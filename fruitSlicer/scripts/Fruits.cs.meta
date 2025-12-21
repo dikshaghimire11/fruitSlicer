@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: af2a13fc7c431d641bdd912208d99be0
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - fullApple: {fileID: 7924401576235638667, guid: d496052478bd082479411fad9b723bd0, type: 3}
+  - leftHalf: {instanceID: 0}
+  - rightHalf: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
