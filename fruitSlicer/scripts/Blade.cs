@@ -102,6 +102,7 @@ public class Blade : MonoBehaviour
         if (fruit != null)
         {
             fruit.Slice(currentSliceDirection);
+            ScoreManager.instance.AddScore(5);
             // Optional: Play slice sound if assigned here
             // if (audioSource != null && sliceSound != null) audioSource.PlayOneShot(sliceSound);
             return; // Stop checking, we hit a fruit
