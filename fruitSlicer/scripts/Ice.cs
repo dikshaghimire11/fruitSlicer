@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Ice : MonoBehaviour
 {
@@ -8,14 +9,15 @@ public class Ice : MonoBehaviour
     public GameObject rightHalf; // Drag the RIGHT half of the ice here
     public float sliceForce = 5f;
     public float rotationForce = 20f;
-    
+
     [Header("Visuals & Audio")]
     public AudioClip breakSound;
-    
+
     [Header("Freeze Settings")]
     public float freezeDuration = 1f;
 
     private bool isSliced = false;
+    // public GameObject snowEffectBackground;
 
     // We now accept the 'direction' of the cut, just like Fruit.cs
     public void Slice(Vector2 sliceDirection)
@@ -70,19 +72,31 @@ public class Ice : MonoBehaviour
     {
         // A. Show Snow Overlay (if it exists)
         GameObject snowScreen = GameObject.Find("SnowOverlay");
-        if (snowScreen != null) snowScreen.SetActive(true);
+        Image myImage = snowScreen.GetComponent<Image>();
+        myImage.enabled = true;
+
+
+        Color tempColor = myImage.color;
+
+        // 2. Change the alpha (0f = Transparent, 1f = Opaque)
+        tempColor.a = 0.5f;
+
+        // 3. Assign the modified color back to the image
+        myImage.color = tempColor;
+        
+        //snowEffectBackground.SetActive(true);
 
         // B. Freeze Time
         Time.timeScale = 0.5f;
 
         // C. Wait (using Realtime)
         yield return new WaitForSecondsRealtime(freezeDuration);
-
+        // snowEffectBackground.SetActive(false);
         // D. Unfreeze
         Time.timeScale = 1f;
 
         // E. Hide Snow Overlay
-        if (snowScreen != null) snowScreen.SetActive(false);
+        myImage.enabled = false;
 
         // F. Destroy the original object
         Destroy(gameObject);

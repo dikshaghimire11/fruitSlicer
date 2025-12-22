@@ -175,3 +175,4 @@ MonoBehaviour:
   rotationForce: 20
   breakSound: {fileID: 8300000, guid: c32aed1f147134a41a8625a34790d480, type: 3}
   freezeDuration: 5
+  snowEffectBackground: {fileID: 6710047538935414627, guid: 7bcadabc829372d4bbf017ee2d0cc548, type: 3}
