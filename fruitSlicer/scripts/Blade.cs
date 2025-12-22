@@ -12,7 +12,7 @@ public class Blade : MonoBehaviour
 
     [Header("Slicing Settings")]
     public float minSlicingVelocity = 0.01f;
-    public AudioClip sliceSound; // Sound when hitting a FRUIT (not bomb)
+    public AudioClip sliceSound; 
 
     private bool isSlicing = false;
     private Vector3 previousPosition;
@@ -71,22 +71,24 @@ public class Blade : MonoBehaviour
         rb.position = previousPosition;
     }
 
-    void ContinueSlicing()
+  void ContinueSlicing()
+{
+    Vector3 worldPos = GetInputPosition();
+    Vector3 movement = worldPos - previousPosition;
+    
+    if (movement.magnitude > 0)
     {
-        Vector3 worldPos = GetInputPosition();
-        Vector3 movement = worldPos - previousPosition;
-        
-        if (movement.magnitude > 0)
-        {
-            currentSliceDirection = movement.normalized;
-        }
-
-        float velocity = movement.magnitude / Time.deltaTime;
-        bladeCollider.enabled = velocity > minSlicingVelocity;
-
-        rb.MovePosition(worldPos);
-        previousPosition = worldPos;
+        currentSliceDirection = movement.normalized;
     }
+
+    // CHANGE THIS LINE: Use unscaledDeltaTime so the blade works while frozen!
+    float velocity = movement.magnitude / Time.unscaledDeltaTime; 
+    
+    bladeCollider.enabled = velocity > minSlicingVelocity;
+
+    rb.MovePosition(worldPos);
+    previousPosition = worldPos;
+}
 
     void StopSlicing()
     {
@@ -95,23 +97,30 @@ public class Blade : MonoBehaviour
         bladeCollider.enabled = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+  private void OnTriggerEnter2D(Collider2D collision)
     {
-        // 1. Check if we hit a FRUIT
+        // 1. Check for FRUIT
         Fruit fruit = collision.gameObject.GetComponent<Fruit>();
         if (fruit != null)
         {
             fruit.Slice(currentSliceDirection);
-            // Optional: Play slice sound if assigned here
-            // if (audioSource != null && sliceSound != null) audioSource.PlayOneShot(sliceSound);
-            return; // Stop checking, we hit a fruit
+            return; 
         }
 
-        // 2. Check if we hit a BOMB
+        // 2. Check for BOMB
         Bomb bomb = collision.gameObject.GetComponent<Bomb>();
         if (bomb != null)
         {
             bomb.Explode();
+            return;
+        }
+
+        // 3. Check for ICE (Updated)
+        Ice ice = collision.gameObject.GetComponent<Ice>();
+        if (ice != null)
+        {
+            // NEW: We pass 'currentSliceDirection' so it cuts properly!
+            ice.Slice(currentSliceDirection);
         }
     }
 }

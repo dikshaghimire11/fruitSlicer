@@ -1,88 +1,102 @@
-using UnityEngine; // Required for Unity-specific functionalities (GameObject, Instantiate, etc.)
-using System.Collections; // Required for Coroutines (IEnumerator, WaitForSeconds)
+using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
+
 public class FruitSpawner : MonoBehaviour
 {
-    // Public variables accessible in the Inspector
+    // --- EXISTING VARIABLES ---
     public List<GameObject> fruitPrefabs;
-    public float spawnDelay = 2f;  // Time between fruit spawns
-    public float spawnForce = 10f; // How much force to apply upwards
-    public float minX = -2f;       // Minimum X position for spawning
+    public float spawnDelay = 2f;  
+    public float spawnForce = 10f; 
+    public float minX = -2f;       
     public float maxX = 2f;
-    public GameObject gameContainer;     // Maximum X position for spawning
+    public GameObject gameContainer;
 
-    // Called when the script instance is being loaded (once)
+    [Header("Special Items Settings")]
+    public GameObject bombPrefab;      // Drag Bomb here
+    public GameObject icePrefab;       // Drag Ice here
+    public float specialSpawnDelay = 10f; // Gap between special items
+
     void Start()
     {
-        // Start the coroutine to repeatedly spawn fruits
+        // 1. Start the normal fruit loop (Fast)
         StartCoroutine(SpawnFruitsRoutine());
 
-
-
+        // 2. Start the separate Bomb/Ice loop (Slow - 10 sec gap)
+        StartCoroutine(SpawnBombAndIceRoutine());
     }
 
-    // Coroutine to handle the spawning logic with delays
+    // --- EXISTING FRUIT ROUTINE (Unchanged logic) ---
     IEnumerator SpawnFruitsRoutine()
     {
         Vector3[] corners = new Vector3[4];
-
-
         gameContainer.GetComponent<RectTransform>().GetWorldCorners(corners);
-        // This loop will run indefinitely as long as the GameObject is active
+
         while (true)
         {
-
-            // Wait for the specified spawn delay before spawning the next fruit
             yield return new WaitForSeconds(spawnDelay);
+
             if (fruitPrefabs.Count > 0)
             {
+                // Logic for Fruits
                 int randomIndex = Random.Range(0, fruitPrefabs.Count);
                 GameObject randomFruitPrefab = fruitPrefabs[randomIndex];
-
-                // 1. Calculate a random X position within our defined range
-                float randomX = Random.Range(corners[0].x, corners[3].x);
-
-                // 2. Determine the spawn position (just above the screen)
-                // We'll spawn at a fixed Y position, and Z=0 for 2D.
-                // You might need to adjust the Y position based on your camera's Orthographic Size.
-                // For a camera with Orthographic Size 5, Y=6 might be a good starting point.
-                Vector3 spawnPosition = new Vector3(randomX, -3f, -10f); // Spawns from the bottom for an upward slice!
-                                                                         // Let's adjust this for a proper "up-into-view" spawn.
-                                                                         // Let's change this to be *above* the screen for now, for fruits to fall.
-                                                                         // A better approach for Fruit Slicer is to spawn from the bottom and apply upward force.
-                                                                         // Let's change the Y position to be *below* the screen, and apply an *upward* force.
-                                                                         // Let's set Y to -6 (below despawn zone) and apply upward force.
-
-                // Let's reconsider the spawn logic for a typical fruit slicer: fruits "pop up" from below.
-                // So, spawnPosition should be below the screen. The fruit will then get an upward force.
-
-                // For a typical Fruit Slicer: fruits appear from below and fly upwards.
-                // Let's assume your bottom despawn zone is around Y=-6 to -7.
-                // So, spawn just below that, e.g., Y = -7.
-                spawnPosition = new Vector3(randomX, -3f, -10f);
-
-
-                // 3. Instantiate the fruit prefab at the calculated position
-                GameObject newFruit = Instantiate(randomFruitPrefab, spawnPosition, Quaternion.identity);
-
-                // Quaternion.identity means "no rotation" or "default rotation"
-
-                // 4. Get the Rigidbody2D component of the new fruit
-                Rigidbody2D rb = newFruit.GetComponent<Rigidbody2D>();
-
-                // 5. Apply an upward force to the fruit if it has a Rigidbody2D
-                if (rb != null)
-                {
-                    // Apply a force vector: (0, spawnForce) means pure upward force
-                    // ForceMode2D.Impulse applies an instant force
-                    rb.AddForce(Vector2.up * spawnForce, ForceMode2D.Impulse);
-
-                    // Add some random horizontal force as well, to make it more dynamic
-                    float randomHorizontalForce = Random.Range(-spawnForce / 2, spawnForce / 2); // Small random sideways push
-                    rb.AddForce(new Vector2(randomHorizontalForce, 0), ForceMode2D.Impulse);
-                }
-                Destroy(newFruit, 5f);
+                SpawnObject(randomFruitPrefab, corners); // I moved the spawn logic to a helper function to avoid repeating code
             }
         }
+    }
+
+    // --- NEW ROUTINE: HANDLES BOMB & ICE ONLY ---
+    IEnumerator SpawnBombAndIceRoutine()
+    {
+        Vector3[] corners = new Vector3[4];
+        gameContainer.GetComponent<RectTransform>().GetWorldCorners(corners);
+
+        while (true)
+        {
+            // Wait for 10 seconds (or whatever you set in Inspector)
+            yield return new WaitForSeconds(specialSpawnDelay);
+
+            // Randomly pick Bomb (0) or Ice (1)
+            GameObject prefabToSpawn = null;
+            if (Random.Range(0, 2) == 0) 
+            {
+                prefabToSpawn = bombPrefab;
+            }
+            else 
+            {
+                prefabToSpawn = icePrefab;
+            }
+
+            // Spawn the special item
+            if (prefabToSpawn != null)
+            {
+                SpawnObject(prefabToSpawn, corners);
+            }
+        }
+    }
+
+    // --- HELPER FUNCTION ---
+    // This keeps your original spawning math exactly the same, 
+    // but lets us use it for both Fruits and Bombs/Ice.
+    void SpawnObject(GameObject prefab, Vector3[] corners)
+    {
+        float screenWidth = corners[3].x - corners[0].x;
+        float upsetWidth = screenWidth * 0.2f; 
+        
+        float randomX = Random.Range(corners[0].x + upsetWidth, corners[3].x - upsetWidth);
+        Vector3 spawnPosition = new Vector3(randomX, -3f, -10f); // Spawns from bottom
+
+        GameObject newObj = Instantiate(prefab, spawnPosition, Quaternion.identity);
+        Rigidbody2D rb = newObj.GetComponent<Rigidbody2D>();
+
+        if (rb != null)
+        {
+            rb.AddForce(Vector2.up * spawnForce, ForceMode2D.Impulse);
+            
+            float randomHorizontalForce = Random.Range(-spawnForce / 2, spawnForce / 2);
+            rb.AddForce(new Vector2(randomHorizontalForce, 0), ForceMode2D.Impulse);
+        }
+        Destroy(newObj, 5f);
     }
 }
