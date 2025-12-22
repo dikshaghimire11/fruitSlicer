@@ -614,12 +614,14 @@ MonoBehaviour:
   fruitPrefabs:
   - {fileID: 7767628628793562763, guid: 76b3c104e6de8c148b59e3eb40aa5495, type: 3}
   - {fileID: 7767628628793562763, guid: e30b83241e41e6948964b3dceef461d8, type: 3}
-  - {fileID: 7767628628793562763, guid: 685ce3e9ffefedb47a3b605920ef9da7, type: 3}
   spawnDelay: 1
   spawnForce: 5
   minX: -2
   maxX: 2
   gameContainer: {fileID: 1575584808}
+  bombPrefab: {fileID: 7767628628793562763, guid: 685ce3e9ffefedb47a3b605920ef9da7, type: 3}
+  icePrefab: {fileID: 7767628628793562763, guid: 22c1d944d0981bb4badaa7757e51ce85, type: 3}
+  specialSpawnDelay: 5
 --- !u!4 &979263250
 Transform:
   m_ObjectHideFlags: 0
