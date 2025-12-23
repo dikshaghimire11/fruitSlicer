@@ -84,12 +84,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -856085545168688419, guid: 281b3f5d23b96184a974b3a0305a460f, type: 3}
+  m_Sprite: {fileID: -7560284153744367771, guid: 5502c6d833ab99f44a891a9ea86106ab, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.37, y: 2.48}
+  m_Size: {x: 2.5, y: 2.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -173,6 +173,5 @@ MonoBehaviour:
   rightHalf: {fileID: 3160838875326261666, guid: 320e9589feece7d4a815c3c9785fc5dc, type: 3}
   sliceForce: 5
   rotationForce: 20
-  breakSound: {fileID: 8300000, guid: c32aed1f147134a41a8625a34790d480, type: 3}
+  breakSound: {fileID: 8300000, guid: 9abe5afa29815cd45a9ebab2ae7a43ff, type: 3}
   freezeDuration: 5
-  snowEffectBackground: {fileID: 6710047538935414627, guid: 7bcadabc829372d4bbf017ee2d0cc548, type: 3}

@@ -1680,7 +1680,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Blade
   minSlicingVelocity: 5
   minSliceDistance: 0.2
-  maxComboDelay: 0.5
   floatingTextPrefab: {fileID: 6631497170589391908, guid: 1ff7f96d3b19eea42abafc0b61e6051a, type: 3}
 --- !u!96 &981257809
 TrailRenderer:

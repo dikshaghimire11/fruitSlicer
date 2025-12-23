@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3162823137706940630}
   - component: {fileID: 6369239120308846846}
   m_Layer: 6
-  m_Name: RightHalfIce
+  m_Name: RightHalfOrange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,12 +83,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7709030422570541014, guid: b347690028fe29d48bad12e11bc41328, type: 3}
+  m_Sprite: {fileID: -6932105534810609398, guid: 6e2347236a67ea3458c0bd3814cfd373, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.46, y: 1.32}
+  m_Size: {x: 2.05, y: 2.42}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -135,7 +135,7 @@ MonoBehaviour:
   delayBeforeFade: 0.5
   fadeDuration: 0.5
   juicePrefab: {fileID: 4892252734919827426, guid: 71a81f525bd9f764cb0d35d595aeeee9, type: 3}
-  specificJuiceColor: {r: 0.56078434, g: 0.6784314, b: 0.7803922, a: 1}
+  specificJuiceColor: {r: 0.79215693, g: 0.5686275, b: 0.17254902, a: 1}
   useSpriteColor: 0
   scaleMultiplier: 0.5
   randomizeRotation: 1

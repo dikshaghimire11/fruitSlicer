@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 5502c6d833ab99f44a891a9ea86106ab
+guid: 6d014b6e621c037438516a0e3c6967d3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7560284153744367771
-    second: Ice_0
+      213: -4014227497477067429
+    second: orangeLeft_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ice_0
+      name: orangeLeft_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 250
-        height: 250
+        height: 234
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 56f5d074e99741790800000000000000
-      internalID: -7560284153744367771
+      spriteID: b5d264dfb599a48c0800000000000000
+      internalID: -4014227497477067429
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Ice_0: -7560284153744367771
+      orangeLeft_0: -4014227497477067429
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 5502c6d833ab99f44a891a9ea86106ab
+guid: b9d1bcbdc14eff345914484c3c901c6b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7560284153744367771
-    second: Ice_0
+      213: 2020061860429574382
+    second: watermelonLeft_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ice_0
+      name: watermelonLeft_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 250
-        height: 250
+        x: 30
+        y: 56
+        width: 190
+        height: 178
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 56f5d074e99741790800000000000000
-      internalID: -7560284153744367771
+      spriteID: ee0383f2f83b80c10800000000000000
+      internalID: 2020061860429574382
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Ice_0: -7560284153744367771
+      watermelonLeft_0: 2020061860429574382
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

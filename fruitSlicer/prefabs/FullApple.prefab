@@ -138,6 +138,8 @@ MonoBehaviour:
   sliceForce: 5
   rotationForce: 2
   sliceSound: {fileID: 8300000, guid: 282a993e5f0972e4d84219721ed29af1, type: 3}
+  points: 15
+  missYPosition: -8
 --- !u!58 &2613413523906398592
 CircleCollider2D:
   m_ObjectHideFlags: 0
