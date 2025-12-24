@@ -1,36 +1,45 @@
 using UnityEngine;
 
-[RequireComponent(typeof(TrailRenderer), typeof(CircleCollider2D), typeof(Rigidbody2D))]
-[RequireComponent(typeof(AudioSource))] 
+[RequireComponent(typeof(TrailRenderer), typeof(Rigidbody2D))]
+[RequireComponent(typeof(AudioSource))]
 public class Blade : MonoBehaviour
 {
     [Header("Components")]
     private TrailRenderer bladeTrail;
-    private CircleCollider2D bladeCollider;
     private Rigidbody2D rb;
     private AudioSource audioSource;
 
     [Header("Slicing Settings")]
-    public float minSlicingVelocity = 0.01f;
-    public AudioClip sliceSound; // Sound when hitting a FRUIT (not bomb)
+    public float minSlicingVelocity = 5.0f;
+    public float minSliceDistance = 0.1f;
+    
+    [Header("Combo Settings")]
+    public float maxComboDelay = 0.2f; 
+    
+    [Header("Visual Effects")]
+    public GameObject floatingTextPrefab; 
 
     private bool isSlicing = false;
     private Vector3 previousPosition;
     private Vector2 currentSliceDirection;
     private Camera mainCamera;
+    
+    // --- COMBO VARIABLES ---
+    private int comboCount = 0; 
+    private float lastHitTime = 0f; 
 
     void Awake()
     {
         mainCamera = Camera.main;
         bladeTrail = GetComponent<TrailRenderer>();
-        bladeCollider = GetComponent<CircleCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
 
         rb.bodyType = RigidbodyType2D.Kinematic;
-        bladeCollider.isTrigger = true;
         bladeTrail.emitting = false;
-        bladeCollider.enabled = false;
+        
+        Collider2D col = GetComponent<Collider2D>();
+        if(col != null) col.enabled = false; 
     }
 
     void Update()
@@ -66,23 +75,32 @@ public class Blade : MonoBehaviour
         isSlicing = true;
         bladeTrail.Clear();
         bladeTrail.emitting = true;
-        bladeCollider.enabled = true;
         previousPosition = GetInputPosition();
         rb.position = previousPosition;
+        
+        // Reset combo on new swipe
+        comboCount = 0; 
+        lastHitTime = 0f;
     }
 
     void ContinueSlicing()
     {
         Vector3 worldPos = GetInputPosition();
-        Vector3 movement = worldPos - previousPosition;
-        
-        if (movement.magnitude > 0)
-        {
-            currentSliceDirection = movement.normalized;
-        }
+        Vector3 directionV3 = worldPos - previousPosition;
+        float distance = directionV3.magnitude;
+        float velocity = distance / Time.unscaledDeltaTime;
 
-        float velocity = movement.magnitude / Time.deltaTime;
-        bladeCollider.enabled = velocity > minSlicingVelocity;
+        if (velocity > minSlicingVelocity && distance > minSliceDistance)
+        {
+             currentSliceDirection = directionV3.normalized;
+
+             RaycastHit2D[] hits = Physics2D.LinecastAll(previousPosition, worldPos);
+
+             foreach (RaycastHit2D hit in hits)
+             {
+                 if (hit.collider != null) CheckHit(hit.collider);
+             }
+        }
 
         rb.MovePosition(worldPos);
         previousPosition = worldPos;
@@ -92,27 +110,72 @@ public class Blade : MonoBehaviour
     {
         isSlicing = false;
         bladeTrail.emitting = false;
-        bladeCollider.enabled = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void CheckHit(Collider2D other)
     {
-        // 1. Check if we hit a FRUIT
-        Fruit fruit = collision.gameObject.GetComponent<Fruit>();
+        Fruit fruit = other.GetComponent<Fruit>();
         if (fruit != null)
         {
             fruit.Slice(currentSliceDirection);
-            ScoreManager.instance.AddScore(5);
-            // Optional: Play slice sound if assigned here
-            // if (audioSource != null && sliceSound != null) audioSource.PlayOneShot(sliceSound);
-            return; // Stop checking, we hit a fruit
+            
+            if (ScoreManager.instance != null) ScoreManager.instance.AddScore(fruit.points);
+
+            if (Time.time - lastHitTime > maxComboDelay)
+            {
+                comboCount = 0; 
+            }
+
+            // Update timer and count
+            lastHitTime = Time.time;
+            comboCount++;
+
+            // Only trigger combo if we have hit 2 or more IN THIS SHORT WINDOW
+            if (comboCount >= 2)
+            {
+                int bonusPoints = comboCount * 5; 
+
+                if (ScoreManager.instance != null)
+                {
+                    ScoreManager.instance.AddScore(bonusPoints);
+                }
+
+                ShowFloatingText("COMBO " + bonusPoints, Color.blue, fruit.transform.position);
+            }
+
+            return;
         }
 
-        // 2. Check if we hit a BOMB
-        Bomb bomb = collision.gameObject.GetComponent<Bomb>();
+        Bomb bomb = other.GetComponent<Bomb>();
         if (bomb != null)
         {
             bomb.Explode();
+            ShowFloatingText("BOOM!", Color.red, bomb.transform.position);
+            comboCount = 0; 
+            return;
+        }
+
+        Ice ice = other.GetComponent<Ice>();
+        if (ice != null)
+        {
+            ice.Slice(currentSliceDirection);
+            ShowFloatingText("FREEZE!", Color.cyan, ice.transform.position);
+        }
+    }
+
+    void ShowFloatingText(string message, Color color, Vector3 position)
+    {
+        if (floatingTextPrefab != null)
+        {
+            Vector3 spawnPos = new Vector3(position.x, position.y + 1f, -5f);
+            
+            GameObject textObj = Instantiate(floatingTextPrefab, spawnPos, Quaternion.identity);
+            
+            FloatingText floatingTextScript = textObj.GetComponent<FloatingText>();
+            if (floatingTextScript != null)
+            {
+                floatingTextScript.Setup(message, color);
+            }
         }
     }
 }
