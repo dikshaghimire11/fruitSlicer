@@ -164,7 +164,7 @@ public class Blade : MonoBehaviour
         }
     }
 
-    void ShowFloatingText(string message, Color color, Vector3 position)
+   public void ShowFloatingText(string message, Color color, Vector3 position)
     {
         if (floatingTextPrefab != null)
         {

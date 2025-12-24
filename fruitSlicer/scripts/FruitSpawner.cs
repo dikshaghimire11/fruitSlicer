@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class FruitSpawner : MonoBehaviour
 {
+    public static FruitSpawner instance;
     // --- EXISTING VARIABLES ---
     public List<GameObject> fruitPrefabs;
     public float spawnDelay = 2f;  
@@ -22,6 +23,10 @@ public class FruitSpawner : MonoBehaviour
     // --- NEW: CONTROL FLAG ---
     private bool stopFruitSpawning = false; // "Traffic light" for fruits
 
+    void Awake()
+    {
+        if (instance == null) { instance = this; }
+    }
     void Start()
     {
         StartCoroutine(SpawnFruitsRoutine());

@@ -17,7 +17,7 @@ public class Ice : MonoBehaviour
     public float freezeDuration = 1f;
 
     private bool isSliced = false;
-    // public GameObject snowEffectBackground;
+    // public GameObject snowEffectBackground; // Reference to the FruitSpawner
 
     // We now accept the 'direction' of the cut, just like Fruit.cs
     public void Slice(Vector2 sliceDirection)
@@ -25,12 +25,13 @@ public class Ice : MonoBehaviour
         if (isSliced) return;
         isSliced = true;
 
+
         // 1. Play Sound
         if (breakSound != null)
         {
             AudioSource.PlayClipAtPoint(breakSound, transform.position, 1.0f);
         }
-
+        StartCoroutine(decreaseSpwanDelay());
         // 2. Hide the main Ice Cube immediately
         GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<Collider2D>().enabled = false;
@@ -83,7 +84,7 @@ public class Ice : MonoBehaviour
 
         // 3. Assign the modified color back to the image
         myImage.color = tempColor;
-        
+
         //snowEffectBackground.SetActive(true);
 
         // B. Freeze Time
@@ -100,5 +101,12 @@ public class Ice : MonoBehaviour
 
         // F. Destroy the original object
         Destroy(gameObject);
+    }
+    public IEnumerator decreaseSpwanDelay()
+    {
+        float originalDelay = FruitSpawner.instance.spawnDelay;
+        FruitSpawner.instance.spawnDelay = 0.1f;
+        yield return new WaitForSeconds(0.5f);
+        FruitSpawner.instance.spawnDelay = originalDelay;
     }
 }
