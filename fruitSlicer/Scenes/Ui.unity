@@ -1820,7 +1820,7 @@ MonoBehaviour:
   - {fileID: 7767628628793562763, guid: e30b83241e41e6948964b3dceef461d8, type: 3}
   - {fileID: 7767628628793562763, guid: 0f71652f212513b4f9a6da0af85a3fdb, type: 3}
   - {fileID: 7767628628793562763, guid: 829aeaf400e6a344c98b005e2843841b, type: 3}
-  spawnDelay: 1
+  spawnDelay: 0.5
   spawnForce: 5
   gameContainer: {fileID: 1575584808}
   bombPrefab: {fileID: 7767628628793562763, guid: 685ce3e9ffefedb47a3b605920ef9da7, type: 3}
