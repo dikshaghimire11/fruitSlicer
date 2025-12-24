@@ -120,6 +120,7 @@ public class Blade : MonoBehaviour
             fruit.Slice(currentSliceDirection);
             
             if (ScoreManager.instance != null) ScoreManager.instance.AddScore(fruit.points);
+            ShowFloatingText("+" + fruit.points, new Color(0.278f, 0.572f, 0.866f), fruit.transform.position);
 
             if (Time.time - lastHitTime > maxComboDelay)
             {
@@ -140,7 +141,7 @@ public class Blade : MonoBehaviour
                     ScoreManager.instance.AddScore(bonusPoints);
                 }
 
-                ShowFloatingText("COMBO " + bonusPoints, Color.blue, fruit.transform.position);
+                ShowFloatingText("COMBO " + bonusPoints, new Color(1.0f, 0.831f, 0.039f), fruit.transform.position);
             }
 
             return;
@@ -150,7 +151,7 @@ public class Blade : MonoBehaviour
         if (bomb != null)
         {
             bomb.Explode();
-            ShowFloatingText("BOOM!", Color.red, bomb.transform.position);
+            ShowFloatingText("BOOM!", new Color(0.925f, 0.247f, 0.235f), bomb.transform.position);
             comboCount = 0; 
             return;
         }

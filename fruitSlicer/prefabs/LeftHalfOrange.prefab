@@ -134,8 +134,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SliceFade
   delayBeforeFade: 0.5
   fadeDuration: 0.5
-  juicePrefab: {fileID: 4892252734919827426, guid: 71a81f525bd9f764cb0d35d595aeeee9, type: 3}
-  specificJuiceColor: {r: 0.76470596, g: 0.5019608, b: 0.098039225, a: 0.5882353}
+  juicePrefab: {fileID: 6104613716547121930, guid: ef21e38b4355949438d302bf77194b71, type: 3}
+  specificJuiceColor: {r: 0.76470596, g: 0.5019608, b: 0.098039225, a: 1}
   useSpriteColor: 0
   scaleMultiplier: 0.565
   randomizeRotation: 1

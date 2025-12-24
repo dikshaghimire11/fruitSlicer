@@ -9,7 +9,7 @@ public class ScoreManager : MonoBehaviour
     [Header("UI References")]
     public TextMeshProUGUI scoreText;      
     public TextMeshProUGUI highScoreText;  
-    public TextMeshProUGUI livesText;      // Displays "Lives: 3" or "XX"
+    public TextMeshProUGUI livesText;      
     public GameObject gameOverPanel;       
     public TextMeshProUGUI finalScoreText; 
 
@@ -122,11 +122,9 @@ public class ScoreManager : MonoBehaviour
         
         if (highScoreText != null) highScoreText.text = "HIGH: " + highScore.ToString("D4");
 
-        // UI shows total lives left (e.g., "Lives: 3")
         if (livesText != null) 
         {
-            // Optional: You can make this look like "X X X" instead of a number
-            livesText.text = "Lives: " + currentLives; 
+            livesText.text = currentLives.ToString(); 
         }
     }
 }
