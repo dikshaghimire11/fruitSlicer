@@ -65,6 +65,7 @@ public class Fruit : MonoBehaviour
  void Update()
 {
     // If the fruit falls below the limit...
+
     if (transform.position.y < missYPosition)
     {
         // 1. Check if Manager exists
