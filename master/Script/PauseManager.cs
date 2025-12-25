@@ -32,8 +32,9 @@ public class PauseManager : MonoBehaviour
 
     public void LoadMainMenu()
     {
-        Time.timeScale = 1f; // IMPORTANT: Reset time before switching scenes
-        SceneManager.LoadScene("MainMenu"); // Replace with your scene name
+        Time.timeScale = 1f;
+        TempData.sceneToLoad="MainMenuFruitSlicer";
+        SceneManager.LoadScene("LoadingScene");
     }
 
     public void QuitGame()

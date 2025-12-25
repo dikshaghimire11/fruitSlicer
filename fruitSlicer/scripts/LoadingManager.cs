@@ -3,29 +3,24 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
-
 public class LoadingManager : MonoBehaviour
 {
-    [Header("Settings")]
-    public string sceneToLoad = "GameScene"; // Name of your actual game level
-
-    [Header("UI Elements")]
     public Slider progressBar;
     public TextMeshProUGUI progressText;
 
-    public GameObject loadingPanel;
-
-    private void Start()
+    void Awake()
     {
-        // Start the background loading process
-        // StartCoroutine(LoadSceneAsync());
+        if (TempData.sceneToLoad == null)
+        {
+            TempData.sceneToLoad = "MainMenuFruitSlicer";
+        }
+        StartCoroutine(LoadSceneAsync());
     }
 
     IEnumerator LoadSceneAsync()
     {
         // 1. Start loading the scene
-        loadingPanel.SetActive(true);
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneToLoad);
+        AsyncOperation operation = SceneManager.LoadSceneAsync(TempData.sceneToLoad);
 
         // Optional: If you want to wait for a "Press Any Key" at the end:
         // operation.allowSceneActivation = false;
@@ -50,7 +45,4 @@ public class LoadingManager : MonoBehaviour
         }
     }
 
-    public void playGame(){
-            StartCoroutine(LoadSceneAsync());
-    }
 }
