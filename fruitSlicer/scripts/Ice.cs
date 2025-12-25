@@ -88,13 +88,13 @@ public class Ice : MonoBehaviour
         //snowEffectBackground.SetActive(true);
 
         // B. Freeze Time
-        Time.timeScale = 0.5f;
+        startSlowMotion();
 
         // C. Wait (using Realtime)
         yield return new WaitForSecondsRealtime(freezeDuration);
         // snowEffectBackground.SetActive(false);
         // D. Unfreeze
-        Time.timeScale = 1f;
+        stopSlowMotion();
 
         // E. Hide Snow Overlay
         myImage.enabled = false;
@@ -105,8 +105,20 @@ public class Ice : MonoBehaviour
     public IEnumerator decreaseSpwanDelay()
     {
         float originalDelay = FruitSpawner.instance.spawnDelay;
-        FruitSpawner.instance.spawnDelay = 0.1f;
-        yield return new WaitForSeconds(0.5f);
+        FruitSpawner.instance.spawnDelay = 0.05f;
+        yield return new WaitForSeconds(1f);
         FruitSpawner.instance.spawnDelay = originalDelay;
+    }
+
+    public void startSlowMotion()
+    {
+        Time.timeScale = 0.5f;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
+    }
+
+    public void stopSlowMotion()
+    {
+        Time.timeScale = 1.0f;
+        Time.fixedDeltaTime = 0.02f;
     }
 }
