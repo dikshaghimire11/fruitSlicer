@@ -431,7 +431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19fc9785dca2cde4fb42093c99a03e35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameContainer
-  offsetMultiplier: 335.8
+  offsetMultiplier: 345
 --- !u!4 &294674266
 Transform:
   m_ObjectHideFlags: 0
@@ -1087,7 +1087,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -7358256641283522813, guid: e3cb752aa418cc8498372bf4035f9cd1, type: 3}
+  m_Sprite: {fileID: 6895926924230315131, guid: 6a37592d1fd305b469faed80a7d43d3c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3256,7 +3256,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5701797923000046564, guid: 88ae02b80cba1384297e47cc5b0998e1, type: 3}
+  m_Sprite: {fileID: 7111969943574635211, guid: 15fa008e7e0ae224dbe9f4bc553337c9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

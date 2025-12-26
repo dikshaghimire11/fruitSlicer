@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4314931022633104191}
   - component: {fileID: 3996240741957143947}
   - component: {fileID: 1381568570917624346}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: JuiceSplash
   m_TagString: Untagged
   m_Icon: {fileID: 0}

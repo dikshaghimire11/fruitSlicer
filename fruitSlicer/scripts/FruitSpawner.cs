@@ -21,7 +21,10 @@ public class FruitSpawner : MonoBehaviour
     private int lastSpecialType = -1;
     
     // --- NEW: CONTROL FLAG ---
-    private bool stopFruitSpawning = false; // "Traffic light" for fruits
+    private bool stopFruitSpawning = false;
+     // "Traffic light" for fruits
+
+     private Camera mainCamera;
 
     void Awake()
     {
@@ -29,6 +32,10 @@ public class FruitSpawner : MonoBehaviour
     }
     void Start()
     {
+        if (mainCamera == null)
+        {
+            mainCamera=Camera.main;
+        }
         StartCoroutine(SpawnFruitsRoutine());
         StartCoroutine(SpawnBombAndIceRoutine());
     }
@@ -129,5 +136,18 @@ public class FruitSpawner : MonoBehaviour
             float randomHorizontalForce = Random.Range(-spawnForce / 2, spawnForce / 2);
             rb.AddForce(new Vector2(randomHorizontalForce, 0), ForceMode2D.Impulse);
         }
+    }
+
+    public void HideFruitsLayer()
+    {
+        // Bitwise operation to remove the layer from the mask
+        Debug.Log("should hide the fruits.");
+        mainCamera.cullingMask &=  ~(1 << LayerMask.NameToLayer("Fruits"));
+    }
+
+    public void ShowFruitsLayer()
+    {
+        // Bitwise operation to add the layer back to the mask
+        mainCamera.cullingMask |= (1 << LayerMask.NameToLayer("Fruits"));
     }
 }

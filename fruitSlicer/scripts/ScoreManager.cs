@@ -1,23 +1,23 @@
 using UnityEngine;
-using TMPro; 
-using UnityEngine.SceneManagement; 
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
 
     [Header("UI References")]
-    public TextMeshProUGUI scoreText;      
-    public TextMeshProUGUI highScoreText;  
-    public TextMeshProUGUI livesText;      
-    public GameObject gameOverPanel;       
-    public TextMeshProUGUI finalScoreText; 
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI highScoreText;
+    public TextMeshProUGUI livesText;
+    public GameObject gameOverPanel;
+    public TextMeshProUGUI finalScoreText;
 
     [Header("Victory Effect")]
-    public GameObject victoryEffectPrefab; 
+    public GameObject victoryEffectPrefab;
 
     [Header("Game Rules")]
-    public int maxLives = 3; 
+    public int maxLives = 3;
 
     private int score = 0;
     private int highScore = 0;
@@ -40,13 +40,13 @@ public class ScoreManager : MonoBehaviour
         currentLives = maxLives;
         score = 0;
         isGameOver = false;
-        
+
         // Reset the flag for the new game
         hasShownHighScoreMessage = false;
-        
-        Time.timeScale = 1f; 
+
+        Time.timeScale = 1f;
         if (gameOverPanel != null) gameOverPanel.SetActive(false);
-        
+
         UpdateUI();
     }
 
@@ -82,8 +82,8 @@ public class ScoreManager : MonoBehaviour
     {
         if (isGameOver) return;
 
-        currentLives--; 
-        UpdateUI(); 
+        currentLives--;
+        UpdateUI();
 
         if (currentLives <= 0)
         {
@@ -94,9 +94,10 @@ public class ScoreManager : MonoBehaviour
     void EndGame()
     {
         isGameOver = true;
-        Time.timeScale = 0f; 
-        
+        Time.timeScale = 0f;
+
         if (gameOverPanel != null) gameOverPanel.SetActive(true);
+        FruitSpawner.instance.HideFruitsLayer();
 
         // Check for High Score (Save it permanently now)
         if (score > highScore)
@@ -119,18 +120,19 @@ public class ScoreManager : MonoBehaviour
 
     public void RestartGame()
     {
-        Time.timeScale = 1f; 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        FruitSpawner.instance.ShowFruitsLayer();
     }
 
     void UpdateUI()
     {
         if (scoreText != null) scoreText.text = score.ToString("D4");
-        
+
         // Update High Score text in real-time if we beat it
         int displayHighScore = (score > highScore) ? score : highScore;
         if (highScoreText != null) highScoreText.text = "HIGH: " + displayHighScore.ToString("D4");
 
-        if (livesText != null) livesText.text = currentLives.ToString(); 
+        if (livesText != null) livesText.text = currentLives.ToString();
     }
 }
