@@ -1,81 +1,60 @@
 using UnityEngine;
 
+public enum FruitType { Apple, Orange, Watermelon, Banana }
+
 public class Fruit : MonoBehaviour
 {
+    // --- ASSIGN THIS IN INSPECTOR ---
+    public FruitType fruitType; 
+    
     public GameObject leftHalf;
     public GameObject rightHalf;
-
     public float sliceForce = 5f;
-
-    // 1. Add a variable to control how fast they spin
     public float rotationForce = 20f;
     public AudioClip sliceSound;
+    public int points = 10;
+    public float missYPosition = -8f;
 
     private bool isSliced = false;
-    [Header("Score Settings")]
-    public int points = 10;
+
     public void Slice(Vector2 sliceDirection)
     {
         if (isSliced) return;
         isSliced = true;
-        if (sliceSound != null)
-        {
-            AudioSource.PlayClipAtPoint(sliceSound, transform.position, 1.0f);
-        }
+
+        if (sliceSound != null) AudioSource.PlayClipAtPoint(sliceSound, transform.position, 1.0f);
 
         GameObject mainFruit = this.gameObject;
-        Transform mainFruitTransform = mainFruit.transform;
-
-        // Disable the whole fruit immediately so it swaps cleanly
         mainFruit.SetActive(false);
 
-        // 2. Instantiate and CAPTURE the new objects in variables
-        // We need to store them in 'leftInst' and 'rightInst' to access THEIR Rigidbodies
-        GameObject leftInst = Instantiate(leftHalf, mainFruitTransform.position, mainFruitTransform.rotation);
-        GameObject rightInst = Instantiate(rightHalf, mainFruitTransform.position, mainFruitTransform.rotation);
+        GameObject leftInst = Instantiate(leftHalf, transform.position, transform.rotation);
+        GameObject rightInst = Instantiate(rightHalf, transform.position, transform.rotation);
 
         Rigidbody2D leftRb = leftInst.GetComponent<Rigidbody2D>();
         Rigidbody2D rightRb = rightInst.GetComponent<Rigidbody2D>();
 
-        // 3. Add Linear Force (Pushing them apart)
-        // I kept your logic here, pushing them generally up and away from the cut
         leftRb.AddForce((-sliceDirection + new Vector2(-0.5f, 0)) * sliceForce, ForceMode2D.Impulse);
         rightRb.AddForce((sliceDirection + new Vector2(0.5f, 0)) * sliceForce, ForceMode2D.Impulse);
 
-        // 4. Add Rotation (Torque)
-        // We apply torque based on the rotationForce. 
-        // We create a slight randomness so every cut looks unique.
         float currentTorque = Random.Range(rotationForce * 0.8f, rotationForce * 1.2f);
-
-        // Apply positive rotation to one and negative to the other 
-        // This makes them spin away from each other (like a real cut)
         leftRb.AddTorque(currentTorque, ForceMode2D.Impulse);
         rightRb.AddTorque(-currentTorque, ForceMode2D.Impulse);
 
-        // Destroy the original whole fruit
-        Destroy(gameObject);
-
-        // Optional: Destroy the slices after 3-4 seconds so they don't clutter the scene
+        Destroy(gameObject); 
         Destroy(leftInst, 4f);
         Destroy(rightInst, 4f);
     }
-    [Header("Miss Settings")]
-    public float missYPosition = -8f; // Y-Coordinate where fruit counts as "Missed"
 
- void Update()
-{
-    // If the fruit falls below the limit...
-
-    if (transform.position.y < missYPosition)
+    void Update()
     {
-        // 1. Check if Manager exists
-        if (ScoreManager.instance != null)
+        if (transform.position.y < missYPosition)
         {
-            ScoreManager.instance.LoseLife(); // Deduct Life
+            // ONLY LOSE LIFE IN INFINITE MODE
+            if (ModeManager.Instance.currentMode == GameMode.Infinite)
+            {
+                if (ScoreManager.instance != null) ScoreManager.instance.LoseLife();
+            }
+            Destroy(gameObject);
         }
-      
-        // 2. NOW destroy it
-        Destroy(gameObject);
     }
-}
 }

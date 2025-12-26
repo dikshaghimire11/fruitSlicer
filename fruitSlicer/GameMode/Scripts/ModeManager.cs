@@ -10,6 +10,7 @@ public class ModeManager : MonoBehaviour
 {
     private static ModeManager _instance;
 
+    // The Magic: This creates the object if it doesn't exist
     public static ModeManager Instance
     {
         get
@@ -22,7 +23,6 @@ public class ModeManager : MonoBehaviour
                 {
                     GameObject managerGO = new GameObject("ModeManager_AutoCreated");
                     _instance = managerGO.AddComponent<ModeManager>();
-
                     DontDestroyOnLoad(managerGO);
                 }
             }
@@ -31,6 +31,7 @@ public class ModeManager : MonoBehaviour
     }
 
     public GameMode currentMode = GameMode.Infinite; // Default
+
     private void Awake()
     {
         if (_instance == null)
@@ -40,7 +41,7 @@ public class ModeManager : MonoBehaviour
         }
         else if (_instance != this)
         {
-            Destroy(this.gameObject); 
+            Destroy(this.gameObject);
         }
     }
 }

@@ -1819,10 +1819,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2efe17dedc6ff224f9be3ac4c771dd30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Blade
-  minSlicingVelocity: 7
-  minSliceDistance: 0.5
-  maxComboDelay: 0.5
+  minSlicingVelocity: 5
+  minSliceDistance: 0.001
   floatingTextPrefab: {fileID: 6631497170589391908, guid: 1ff7f96d3b19eea42abafc0b61e6051a, type: 3}
+  maxComboDelay: 0.5
 --- !u!96 &981257809
 TrailRenderer:
   serializedVersion: 4
