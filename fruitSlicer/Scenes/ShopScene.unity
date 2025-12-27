@@ -292,7 +292,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 434915194}
+      - m_Target: {fileID: 1910927242}
         m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
         m_MethodName: ShowBackgrounds
         m_Mode: 1
@@ -478,86 +478,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1695433629}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &434915193
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 434915195}
-  - component: {fileID: 434915194}
-  m_Layer: 0
-  m_Name: ShopManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &434915194
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 434915193}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34f96f9689bb3314b9714ca56192fea8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShopManager
-  allItems:
-  - itemName: Dangerous Shop
-    price: 0
-    icon: {fileID: 6787667684171446219, guid: 9e267d30f07557c4abd55f39aa664cc3, type: 3}
-    actualSprite: {fileID: 6787667684171446219, guid: 9e267d30f07557c4abd55f39aa664cc3, type: 3}
-    isDefault: 1
-    itemType: 0
-    isPurchased: 0
-    isEquipped: 0
-  - itemName: Glass Shop
-    price: 100
-    icon: {fileID: 7111969943574635211, guid: 15fa008e7e0ae224dbe9f4bc553337c9, type: 3}
-    actualSprite: {fileID: 7111969943574635211, guid: 15fa008e7e0ae224dbe9f4bc553337c9, type: 3}
-    isDefault: 0
-    itemType: 0
-    isPurchased: 0
-    isEquipped: 0
-  - itemName: Glass Shop
-    price: 100
-    icon: {fileID: 7111969943574635211, guid: 15fa008e7e0ae224dbe9f4bc553337c9, type: 3}
-    actualSprite: {fileID: 7111969943574635211, guid: 15fa008e7e0ae224dbe9f4bc553337c9, type: 3}
-    isDefault: 1
-    itemType: 1
-    isPurchased: 0
-    isEquipped: 0
-  - itemName: Glass Shop
-    price: 100
-    icon: {fileID: 7111969943574635211, guid: 15fa008e7e0ae224dbe9f4bc553337c9, type: 3}
-    actualSprite: {fileID: 7111969943574635211, guid: 15fa008e7e0ae224dbe9f4bc553337c9, type: 3}
-    isDefault: 0
-    itemType: 1
-    isPurchased: 0
-    isEquipped: 0
-  contentContainer: {fileID: 2133304951}
-  itemPrefab: {fileID: 6629624732144196224, guid: d44de1bc920c56b478663307ca15383e, type: 3}
-  coinsText: {fileID: 2066386500}
---- !u!4 &434915195
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 434915193}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.97246, y: -1.06362, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &469043572
@@ -1016,7 +936,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 434915194}
+      - m_Target: {fileID: 1910927242}
         m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
         m_MethodName: ShowBlades
         m_Mode: 1
@@ -2511,6 +2431,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1825253524}
   m_CullTransparentMesh: 1
+--- !u!1 &1910927240
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1910927243}
+  - component: {fileID: 1910927242}
+  m_Layer: 0
+  m_Name: ShopManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1910927242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910927240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34f96f9689bb3314b9714ca56192fea8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShopManager
+  contentContainer: {fileID: 2133304951}
+  itemPrefab: {fileID: 6629624732144196224, guid: d44de1bc920c56b478663307ca15383e, type: 3}
+  coinsText: {fileID: 2066386500}
+--- !u!4 &1910927243
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910927240}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.97246, y: -1.06362, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2066386499
 GameObject:
   m_ObjectHideFlags: 0
@@ -2941,6 +2908,63 @@ PrefabInstance:
       addedObject: {fileID: 0}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aef0793ad792d6741bc4bc4addb039a1, type: 3}
+--- !u!1001 &1901822862708855271
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3442582818873798525, guid: 07f16581bdde37849aff9603148fa1ff, type: 3}
+      propertyPath: m_Name
+      value: ShopList
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711174035348535265, guid: 07f16581bdde37849aff9603148fa1ff, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.97246
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711174035348535265, guid: 07f16581bdde37849aff9603148fa1ff, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.06362
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711174035348535265, guid: 07f16581bdde37849aff9603148fa1ff, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711174035348535265, guid: 07f16581bdde37849aff9603148fa1ff, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711174035348535265, guid: 07f16581bdde37849aff9603148fa1ff, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711174035348535265, guid: 07f16581bdde37849aff9603148fa1ff, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711174035348535265, guid: 07f16581bdde37849aff9603148fa1ff, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711174035348535265, guid: 07f16581bdde37849aff9603148fa1ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711174035348535265, guid: 07f16581bdde37849aff9603148fa1ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711174035348535265, guid: 07f16581bdde37849aff9603148fa1ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 07f16581bdde37849aff9603148fa1ff, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2950,4 +2974,5 @@ SceneRoots:
   - {fileID: 936022330}
   - {fileID: 294674266}
   - {fileID: 1464588288}
-  - {fileID: 434915195}
+  - {fileID: 1910927243}
+  - {fileID: 1901822862708855271}

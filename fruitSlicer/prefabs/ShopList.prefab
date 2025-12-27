@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3442582818873798525
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3711174035348535265}
+  - component: {fileID: 5139106960391300893}
+  m_Layer: 0
+  m_Name: ShopList
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3711174035348535265
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3442582818873798525}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.97246, y: -1.06362, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5139106960391300893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3442582818873798525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96b1a25ff1f9e6a418e87d0ea90e4272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
+  selectedShopList: []
+  shopBackgroundList:
+  - itemName: Snow Background
+    price: 0
+    icon: {fileID: 6895926924230315131, guid: 6a37592d1fd305b469faed80a7d43d3c, type: 3}
+    actualSprite: {fileID: 6895926924230315131, guid: 6a37592d1fd305b469faed80a7d43d3c, type: 3}
+    isDefault: 1
+    itemType: 1
+    isPurchased: 0
+    isEquipped: 0
+  - itemName: Sea
+    price: 100
+    icon: {fileID: 5483812648860242441, guid: 6ddbb621010fe2b4f85909ce0b81ea88, type: 3}
+    actualSprite: {fileID: 5483812648860242441, guid: 6ddbb621010fe2b4f85909ce0b81ea88, type: 3}
+    isDefault: 0
+    itemType: 1
+    isPurchased: 0
+    isEquipped: 0
+  bladeItemList: []

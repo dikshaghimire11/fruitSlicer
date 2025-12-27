@@ -38,6 +38,11 @@ public class MenuManager : MonoBehaviour
         navigateToScene("ShopScene");
     }
 
+    public void mainMenu()
+    {
+        navigateToScene("MainMenuFruitSlicer");
+    }
+
     public void navigateToScene(String sceneName)
 
     {

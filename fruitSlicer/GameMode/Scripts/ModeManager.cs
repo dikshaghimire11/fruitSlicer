@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum GameMode
 {
@@ -44,4 +45,5 @@ public class ModeManager : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
 }
