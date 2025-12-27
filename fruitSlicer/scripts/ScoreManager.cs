@@ -1,23 +1,23 @@
 using UnityEngine;
-using TMPro; 
-using UnityEngine.SceneManagement; 
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
 
     [Header("UI References")]
-    public TextMeshProUGUI scoreText;      
-    public TextMeshProUGUI highScoreText;  
-    public TextMeshProUGUI livesText;      
-    public GameObject gameOverPanel;       
-    public TextMeshProUGUI finalScoreText; 
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI highScoreText;
+    public TextMeshProUGUI livesText;
+    public GameObject gameOverPanel;
+    public TextMeshProUGUI finalScoreText;
 
     [Header("Victory Effect")]
-    public GameObject victoryEffectPrefab; 
+    public GameObject victoryEffectPrefab;
 
     [Header("Game Rules")]
-    public int maxLives = 3; 
+    public int maxLives = 3;
 
     private int score = 0;
     private int highScore = 0;
@@ -25,9 +25,9 @@ public class ScoreManager : MonoBehaviour
     private bool isGameOver = false;
     private bool hasShownHighScoreMessage = false;
 
-    void Awake() 
-    { 
-        if (instance == null) { instance = this; } 
+    void Awake()
+    {
+        if (instance == null) { instance = this; }
     }
 
     void Start()
@@ -40,9 +40,9 @@ public class ScoreManager : MonoBehaviour
         isGameOver = false;
         hasShownHighScoreMessage = false;
 
-        Time.timeScale = 1f; 
+        Time.timeScale = 1f;
         if (gameOverPanel != null) gameOverPanel.SetActive(false);
-        
+
         UpdateUI();
     }
 
@@ -57,7 +57,7 @@ public class ScoreManager : MonoBehaviour
         {
             if (score > highScore && highScore > 0 && !hasShownHighScoreMessage)
             {
-                hasShownHighScoreMessage = true; 
+                hasShownHighScoreMessage = true;
                 Blade blade = FindObjectOfType<Blade>();
                 if (blade != null) blade.ShowFloatingText("NEW HIGH SCORE!", Color.green, Vector3.zero);
             }
@@ -67,14 +67,14 @@ public class ScoreManager : MonoBehaviour
     public void WinGame(int pointsPerLevel)
     {
         isGameOver = true;
-        Time.timeScale = 0f; 
-        
-        if (gameOverPanel != null) gameOverPanel.SetActive(true);
+        Time.timeScale = 0f;
 
+        if (gameOverPanel != null) gameOverPanel.SetActive(true);
+        if (FruitSpawner.instance != null) FruitSpawner.instance.HideFruitsLayer();
         if (finalScoreText != null) finalScoreText.text = "LEVEL COMPLETE!\nYOU WON!";
-        
+
         int totalCoins = PlayerPrefs.GetInt("TotalCoins", 100);
-        PlayerPrefs.SetInt("TotalCoins", totalCoins + pointsPerLevel); 
+        PlayerPrefs.SetInt("TotalCoins", totalCoins + pointsPerLevel);
         PlayerPrefs.Save();
 
         if (victoryEffectPrefab != null) Instantiate(victoryEffectPrefab, Vector3.zero, Quaternion.identity);
@@ -130,9 +130,9 @@ public class ScoreManager : MonoBehaviour
             if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
             {
                 // Logic: If lives are 0, you died. If lives > 0, Time ran out.
-                if (currentLives > 0) 
+                if (currentLives > 0)
                     finalScoreText.text = "TIME'S UP!\nMISSION FAILED";
-                else 
+                else
                     finalScoreText.text = "LIVES LOST!\nMISSION FAILED";
             }
             else
@@ -163,12 +163,12 @@ public class ScoreManager : MonoBehaviour
         else
         {
             // FORCE SHOW in Infinite Mode
-            if (scoreText != null) 
+            if (scoreText != null)
             {
                 scoreText.gameObject.SetActive(true);
                 scoreText.text = score.ToString("D4");
             }
-            if (highScoreText != null) 
+            if (highScoreText != null)
             {
                 highScoreText.gameObject.SetActive(true);
                 int displayHighScore = (score > highScore) ? score : highScore;
@@ -177,6 +177,6 @@ public class ScoreManager : MonoBehaviour
         }
 
         // Lives are always visible
-        if (livesText != null) livesText.text = currentLives.ToString(); 
+        if (livesText != null) livesText.text = currentLives.ToString();
     }
 }

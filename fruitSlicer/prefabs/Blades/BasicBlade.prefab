@@ -241,8 +241,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Blade
   minSlicingVelocity: 7
   minSliceDistance: 0.5
-  maxComboDelay: 0.5
   floatingTextPrefab: {fileID: 6631497170589391908, guid: 1ff7f96d3b19eea42abafc0b61e6051a, type: 3}
+  maxComboDelay: 0.5
 --- !u!82 &7035028759514319195
 AudioSource:
   m_ObjectHideFlags: 0

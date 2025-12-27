@@ -67,19 +67,19 @@ public class JuiceManager : MonoBehaviour
         isLevelActive = true;
         
         UpdateCounterUI();
-        
-        // --- THIS IS CALLED ONLY ONCE NOW ---
         PickNewTarget(); 
     }
 
     void PickNewTarget()
     {
-        targetFruit = (FruitType)Random.Range(0, 5); // Picks ONE fruit for the whole level
+        targetFruit = (FruitType)Random.Range(0, 5); 
         
         if (taskText != null)
         {
             taskText.text = "" + targetFruit.ToString();
         }
+        FruitSpawner.instance.fruitPrefabs.Add(FruitSpawner.instance.GetFruitsOfType(targetFruit));
+    
     }
 
     public void CheckFruit(FruitType slicedType)

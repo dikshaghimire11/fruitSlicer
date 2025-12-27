@@ -180,4 +180,16 @@ public class FruitSpawner : MonoBehaviour
         // Bitwise operation to add the layer back to the mask
         mainCamera.cullingMask |= (1 << LayerMask.NameToLayer("Fruits"));
     }
+    public GameObject GetFruitsOfType(FruitType type)
+    {
+        foreach (GameObject fruitPrefab in fruitPrefabs)
+        {
+            Fruit fruitComponent = fruitPrefab.GetComponent<Fruit>();
+            if (fruitComponent != null && fruitComponent.fruitType == type)
+            {
+                return fruitPrefab;
+            }
+        }
+        return null; // Return null if no matching fruit is found
+    }
 }
