@@ -1867,6 +1867,7 @@ MonoBehaviour:
   - {fileID: 7767628628793562763, guid: e30b83241e41e6948964b3dceef461d8, type: 3}
   - {fileID: 7767628628793562763, guid: 0f71652f212513b4f9a6da0af85a3fdb, type: 3}
   - {fileID: 7767628628793562763, guid: 829aeaf400e6a344c98b005e2843841b, type: 3}
+  - {fileID: 7767628628793562763, guid: 133a40416cffa814e828f04fb96f653e, type: 3}
   spawnDelay: 0.5
   spawnForce: 5
   gameContainer: {fileID: 807754671}
@@ -4507,6 +4508,7 @@ MonoBehaviour:
   counterText: {fileID: 0}
   levelDuration: 60
   requiredCuts: 10
+  pointsPerLevel: 50
   targetFruit: 0
 --- !u!4 &2002546103
 Transform:
@@ -5052,6 +5054,10 @@ PrefabInstance:
       propertyPath: gameContainer
       value: 
       objectReference: {fileID: 1575584808}
+    - target: {fileID: 7232620994714346332, guid: 760afb29f009a1641a63be6fc69f45bb, type: 3}
+      propertyPath: fruitPrefabs.Array.size
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7518102174590354455, guid: 760afb29f009a1641a63be6fc69f45bb, type: 3}
       propertyPath: livesText
       value: 
