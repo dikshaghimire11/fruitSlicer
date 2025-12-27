@@ -6,64 +6,48 @@ public class ShopManager : MonoBehaviour
 {
     public static ShopManager instance; // Singleton for easy access
 
-    [Header("Shop Data")]
-    public ShopItem[] allItems; // Drag ALL your blades and backgrounds here
+
+    // Drag ALL your blades and backgrounds here
 
     [Header("UI Connections")]
     public Transform contentContainer; // The ScrollView Content
     public GameObject itemPrefab;      // The prefab with ShopItemUI script
     public TextMeshProUGUI coinsText;
-    
+
     // Track current filter (Blades or Backgrounds)
     private ShopItem.ItemType currentTab = ShopItem.ItemType.Blade;
     private int totalCoins;
 
     void Awake()
     {
-        instance = this;
-        
+          if (instance == null) { instance = this; } 
+
         // 1. Load Coin Balance (Default 1000 for testing)
         totalCoins = PlayerPrefs.GetInt("TotalCoins", 100);
-        UpdateCoinUI();
 
-        // 2. Load Purchased/Equipped Status from PlayerPrefs
-        LoadSavedData();
-        
-        // 3. Show Blades by default
-        RefreshUI();
     }
-
-    void LoadSavedData()
+    void Start()
     {
-        for (int i = 0; i < allItems.Length; i++)
-        {
-            // Default: First item of each category is owned
-
-
-            // LOAD PURCHASED: 1 = true, 0 = false
-            int sold = PlayerPrefs.GetInt("Sold_" + i, allItems[i].isDefault ? 1 : 0);
-            allItems[i].isPurchased = (sold == 1);
-
-            // LOAD EQUIPPED: Get the saved ID for this type
-            int equippedID = PlayerPrefs.GetInt("Equipped_" + allItems[i].itemType, -1);
-            
-            // If nothing saved, equip the first one we find
-            if (equippedID == -1 && allItems[i].isDefault && allItems[i].itemType == ShopItem.ItemType.Blade) equippedID = i; 
-            
-            allItems[i].isEquipped = (equippedID == i);
-        }
+        UpdateCoinUI();
+        ShowBlades();
     }
+
+ 
 
     // --- TAB SYSTEM ---
     public void ShowBlades()
     {
         currentTab = ShopItem.ItemType.Blade;
+        ShopLists.instance.selectedShopList = ShopLists.instance.bladeItemList;
+        ShopLists.instance.LoadSavedData();
         RefreshUI();
     }
 
     public void ShowBackgrounds()
     {
         currentTab = ShopItem.ItemType.Background;
+        ShopLists.instance.selectedShopList = ShopLists.instance.shopBackgroundList;
+        ShopLists.instance.LoadSavedData();
         RefreshUI();
     }
 
@@ -75,21 +59,21 @@ public class ShopManager : MonoBehaviour
             Destroy(child.gameObject);
 
         // 2. Spawn new buttons for the current tab
-        for (int i = 0; i < allItems.Length; i++)
+        for (int i = 0; i < ShopLists.instance.selectedShopList.Length; i++)
         {
             // Filter: Only show items matching the current tab
-            if (allItems[i].itemType == currentTab)
-            {
-                GameObject newCard = Instantiate(itemPrefab, contentContainer);
-                // Pass 'i' as the ID so we know which item inside 'allItems' array to refer to
-                newCard.GetComponent<ShopItemUI>().Setup(allItems[i], i, this);
-            }
+            // if (selectedShopList[i].itemType == currentTab)
+            // {
+            GameObject newCard = Instantiate(itemPrefab, contentContainer);
+            // Pass 'i' as the ID so we know which item inside 'allItems' array to refer to
+            newCard.GetComponent<ShopItemUI>().Setup(ShopLists.instance.selectedShopList[i], i, this);
+            // }
         }
     }
 
     public void OnItemButtonClicked(int id)
     {
-        ShopItem item = allItems[id];
+        ShopItem item = ShopLists.instance.selectedShopList[id];
 
         if (item.isPurchased)
         {
@@ -103,7 +87,7 @@ public class ShopManager : MonoBehaviour
 
     void BuyItem(int id)
     {
-        ShopItem item = allItems[id];
+        ShopItem item = ShopLists.instance.selectedShopList[id];
 
         if (totalCoins >= item.price)
         {
@@ -127,14 +111,14 @@ public class ShopManager : MonoBehaviour
 
     void EquipItem(int id)
     {
-        ShopItem newItem = allItems[id];
+        ShopItem newItem = ShopLists.instance.selectedShopList[id];
 
         // 1. Unequip all others of same type
-        for (int i = 0; i < allItems.Length; i++)
+        for (int i = 0; i < ShopLists.instance.selectedShopList.Length; i++)
         {
-            if (allItems[i].itemType == newItem.itemType)
+            if (ShopLists.instance.selectedShopList[i].itemType == newItem.itemType)
             {
-                allItems[i].isEquipped = false;
+                ShopLists.instance.selectedShopList[i].isEquipped = false;
             }
         }
 
@@ -153,4 +137,5 @@ public class ShopManager : MonoBehaviour
     {
         coinsText.text = totalCoins.ToString(); // Format as needed (e.g., "1,500")
     }
+
 }
