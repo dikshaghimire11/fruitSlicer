@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5401397531378183924}
   - component: {fileID: 3973755966708331762}
   - component: {fileID: 1575655191716206093}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ExtraJuicyParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}

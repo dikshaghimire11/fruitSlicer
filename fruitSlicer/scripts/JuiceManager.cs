@@ -144,21 +144,28 @@ public class JuiceManager : MonoBehaviour
         }
     }
 
-    void EndLevel(bool playerWon)
+   void EndLevel(bool playerWon)
     {
         isLevelActive = false;
 
         if (playerWon)
         {
             Debug.Log("VICTORY! You collected " + requiredCuts + " fruits!");
-            if (taskText != null) taskText.text = "VICTORY!";
-            // Add any "Level Complete" UI logic here later
+            if (taskText != null) taskText.text = "VICTORY! +10 PTS";
+            
+            // --- NEW: ADD REWARD ---
+            if (ScoreManager.instance != null)
+            {
+                ScoreManager.instance.AddScore(10); // Give 10 Points
+                ScoreManager.instance.WinGame();    // Call a new "Win" function
+            }
+            // -----------------------
         }
         else
         {
             Debug.Log("GAME OVER! Time ran out.");
             if (taskText != null) taskText.text = "TIME'S UP!";
-            if (ScoreManager.instance != null) ScoreManager.instance.LoseLife(); // Optional: Punish for time out
+            if (ScoreManager.instance != null) ScoreManager.instance.LoseLife(); 
         }
     }
 
