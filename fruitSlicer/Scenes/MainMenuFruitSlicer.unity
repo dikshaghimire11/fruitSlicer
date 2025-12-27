@@ -615,8 +615,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1851052138}
-        m_TargetAssemblyTypeName: LoadingManager, Assembly-CSharp
-        m_MethodName: playGame
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: shop
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3167,10 +3167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74c819c37a296da42aeb5946b08b08a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadingManager
-  sceneToLoad: UI
-  progressBar: {fileID: 220117979}
-  progressText: {fileID: 1243376739}
-  loadingPanel: {fileID: 2046213015}
 --- !u!4 &1851052139
 Transform:
   m_ObjectHideFlags: 0

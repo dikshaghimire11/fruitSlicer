@@ -98,7 +98,8 @@ public class ScoreManager : MonoBehaviour
 
         if (gameOverPanel != null) gameOverPanel.SetActive(true);
         FruitSpawner.instance.HideFruitsLayer();
-
+        int totalCoins=PlayerPrefs.GetInt("TotalCoins",100);
+        PlayerPrefs.SetInt("TotalCoins",score+totalCoins);
         // Check for High Score (Save it permanently now)
         if (score > highScore)
         {

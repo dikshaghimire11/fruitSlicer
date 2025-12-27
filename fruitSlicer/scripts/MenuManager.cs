@@ -74,7 +74,7 @@ public class MenuManager : MonoBehaviour
 
     public void shop()
     {
-
+        navigateToScene("ShopScene");
     }
 
     public void navigateToScene(String sceneName)
