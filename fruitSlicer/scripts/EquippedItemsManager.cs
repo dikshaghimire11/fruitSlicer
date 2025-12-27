@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NewEmptyCSharpScript : MonoBehaviour
+public class EquippedItemsManager : MonoBehaviour
 {
     public Image shopBackground;
     public Material bladeMaterial;
@@ -11,7 +11,7 @@ public class NewEmptyCSharpScript : MonoBehaviour
     void Start()
     {
         // --- LOAD BACKGROUND ---
-        int bgIndex = PlayerPrefs.GetInt("Equipped_Background", -1); // Default to item 0
+        int bgIndex = PlayerPrefs.GetInt("Equipped_Background", 0); // Default to item 0
                                                                      // Access your ShopManager array or a duplicate list to find sprite
                                                                      // (A better way is to make ShopManager a singleton that doesn't destroy on load)
         shopBackground.sprite = ShopLists.instance.shopBackgroundList[bgIndex].actualSprite;

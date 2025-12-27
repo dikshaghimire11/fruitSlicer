@@ -80,31 +80,25 @@ public class Blade : MonoBehaviour
             // 1. Visual Slice (If this happens, physics works)
             fruit.Slice(currentSliceDirection);
 
-            // --- DEBUG START ---
-            Debug.Log("Hit Fruit! Current Mode: " + ModeManager.Instance.currentMode);
+
             // -------------------
 
             if (ModeManager.Instance.currentMode == GameMode.Infinite)
             {
-                Debug.Log("Mode is Infinite. Adding Score...");
+  
                 if (ScoreManager.instance != null) ScoreManager.instance.AddScore(fruit.points);
                 ShowFloatingText("+" + fruit.points, new Color(0.278f, 0.572f, 0.866f), fruit.transform.position);
                 HandleCombo(fruit);
             }
             else if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
             {
-                Debug.Log("Mode is JuiceMaking. Calling JuiceManager...");
                 
                 if (JuiceManager.instance != null) 
                 {
-                    Debug.Log("JuiceManager Found! Sending Data...");
+
                     JuiceManager.instance.CheckFruit(fruit.fruitType);
                 }
-                else
-                {
-                    Debug.LogError("CRITICAL ERROR: JuiceManager is NULL! It is not in the scene.");
-                }
-
+                
                 ShowFloatingText("SPLASH!", Color.cyan, fruit.transform.position);
             }
             return;
@@ -120,7 +114,6 @@ public class Blade : MonoBehaviour
             // --- BOMB LOGIC: ALWAYS LOSE LIFE ---
             if (ScoreManager.instance != null) 
             {
-                Debug.Log("Bomb Hit! Reducing Life.");
                 ScoreManager.instance.HitBomb(); // Calls LoseLife()
             }
             else
