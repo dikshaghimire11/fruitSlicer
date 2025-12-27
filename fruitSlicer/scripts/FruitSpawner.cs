@@ -5,20 +5,25 @@ using System.Collections.Generic;
 public class FruitSpawner : MonoBehaviour
 {
     public static FruitSpawner instance;
-    // --- EXISTING VARIABLES ---
-    public List<GameObject> fruitPrefabs;
+
+    // --- FRUIT SETTINGS ---
+    // DRAG YOUR FRUIT PREFABS HERE IN THE INSPECTOR (Apple, Orange, etc.)
+    public List<GameObject> fruitPrefabs; 
+
     public float spawnDelay = 2f;  
     public float spawnForce = 12f; 
     public GameObject gameContainer;
 
+    // --- SPECIAL ITEMS SETTINGS ---
     [Header("Special Items Settings")]
     public GameObject bombPrefab;      
     public GameObject icePrefab;       
     public float specialSpawnDelay = 10f; 
 
-    // --- MEMORY VARIABLES ---
+    // --- INTERNAL VARIABLES ---
     private int lastFruitIndex = -1;    
     private int lastSpecialType = -1;
+
     
     // --- NEW: CONTROL FLAG ---
     private bool stopFruitSpawning = false;
@@ -26,10 +31,12 @@ public class FruitSpawner : MonoBehaviour
 
      private Camera mainCamera;
 
-    void Awake()
-    {
-        if (instance == null) { instance = this; }
+
+    void Awake() 
+    { 
+        if (instance == null) instance = this; 
     }
+
     void Start()
     {
         if (mainCamera == null)
@@ -40,22 +47,39 @@ public class FruitSpawner : MonoBehaviour
         StartCoroutine(SpawnBombAndIceRoutine());
     }
 
-    // --- FRUIT ROUTINE (Listens to the traffic light) ---
+    // --- 1. RANDOM FRUIT SPAWNING ROUTINE ---
     IEnumerator SpawnFruitsRoutine()
     {
         Vector3[] corners = new Vector3[4];
-        gameContainer.GetComponent<RectTransform>().GetWorldCorners(corners);
+        if (gameContainer != null) 
+        {
+            gameContainer.GetComponent<RectTransform>().GetWorldCorners(corners);
+        }
+        else
+        {
+            Debug.LogError("Game Container is missing! Assign it in the Inspector.");
+            yield break;
+        }
 
         while (true)
         {
-            yield return new WaitForSeconds(spawnDelay);
+             if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
+            {
+              yield return new WaitForSeconds(1f);
+            }
+            else
+            {
+                yield return new WaitForSeconds(spawnDelay);
+            }
+            
 
-            // ONLY spawn if the special routine says it's okay
+            // Only spawn if not paused by special event AND if we have fruits to spawn
             if (!stopFruitSpawning && fruitPrefabs.Count > 0)
             {
+                // A. Pick a random fruit index (0 to List Size)
                 int randomIndex = Random.Range(0, fruitPrefabs.Count);
                 
-                // Prevent duplicate fruits logic
+                // B. Logic to prevent the exact same fruit twice in a row (makes it feel more random)
                 if (fruitPrefabs.Count > 1)
                 {
                     while (randomIndex == lastFruitIndex)
@@ -65,65 +89,70 @@ public class FruitSpawner : MonoBehaviour
                 }
                 
                 lastFruitIndex = randomIndex;
+
+                // C. Spawn the chosen fruit
                 SpawnObject(fruitPrefabs[randomIndex], corners);
             }
         }
     }
 
-    // --- SPECIAL ITEM ROUTINE (Controls the traffic light) ---
+    // --- 2. SPECIAL ITEM (BOMB/ICE) ROUTINE ---
     IEnumerator SpawnBombAndIceRoutine()
     {
         Vector3[] corners = new Vector3[4];
-        gameContainer.GetComponent<RectTransform>().GetWorldCorners(corners);
+        if (gameContainer != null) gameContainer.GetComponent<RectTransform>().GetWorldCorners(corners);
 
         while (true)
         {
-            // 1. Wait for the big gap (10 seconds)
+            // Wait for the delay
             yield return new WaitForSeconds(specialSpawnDelay);
 
-            // 2. PAUSE FRUITS! 
-            // We turn the red light on so no fruits spawn while we prepare.
+            // Pause normal fruits
             stopFruitSpawning = true;
-
-            // 3. Wait a tiny bit to let existing fruits clear out (optional, e.g. 1.5 seconds)
             yield return new WaitForSeconds(1.5f);
 
-            // 4. Decide what to spawn (Alternating logic)
             GameObject prefabToSpawn = null;
-            int currentType = 0;
 
-            if (lastSpecialType == 0) 
+            // --- MODE CHECK LOGIC ---
+            if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
             {
-                currentType = 1;      
-                prefabToSpawn = icePrefab;
+                // CAREER MODE: Always spawn Bomb (to punish cutting it)
+                prefabToSpawn = bombPrefab; 
             }
             else 
             {
-                currentType = 0;      
-                prefabToSpawn = bombPrefab;
+                // FREESTYLE MODE: Alternate between Ice and Bomb
+                if (lastSpecialType == 0) 
+                {
+                    prefabToSpawn = icePrefab; 
+                    lastSpecialType = 1; 
+                }
+                else 
+                {
+                    prefabToSpawn = bombPrefab; 
+                    lastSpecialType = 0; 
+                }
             }
-            lastSpecialType = currentType;
+            // ------------------------
 
-            // 5. Spawn the Special Item
-            if (prefabToSpawn != null)
-            {
-                SpawnObject(prefabToSpawn, corners);
-            }
+            // Spawn the special item
+            if (prefabToSpawn != null) SpawnObject(prefabToSpawn, corners);
 
-            // 6. Wait a bit so the item is alone on screen (e.g. 2 seconds)
+            // Wait for it to clear, then resume normal fruits
             yield return new WaitForSeconds(1f);
-
-            // 7. RESUME FRUITS!
             stopFruitSpawning = false;
         }
     }
 
-    // --- HELPER FUNCTION ---
+    // --- 3. HELPER FUNCTION TO LAUNCH OBJECTS ---
     void SpawnObject(GameObject prefab, Vector3[] corners)
     {
+        if (prefab == null) return;
+
         float screenWidth = corners[3].x - corners[0].x;
         float upsetWidth = screenWidth * 0.2f; 
         
+        // Random X position within the container bounds
         float randomX = Random.Range(corners[0].x + upsetWidth, corners[3].x - upsetWidth);
         Vector3 spawnPosition = new Vector3(randomX, -3f, -10f); 
 
@@ -132,7 +161,10 @@ public class FruitSpawner : MonoBehaviour
 
         if (rb != null)
         {
+            // Launch Up
             rb.AddForce(Vector2.up * spawnForce, ForceMode2D.Impulse);
+            
+            // Add slight side force for randomness
             float randomHorizontalForce = Random.Range(-spawnForce / 2, spawnForce / 2);
             rb.AddForce(new Vector2(randomHorizontalForce, 0), ForceMode2D.Impulse);
         }

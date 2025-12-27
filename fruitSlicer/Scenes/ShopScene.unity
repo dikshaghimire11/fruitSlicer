@@ -530,6 +530,14 @@ MonoBehaviour:
     price: 100
     icon: {fileID: 7111969943574635211, guid: 15fa008e7e0ae224dbe9f4bc553337c9, type: 3}
     actualSprite: {fileID: 7111969943574635211, guid: 15fa008e7e0ae224dbe9f4bc553337c9, type: 3}
+    isDefault: 1
+    itemType: 1
+    isPurchased: 0
+    isEquipped: 0
+  - itemName: Glass Shop
+    price: 100
+    icon: {fileID: 7111969943574635211, guid: 15fa008e7e0ae224dbe9f4bc553337c9, type: 3}
+    actualSprite: {fileID: 7111969943574635211, guid: 15fa008e7e0ae224dbe9f4bc553337c9, type: 3}
     isDefault: 0
     itemType: 1
     isPurchased: 0

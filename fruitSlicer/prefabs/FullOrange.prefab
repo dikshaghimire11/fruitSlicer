@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af2a13fc7c431d641bdd912208d99be0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Fruit
+  fruitType: 1
   leftHalf: {fileID: 1196853473894489004, guid: 0ec3b99458b2474418ffaa4700c6b686, type: 3}
   rightHalf: {fileID: 3160838875326261666, guid: 7159d4b9bee5c8541a62bb0ef5d16762, type: 3}
   sliceForce: 5
