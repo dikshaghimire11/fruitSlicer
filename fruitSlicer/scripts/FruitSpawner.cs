@@ -109,7 +109,7 @@ public class FruitSpawner : MonoBehaviour
 
             // Pause normal fruits
             stopFruitSpawning = true;
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1f);
 
             GameObject prefabToSpawn = null;
 
@@ -172,8 +172,6 @@ public class FruitSpawner : MonoBehaviour
 
     public void HideFruitsLayer()
     {
-        // Bitwise operation to remove the layer from the mask
-        Debug.Log("should hide the fruits.");
         mainCamera.cullingMask &=  ~(1 << LayerMask.NameToLayer("Fruits"));
     }
 

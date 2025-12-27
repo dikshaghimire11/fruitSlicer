@@ -32,9 +32,9 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
-        // Load High Score
-        highScore = PlayerPrefs.GetInt("HighScore", 0);
 
+
+        highScore = PlayerPrefs.GetInt("HighScore", 0);
         currentLives = maxLives;
         score = 0;
         isGameOver = false;
@@ -43,21 +43,6 @@ public class ScoreManager : MonoBehaviour
         Time.timeScale = 1f; 
         if (gameOverPanel != null) gameOverPanel.SetActive(false);
         
-        // --- KEY CHANGE: HIDE SCORE IN JUICE MODE ---
-        // We check the ModeManager. If it's JuiceMaking, we turn off the text objects.
-        if (ModeManager.Instance != null && ModeManager.Instance.currentMode == GameMode.JuiceMaking)
-        {
-            if (scoreText != null) scoreText.gameObject.SetActive(false);
-            if (highScoreText != null) highScoreText.gameObject.SetActive(false);
-        }
-        else
-        {
-            // Infinite Mode: Make sure they are visible
-            if (scoreText != null) scoreText.gameObject.SetActive(true);
-            if (highScoreText != null) highScoreText.gameObject.SetActive(true);
-        }
-        // ---------------------------------------------
-
         UpdateUI();
     }
 
@@ -67,7 +52,7 @@ public class ScoreManager : MonoBehaviour
         score += amount;
         UpdateUI();
 
-        // High Score Logic (Only show floating text in Infinite Mode)
+        // High Score Logic (Infinite Mode Only)
         if (ModeManager.Instance.currentMode == GameMode.Infinite)
         {
             if (score > highScore && highScore > 0 && !hasShownHighScoreMessage)
@@ -79,56 +64,57 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    // --- WIN FUNCTION (Called by JuiceManager) ---
-    public void WinGame()
+    public void WinGame(int pointsPerLevel)
     {
         isGameOver = true;
         Time.timeScale = 0f; 
         
         if (gameOverPanel != null) gameOverPanel.SetActive(true);
 
-        // Show "Level Complete" message
-        if (finalScoreText != null)
-        {
-            finalScoreText.text = "LEVEL COMPLETE!\nYOU WON!";
-        }
+        if (finalScoreText != null) finalScoreText.text = "LEVEL COMPLETE!\nYOU WON!";
+        
+        int totalCoins = PlayerPrefs.GetInt("TotalCoins", 100);
+        PlayerPrefs.SetInt("TotalCoins", totalCoins + pointsPerLevel); 
+        PlayerPrefs.Save();
 
-        if (victoryEffectPrefab != null)
-        {
-            Instantiate(victoryEffectPrefab, Vector3.zero, Quaternion.identity);
-        }
+        if (victoryEffectPrefab != null) Instantiate(victoryEffectPrefab, Vector3.zero, Quaternion.identity);
     }
 
-    // --- SHARED LIFE SYSTEM ---
+    // --- NEW: FORCE GAME OVER (For Timer) ---
+    public void ForceGameOver()
+    {
+        currentLives = 0;
+        UpdateUI();
+        EndGame();
+    }
+    // ----------------------------------------
+
     public void LoseLife() { SubtractLife(); }
     public void HitBomb() { SubtractLife(); }
 
     private void SubtractLife()
     {
         if (isGameOver) return;
-
         currentLives--;
         UpdateUI();
-
-        if (currentLives <= 0)
-        {
-            EndGame();
-        }
+        if (currentLives <= 0) EndGame();
     }
 
-    // --- LOSE FUNCTION ---
     void EndGame()
     {
         isGameOver = true;
         Time.timeScale = 0f;
 
         if (gameOverPanel != null) gameOverPanel.SetActive(true);
-        FruitSpawner.instance.HideFruitsLayer();
-        int totalCoins=PlayerPrefs.GetInt("TotalCoins",100);
-        PlayerPrefs.SetInt("TotalCoins",score+totalCoins);
-        // Check for High Score (Save it permanently now)
-        // 1. Infinite Mode Logic (Save High Score)
-        if (ModeManager.Instance != null && ModeManager.Instance.currentMode == GameMode.Infinite)
+        if (FruitSpawner.instance != null) FruitSpawner.instance.HideFruitsLayer();
+
+        // Save Score/Coins
+        int totalCoins = PlayerPrefs.GetInt("TotalCoins", 100);
+        PlayerPrefs.SetInt("TotalCoins", score + totalCoins);
+        PlayerPrefs.Save();
+
+        // High Score Logic (Infinite Mode)
+        if (ModeManager.Instance.currentMode == GameMode.Infinite)
         {
             if (score > highScore)
             {
@@ -138,12 +124,16 @@ public class ScoreManager : MonoBehaviour
             }
         }
 
-        // 2. Set Final Text based on Mode
+        // Final Text Logic
         if (finalScoreText != null)
         {
-            if (ModeManager.Instance != null && ModeManager.Instance.currentMode == GameMode.JuiceMaking)
+            if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
             {
-                finalScoreText.text = "MISSION FAILED\nTRY AGAIN";
+                // Logic: If lives are 0, you died. If lives > 0, Time ran out.
+                if (currentLives > 0) 
+                    finalScoreText.text = "TIME'S UP!\nMISSION FAILED";
+                else 
+                    finalScoreText.text = "LIVES LOST!\nMISSION FAILED";
             }
             else
             {
@@ -156,20 +146,37 @@ public class ScoreManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if (FruitSpawner.instance != null) FruitSpawner.instance.ShowFruitsLayer();
     }
 
+    // --- UPDATED UI LOGIC (Fixes the persistent Score issue) ---
     void UpdateUI()
     {
-        // Only update Score Text if we are in Infinite Mode
-        if (ModeManager.Instance != null && ModeManager.Instance.currentMode == GameMode.Infinite)
+        bool isJuiceMode = (ModeManager.Instance.currentMode == GameMode.JuiceMaking);
+
+        if (isJuiceMode)
         {
-            if (scoreText != null) scoreText.text = score.ToString("D4");
-            
-            int displayHighScore = (score > highScore) ? score : highScore;
-            if (highScoreText != null) highScoreText.text = "HIGH: " + displayHighScore.ToString("D4");
+            // FORCE HIDE in Juice Mode
+            if (scoreText != null) scoreText.gameObject.SetActive(false);
+            if (highScoreText != null) highScoreText.gameObject.SetActive(false);
+        }
+        else
+        {
+            // FORCE SHOW in Infinite Mode
+            if (scoreText != null) 
+            {
+                scoreText.gameObject.SetActive(true);
+                scoreText.text = score.ToString("D4");
+            }
+            if (highScoreText != null) 
+            {
+                highScoreText.gameObject.SetActive(true);
+                int displayHighScore = (score > highScore) ? score : highScore;
+                highScoreText.text = "HIGH: " + displayHighScore.ToString("D4");
+            }
         }
 
-        // Lives are always visible in both modes
+        // Lives are always visible
         if (livesText != null) livesText.text = currentLives.ToString(); 
     }
 }
