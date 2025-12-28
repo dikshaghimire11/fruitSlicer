@@ -7,6 +7,7 @@ public class FruitSpawner : MonoBehaviour
     public static FruitSpawner instance;
 
     // --- FRUIT SETTINGS ---
+
     [Header("Fruit Settings")]
     public List<GameObject> fruitPrefabs; 
     public float spawnDelay = 2f;  
@@ -20,19 +21,21 @@ public class FruitSpawner : MonoBehaviour
 
     // --- SPECIAL ITEMS SETTINGS ---
     [Header("Special Items Settings")]
-    public GameObject bombPrefab;      
-    public GameObject icePrefab;       
-    public float specialSpawnDelay = 10f; 
+    public GameObject bombPrefab;
+    public GameObject icePrefab;
+    public float specialSpawnDelay = 10f;
 
     // --- INTERNAL VARIABLES ---
-    private int lastFruitIndex = -1;    
+    private int lastFruitIndex = -1;
     private int lastSpecialType = -1;
+
     private bool stopFruitSpawning = false;
     private Camera mainCamera;
 
-    void Awake() 
-    { 
-        if (instance == null) instance = this; 
+
+    void Awake()
+    {
+        if (instance == null) instance = this;
     }
 
     void Start()
@@ -41,6 +44,11 @@ public class FruitSpawner : MonoBehaviour
         {
             mainCamera = Camera.main;
         }
+
+    }
+
+    public void startSpawnning()
+    {
         StartCoroutine(SpawnFruitsRoutine());
         StartCoroutine(SpawnBombAndIceRoutine());
     }
@@ -49,7 +57,7 @@ public class FruitSpawner : MonoBehaviour
     IEnumerator SpawnFruitsRoutine()
     {
         Vector3[] corners = new Vector3[4];
-        if (gameContainer != null) 
+        if (gameContainer != null)
         {
             gameContainer.GetComponent<RectTransform>().GetWorldCorners(corners);
         }
@@ -61,21 +69,39 @@ public class FruitSpawner : MonoBehaviour
 
         while (true)
         {
+
             // 1. Handle Delay based on Mode
             if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
             {
                 yield return new WaitForSeconds(1f); // Faster spawns in Juice Mode?
+
             }
             else
             {
                 yield return new WaitForSeconds(spawnDelay);
             }
-            
+
 
             // 2. Spawn Logic
             if (!stopFruitSpawning && fruitPrefabs.Count > 0)
             {
+
                 GameObject prefabToSpawn = null;
+
+                // // A. Pick a random fruit index (0 to List Size)
+                // int randomIndex = Random.Range(0, fruitPrefabs.Count);
+
+                // // B. Logic to prevent the exact same fruit twice in a row (makes it feel more random)
+                // if (fruitPrefabs.Count > 1)
+                // {
+                //     while (randomIndex == lastFruitIndex)
+                //     {
+                //         randomIndex = Random.Range(0, fruitPrefabs.Count);
+                //     }
+                // }
+
+                // lastFruitIndex = randomIndex;
+
 
                 // --- NEW: SPAWN BIAS LOGIC ---
                 // Check if we are in Juice Mode
@@ -132,12 +158,27 @@ public class FruitSpawner : MonoBehaviour
 
             if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
             {
+
                 prefabToSpawn = bombPrefab; 
+
             }
-            else 
+            else
             {
+
                 if (lastSpecialType == 0) { prefabToSpawn = icePrefab; lastSpecialType = 1; }
                 else { prefabToSpawn = bombPrefab; lastSpecialType = 0; }
+
+                if (lastSpecialType == 0)
+                {
+                    prefabToSpawn = icePrefab;
+                    lastSpecialType = 1;
+                }
+                else
+                {
+                    prefabToSpawn = bombPrefab;
+                    lastSpecialType = 0;
+                }
+
             }
 
             if (prefabToSpawn != null) SpawnObject(prefabToSpawn, corners);
@@ -153,10 +194,11 @@ public class FruitSpawner : MonoBehaviour
         if (prefab == null) return;
 
         float screenWidth = corners[3].x - corners[0].x;
+
         float upsetWidth = screenWidth * 0.2f; 
-        
+
         float randomX = Random.Range(corners[0].x + upsetWidth, corners[3].x - upsetWidth);
-        Vector3 spawnPosition = new Vector3(randomX, -3f, -10f); 
+        Vector3 spawnPosition = new Vector3(randomX, -3f, -10f);
 
         GameObject newObj = Instantiate(prefab, spawnPosition, Quaternion.identity);
         Rigidbody2D rb = newObj.GetComponent<Rigidbody2D>();
@@ -171,8 +213,10 @@ public class FruitSpawner : MonoBehaviour
 
     public void HideFruitsLayer()
     {
+
         if(mainCamera != null)
             mainCamera.cullingMask &=  ~(1 << LayerMask.NameToLayer("Fruits"));
+
     }
 
     public void ShowFruitsLayer()

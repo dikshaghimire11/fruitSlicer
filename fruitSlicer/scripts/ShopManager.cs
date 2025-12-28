@@ -137,5 +137,6 @@ public class ShopManager : MonoBehaviour
     {
         coinsText.text = totalCoins.ToString(); // Format as needed (e.g., "1,500")
     }
+    
 
 }

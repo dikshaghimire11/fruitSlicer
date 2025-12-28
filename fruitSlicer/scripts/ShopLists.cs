@@ -10,6 +10,8 @@ public class ShopLists : MonoBehaviour
     public ShopItem[] shopBackgroundList;
 
     public ShopItem[] bladeItemList;
+
+    public GameObject[] characterList;
     public static ShopLists instance;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
