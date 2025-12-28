@@ -22,6 +22,8 @@ public class JuiceManager : MonoBehaviour
     private int currentCuts = 0;
     private bool isLevelActive = false;
 
+    public TextMeshProUGUI missionText;
+
     void Awake() { instance = this; }
 
     void Start()
@@ -47,7 +49,7 @@ public class JuiceManager : MonoBehaviour
 
     void Update()
     {
-        if (isLevelActive)
+        if (isLevelActive && GameCanvasManager.instance.startSpawning)
         {
             currentTime -= Time.deltaTime;
             if (timerText != null) timerText.text = "" + Mathf.CeilToInt(currentTime).ToString();
@@ -77,6 +79,7 @@ public class JuiceManager : MonoBehaviour
         if (taskText != null)
         {
             taskText.text = "" + targetFruit.ToString();
+            missionText.text="I want to have some fresh "+targetFruit.ToString()+" Juice...";
         }
         FruitSpawner.instance.fruitPrefabs.Add(FruitSpawner.instance.GetFruitsOfType(targetFruit));
     
