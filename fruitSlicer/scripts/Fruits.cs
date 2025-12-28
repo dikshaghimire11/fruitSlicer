@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum FruitType { Apple, Orange, Watermelon, Banana }
+public enum FruitType { Apple, Orange, Watermelon, Banana, Pineapple, Mango ,Kiwi ,Coconut}
 
 public class Fruit : MonoBehaviour
 {

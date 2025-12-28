@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System; // <--- REQUIRED for Enum.GetNames
 
 public class JuiceManager : MonoBehaviour
 {
     public static JuiceManager instance;
 
     [Header("UI References")]
+    private GameObject timersParent;       // Auto-found
     public TextMeshProUGUI taskText;      
     public TextMeshProUGUI timerText;     
     public TextMeshProUGUI counterText;   
@@ -21,6 +23,7 @@ public class JuiceManager : MonoBehaviour
     private float currentTime;
     private int currentCuts = 0;
     private bool isLevelActive = false;
+    private int lastTimeInt = -1;
 
     void Awake() { instance = this; }
 
@@ -28,18 +31,24 @@ public class JuiceManager : MonoBehaviour
     {
         if (ModeManager.Instance == null) return;
 
+        // Auto-find logic
+        if (timersParent == null && timerText != null)
+        {
+            timersParent = timerText.transform.parent.gameObject;
+        }
+
         if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
         {
+            if (timersParent != null) timersParent.SetActive(true);
             if (taskText != null) taskText.gameObject.SetActive(true);
-            if (timerText != null) timerText.gameObject.SetActive(true);
             if (counterText != null) counterText.gameObject.SetActive(true);
 
             StartLevel();
         }
         else
         {
+            if (timersParent != null) timersParent.SetActive(false);
             if (taskText != null) taskText.gameObject.SetActive(false);
-            if (timerText != null) timerText.gameObject.SetActive(false);
             if (counterText != null) counterText.gameObject.SetActive(false);
             gameObject.SetActive(false); 
         }
@@ -50,7 +59,13 @@ public class JuiceManager : MonoBehaviour
         if (isLevelActive)
         {
             currentTime -= Time.deltaTime;
-            if (timerText != null) timerText.text = "" + Mathf.CeilToInt(currentTime).ToString();
+            
+            int timeInt = Mathf.CeilToInt(currentTime);
+            if (timeInt != lastTimeInt)
+            {
+                if (timerText != null) timerText.text = timeInt.ToString();
+                lastTimeInt = timeInt;
+            }
 
             if (currentTime <= 0)
             {
@@ -70,43 +85,40 @@ public class JuiceManager : MonoBehaviour
         PickNewTarget(); 
     }
 
+    // --- FIX IS HERE ---
     void PickNewTarget()
     {
-        targetFruit = (FruitType)Random.Range(0, 5); 
+        // 1. Automatically count how many items are in the FruitType List
+        // This will return '8' for your current list (Apple...Coconut)
+        int fruitCount = Enum.GetNames(typeof(FruitType)).Length;
+
+        // 2. Pick a random number between 0 and the Total Count
+        targetFruit = (FruitType)UnityEngine.Random.Range(0, fruitCount); 
         
         if (taskText != null)
         {
-            taskText.text = "" + targetFruit.ToString();
+            taskText.text = targetFruit.ToString(); // Displays "Coconut", "Mango", etc.
         }
-        FruitSpawner.instance.fruitPrefabs.Add(FruitSpawner.instance.GetFruitsOfType(targetFruit));
-    
     }
+    // -------------------
 
     public void CheckFruit(FruitType slicedType)
     {
         if (!isLevelActive) return;
 
-        // 1. CORRECT FRUIT
         if (slicedType == targetFruit)
         {
             currentCuts++;
             UpdateCounterUI();
-
-            // --- CHANGE HERE: We do NOT change the target anymore! ---
-            // The player must keep cutting the SAME fruit until they reach 10.
 
             if (currentCuts >= requiredCuts)
             {
                 EndLevel(true); 
             }
         }
-        // 2. WRONG FRUIT
         else
         {
-            if (ScoreManager.instance != null)
-            {
-                ScoreManager.instance.LoseLife();
-            }
+            if (ScoreManager.instance != null) ScoreManager.instance.LoseLife();
         }
     }
 
@@ -132,21 +144,12 @@ public class JuiceManager : MonoBehaviour
         else
         {
             if (taskText != null) taskText.text = "TIME'S UP!";
-            
-            // Call the NEW Instant Game Over function
-            if (ScoreManager.instance != null) 
-            {
-                ScoreManager.instance.ForceGameOver(); 
-            }
-            // ----------------------
+            if (ScoreManager.instance != null) ScoreManager.instance.ForceGameOver(); 
         }
     }
 
     void UpdateCounterUI()
     {
-        if (counterText != null)
-        {
-            counterText.text = currentCuts + " / " + requiredCuts;
-        }
+        if (counterText != null) counterText.text = currentCuts + " / " + requiredCuts;
     }
 }
