@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 6261397905656911256}
   - component: {fileID: 2002393568182117257}
   - component: {fileID: 9146751011432130112}
-  - component: {fileID: 2834816725617792329}
+  - component: {fileID: 2613413523906398592}
   m_Layer: 6
-  m_Name: FullBanana
+  m_Name: FullCoconut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,9 +28,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7767628628793562763}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.031252988, y: -0.034770697, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 5409164220331617237, guid: f22bd61aea07a8e44886107ba1565cd5, type: 3}
+  m_Sprite: {fileID: 4097144792221710411, guid: e7563b1c15649ea4fa8c292b7796ccb7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -133,16 +133,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af2a13fc7c431d641bdd912208d99be0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Fruit
-  fruitType: 3
-  leftHalf: {fileID: 1196853473894489004, guid: a1bc618ed58819b408b8af9f4c508b4b, type: 3}
-  rightHalf: {fileID: 3160838875326261666, guid: 974ef22154724d4418f037c77505051d, type: 3}
+  fruitType: 7
+  leftHalf: {fileID: 1196853473894489004, guid: 36737d950add32c4e9cabd09b6b416e1, type: 3}
+  rightHalf: {fileID: 3160838875326261666, guid: 3127d424f1b8c1849868ce069673897b, type: 3}
   sliceForce: 5
   rotationForce: 2
-  sliceSound: {fileID: 8300000, guid: 282a993e5f0972e4d84219721ed29af1, type: 3}
-  points: 10
+  sliceSound: {fileID: 8300000, guid: b07ef16d57a37ad4a930634df21b0546, type: 3}
+  points: 25
   missYPosition: -8
---- !u!68 &2834816725617792329
-EdgeCollider2D:
+--- !u!58 &2613413523906398592
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -176,23 +176,4 @@ EdgeCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: 1.0322195, y: -0.8750837}
-  - {x: 0.99304795, y: -0.6424831}
-  - {x: 0.085788205, y: -0.53658867}
-  - {x: -0.38519186, y: -0.12685248}
-  - {x: -0.48046055, y: 0.596058}
-  - {x: -0.3061582, y: 1.1919205}
-  - {x: -0.4584585, y: 1.1116722}
-  - {x: -0.990225, y: 0.47840968}
-  - {x: -1.1034746, y: 0.11451777}
-  - {x: -0.8886741, y: -0.6048035}
-  - {x: -0.44963208, y: -0.97884256}
-  - {x: 0.04535611, y: -1.184457}
-  - {x: 0.7196283, y: -1.1620107}
-  - {x: 1.0450001, y: -0.9104407}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
+  m_Radius: 1.24

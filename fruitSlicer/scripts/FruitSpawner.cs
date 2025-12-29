@@ -7,12 +7,17 @@ public class FruitSpawner : MonoBehaviour
     public static FruitSpawner instance;
 
     // --- FRUIT SETTINGS ---
-    // DRAG YOUR FRUIT PREFABS HERE IN THE INSPECTOR (Apple, Orange, etc.)
-    public List<GameObject> fruitPrefabs;
 
-    public float spawnDelay = 2f;
-    public float spawnForce = 12f;
+    [Header("Fruit Settings")]
+    public List<GameObject> fruitPrefabs; 
+    public float spawnDelay = 2f;  
+    public float spawnForce = 12f; 
     public GameObject gameContainer;
+
+    // --- JUICE MODE SETTINGS (NEW) ---
+    [Header("Juice Mode Settings")]
+    [Range(0f, 1f)]
+    public float targetFruitChance = 0.6f; // 60% chance to spawn the TARGET fruit
 
     // --- SPECIAL ITEMS SETTINGS ---
     [Header("Special Items Settings")]
@@ -24,11 +29,7 @@ public class FruitSpawner : MonoBehaviour
     private int lastFruitIndex = -1;
     private int lastSpecialType = -1;
 
-
-    // --- NEW: CONTROL FLAG ---
     private bool stopFruitSpawning = false;
-    // "Traffic light" for fruits
-
     private Camera mainCamera;
 
 
@@ -52,7 +53,7 @@ public class FruitSpawner : MonoBehaviour
         StartCoroutine(SpawnBombAndIceRoutine());
     }
 
-    // --- 1. RANDOM FRUIT SPAWNING ROUTINE ---
+    // --- 1. FRUIT SPAWNING ROUTINE ---
     IEnumerator SpawnFruitsRoutine()
     {
         Vector3[] corners = new Vector3[4];
@@ -68,9 +69,12 @@ public class FruitSpawner : MonoBehaviour
 
         while (true)
         {
+
+            // 1. Handle Delay based on Mode
             if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
             {
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(1f); // Faster spawns in Juice Mode?
+
             }
             else
             {
@@ -78,25 +82,61 @@ public class FruitSpawner : MonoBehaviour
             }
 
 
-            // Only spawn if not paused by special event AND if we have fruits to spawn
+            // 2. Spawn Logic
             if (!stopFruitSpawning && fruitPrefabs.Count > 0)
             {
-                // A. Pick a random fruit index (0 to List Size)
-                int randomIndex = Random.Range(0, fruitPrefabs.Count);
 
-                // B. Logic to prevent the exact same fruit twice in a row (makes it feel more random)
-                if (fruitPrefabs.Count > 1)
+                GameObject prefabToSpawn = null;
+
+                // // A. Pick a random fruit index (0 to List Size)
+                // int randomIndex = Random.Range(0, fruitPrefabs.Count);
+
+                // // B. Logic to prevent the exact same fruit twice in a row (makes it feel more random)
+                // if (fruitPrefabs.Count > 1)
+                // {
+                //     while (randomIndex == lastFruitIndex)
+                //     {
+                //         randomIndex = Random.Range(0, fruitPrefabs.Count);
+                //     }
+                // }
+
+                // lastFruitIndex = randomIndex;
+
+
+                // --- NEW: SPAWN BIAS LOGIC ---
+                // Check if we are in Juice Mode
+                bool isJuiceMode = (ModeManager.Instance != null && ModeManager.Instance.currentMode == GameMode.JuiceMaking);
+
+                // If Juice Mode, roll the dice to see if we force the Target Fruit
+                if (isJuiceMode && Random.value < targetFruitChance && JuiceManager.instance != null)
                 {
-                    while (randomIndex == lastFruitIndex)
-                    {
-                        randomIndex = Random.Range(0, fruitPrefabs.Count);
-                    }
+                    // Use your helper function to get the target prefab
+                    prefabToSpawn = GetFruitsOfType(JuiceManager.instance.targetFruit);
                 }
 
-                lastFruitIndex = randomIndex;
+                // --- FALLBACK: RANDOM SPAWN ---
+                // If we didn't force a target (or we are in Infinite mode), pick randomly
+                if (prefabToSpawn == null)
+                {
+                    int randomIndex = Random.Range(0, fruitPrefabs.Count);
+                    
+                    // Prevent same fruit twice in a row (Visual variety)
+                    if (fruitPrefabs.Count > 1)
+                    {
+                        while (randomIndex == lastFruitIndex)
+                        {
+                            randomIndex = Random.Range(0, fruitPrefabs.Count);
+                        }
+                    }
+                    lastFruitIndex = randomIndex;
+                    prefabToSpawn = fruitPrefabs[randomIndex];
+                }
 
-                // C. Spawn the chosen fruit
-                SpawnObject(fruitPrefabs[randomIndex], corners);
+                // 3. Execute Spawn
+                if (prefabToSpawn != null)
+                {
+                    SpawnObject(prefabToSpawn, corners);
+                }
             }
         }
     }
@@ -109,24 +149,25 @@ public class FruitSpawner : MonoBehaviour
 
         while (true)
         {
-            // Wait for the delay
             yield return new WaitForSeconds(specialSpawnDelay);
 
-            // Pause normal fruits
             stopFruitSpawning = true;
             yield return new WaitForSeconds(1f);
 
             GameObject prefabToSpawn = null;
 
-            // --- MODE CHECK LOGIC ---
             if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
             {
-                // CAREER MODE: Always spawn Bomb (to punish cutting it)
-                prefabToSpawn = bombPrefab;
+
+                prefabToSpawn = bombPrefab; 
+
             }
             else
             {
-                // FREESTYLE MODE: Alternate between Ice and Bomb
+
+                if (lastSpecialType == 0) { prefabToSpawn = icePrefab; lastSpecialType = 1; }
+                else { prefabToSpawn = bombPrefab; lastSpecialType = 0; }
+
                 if (lastSpecialType == 0)
                 {
                     prefabToSpawn = icePrefab;
@@ -137,13 +178,11 @@ public class FruitSpawner : MonoBehaviour
                     prefabToSpawn = bombPrefab;
                     lastSpecialType = 0;
                 }
-            }
-            // ------------------------
 
-            // Spawn the special item
+            }
+
             if (prefabToSpawn != null) SpawnObject(prefabToSpawn, corners);
 
-            // Wait for it to clear, then resume normal fruits
             yield return new WaitForSeconds(1f);
             stopFruitSpawning = false;
         }
@@ -155,9 +194,9 @@ public class FruitSpawner : MonoBehaviour
         if (prefab == null) return;
 
         float screenWidth = corners[3].x - corners[0].x;
-        float upsetWidth = screenWidth * 0.2f;
 
-        // Random X position within the container bounds
+        float upsetWidth = screenWidth * 0.2f; 
+
         float randomX = Random.Range(corners[0].x + upsetWidth, corners[3].x - upsetWidth);
         Vector3 spawnPosition = new Vector3(randomX, -3f, -10f);
 
@@ -166,10 +205,7 @@ public class FruitSpawner : MonoBehaviour
 
         if (rb != null)
         {
-            // Launch Up
             rb.AddForce(Vector2.up * spawnForce, ForceMode2D.Impulse);
-
-            // Add slight side force for randomness
             float randomHorizontalForce = Random.Range(-spawnForce / 2, spawnForce / 2);
             rb.AddForce(new Vector2(randomHorizontalForce, 0), ForceMode2D.Impulse);
         }
@@ -177,14 +213,19 @@ public class FruitSpawner : MonoBehaviour
 
     public void HideFruitsLayer()
     {
-        mainCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Fruits"));
+
+        if(mainCamera != null)
+            mainCamera.cullingMask &=  ~(1 << LayerMask.NameToLayer("Fruits"));
+
     }
 
     public void ShowFruitsLayer()
     {
-        // Bitwise operation to add the layer back to the mask
-        mainCamera.cullingMask |= (1 << LayerMask.NameToLayer("Fruits"));
+        if(mainCamera != null)
+            mainCamera.cullingMask |= (1 << LayerMask.NameToLayer("Fruits"));
     }
+
+    // Your existing helper function
     public GameObject GetFruitsOfType(FruitType type)
     {
         foreach (GameObject fruitPrefab in fruitPrefabs)
@@ -195,6 +236,6 @@ public class FruitSpawner : MonoBehaviour
                 return fruitPrefab;
             }
         }
-        return null; // Return null if no matching fruit is found
+        return null; 
     }
 }
