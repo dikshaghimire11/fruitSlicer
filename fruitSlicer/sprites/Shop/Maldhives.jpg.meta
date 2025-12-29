@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 4031f91270bff8743b20eed43c49931a
+guid: be7f1cfb5dc727b4fa04ac111206c1b8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3010375928418161858
-    second: 6blurred_0
+      213: 268326099042636684
+    second: Maldhives_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 6blurred_0
+      name: Maldhives_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1920
-        height: 1080
+        width: 1440
+        height: 2560
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e3baf32fa0ff836d0800000000000000
-      internalID: -3010375928418161858
+      spriteID: c8317695a2949b300800000000000000
+      internalID: 268326099042636684
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      6blurred_0: -3010375928418161858
+      Maldhives_0: 268326099042636684
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
