@@ -8,16 +8,16 @@ public class MenuManager : MonoBehaviour
     public void careerMode()
     {
         ModeManager.Instance.currentMode = GameMode.JuiceMaking;
-        
+
         // FIX: Matches the scene name in your Build Settings screenshot
-        navigateToScene("UI"); 
+        navigateToScene("UI");
     }
 
     // --- FREESTYLE BUTTON (Infinite Mode) ---
     public void freestyleMode()
     {
         ModeManager.Instance.currentMode = GameMode.Infinite;
-        
+
         // FIX: Matches the scene name in your Build Settings screenshot
         navigateToScene("UI");
     }
@@ -25,12 +25,13 @@ public class MenuManager : MonoBehaviour
 
     public void setting()
     {
-
+     Debug.Log("Navigating to Settings Scene");   
+        navigateToScene("SettingScene");
     }
 
     public void highScore()
     {
-
+        navigateToScene("ShopScene");
     }
 
     public void shop()
@@ -48,5 +49,14 @@ public class MenuManager : MonoBehaviour
     {
         TempData.sceneToLoad = sceneName;
         SceneManager.LoadSceneAsync("LoadingScene");
+    }
+    void Start()
+    {
+        // ... your existing code ...
+
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayMenuMusic();
+        }
     }
 }

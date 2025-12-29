@@ -9,14 +9,14 @@ public class JuiceManager : MonoBehaviour
 
     [Header("UI References")]
     private GameObject timersParent;       // Auto-found
-    public TextMeshProUGUI taskText;      
-    public TextMeshProUGUI timerText;     
-    public TextMeshProUGUI counterText;   
+    public TextMeshProUGUI taskText;
+    public TextMeshProUGUI timerText;
+    public TextMeshProUGUI counterText;
 
     [Header("Level Settings")]
-    public float levelDuration = 60f;     
-    public int requiredCuts = 10;     
-    public int pointsPerLevel = 50;    
+    public float levelDuration = 60f;
+    public int requiredCuts = 10;
+    public int pointsPerLevel = 50;
 
     [Header("Game State")]
     public FruitType targetFruit;
@@ -31,6 +31,14 @@ public class JuiceManager : MonoBehaviour
 
     void Start()
     {
+
+        // ... your existing code ...
+
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayCareerMusic();
+        }
+
         if (ModeManager.Instance == null) return;
 
         // Auto-find logic
@@ -52,7 +60,7 @@ public class JuiceManager : MonoBehaviour
             if (timersParent != null) timersParent.SetActive(false);
             if (taskText != null) taskText.gameObject.SetActive(false);
             if (counterText != null) counterText.gameObject.SetActive(false);
-            gameObject.SetActive(false); 
+            gameObject.SetActive(false);
         }
     }
 
@@ -61,7 +69,7 @@ public class JuiceManager : MonoBehaviour
         if (isLevelActive && GameCanvasManager.instance.startSpawning)
         {
             currentTime -= Time.deltaTime;
-            
+
             int timeInt = Mathf.CeilToInt(currentTime);
             if (timeInt != lastTimeInt)
             {
@@ -72,7 +80,7 @@ public class JuiceManager : MonoBehaviour
             if (currentTime <= 0)
             {
                 currentTime = 0;
-                EndLevel(false); 
+                EndLevel(false);
             }
         }
     }
@@ -82,9 +90,9 @@ public class JuiceManager : MonoBehaviour
         currentCuts = 0;
         currentTime = levelDuration;
         isLevelActive = true;
-        
+
         UpdateCounterUI();
-        PickNewTarget(); 
+        PickNewTarget();
     }
 
     // --- FIX IS HERE ---
@@ -95,14 +103,14 @@ public class JuiceManager : MonoBehaviour
         int fruitCount = Enum.GetNames(typeof(FruitType)).Length;
 
         // 2. Pick a random number between 0 and the Total Count
-        targetFruit = (FruitType)UnityEngine.Random.Range(0, fruitCount); 
-        
+        targetFruit = (FruitType)UnityEngine.Random.Range(0, fruitCount);
+
         if (taskText != null)
         {
             taskText.text = targetFruit.ToString(); // Displays "Coconut", "Mango", etc.
 
             taskText.text = "" + targetFruit.ToString();
-            missionText.text="I want to have some fresh "+targetFruit.ToString()+" Juice...";
+            missionText.text = "I want to have some fresh " + targetFruit.ToString() + " Juice...";
 
         }
     }
@@ -119,7 +127,7 @@ public class JuiceManager : MonoBehaviour
 
             if (currentCuts >= requiredCuts)
             {
-                EndLevel(true); 
+                EndLevel(true);
             }
         }
         else
@@ -143,14 +151,14 @@ public class JuiceManager : MonoBehaviour
             if (taskText != null) taskText.text = "VICTORY!";
             if (ScoreManager.instance != null)
             {
-                ScoreManager.instance.AddScore(pointsPerLevel); 
-                ScoreManager.instance.WinGame(pointsPerLevel);    
+                ScoreManager.instance.AddScore(pointsPerLevel);
+                ScoreManager.instance.WinGame(pointsPerLevel);
             }
         }
         else
         {
             if (taskText != null) taskText.text = "TIME'S UP!";
-            if (ScoreManager.instance != null) ScoreManager.instance.ForceGameOver(); 
+            if (ScoreManager.instance != null) ScoreManager.instance.ForceGameOver();
         }
     }
 

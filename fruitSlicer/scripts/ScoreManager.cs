@@ -33,6 +33,14 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
+
+        if (ModeManager.Instance.currentMode == GameMode.Infinite)
+    {
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayInfiniteMusic();
+        }
+    }
         // --- 1. AUTO-FIND PARENT LOGIC ---
         // If "ScoreParent" is empty, we find it automatically using the scoreText!
         if (scoreParent == null && scoreText != null)

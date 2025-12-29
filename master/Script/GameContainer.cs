@@ -14,12 +14,9 @@ public class GameContainer : MonoBehaviour
     Vector3 bottomLeft = mainCamera.ViewportToWorldPoint(Vector3.zero) * offsetMultiplier;
     Vector3 topRight = mainCamera.ViewportToWorldPoint(new Vector3(mainCamera.rect.width, mainCamera.rect.height)) * offsetMultiplier;
 
-    Debug.Log("Bottom Left: " + bottomLeft);
-    Debug.Log("top Right: " + topRight);
     Vector3 screenSize = topRight - bottomLeft;
     float screenRatio = screenSize.x / screenSize.y;
     float desiredRatio = transform.localScale.x / transform.localScale.y;
-    Debug.Log("Desired: " + desiredRatio);
 
     if (screenRatio > desiredRatio)
     {
