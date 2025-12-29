@@ -46,20 +46,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
   selectedShopList: []
   shopBackgroundList:
-  - itemName: Snow Background
+  - itemName: Maldhives
     price: 0
-    icon: {fileID: 6895926924230315131, guid: 6a37592d1fd305b469faed80a7d43d3c, type: 3}
-    actualSprite: {fileID: 6895926924230315131, guid: 6a37592d1fd305b469faed80a7d43d3c, type: 3}
+    icon: {fileID: 268326099042636684, guid: be7f1cfb5dc727b4fa04ac111206c1b8, type: 3}
+    actualSprite: {fileID: 268326099042636684, guid: be7f1cfb5dc727b4fa04ac111206c1b8, type: 3}
     isDefault: 1
     itemType: 1
     isPurchased: 0
     isEquipped: 0
-  - itemName: Sea
-    price: 100
-    icon: {fileID: 5483812648860242441, guid: 6ddbb621010fe2b4f85909ce0b81ea88, type: 3}
-    actualSprite: {fileID: 5483812648860242441, guid: 6ddbb621010fe2b4f85909ce0b81ea88, type: 3}
-    isDefault: 0
-    itemType: 1
-    isPurchased: 0
-    isEquipped: 0
   bladeItemList: []
+  characterList: []
