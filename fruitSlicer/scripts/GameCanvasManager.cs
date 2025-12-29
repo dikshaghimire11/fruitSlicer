@@ -4,6 +4,8 @@ using System.Collections;
 using System;
 using NUnit.Framework;
 using Random = UnityEngine.Random;
+using System.Numerics;
+using Vector2 = UnityEngine.Vector2;
 
 public class GameCanvasManager : MonoBehaviour
 {
@@ -18,6 +20,10 @@ public class GameCanvasManager : MonoBehaviour
     public bool startSpawning;
     public GameObject shopGameObject;
     public GameObject choppingBoard;
+
+    private GameObject newObject;
+
+    public GameObject missionPanel;
 
 
     void Awake()
@@ -36,21 +42,31 @@ public class GameCanvasManager : MonoBehaviour
             int length = ShopLists.instance.characterList.Length;
             choppingBoard.SetActive(false);
             GameObject character = ShopLists.instance.characterList[Random.Range(0, length)];
-            GameObject newObject = Instantiate(character, character.transform.position, character.transform.rotation, shopGameObject.transform);
-            newObject.transform.SetSiblingIndex(1);
+            newObject = Instantiate(character, character.transform.position, character.transform.rotation, shopGameObject.transform);
+            newObject.transform.SetSiblingIndex(0);
+            StartCoroutine(MoveRoutine(new Vector2(-0.35f, -0.87f), 1, 1));
         }
         else
         {
-            missionAccepted();
+            startSpawnAction();
         }
 
     }
 
     public void missionAccepted()
     {
+
+
+        missionPanel.SetActive(false);
+        startSpawnAction();
+        StartCoroutine(MoveRoutine(new Vector2(-2.67f, -0.87f), 1, 2));
+        // choppingBoard.SetActive(true);
+
+    }
+
+    public void startSpawnAction()
+    {
         startSpawning = true;
-        shopGameObject.SetActive(false);
-        choppingBoard.SetActive(true);
         FruitSpawner.instance.startSpawnning();
     }
     // public void StartMoving()
@@ -58,28 +74,38 @@ public class GameCanvasManager : MonoBehaviour
     //     // StartCoroutine(MoveRoutine(targetPosition, duration));
     // }
 
-    // private IEnumerator MoveRoutine(Vector2 target, float time)
-    // {
-    //     Vector2 startPos = imageToMove.anchoredPosition;
-    //     float elapsedTime = 0;
+    private IEnumerator MoveRoutine(Vector2 target, float time, int type)
+    // 1 is for enter the screen, 2 is for exit the screen
+    {
+        RectTransform rectTransform = newObject.GetComponent<RectTransform>();
+        Vector2 startPos = rectTransform.anchoredPosition;
+        float elapsedTime = 0;
 
-    //     while (elapsedTime < time)
-    //     {
-    //         // Calculate how far along we are (0.0 to 1.0)
-    //         float t = elapsedTime / time;
+        while (elapsedTime < time)
+        {
+            // Calculate how far along we are (0.0 to 1.0)
+            float t = elapsedTime / time;
 
-    //         // Optional: Make it "Smooth" (Ease In and Out) instead of robotic linear speed
-    //         // If you want constant speed, remove this line.
-    //         t = Mathf.SmoothStep(0.0f, 1.0f, t);
+            // Optional: Make it "Smooth" (Ease In and Out) instead of robotic linear speed
+            // If you want constant speed, remove this line.
+            t = Mathf.SmoothStep(0.0f, 1.0f, t);
 
-    //         // Move the image
-    //         imageToMove.anchoredPosition = Vector2.Lerp(startPos, target, t);
+            // Move the image
+            rectTransform.anchoredPosition = Vector2.Lerp(startPos, target, t);
 
-    //         elapsedTime += Time.deltaTime;
-    //         yield return null; // Wait for the next frame
-    //     }
+            elapsedTime += Time.deltaTime;
+            yield return null; // Wait for the next frame
+        }
 
-    //     // Ensure it lands exactly on the target at the end
-    //     imageToMove.anchoredPosition = target;
-    // }
+        // Ensure it lands exactly on the target at the end
+        rectTransform.anchoredPosition = target;
+
+        if (type == 1)
+        {
+            missionPanel.SetActive(true);
+            // shopGameObject.SetActive(false);
+        }
+
+
+    }
 }
