@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c2fa27eaedebf7847af12fc0b333ca25
+guid: 5062d16fbe80c9246b6758d03b6509d4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 845954987241308830
-    second: timer.jpeg_0
+      213: -5893129418328794505
+    second: newWoodenPanel_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,17 +109,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: timer.jpeg_0
+      name: newWoodenPanel_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 183
-        height: 184
+        x: 77
+        y: 59
+        width: 1778
+        height: 624
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e920d7e249f6dbb00800000000000000
-      internalID: 845954987241308830
+      spriteID: 77a9b156406673ea0800000000000000
+      internalID: -5893129418328794505
       vertices: []
       indices: 
       edges: []
@@ -148,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      timer.jpeg_0: 845954987241308830
+      newWoodenPanel_0: -5893129418328794505
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

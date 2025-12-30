@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public enum FruitType { Apple, Orange, Watermelon, Banana, Pineapple, Mango ,Kiwi ,Coconut}
+// public enum FruitType { Apple, Orange, Watermelon, Banana, Pineapple, Mango ,Kiwi ,Coconut}
 
 public class Fruit : MonoBehaviour
 {
     // --- ASSIGN THIS IN INSPECTOR ---
-    public FruitType fruitType; 
+    // public FruitType fruitType; 
     
     public GameObject leftHalf;
     public GameObject rightHalf;

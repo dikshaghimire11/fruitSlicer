@@ -9,9 +9,9 @@ public class FruitSpawner : MonoBehaviour
     // --- FRUIT SETTINGS ---
 
     [Header("Fruit Settings")]
-    public List<GameObject> fruitPrefabs; 
-    public float spawnDelay = 2f;  
-    public float spawnForce = 12f; 
+    public List<GameObject> fruitPrefabs;
+    public float spawnDelay = 2f;
+    public float spawnForce = 12f;
     public GameObject gameContainer;
 
     // --- JUICE MODE SETTINGS (NEW) ---
@@ -56,6 +56,7 @@ public class FruitSpawner : MonoBehaviour
     // --- 1. FRUIT SPAWNING ROUTINE ---
     IEnumerator SpawnFruitsRoutine()
     {
+
         Vector3[] corners = new Vector3[4];
         if (gameContainer != null)
         {
@@ -69,7 +70,12 @@ public class FruitSpawner : MonoBehaviour
 
         while (true)
         {
-
+            if (ScoreManager.instance.isGameOver)
+            {
+                Debug.Log("Entered");
+                yield return new WaitForSeconds(1);
+            }
+                  Debug.Log("Out");
             // 1. Handle Delay based on Mode
             if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
             {
@@ -111,7 +117,7 @@ public class FruitSpawner : MonoBehaviour
                 if (isJuiceMode && Random.value < targetFruitChance && JuiceManager.instance != null)
                 {
                     // Use your helper function to get the target prefab
-                    prefabToSpawn = GetFruitsOfType(JuiceManager.instance.targetFruit);
+                    prefabToSpawn = JuiceManager.instance.targetFruitNew;
                 }
 
                 // --- FALLBACK: RANDOM SPAWN ---
@@ -119,7 +125,7 @@ public class FruitSpawner : MonoBehaviour
                 if (prefabToSpawn == null)
                 {
                     int randomIndex = Random.Range(0, fruitPrefabs.Count);
-                    
+
                     // Prevent same fruit twice in a row (Visual variety)
                     if (fruitPrefabs.Count > 1)
                     {
@@ -144,11 +150,16 @@ public class FruitSpawner : MonoBehaviour
     // --- 2. SPECIAL ITEM (BOMB/ICE) ROUTINE ---
     IEnumerator SpawnBombAndIceRoutine()
     {
+
         Vector3[] corners = new Vector3[4];
         if (gameContainer != null) gameContainer.GetComponent<RectTransform>().GetWorldCorners(corners);
 
         while (true)
         {
+            if (ScoreManager.instance.isGameOver)
+            {
+                yield return new WaitForSeconds(1);
+            }
             yield return new WaitForSeconds(specialSpawnDelay);
 
             stopFruitSpawning = true;
@@ -159,7 +170,7 @@ public class FruitSpawner : MonoBehaviour
             if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
             {
 
-                prefabToSpawn = bombPrefab; 
+                prefabToSpawn = bombPrefab;
 
             }
             else
@@ -195,7 +206,7 @@ public class FruitSpawner : MonoBehaviour
 
         float screenWidth = corners[3].x - corners[0].x;
 
-        float upsetWidth = screenWidth * 0.2f; 
+        float upsetWidth = screenWidth * 0.2f;
 
         float randomX = Random.Range(corners[0].x + upsetWidth, corners[3].x - upsetWidth);
         Vector3 spawnPosition = new Vector3(randomX, -3f, -10f);
@@ -214,28 +225,28 @@ public class FruitSpawner : MonoBehaviour
     public void HideFruitsLayer()
     {
 
-        if(mainCamera != null)
-            mainCamera.cullingMask &=  ~(1 << LayerMask.NameToLayer("Fruits"));
+        if (mainCamera != null)
+            mainCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Fruits"));
 
     }
 
     public void ShowFruitsLayer()
     {
-        if(mainCamera != null)
+        if (mainCamera != null)
             mainCamera.cullingMask |= (1 << LayerMask.NameToLayer("Fruits"));
     }
 
     // Your existing helper function
-    public GameObject GetFruitsOfType(FruitType type)
-    {
-        foreach (GameObject fruitPrefab in fruitPrefabs)
-        {
-            Fruit fruitComponent = fruitPrefab.GetComponent<Fruit>();
-            if (fruitComponent != null && fruitComponent.fruitType == type)
-            {
-                return fruitPrefab;
-            }
-        }
-        return null; 
-    }
+    // public GameObject GetFruitsOfType(FruitType type)
+    // {
+    //     foreach (GameObject fruitPrefab in fruitPrefabs)
+    //     {
+    //         Fruit fruitComponent = fruitPrefab.GetComponent<Fruit>();
+    //         if (fruitComponent != null && fruitComponent.fruitType == type)
+    //         {
+    //             return fruitPrefab;
+    //         }
+    //     }
+    //     return null; 
+    // }
 }
