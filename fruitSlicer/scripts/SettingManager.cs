@@ -1,38 +1,75 @@
 using UnityEngine;
-using UnityEngine.UI; // Required for UI buttons and images
+using UnityEngine.UI;
 
 public class SettingManager : MonoBehaviour
 {
     [Header("UI References")]
-    public Image soundButtonIcon; // Drag the Image component of your button here
+    public Image soundButtonIcon; 
+    public Slider volumeSlider;   
 
     [Header("Sprites")]
-    public Sprite soundOnSprite;  // Drag your "Speaker" icon here
-    public Sprite soundOffSprite; // Drag your "Mute" icon here
+    public Sprite soundOnSprite;  
+    public Sprite soundOffSprite; 
 
     void Start()
     {
-        // Update the visual state immediately when scene loads
-        UpdateSoundIcon();
+        // 1. Setup the Slider Listener
+        if (volumeSlider != null)
+        {
+            volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
+        }
+
+        // 2. Update the UI correctly when the scene starts
+        UpdateUI();
     }
 
+    // Called when dragging the slider
+    public void OnVolumeChanged(float value)
+    {
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.ChangeVolume(value);
+        }
+    }
+
+    // Called when clicking the Mute Button
     public void OnSoundButtonClicked()
     {
         if (SoundManager.instance != null)
         {
             SoundManager.instance.ToggleSound();
-            UpdateSoundIcon();
+            UpdateUI(); // <--- CRITICAL: Refreshes the slider lock state
         }
     }
 
-    void UpdateSoundIcon()
+    // Updates the Icons and Locks/Unlocks the Slider
+    void UpdateUI()
     {
-        if (SoundManager.instance != null && soundButtonIcon != null)
+        if (SoundManager.instance == null) return;
+
+        bool isMuted = SoundManager.instance.IsMuted();
+
+        // 1. Update the Button Icon
+        if (soundButtonIcon != null)
         {
-            bool isMuted = SoundManager.instance.IsMuted();
-            
-            // If Muted -> Show Off Sprite. If Not Muted -> Show On Sprite.
             soundButtonIcon.sprite = isMuted ? soundOffSprite : soundOnSprite;
+        }
+
+        // 2. Lock or Unlock the Slider
+        if (volumeSlider != null)
+        {
+            if (isMuted)
+            {
+                // IF MUTED: Lock the slider and show 0 volume
+                volumeSlider.interactable = false; 
+                volumeSlider.value = 0; 
+            }
+            else
+            {
+                // IF UNMUTED: Unlock slider and show saved volume
+                volumeSlider.interactable = true;
+                volumeSlider.value = SoundManager.instance.GetSavedVolume();
+            }
         }
     }
 }
