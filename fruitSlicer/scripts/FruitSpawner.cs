@@ -157,7 +157,7 @@ public class FruitSpawner : MonoBehaviour
         {
 
             yield return new WaitForSeconds(specialSpawnDelay);
-          while (ScoreManager.instance.isGameOver)
+            while (ScoreManager.instance.isGameOver)
             {
                 yield break;
             }
@@ -173,68 +173,68 @@ public class FruitSpawner : MonoBehaviour
                 prefabToSpawn = bombPrefab;
 
             }
+
+
             else
             {
-
-                if (lastSpecialType == 0) { prefabToSpawn = icePrefab; lastSpecialType = 1; }
-                else { prefabToSpawn = bombPrefab; lastSpecialType = 0; }
-
+                // Simple toggle: If 0, spawn Ice. If anything else (like -1 or 1), spawn Bomb.
                 if (lastSpecialType == 0)
                 {
                     prefabToSpawn = icePrefab;
-                    lastSpecialType = 1;
+                    lastSpecialType = 1; // Next time will be Bomb
                 }
                 else
                 {
                     prefabToSpawn = bombPrefab;
-                    lastSpecialType = 0;
+                    lastSpecialType = 0; // Next time will be Ice
                 }
-
             }
 
-            if (prefabToSpawn != null) SpawnObject(prefabToSpawn, corners);
+        
 
-            yield return new WaitForSeconds(1f);
-            stopFruitSpawning = false;
-        }
+        if (prefabToSpawn != null) SpawnObject(prefabToSpawn, corners);
+
+        yield return new WaitForSeconds(1f);
+        stopFruitSpawning = false;
     }
+}
 
-    // --- 3. HELPER FUNCTION TO LAUNCH OBJECTS ---
-    void SpawnObject(GameObject prefab, Vector3[] corners)
+// --- 3. HELPER FUNCTION TO LAUNCH OBJECTS ---
+void SpawnObject(GameObject prefab, Vector3[] corners)
+{
+    if (prefab == null) return;
+
+    float screenWidth = corners[3].x - corners[0].x;
+
+    float upsetWidth = screenWidth * 0.2f;
+
+    float randomX = Random.Range(corners[0].x + upsetWidth, corners[3].x - upsetWidth);
+    Vector3 spawnPosition = new Vector3(randomX, -3f, -10f);
+
+    GameObject newObj = Instantiate(prefab, spawnPosition, Quaternion.identity);
+    Rigidbody2D rb = newObj.GetComponent<Rigidbody2D>();
+
+    if (rb != null)
     {
-        if (prefab == null) return;
-
-        float screenWidth = corners[3].x - corners[0].x;
-
-        float upsetWidth = screenWidth * 0.2f;
-
-        float randomX = Random.Range(corners[0].x + upsetWidth, corners[3].x - upsetWidth);
-        Vector3 spawnPosition = new Vector3(randomX, -3f, -10f);
-
-        GameObject newObj = Instantiate(prefab, spawnPosition, Quaternion.identity);
-        Rigidbody2D rb = newObj.GetComponent<Rigidbody2D>();
-
-        if (rb != null)
-        {
-            rb.AddForce(Vector2.up * spawnForce, ForceMode2D.Impulse);
-            float randomHorizontalForce = Random.Range(-spawnForce / 2, spawnForce / 2);
-            rb.AddForce(new Vector2(randomHorizontalForce, 0), ForceMode2D.Impulse);
-        }
+        rb.AddForce(Vector2.up * spawnForce, ForceMode2D.Impulse);
+        float randomHorizontalForce = Random.Range(-spawnForce / 2, spawnForce / 2);
+        rb.AddForce(new Vector2(randomHorizontalForce, 0), ForceMode2D.Impulse);
     }
+}
 
-    public void HideFruitsLayer()
-    {
+public void HideFruitsLayer()
+{
 
-        if (mainCamera != null)
-            mainCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Fruits"));
+    if (mainCamera != null)
+        mainCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Fruits"));
 
-    }
+}
 
-    public void ShowFruitsLayer()
-    {
-        if (mainCamera != null)
-            mainCamera.cullingMask |= (1 << LayerMask.NameToLayer("Fruits"));
-    }
+public void ShowFruitsLayer()
+{
+    if (mainCamera != null)
+        mainCamera.cullingMask |= (1 << LayerMask.NameToLayer("Fruits"));
+}
 
     // Your existing helper function
     // public GameObject GetFruitsOfType(FruitType type)
