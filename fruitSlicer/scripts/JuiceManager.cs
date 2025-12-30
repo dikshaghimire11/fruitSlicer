@@ -14,6 +14,7 @@ public class JuiceManager : MonoBehaviour
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI counterText;
 
+
     public Image missionFruitIcon;
 
     [Header("Level Settings")]
@@ -36,6 +37,14 @@ public class JuiceManager : MonoBehaviour
 
     void Start()
     {
+
+        // ... your existing code ...
+
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayCareerMusic();
+        }
+
         if (ModeManager.Instance == null) return;
 
         // Auto-find logic
@@ -58,8 +67,8 @@ public class JuiceManager : MonoBehaviour
             if (timersParent != null) timersParent.SetActive(false);
             if (taskText != null) taskText.gameObject.SetActive(false);
             if (counterText != null) counterText.gameObject.SetActive(false);
-            if (missionFruitIcon != null) missionFruitIcon.gameObject.SetActive(false);
 
+            if (missionFruitIcon != null) missionFruitIcon.gameObject.SetActive(false);
             gameObject.SetActive(false);
         }
     }
@@ -92,7 +101,9 @@ public class JuiceManager : MonoBehaviour
         isLevelActive = true;
 
         UpdateCounterUI();
+
         PickNewTargetNew();
+
     }
 
     // --- FIX IS HERE ---
@@ -124,6 +135,7 @@ public class JuiceManager : MonoBehaviour
         int fruitCount =  UnityEngine.Random.Range(0, fruitsPrefab.Count);
         Debug.Log("Count is: "+fruitCount);
         // 2. Pick a random number between 0 and the Total Count
+
         targetFruitNew = fruitsPrefab[fruitCount];
 
         if (taskText != null)
