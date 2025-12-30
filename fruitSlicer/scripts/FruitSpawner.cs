@@ -57,6 +57,7 @@ public class FruitSpawner : MonoBehaviour
     IEnumerator SpawnFruitsRoutine()
     {
 
+
         Vector3[] corners = new Vector3[4];
         if (gameContainer != null)
         {
@@ -70,12 +71,11 @@ public class FruitSpawner : MonoBehaviour
 
         while (true)
         {
-            if (ScoreManager.instance.isGameOver)
+            while (ScoreManager.instance.isGameOver)
             {
-                Debug.Log("Entered");
-                yield return new WaitForSeconds(1);
+                yield break;
             }
-                  Debug.Log("Out");
+            ;
             // 1. Handle Delay based on Mode
             if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
             {
@@ -150,18 +150,18 @@ public class FruitSpawner : MonoBehaviour
     // --- 2. SPECIAL ITEM (BOMB/ICE) ROUTINE ---
     IEnumerator SpawnBombAndIceRoutine()
     {
-
         Vector3[] corners = new Vector3[4];
         if (gameContainer != null) gameContainer.GetComponent<RectTransform>().GetWorldCorners(corners);
 
         while (true)
         {
-            if (ScoreManager.instance.isGameOver)
-            {
-                yield return new WaitForSeconds(1);
-            }
-            yield return new WaitForSeconds(specialSpawnDelay);
 
+            yield return new WaitForSeconds(specialSpawnDelay);
+            while (ScoreManager.instance.isGameOver)
+            {
+                yield break;
+            }
+            ;
             stopFruitSpawning = true;
             yield return new WaitForSeconds(1f);
 
