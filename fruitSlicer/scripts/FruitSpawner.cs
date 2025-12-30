@@ -157,7 +157,7 @@ public class FruitSpawner : MonoBehaviour
         {
 
             yield return new WaitForSeconds(specialSpawnDelay);
-            while (ScoreManager.instance.isGameOver)
+          while (ScoreManager.instance.isGameOver)
             {
                 yield break;
             }

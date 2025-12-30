@@ -31,6 +31,8 @@ public class GameCanvasManager : MonoBehaviour
 
     public GameObject missionAccomplishedPanel;
 
+    public GameObject juiceContainer;
+
 
     void Awake()
     {
@@ -125,9 +127,10 @@ public class GameCanvasManager : MonoBehaviour
     {
         if (missionAccomplishedPanel != null)
         {
-            Debug.Log("Should work");
             StartCoroutine(MoveRoutine(new Vector2(-0.35f, -0.87f), 1, 0, newObject));
             StartCoroutine(MoveRoutine(new Vector2(0, -1.99f), 1, 0, workDesk));
+            StartCoroutine(MoveRoutine(new Vector2(0, -1.25f), 1, 0, juiceContainer));
+
             missionAccomplishedPanel.SetActive(true);
         }
     }
@@ -136,6 +139,7 @@ public class GameCanvasManager : MonoBehaviour
     {
         if (missionAccomplishedPanel != null)
         {
+            
             missionAccomplishedPanel.SetActive(false);
             ScoreManager.instance.RestartGame();
         }
