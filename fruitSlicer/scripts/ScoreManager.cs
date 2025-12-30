@@ -1,6 +1,6 @@
 using UnityEngine;
-using TMPro; 
-using UnityEngine.SceneManagement; 
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -8,17 +8,19 @@ public class ScoreManager : MonoBehaviour
 
     [Header("UI References")]
     private GameObject scoreParent;         // <--- The Object holding Background + Text
-    public TextMeshProUGUI scoreText;      
-    public TextMeshProUGUI highScoreText;  
-    public TextMeshProUGUI livesText;      
-    public GameObject gameOverPanel;       
-    public TextMeshProUGUI finalScoreText; 
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI highScoreText;
+    public TextMeshProUGUI livesText;
+    public GameObject gameOverPanel;
+    public TextMeshProUGUI finalScoreText;
+
+    public TextMeshProUGUI missionPassEarnPoints;
 
     [Header("Victory Effect")]
-    public GameObject victoryEffectPrefab; 
+    public GameObject victoryEffectPrefab;
 
     [Header("Game Rules")]
-    public int maxLives = 3; 
+    public int maxLives = 3;
 
     private int score = 0;
     private int highScore = 0;
@@ -26,21 +28,21 @@ public class ScoreManager : MonoBehaviour
     public bool isGameOver = false;
     private bool hasShownHighScoreMessage = false;
 
-    void Awake() 
-    { 
-        if (instance == null) { instance = this; } 
+    void Awake()
+    {
+        if (instance == null) { instance = this; }
     }
 
     void Start()
     {
 
         if (ModeManager.Instance.currentMode == GameMode.Infinite)
-    {
-        if (SoundManager.instance != null)
         {
-            SoundManager.instance.PlayInfiniteMusic();
+            if (SoundManager.instance != null)
+            {
+                SoundManager.instance.PlayInfiniteMusic();
+            }
         }
-    }
         // --- 1. AUTO-FIND PARENT LOGIC ---
         // If "ScoreParent" is empty, we find it automatically using the scoreText!
         if (scoreParent == null && scoreText != null)
@@ -55,9 +57,9 @@ public class ScoreManager : MonoBehaviour
         isGameOver = false;
         hasShownHighScoreMessage = false;
 
-        Time.timeScale = 1f; 
+        Time.timeScale = 1f;
         if (gameOverPanel != null) gameOverPanel.SetActive(false);
-        
+
         // Apply the correct Mode Settings immediately
         UpdateUIStateBasedOnMode();
         UpdateTexts();
@@ -94,7 +96,7 @@ public class ScoreManager : MonoBehaviour
         {
             if (score > highScore && highScore > 0 && !hasShownHighScoreMessage)
             {
-                hasShownHighScoreMessage = true; 
+                hasShownHighScoreMessage = true;
                 Blade blade = FindObjectOfType<Blade>();
                 if (blade != null) blade.ShowFloatingText("NEW HIGH SCORE!", Color.green, Vector3.zero);
             }
@@ -109,7 +111,7 @@ public class ScoreManager : MonoBehaviour
         // if (gameOverPanel != null) gameOverPanel.SetActive(true);
         GameCanvasManager.instance.missionAccomplished();
         if (FruitSpawner.instance != null) FruitSpawner.instance.HideFruitsLayer();
-        // if (finalScoreText != null) finalScoreText.text = "LEVEL COMPLETE!\nYOU WON!";
+        if (missionPassEarnPoints != null) missionPassEarnPoints.text = "+" + pointsPerLevel;
 
         // Add Points to Total Coins
         int totalCoins = PlayerPrefs.GetInt("TotalCoins", 100);
@@ -191,8 +193,8 @@ public class ScoreManager : MonoBehaviour
         if (scoreParent != null && scoreParent.activeSelf)
         {
             if (scoreText != null) scoreText.text = score.ToString("D4");
-            
-            if (highScoreText != null) 
+
+            if (highScoreText != null)
             {
                 int displayHighScore = (score > highScore) ? score : highScore;
                 highScoreText.text = "HIGH: " + displayHighScore.ToString("D4");
@@ -200,6 +202,6 @@ public class ScoreManager : MonoBehaviour
         }
 
         // Lives are always visible in both modes
-        if (livesText != null) livesText.text = currentLives.ToString(); 
+        if (livesText != null) livesText.text = currentLives.ToString();
     }
 }
