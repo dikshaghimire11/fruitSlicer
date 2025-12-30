@@ -373,7 +373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Shadow
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 1, y: -1}
+  m_EffectDistance: {x: -0.25, y: -0.35}
   m_UseGraphicAlpha: 1
 --- !u!114 &239908783
 MonoBehaviour:
@@ -444,14 +444,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.99215686, g: 0.99215686, b: 0.99215686, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 920584378544195678, guid: 92338af732347ad4abdca01cd0b0b00a, type: 3}
+  m_Sprite: {fileID: -400804402935298158, guid: 58dbfaf23a7d50a44842101c3913533d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1055,7 +1055,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 920584378544195678, guid: 92338af732347ad4abdca01cd0b0b00a, type: 3}
+  m_Sprite: {fileID: -4768144053833488792, guid: 87ed53d4b3d86504a947be99d3df2046, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1086,7 +1086,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Shadow
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 1, y: -1}
+  m_EffectDistance: {x: -0.25, y: -0.35}
   m_UseGraphicAlpha: 1
 --- !u!1 &615739913
 GameObject:
@@ -1224,7 +1224,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.9}
+  m_AnchoredPosition: {x: -0.6, y: -1.96}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &661284045
@@ -1274,7 +1274,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36.35
+  m_fontSize: 30.55
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1313,7 +1313,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 21.721329, y: 0, z: 8.708247, w: 0}
+  m_margin: {x: 21.721329, y: 0, z: 8.708247, w: 19.412354}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2263,7 +2263,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.9}
+  m_AnchoredPosition: {x: -1.18, y: -1.84}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1346260206
@@ -2313,7 +2313,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
+  m_fontSize: 37.05
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2352,7 +2352,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 13.738785, y: 0, z: 0, w: 0}
+  m_margin: {x: 17.856407, y: 0, z: 0, w: 12.901846}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3562,11 +3562,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 974398302904177224, guid: aef0793ad792d6741bc4bc4addb039a1, type: 3}
       propertyPath: m_fontSize
-      value: 50
+      value: 37.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 974398302904177224, guid: aef0793ad792d6741bc4bc4addb039a1, type: 3}
+      propertyPath: m_margin.w
+      value: 12.901846
       objectReference: {fileID: 0}
     - target: {fileID: 974398302904177224, guid: aef0793ad792d6741bc4bc4addb039a1, type: 3}
       propertyPath: m_margin.x
-      value: 13.738785
+      value: 17.856407
       objectReference: {fileID: 0}
     - target: {fileID: 1840091875183562981, guid: aef0793ad792d6741bc4bc4addb039a1, type: 3}
       propertyPath: m_Enabled
@@ -3685,8 +3689,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6063668985214763963, guid: aef0793ad792d6741bc4bc4addb039a1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6063668985214763963, guid: aef0793ad792d6741bc4bc4addb039a1, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.9
+      value: -1.84
       objectReference: {fileID: 0}
     - target: {fileID: 6170919869476222553, guid: aef0793ad792d6741bc4bc4addb039a1, type: 3}
       propertyPath: m_Color.a

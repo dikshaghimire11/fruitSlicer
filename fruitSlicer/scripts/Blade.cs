@@ -96,7 +96,7 @@ public class Blade : MonoBehaviour
                 if (JuiceManager.instance != null) 
                 {
 
-                    JuiceManager.instance.CheckFruit(fruit.fruitType);
+                    JuiceManager.instance.CheckFruit(fruit.gameObject.name);
                 }
                 
                 ShowFloatingText("SPLASH!", Color.cyan, fruit.transform.position);

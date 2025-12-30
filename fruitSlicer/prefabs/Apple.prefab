@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9146751011432130112}
   - component: {fileID: 2613413523906398592}
   m_Layer: 6
-  m_Name: FullWatermelon
+  m_Name: Apple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 8532703672136922592, guid: da4034d93281bb042928ad072db8c15d, type: 3}
+  m_Sprite: {fileID: 306349666661773004, guid: 977ecd6742e611949914d9668a15ff33, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -133,13 +133,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af2a13fc7c431d641bdd912208d99be0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Fruit
-  fruitType: 2
-  leftHalf: {fileID: 1196853473894489004, guid: 15de04de605491d4f9324048828644a6, type: 3}
-  rightHalf: {fileID: 3160838875326261666, guid: 4ecc38bb6fcc1724e8f20cc3999117c9, type: 3}
+  fruitType: 0
+  leftHalf: {fileID: 1196853473894489004, guid: d2fb2e381e24f6b4baa64ee3d0083e81, type: 3}
+  rightHalf: {fileID: 3160838875326261666, guid: ba8aa9ca174a5bc49943615eaf003d55, type: 3}
   sliceForce: 5
   rotationForce: 2
-  sliceSound: {fileID: 8300000, guid: b07ef16d57a37ad4a930634df21b0546, type: 3}
-  points: 25
+  sliceSound: {fileID: 8300000, guid: 282a993e5f0972e4d84219721ed29af1, type: 3}
+  points: 15
   missYPosition: -8
 --- !u!58 &2613413523906398592
 CircleCollider2D:

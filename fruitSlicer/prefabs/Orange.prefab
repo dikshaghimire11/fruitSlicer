@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9146751011432130112}
   - component: {fileID: 2613413523906398592}
   m_Layer: 6
-  m_Name: FullOrange
+  m_Name: Orange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

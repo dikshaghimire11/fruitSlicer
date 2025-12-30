@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System; // <--- REQUIRED for Enum.GetNames
+using System;
+using System.Collections.Generic; // <--- REQUIRED for Enum.GetNames
 
 public class JuiceManager : MonoBehaviour
 {
@@ -13,13 +14,18 @@ public class JuiceManager : MonoBehaviour
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI counterText;
 
+
+    public Image missionFruitIcon;
+
     [Header("Level Settings")]
     public float levelDuration = 60f;
     public int requiredCuts = 10;
     public int pointsPerLevel = 50;
 
     [Header("Game State")]
-    public FruitType targetFruit;
+    // public FruitType targetFruit;
+    public GameObject targetFruitNew;
+
     private float currentTime;
     private int currentCuts = 0;
     private bool isLevelActive = false;
@@ -52,6 +58,7 @@ public class JuiceManager : MonoBehaviour
             if (timersParent != null) timersParent.SetActive(true);
             if (taskText != null) taskText.gameObject.SetActive(true);
             if (counterText != null) counterText.gameObject.SetActive(true);
+            if (missionFruitIcon != null) missionFruitIcon.gameObject.SetActive(true);
 
             StartLevel();
         }
@@ -60,6 +67,8 @@ public class JuiceManager : MonoBehaviour
             if (timersParent != null) timersParent.SetActive(false);
             if (taskText != null) taskText.gameObject.SetActive(false);
             if (counterText != null) counterText.gameObject.SetActive(false);
+
+            if (missionFruitIcon != null) missionFruitIcon.gameObject.SetActive(false);
             gameObject.SetActive(false);
         }
     }
@@ -92,35 +101,58 @@ public class JuiceManager : MonoBehaviour
         isLevelActive = true;
 
         UpdateCounterUI();
-        PickNewTarget();
+
+        PickNewTargetNew();
+
     }
 
     // --- FIX IS HERE ---
-    void PickNewTarget()
+    // void PickNewTarget()
+    // {
+    //     // 1. Automatically count how many items are in the FruitType List
+    //     // This will return '8' for your current list (Apple...Coconut)
+    //     int fruitCount = Enum.GetNames(typeof(FruitType)).Length;
+
+    //     // 2. Pick a random number between 0 and the Total Count
+    //     targetFruit = (FruitType)UnityEngine.Random.Range(0, fruitCount);
+
+    //     if (taskText != null)
+    //     {
+    //         taskText.text = targetFruit.ToString(); // Displays "Coconut", "Mango", etc.
+
+    //         taskText.text = "" + targetFruit.ToString();
+    //         missionText.text = "I want to have some fresh " + targetFruit.ToString() + " Juice...";
+
+    //     }
+    // }
+    // -------------------
+
+        void PickNewTargetNew()
     {
+        List<GameObject> fruitsPrefab=FruitSpawner.instance.fruitPrefabs;
         // 1. Automatically count how many items are in the FruitType List
         // This will return '8' for your current list (Apple...Coconut)
-        int fruitCount = Enum.GetNames(typeof(FruitType)).Length;
-
+        int fruitCount =  UnityEngine.Random.Range(0, fruitsPrefab.Count);
+        Debug.Log("Count is: "+fruitCount);
         // 2. Pick a random number between 0 and the Total Count
-        targetFruit = (FruitType)UnityEngine.Random.Range(0, fruitCount);
+
+        targetFruitNew = fruitsPrefab[fruitCount];
 
         if (taskText != null)
         {
-            taskText.text = targetFruit.ToString(); // Displays "Coconut", "Mango", etc.
-
-            taskText.text = "" + targetFruit.ToString();
-            missionText.text = "I want to have some fresh " + targetFruit.ToString() + " Juice...";
+    
+            taskText.text = "" + targetFruitNew.name.ToString();
+            missionText.text = "I want to have some fresh " + targetFruitNew.name.ToString() + " Juice...";
+            missionFruitIcon.sprite=targetFruitNew.GetComponent<SpriteRenderer>().sprite;
 
         }
     }
-    // -------------------
 
-    public void CheckFruit(FruitType slicedType)
+    public void CheckFruit(String slicedFruitName)
     {
         if (!isLevelActive) return;
-
-        if (slicedType == targetFruit)
+        Debug.Log(slicedFruitName+" - "+targetFruitNew.name+"(Clone)");
+        if (slicedFruitName == targetFruitNew.name+"(Clone)")
         {
             currentCuts++;
             UpdateCounterUI();

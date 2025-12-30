@@ -21,9 +21,15 @@ public class GameCanvasManager : MonoBehaviour
     public GameObject shopGameObject;
     public GameObject choppingBoard;
 
+    public GameObject workDesk;
+
     private GameObject newObject;
 
     public GameObject missionPanel;
+
+    public GameObject freeModeCharacter;
+
+    public GameObject missionAccomplishedPanel;
 
 
     void Awake()
@@ -36,22 +42,26 @@ public class GameCanvasManager : MonoBehaviour
     void Start()
     {
         // StartMoving();
-
+        GameObject character;
         if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
         {
             int length = ShopLists.instance.characterList.Length;
+            character = ShopLists.instance.characterList[Random.Range(0, length)];
             choppingBoard.SetActive(false);
-            GameObject character = ShopLists.instance.characterList[Random.Range(0, length)];
-            newObject = Instantiate(character, character.transform.position, character.transform.rotation, shopGameObject.transform);
-            newObject.transform.SetSiblingIndex(0);
-            StartCoroutine(MoveRoutine(new Vector2(-0.35f, -0.87f), 1, 1));
         }
         else
         {
-            startSpawnAction();
+            character = freeModeCharacter;
         }
 
+        newObject = Instantiate(character, character.transform.position, character.transform.rotation, shopGameObject.transform);
+        newObject.transform.SetSiblingIndex(0);
+        StartCoroutine(MoveRoutine(new Vector2(-0.35f, -0.87f), 1, 1, newObject));
+        StartCoroutine(MoveRoutine(new Vector2(0, -1.99f), 1, 0, workDesk));
+
     }
+
+
 
     public void missionAccepted()
     {
@@ -59,7 +69,9 @@ public class GameCanvasManager : MonoBehaviour
 
         missionPanel.SetActive(false);
         startSpawnAction();
-        StartCoroutine(MoveRoutine(new Vector2(-2.67f, -0.87f), 1, 2));
+        StartCoroutine(MoveRoutine(new Vector2(-2.67f, -0.87f), 1, 2, newObject));
+        StartCoroutine(MoveRoutine(new Vector2(0f, -6f), 1, 2, workDesk));
+
         // choppingBoard.SetActive(true);
 
     }
@@ -74,10 +86,10 @@ public class GameCanvasManager : MonoBehaviour
     //     // StartCoroutine(MoveRoutine(targetPosition, duration));
     // }
 
-    private IEnumerator MoveRoutine(Vector2 target, float time, int type)
+    private IEnumerator MoveRoutine(Vector2 target, float time, int type, GameObject targetObject)
     // 1 is for enter the screen, 2 is for exit the screen
     {
-        RectTransform rectTransform = newObject.GetComponent<RectTransform>();
+        RectTransform rectTransform = targetObject.GetComponent<RectTransform>();
         Vector2 startPos = rectTransform.anchoredPosition;
         float elapsedTime = 0;
 
@@ -107,5 +119,25 @@ public class GameCanvasManager : MonoBehaviour
         }
 
 
+    }
+
+    public void missionAccomplished()
+    {
+        if (missionAccomplishedPanel != null)
+        {
+            Debug.Log("Should work");
+            StartCoroutine(MoveRoutine(new Vector2(-0.35f, -0.87f), 1, 0, newObject));
+            StartCoroutine(MoveRoutine(new Vector2(0, -1.99f), 1, 0, workDesk));
+            missionAccomplishedPanel.SetActive(true);
+        }
+    }
+
+    public void nextOrderAfterMissionAccomplished()
+    {
+        if (missionAccomplishedPanel != null)
+        {
+            missionAccomplishedPanel.SetActive(false);
+            ScoreManager.instance.RestartGame();
+        }
     }
 }

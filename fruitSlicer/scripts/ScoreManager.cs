@@ -23,7 +23,7 @@ public class ScoreManager : MonoBehaviour
     private int score = 0;
     private int highScore = 0;
     private int currentLives;
-    private bool isGameOver = false;
+    public bool isGameOver = false;
     private bool hasShownHighScoreMessage = false;
 
     void Awake() 
@@ -104,11 +104,12 @@ public class ScoreManager : MonoBehaviour
     public void WinGame(int pointsPerLevel)
     {
         isGameOver = true;
-        Time.timeScale = 0f; 
+        // Time.timeScale = 0f; 
 
-        if (gameOverPanel != null) gameOverPanel.SetActive(true);
+        // if (gameOverPanel != null) gameOverPanel.SetActive(true);
+        GameCanvasManager.instance.missionAccomplished();
         if (FruitSpawner.instance != null) FruitSpawner.instance.HideFruitsLayer();
-        if (finalScoreText != null) finalScoreText.text = "LEVEL COMPLETE!\nYOU WON!";
+        // if (finalScoreText != null) finalScoreText.text = "LEVEL COMPLETE!\nYOU WON!";
 
         // Add Points to Total Coins
         int totalCoins = PlayerPrefs.GetInt("TotalCoins", 100);
