@@ -3,8 +3,8 @@ guid: f22bd61aea07a8e44886107ba1565cd5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5409164220331617237
-    second: fullBanana_0
+      213: -4058413828039884337
+    second: FullBanana_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: fullBanana_0
+      name: FullBanana_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 44
         y: 0
-        width: 209
-        height: 238
+        width: 419
+        height: 500
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5db6e9c0336311b40800000000000000
-      internalID: 5409164220331617237
+      spriteID: fc14624302e9da7c0800000000000000
+      internalID: -4058413828039884337
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      fullBanana_0: 5409164220331617237
+      FullBanana_0: -4058413828039884337
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -2321,9 +2321,14 @@ MonoBehaviour:
   fruitPrefabs:
   - {fileID: 7767628628793562763, guid: 76b3c104e6de8c148b59e3eb40aa5495, type: 3}
   - {fileID: 7767628628793562763, guid: e30b83241e41e6948964b3dceef461d8, type: 3}
-  - {fileID: 7767628628793562763, guid: 0f71652f212513b4f9a6da0af85a3fdb, type: 3}
-  - {fileID: 7767628628793562763, guid: 829aeaf400e6a344c98b005e2843841b, type: 3}
   - {fileID: 7767628628793562763, guid: 133a40416cffa814e828f04fb96f653e, type: 3}
+  - {fileID: 7767628628793562763, guid: cc9f585352d768e4ca1809fda84509f5, type: 3}
+  - {fileID: 7767628628793562763, guid: 686ed0b373523f045b3be9bce3909cd0, type: 3}
+  - {fileID: 7767628628793562763, guid: 26506adfa30fd41499b57ac0dbde3a41, type: 3}
+  - {fileID: 7767628628793562763, guid: c76ee44b31f51644ab1a63b52923c7d0, type: 3}
+  - {fileID: 7767628628793562763, guid: 904ee6df875b0304885923d148bec93a, type: 3}
+  - {fileID: 7767628628793562763, guid: d4a0dd5590153a54e814e1c116749386, type: 3}
+  - {fileID: 7767628628793562763, guid: 73fd01f1792d0014a99d066e059b99b5, type: 3}
   spawnDelay: 0.5
   spawnForce: 5
   gameContainer: {fileID: 807754671}
@@ -5535,6 +5540,7 @@ MonoBehaviour:
   freeModeCharacter: {fileID: 1867517093331897566, guid: 850188bd0bf23af4493785bcef9cd233, type: 3}
   missionAccomplishedPanel: {fileID: 1372017214}
   juiceContainer: {fileID: 1785449435}
+  juiceColor: {fileID: 1238521780}
 --- !u!114 &1695433634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7168,6 +7174,10 @@ PrefabInstance:
     - target: {fileID: 7232620994714346332, guid: 760afb29f009a1641a63be6fc69f45bb, type: 3}
       propertyPath: gameContainer
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7232620994714346332, guid: 760afb29f009a1641a63be6fc69f45bb, type: 3}
+      propertyPath: fruitPrefabs.Array.size
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7518102174590354455, guid: 760afb29f009a1641a63be6fc69f45bb, type: 3}
       propertyPath: livesText

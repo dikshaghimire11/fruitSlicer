@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 292ec9a122ecef14c86b8df1eecf0e87
+guid: 3fcbd8e4e9c9f5047ae0d4e1242b1111
 TextureImporter:
   internalIDToNameTable:
   - first:
       213: -6651102532560562339
     second: FullKiwi_0
-  - first:
-      213: 4865846840661515207
-    second: FullKiwi_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -119,10 +116,10 @@ TextureImporter:
       name: FullKiwi_0
       rect:
         serializedVersion: 2
-        x: 80
-        y: 66
-        width: 92
-        height: 113
+        x: 22
+        y: 17
+        width: 450
+        height: 437
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -133,28 +130,6 @@ TextureImporter:
       bones: []
       spriteID: d57d6065c7982b3a0800000000000000
       internalID: -6651102532560562339
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FullKiwi_1
-      rect:
-        serializedVersion: 2
-        x: 76
-        y: 24
-        width: 12
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7cb1615dbe5f68340800000000000000
-      internalID: 4865846840661515207
       vertices: []
       indices: 
       edges: []
@@ -174,7 +149,6 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       FullKiwi_0: -6651102532560562339
-      FullKiwi_1: 4865846840661515207
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
