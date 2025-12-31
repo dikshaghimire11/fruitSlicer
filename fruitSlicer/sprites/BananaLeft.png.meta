@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 6e7bbd8e252ffb14b99d3bca9f25c10d
+guid: e114cd40daa187e4c8a3ae3f89c57a91
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6108776922173897928
-    second: LeftHalfBanana_0
+      213: 2612485201978779440
+    second: BananaLeft_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: LeftHalfBanana_0
+      name: BananaLeft_0
       rect:
         serializedVersion: 2
-        x: 65
-        y: 11
-        width: 292
-        height: 465
+        x: 18
+        y: 26
+        width: 463
+        height: 456
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 83388b541c3493ba0800000000000000
-      internalID: -6108776922173897928
+      spriteID: 037e8ec1379614420800000000000000
+      internalID: 2612485201978779440
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      LeftHalfBanana_0: -6108776922173897928
+      BananaLeft_0: 2612485201978779440
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

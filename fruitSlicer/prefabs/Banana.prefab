@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6261397905656911256}
   - component: {fileID: 2002393568182117257}
   - component: {fileID: 9146751011432130112}
-  - component: {fileID: 2834816725617792329}
+  - component: {fileID: 2635831309159686521}
   m_Layer: 6
   m_Name: Banana
   m_TagString: Untagged
@@ -84,12 +84,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -4058413828039884337, guid: f22bd61aea07a8e44886107ba1565cd5, type: 3}
+  m_Sprite: {fileID: -9182177788924653191, guid: 1d73844bcb9dd064b89e8a3f6fd29ea0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.19, y: 5}
+  m_Size: {x: 5, y: 5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -141,8 +141,8 @@ MonoBehaviour:
   points: 10
   missYPosition: -8
   juiceColor: {r: 1, g: 0.9557321, b: 0.6622641, a: 0}
---- !u!68 &2834816725617792329
-EdgeCollider2D:
+--- !u!61 &2635831309159686521
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -175,28 +175,15 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.5292086}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5, y: 5}
+    newSize: {x: 5, y: 5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 5, y: 3.3488674}
   m_EdgeRadius: 0
-  m_Points:
-  - {x: 1.5438528, y: -1.5709058}
-  - {x: 0.21536523, y: -0.94946307}
-  - {x: 0.085788205, y: -0.53658867}
-  - {x: -0.38519186, y: -0.12685248}
-  - {x: -0.48046055, y: 0.596058}
-  - {x: -0.7973262, y: 1.0486631}
-  - {x: -0.8096655, y: 1.4432126}
-  - {x: -0.8473, y: 2.6465724}
-  - {x: -1.6075941, y: 1.51635}
-  - {x: -2.0521238, y: 1.1573497}
-  - {x: -2.171542, y: 0.044466734}
-  - {x: -1.911165, y: -0.66764975}
-  - {x: -1.4513854, y: -1.3999174}
-  - {x: 0.80995005, y: -2.6104054}
-  - {x: 2.108535, y: -2.0839696}
-  - {x: 2.05096, y: -1.818883}
-  - {x: 0.7196283, y: -1.1620107}
-  - {x: 0.492436, y: -1.0536987}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0

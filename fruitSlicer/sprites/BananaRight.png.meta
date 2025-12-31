@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f22bd61aea07a8e44886107ba1565cd5
+guid: 0eaf67a406bc098428c371b682ccf8cb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4058413828039884337
-    second: FullBanana_0
+      213: 3172226124633829201
+    second: BananaRight_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FullBanana_0
+      name: BananaRight_0
       rect:
         serializedVersion: 2
-        x: 44
-        y: 0
-        width: 419
-        height: 500
+        x: 64
+        y: 48
+        width: 325
+        height: 375
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fc14624302e9da7c0800000000000000
-      internalID: -4058413828039884337
+      spriteID: 15f630a6ad2060c20800000000000000
+      internalID: 3172226124633829201
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      FullBanana_0: -4058413828039884337
+      BananaRight_0: 3172226124633829201
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
