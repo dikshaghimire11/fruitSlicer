@@ -6,7 +6,7 @@ public class Fruit : MonoBehaviour
 {
     // --- ASSIGN THIS IN INSPECTOR ---
     // public FruitType fruitType; 
-    
+
     public GameObject leftHalf;
     public GameObject rightHalf;
     public float sliceForce = 5f;
@@ -14,6 +14,8 @@ public class Fruit : MonoBehaviour
     public AudioClip sliceSound;
     public int points = 10;
     public float missYPosition = -8f;
+
+    public Color juiceColor;
 
     private bool isSliced = false;
 
@@ -40,7 +42,7 @@ public class Fruit : MonoBehaviour
         leftRb.AddTorque(currentTorque, ForceMode2D.Impulse);
         rightRb.AddTorque(-currentTorque, ForceMode2D.Impulse);
 
-        Destroy(gameObject); 
+        Destroy(gameObject);
         Destroy(leftInst, 4f);
         Destroy(rightInst, 4f);
     }

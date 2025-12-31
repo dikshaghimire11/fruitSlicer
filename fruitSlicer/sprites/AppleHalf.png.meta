@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 948afccc1eb2c5b409a6377ce852c09f
+guid: e23609e6d8c86b445a781db35ceafb3a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3522760300694076314
-    second: righthalf_0
+      213: -7106899066620625206
+    second: AppleRight_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,17 +109,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: righthalf_0
+      name: AppleRight_0
       rect:
         serializedVersion: 2
-        x: 30
-        y: 4
-        width: 205
-        height: 242
+        x: 3
+        y: 27
+        width: 494
+        height: 443
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6640840cb24ac1fc0800000000000000
-      internalID: -3522760300694076314
+      spriteID: aceb58fe3f83f5d90800000000000000
+      internalID: -7106899066620625206
       vertices: []
       indices: 
       edges: []
@@ -148,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      righthalf_0: -3522760300694076314
+      AppleRight_0: -7106899066620625206
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

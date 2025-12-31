@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -84,12 +84,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 306349666661773004, guid: 977ecd6742e611949914d9668a15ff33, type: 3}
+  m_Sprite: {fileID: 7293598183456022363, guid: 977ecd6742e611949914d9668a15ff33, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.37, y: 2.48}
+  m_Size: {x: 4.9, y: 4.88}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -133,7 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af2a13fc7c431d641bdd912208d99be0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Fruit
-  fruitType: 0
   leftHalf: {fileID: 1196853473894489004, guid: d2fb2e381e24f6b4baa64ee3d0083e81, type: 3}
   rightHalf: {fileID: 3160838875326261666, guid: ba8aa9ca174a5bc49943615eaf003d55, type: 3}
   sliceForce: 5
@@ -141,6 +140,7 @@ MonoBehaviour:
   sliceSound: {fileID: 8300000, guid: 282a993e5f0972e4d84219721ed29af1, type: 3}
   points: 15
   missYPosition: -8
+  juiceColor: {r: 1, g: 0.7883347, b: 0.72264147, a: 0}
 --- !u!58 &2613413523906398592
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -175,5 +175,5 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 1.24
+  m_Offset: {x: 0.028080344, y: -0.0941205}
+  m_Radius: 2.3338869

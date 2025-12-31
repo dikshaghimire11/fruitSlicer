@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 728c720ebc08b9f4283ee5523ce35b17
+guid: b058b4d189c39d84c86c15b5d1b27a2e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5866511882185172738
-    second: Juice_0
+      213: -1824430880225754223
+    second: newJuice_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Juice_0
+      name: newJuice_0
       rect:
         serializedVersion: 2
-        x: 247
-        y: 97
-        width: 583
-        height: 1489
+        x: 254
+        y: 108
+        width: 568
+        height: 1463
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ef89eb77686f59ea0800000000000000
-      internalID: -5866511882185172738
+      spriteID: 19304ead7c15ea6e0800000000000000
+      internalID: -1824430880225754223
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Juice_0: -5866511882185172738
+      newJuice_0: -1824430880225754223
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
