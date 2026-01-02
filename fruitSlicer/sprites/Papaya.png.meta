@@ -116,10 +116,10 @@ TextureImporter:
       name: Papaya_0
       rect:
         serializedVersion: 2
-        x: 31
-        y: 31
-        width: 438
-        height: 438
+        x: 48
+        y: 7
+        width: 404
+        height: 486
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

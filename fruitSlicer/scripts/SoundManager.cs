@@ -6,15 +6,20 @@ public class SoundManager : MonoBehaviour
 
     [Header("Audio Sources")]
     public AudioSource musicSource;       
+    public AudioSource sfxSource; // Ensure this is assigned in Inspector!
 
     [Header("Music Lists")]
     public AudioClip[] menuMusicList;      
     public AudioClip[] careerMusicList;    
     public AudioClip[] infiniteMusicList;  
 
-    // --- VARIABLES ---
+    // --- CONFIGURATION ---
+    private const float MAX_MUSIC_VOLUME = 0.5f; // Slider at 100% = 0.5 actual volume
+    private const float DEFAULT_SLIDER_VALUE = 0.04f; // 0.04 * 0.5 = 0.02 (Your requested default)
+
+    // --- STATE VARIABLES ---
     private bool isMuted = false; 
-    private float savedVolume = 1f; // NEW: Remembers volume (0.0 to 1.0)
+    private float savedSliderValue = 1f; // Stores the 0.0 to 1.0 slider position
 
     void Awake()
     {
@@ -24,8 +29,11 @@ public class SoundManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             
             // --- LOAD SAVED SETTINGS ---
+            // Load Mute State
             isMuted = PlayerPrefs.GetInt("IsMuted", 0) == 1;
-            savedVolume = PlayerPrefs.GetFloat("SavedVolume", 1f); // Load saved slider value
+
+            // Load Saved Slider Position (Default to 0.04 if not found)
+            savedSliderValue = PlayerPrefs.GetFloat("SavedSliderValue", DEFAULT_SLIDER_VALUE); 
 
             // Apply immediately
             ApplyVolume();
@@ -36,46 +44,47 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // --- NEW FUNCTIONS FOR BUTTON & SLIDER ---
+    // --- VOLUME CONTROL ---
     
     public void ToggleSound()
     {
         isMuted = !isMuted;
-        
-        // Use helper to restore previous volume instead of hard reset to 1
         ApplyVolume(); 
-
-        // Save the setting
+        
         PlayerPrefs.SetInt("IsMuted", isMuted ? 1 : 0);
         PlayerPrefs.Save();
     }
 
-    public void ChangeVolume(float volume)
+    public void ChangeVolume(float sliderValue)
     {
-        // 1. If we are muted, DO NOT change the volume (keeps it silent)
+        // If muted, we still update the "saved" value, but we don't apply it yet
         if (isMuted) return;
 
-        // 2. Remember this new volume
-        savedVolume = volume;
-        
-        // 3. Apply it
-        AudioListener.volume = savedVolume;
+        savedSliderValue = sliderValue;
+        ApplyVolume();
 
-        // 4. Save it
-        PlayerPrefs.SetFloat("SavedVolume", savedVolume);
+        PlayerPrefs.SetFloat("SavedSliderValue", savedSliderValue);
         PlayerPrefs.Save();
     }
 
-    // Helper function to decide actual volume
+    // Helper function to calculate and set the volume
     private void ApplyVolume()
     {
         if (isMuted)
         {
-            AudioListener.volume = 0; // Silence
+            musicSource.volume = 0; 
+            // Note: We do NOT mute SFX here based on your request. 
+            // If you want to mute SFX too, add: sfxSource.volume = 0;
         }
         else
         {
-            AudioListener.volume = savedVolume; // Restore saved volume (e.g. 0.5)
+            // MATH: Slider (0 to 1) * MaxVolume (0.5)
+            // Example: Slider 1.0 * 0.5 = 0.5 Volume
+            // Example: Slider 0.04 * 0.5 = 0.02 Volume
+            musicSource.volume = savedSliderValue * MAX_MUSIC_VOLUME;
+            
+            // Restore SFX volume (assuming SFX should always be full volume)
+            if(sfxSource != null) sfxSource.volume = 1.0f; 
         }
     }
 
@@ -86,10 +95,11 @@ public class SoundManager : MonoBehaviour
 
     public float GetSavedVolume()
     {
-        return savedVolume;
+        return savedSliderValue;
     }
 
-    // ... (Keep the rest of your PlayMusic functions exactly the same) ...
+    // --- MUSIC PLAYING LOGIC ---
+    // (Kept exactly the same)
     public void PlayMenuMusic() { PlayMusicFromList(menuMusicList); }
     public void PlayCareerMusic() { PlayMusicFromList(careerMusicList); }
     public void PlayInfiniteMusic() { PlayMusicFromList(infiniteMusicList); }
@@ -99,10 +109,13 @@ public class SoundManager : MonoBehaviour
         if (playlist.Length == 0) return;
         int index = Random.Range(0, playlist.Length);
         AudioClip newClip = playlist[index];
+        
+        // Prevent restarting the same song
         if (musicSource.clip == newClip && musicSource.isPlaying) return;
+        
         musicSource.Stop();
         musicSource.clip = newClip;
+        musicSource.volume = isMuted ? 0 : savedSliderValue * MAX_MUSIC_VOLUME; // Ensure volume is correct on start
         musicSource.Play();
     }
-
 }

@@ -116,10 +116,10 @@ TextureImporter:
       name: HalfPineapple_0
       rect:
         serializedVersion: 2
-        x: 43
-        y: 10
-        width: 392
-        height: 481
+        x: 118
+        y: 6
+        width: 225
+        height: 486
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

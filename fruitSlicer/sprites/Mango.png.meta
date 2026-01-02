@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e23609e6d8c86b445a781db35ceafb3a
+guid: bec17e6d63f6e3b45a4007226754e3ae
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7106899066620625206
-    second: AppleRight_0
+      213: -3968840770022985357
+    second: Mango_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,30 +109,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: AppleRight_0
+      name: Mango_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 27
-        width: 494
-        height: 443
+        x: 17
+        y: 56
+        width: 466
+        height: 388
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: aceb58fe3f83f5d90800000000000000
-      internalID: -7106899066620625206
+      spriteID: 37131b4f858dbe8c0800000000000000
+      internalID: -3968840770022985357
       vertices: []
       indices: 
       edges: []
@@ -161,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      AppleRight_0: -7106899066620625206
+      Mango_0: -3968840770022985357
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

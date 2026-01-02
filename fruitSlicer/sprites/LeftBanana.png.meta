@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 1532e310cee4ffc45843565a1b98f6a4
+guid: cf671a848e99eb143b48ce8eaea04c39
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4968875890488477815
-    second: FullMango_0
+      213: -3138188515020735527
+    second: LeftBanana_0
+  - first:
+      213: -4890432488364496004
+    second: LeftBanana_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FullMango_0
+      name: LeftBanana_0
       rect:
         serializedVersion: 2
-        x: 33
-        y: 51
-        width: 434
-        height: 398
+        x: 6
+        y: 66
+        width: 488
+        height: 279
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +131,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7788191db4ef4f440800000000000000
-      internalID: 4968875890488477815
+      spriteID: 9db7af32c2ae274d0800000000000000
+      internalID: -3138188515020735527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeftBanana_1
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 342
+        width: 16
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7b210dff81b12cb0800000000000000
+      internalID: -4890432488364496004
       vertices: []
       indices: 
       edges: []
@@ -148,7 +173,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      FullMango_0: 4968875890488477815
+      LeftBanana_0: -3138188515020735527
+      LeftBanana_1: -4890432488364496004
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

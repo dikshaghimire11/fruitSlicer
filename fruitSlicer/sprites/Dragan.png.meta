@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 0eaf67a406bc098428c371b682ccf8cb
+guid: 106f2de5441870540a447baa8046608f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3172226124633829201
-    second: BananaRight_0
+      213: -8844659645014467140
+    second: Dragan_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BananaRight_0
+      name: Dragan_0
       rect:
         serializedVersion: 2
-        x: 64
-        y: 48
-        width: 325
-        height: 375
+        x: 110
+        y: 26
+        width: 280
+        height: 457
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 15f630a6ad2060c20800000000000000
-      internalID: 3172226124633829201
+      spriteID: cbd1ea3f9e4714580800000000000000
+      internalID: -8844659645014467140
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BananaRight_0: 3172226124633829201
+      Dragan_0: -8844659645014467140
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

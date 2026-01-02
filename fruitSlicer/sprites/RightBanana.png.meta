@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3fcbd8e4e9c9f5047ae0d4e1242b1111
+guid: b3e3eb4add23b1646967d8ebad56e327
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6651102532560562339
-    second: FullKiwi_0
+      213: -8990244276545812350
+    second: RightBanana_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FullKiwi_0
+      name: RightBanana_0
       rect:
         serializedVersion: 2
-        x: 22
-        y: 17
-        width: 450
-        height: 437
+        x: 111
+        y: 83
+        width: 322
+        height: 351
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d57d6065c7982b3a0800000000000000
-      internalID: -6651102532560562339
+      spriteID: 2888f7c767c3c3380800000000000000
+      internalID: -8990244276545812350
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      FullKiwi_0: -6651102532560562339
+      RightBanana_0: -8990244276545812350
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

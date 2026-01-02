@@ -116,10 +116,10 @@ TextureImporter:
       name: HalfPapaya_0
       rect:
         serializedVersion: 2
-        x: 107
-        y: 4
-        width: 333
-        height: 480
+        x: 90
+        y: 8
+        width: 302
+        height: 469
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

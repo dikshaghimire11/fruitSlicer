@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7b38d475724a052498b82038198481b7
+guid: 65c3beeae4b05fa4b8626019f59d6e0f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1372335161102834277
-    second: Dragon_0
+      213: 4121880872312635667
+    second: Orange_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Dragon_0
+      name: Orange_0
       rect:
         serializedVersion: 2
-        x: 34
-        y: 0
-        width: 432
-        height: 500
+        x: 48
+        y: 7
+        width: 404
+        height: 486
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 56a105ede838b0310800000000000000
-      internalID: 1372335161102834277
+      spriteID: 3110ca090dcd33930800000000000000
+      internalID: 4121880872312635667
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Dragon_0: 1372335161102834277
+      Orange_0: 4121880872312635667
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
