@@ -105,7 +105,7 @@ public class Ice : MonoBehaviour
     public IEnumerator decreaseSpwanDelay()
     {
         float originalDelay = FruitSpawner.instance.spawnDelay;
-        FruitSpawner.instance.spawnDelay = 0.09f;
+        FruitSpawner.instance.spawnDelay = 0.1f;
         yield return new WaitForSeconds(1f);
         FruitSpawner.instance.spawnDelay = originalDelay;
     }

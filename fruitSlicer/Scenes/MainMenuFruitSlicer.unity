@@ -2213,6 +2213,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2d246e90c41d53641af2f126deb03cd9, type: 3}
   infiniteMusicList:
   - {fileID: 8300000, guid: 05385abb83b7c5b48b814581bebcac63, type: 3}
+  lifeLostSound: {fileID: 8300000, guid: ec1cf918e967f974ea7eb889a52d087d, type: 3}
+  gameOverSound: {fileID: 8300000, guid: 99b8fd69f9c286d4faaf641c36f4bd3f, type: 3}
 --- !u!4 &1343208068
 Transform:
   m_ObjectHideFlags: 0

@@ -2329,13 +2329,13 @@ MonoBehaviour:
   - {fileID: 7767628628793562763, guid: 904ee6df875b0304885923d148bec93a, type: 3}
   - {fileID: 7767628628793562763, guid: d4a0dd5590153a54e814e1c116749386, type: 3}
   - {fileID: 7767628628793562763, guid: 73fd01f1792d0014a99d066e059b99b5, type: 3}
-  spawnDelay: 0.5
+  spawnDelay: 1.5
   spawnForce: 5
   gameContainer: {fileID: 807754671}
-  targetFruitChance: 0.25
+  targetFruitChance: 0.8
   bombPrefab: {fileID: 7767628628793562763, guid: 685ce3e9ffefedb47a3b605920ef9da7, type: 3}
   icePrefab: {fileID: 7767628628793562763, guid: 22c1d944d0981bb4badaa7757e51ce85, type: 3}
-  specialSpawnDelay: 5
+  specialSpawnDelay: 3
 --- !u!4 &979263250
 Transform:
   m_ObjectHideFlags: 0
@@ -6267,8 +6267,8 @@ MonoBehaviour:
   counterText: {fileID: 1083250124}
   missionFruitIcon: {fileID: 153630906}
   levelDuration: 60
-  requiredCuts: 10
-  pointsPerLevel: 50
+  requiredCuts: 40
+  pointsPerLevel: 900
   targetFruitNew: {fileID: 0}
   missionText: {fileID: 29615215}
 --- !u!4 &2002546103
@@ -7173,8 +7173,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7232620994714346332, guid: 760afb29f009a1641a63be6fc69f45bb, type: 3}
+      propertyPath: spawnDelay
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7232620994714346332, guid: 760afb29f009a1641a63be6fc69f45bb, type: 3}
       propertyPath: gameContainer
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7232620994714346332, guid: 760afb29f009a1641a63be6fc69f45bb, type: 3}
+      propertyPath: specialSpawnDelay
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7232620994714346332, guid: 760afb29f009a1641a63be6fc69f45bb, type: 3}
+      propertyPath: targetFruitChance
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 7232620994714346332, guid: 760afb29f009a1641a63be6fc69f45bb, type: 3}
       propertyPath: fruitPrefabs.Array.size

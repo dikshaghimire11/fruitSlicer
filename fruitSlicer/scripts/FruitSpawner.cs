@@ -28,8 +28,8 @@ public class FruitSpawner : MonoBehaviour
     // --- INTERNAL VARIABLES ---
     private int lastFruitIndex = -1;
     private int lastSpecialType = -1;
+    private float randomDelay;
 
-    private bool stopFruitSpawning = false;
     private Camera mainCamera;
 
 
@@ -49,12 +49,13 @@ public class FruitSpawner : MonoBehaviour
 
     public void startSpawnning()
     {
-        StartCoroutine(SpawnFruitsRoutine());
+        StartCoroutine(SpawnFruitsRoutine(true));
+        StartCoroutine(SpawnFruitsRoutine(false));
         StartCoroutine(SpawnBombAndIceRoutine());
     }
 
     // --- 1. FRUIT SPAWNING ROUTINE ---
-    IEnumerator SpawnFruitsRoutine()
+    IEnumerator SpawnFruitsRoutine(bool calculateDelay)
     {
 
 
@@ -76,20 +77,17 @@ public class FruitSpawner : MonoBehaviour
                 yield break;
             }
             ;
-            // 1. Handle Delay based on Mode
-            if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
-            {
-                yield return new WaitForSeconds(1f); // Faster spawns in Juice Mode?
+      
+                if (calculateDelay)
+                {
+                    randomDelay = Random.Range(spawnDelay/2f, spawnDelay);
+                }
+                yield return new WaitForSeconds(randomDelay);
 
-            }
-            else
-            {
-                yield return new WaitForSeconds(spawnDelay);
-            }
 
 
             // 2. Spawn Logic
-            if (!stopFruitSpawning && fruitPrefabs.Count > 0)
+            if ( fruitPrefabs.Count > 0)
             {
 
                 GameObject prefabToSpawn = null;
@@ -139,7 +137,7 @@ public class FruitSpawner : MonoBehaviour
                 }
 
                 // 3. Execute Spawn
-                if (prefabToSpawn != null)
+                if (prefabToSpawn != null && Random.Range(0f, 1.1f)>0.5f)
                 {
                     SpawnObject(prefabToSpawn, corners);
                 }
@@ -162,7 +160,6 @@ public class FruitSpawner : MonoBehaviour
                 yield break;
             }
             ;
-            stopFruitSpawning = true;
             yield return new WaitForSeconds(1f);
 
             GameObject prefabToSpawn = null;
@@ -195,7 +192,6 @@ public class FruitSpawner : MonoBehaviour
         if (prefabToSpawn != null) SpawnObject(prefabToSpawn, corners);
 
         yield return new WaitForSeconds(1f);
-        stopFruitSpawning = false;
     }
 }
 

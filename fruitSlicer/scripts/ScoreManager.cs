@@ -135,6 +135,10 @@ public class ScoreManager : MonoBehaviour
     {
         if (isGameOver) return;
         currentLives--;
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayLifeLostSound();
+        }
         UpdateTexts();
         if (currentLives <= 0) EndGame();
     }
@@ -143,6 +147,7 @@ public class ScoreManager : MonoBehaviour
     {
         isGameOver = true;
         Time.timeScale = 0f;
+
 
         if (gameOverPanel != null) gameOverPanel.SetActive(true);
         if (FruitSpawner.instance != null) FruitSpawner.instance.HideFruitsLayer();
@@ -175,6 +180,11 @@ public class ScoreManager : MonoBehaviour
             {
                 finalScoreText.text = "SCORE: " + score + "\nHIGH SCORE: " + highScore;
             }
+        }
+        
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayGameOverSound();
         }
     }
 
