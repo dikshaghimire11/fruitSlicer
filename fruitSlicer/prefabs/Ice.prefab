@@ -109,7 +109,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 0.2
+  m_GravityScale: 0.3
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -175,4 +175,3 @@ MonoBehaviour:
   rotationForce: 20
   breakSound: {fileID: 8300000, guid: 9abe5afa29815cd45a9ebab2ae7a43ff, type: 3}
   freezeDuration: 5
-  fruitSpawner: {fileID: 7232620994714346332, guid: 760afb29f009a1641a63be6fc69f45bb, type: 3}

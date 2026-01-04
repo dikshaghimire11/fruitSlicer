@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6261397905656911256}
   - component: {fileID: 2002393568182117257}
   - component: {fileID: 9146751011432130112}
-  - component: {fileID: 121301332114398150}
+  - component: {fileID: 3347494037045324085}
   m_Layer: 6
   m_Name: Pineapple
   m_TagString: Untagged
@@ -109,7 +109,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 0.2
+  m_GravityScale: 0.3
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -141,8 +141,8 @@ MonoBehaviour:
   points: 15
   missYPosition: -8
   juiceColor: {r: 0.9843138, g: 0.9450981, b: 0.7294118, a: 0}
---- !u!61 &121301332114398150
-BoxCollider2D:
+--- !u!70 &3347494037045324085
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -175,15 +175,6 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.64, y: 4.89}
-    newSize: {x: 2.64, y: 4.89}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 2.36, y: 4.84}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0, y: -0.9025614}
+  m_Size: {x: 2.64, y: 3.0848765}
+  m_Direction: 0

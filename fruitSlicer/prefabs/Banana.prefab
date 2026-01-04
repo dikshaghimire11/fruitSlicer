@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6261397905656911256}
   - component: {fileID: 2002393568182117257}
   - component: {fileID: 9146751011432130112}
-  - component: {fileID: 2635831309159686521}
+  - component: {fileID: 7953354025313316492}
   m_Layer: 6
   m_Name: Banana
   m_TagString: Untagged
@@ -109,7 +109,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 0.2
+  m_GravityScale: 0.3
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -141,8 +141,8 @@ MonoBehaviour:
   points: 10
   missYPosition: -8
   juiceColor: {r: 1, g: 0.9557321, b: 0.6622641, a: 0}
---- !u!61 &2635831309159686521
-BoxCollider2D:
+--- !u!68 &7953354025313316492
+EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -175,15 +175,20 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.5292086}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.66, y: 4.1}
-    newSize: {x: 4.66, y: 4.1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 5, y: 3.3488674}
+  m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
+  m_Points:
+  - {x: -2.273705, y: -0.36591163}
+  - {x: -0.54244184, y: 0.23994261}
+  - {x: 0.8673241, y: 1.4356867}
+  - {x: 1.1542974, y: 2.0932477}
+  - {x: 1.7949374, y: 1.7853566}
+  - {x: 2.3716745, y: 0.14356035}
+  - {x: 1.9448148, y: -1.2200234}
+  - {x: 1.2590168, y: -1.7810265}
+  - {x: -0.12773934, y: -2.0621197}
+  - {x: -2.286109, y: -0.45035228}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
