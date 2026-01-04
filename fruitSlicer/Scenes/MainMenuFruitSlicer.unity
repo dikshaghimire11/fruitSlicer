@@ -2210,9 +2210,17 @@ MonoBehaviour:
   menuMusicList:
   - {fileID: 8300000, guid: f99a950755fdae2468b7cbca9d343e7f, type: 3}
   careerMusicList:
-  - {fileID: 8300000, guid: 2d246e90c41d53641af2f126deb03cd9, type: 3}
+  - {fileID: 8300000, guid: 9a4e6ea1d66470347b6059f8bb12250e, type: 3}
+  - {fileID: 8300000, guid: efbeb3ebf2df1eb46917411400e3ed17, type: 3}
+  - {fileID: 8300000, guid: c9887e8689ebbb849b0627cc0e300165, type: 3}
+  - {fileID: 8300000, guid: 4f1a9fd9baad73041a807c76d1b102ee, type: 3}
+  - {fileID: 8300000, guid: 1c76e2e5273d5d944b2c940d0b6392e5, type: 3}
   infiniteMusicList:
-  - {fileID: 8300000, guid: 05385abb83b7c5b48b814581bebcac63, type: 3}
+  - {fileID: 8300000, guid: 4f1a9fd9baad73041a807c76d1b102ee, type: 3}
+  - {fileID: 8300000, guid: efbeb3ebf2df1eb46917411400e3ed17, type: 3}
+  - {fileID: 8300000, guid: 9a4e6ea1d66470347b6059f8bb12250e, type: 3}
+  - {fileID: 8300000, guid: c9887e8689ebbb849b0627cc0e300165, type: 3}
+  - {fileID: 8300000, guid: 1c76e2e5273d5d944b2c940d0b6392e5, type: 3}
   lifeLostSound: {fileID: 8300000, guid: ec1cf918e967f974ea7eb889a52d087d, type: 3}
   gameOverSound: {fileID: 8300000, guid: 99b8fd69f9c286d4faaf641c36f4bd3f, type: 3}
 --- !u!4 &1343208068
