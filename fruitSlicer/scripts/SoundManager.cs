@@ -15,6 +15,8 @@ public class SoundManager : MonoBehaviour
 
     public AudioClip lifeLostSound;
     public AudioClip gameOverSound;
+      public AudioClip characterPopSound;
+      public AudioClip characterGoneSound;
     // --- CONFIGURATION ---
     private const float MAX_MUSIC_VOLUME = 0.5f; // Slider at 100% = 0.5 actual volume
     private const float DEFAULT_SLIDER_VALUE = 0.04f; // 0.04 * 0.5 = 0.02 (Your requested default)
@@ -135,4 +137,18 @@ public class SoundManager : MonoBehaviour
             sfxSource.PlayOneShot(gameOverSound);
         }
     }
+        public void PlayCharacterPopSound()
+        {
+            if (sfxSource != null && characterPopSound != null)
+            {
+                sfxSource.PlayOneShot(characterPopSound);
+            }
+        }
+        public void PlayCharacterGoneSound()
+        {
+            if (sfxSource != null && characterGoneSound != null)
+            {
+                sfxSource.PlayOneShot(characterGoneSound);
+            }
+        }
 }
