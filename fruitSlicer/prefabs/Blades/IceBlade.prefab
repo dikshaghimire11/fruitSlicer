@@ -242,6 +242,8 @@ MonoBehaviour:
   minSlicingVelocity: 7
   minSliceDistance: 0.5
   floatingTextPrefab: {fileID: 6631497170589391908, guid: 1ff7f96d3b19eea42abafc0b61e6051a, type: 3}
+  bladeMinVolume: 0.2
+  bladeMaxVolume: 1
   maxComboDelay: 0.5
 --- !u!82 &7035028759514319195
 AudioSource:
@@ -254,11 +256,11 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_Resource: {fileID: 8300000, guid: debcd097bb2e89242a38ae86cf0200bb, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
