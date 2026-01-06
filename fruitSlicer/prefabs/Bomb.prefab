@@ -5042,7 +5042,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 354887031
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 10
   m_MaskInteraction: 0
   m_RenderMode: 0
@@ -5089,7 +5089,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: f636aee4ad855d24f9f19c59a49ecf3c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.535
   m_Pitch: 1
   Loop: 0
   Mute: 0

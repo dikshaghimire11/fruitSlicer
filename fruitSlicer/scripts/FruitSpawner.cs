@@ -205,7 +205,7 @@ void SpawnObject(GameObject prefab, Vector3[] corners)
     float upsetWidth = screenWidth * 0.2f;
 
     float randomX = Random.Range(corners[0].x + upsetWidth, corners[3].x - upsetWidth);
-    Vector3 spawnPosition = new Vector3(randomX, -3f, -10f);
+    Vector3 spawnPosition = new Vector3(randomX, -4f, -10f);
 
     GameObject newObj = Instantiate(prefab, spawnPosition, Quaternion.identity);
     Rigidbody2D rb = newObj.GetComponent<Rigidbody2D>();

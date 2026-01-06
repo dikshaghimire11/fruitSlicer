@@ -72,18 +72,18 @@ public class Ice : MonoBehaviour
     IEnumerator FreezeAndShowSnow()
     {
         // A. Show Snow Overlay (if it exists)
-        GameObject snowScreen = GameObject.Find("SnowOverlay");
-        Image myImage = snowScreen.GetComponent<Image>();
-        myImage.enabled = true;
+        // GameObject snowScreen = GameObject.Find("SnowOverlay");
+        // Image myImage = snowScreen.GetComponent<Image>();
+        // myImage.enabled = true;
 
 
-        Color tempColor = myImage.color;
+        // Color tempColor = myImage.color;
 
         // 2. Change the alpha (0f = Transparent, 1f = Opaque)
-        tempColor.a = 0.5f;
+        // tempColor.a = 0.5f;
 
         // 3. Assign the modified color back to the image
-        myImage.color = tempColor;
+        // myImage.color = tempColor;
 
         //snowEffectBackground.SetActive(true);
 
@@ -97,7 +97,7 @@ public class Ice : MonoBehaviour
         stopSlowMotion();
 
         // E. Hide Snow Overlay
-        myImage.enabled = false;
+        // myImage.enabled = false;
 
         // F. Destroy the original object
         Destroy(gameObject);

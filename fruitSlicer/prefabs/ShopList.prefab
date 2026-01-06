@@ -46,13 +46,100 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
   selectedShopList: []
   shopBackgroundList:
-  - itemName: Maldhives
+  - itemName: Beach
     price: 0
     icon: {fileID: 268326099042636684, guid: be7f1cfb5dc727b4fa04ac111206c1b8, type: 3}
     actualSprite: {fileID: 268326099042636684, guid: be7f1cfb5dc727b4fa04ac111206c1b8, type: 3}
+    prefb: {fileID: 0}
     isDefault: 1
     itemType: 1
     isPurchased: 0
     isEquipped: 0
-  bladeItemList: []
-  characterList: []
+  - itemName: Forest
+    price: 500
+    icon: {fileID: 9085546173938197295, guid: c38de719f6949f34da7055d31f5f49f3, type: 3}
+    actualSprite: {fileID: 9085546173938197295, guid: c38de719f6949f34da7055d31f5f49f3, type: 3}
+    prefb: {fileID: 0}
+    isDefault: 0
+    itemType: 1
+    isPurchased: 0
+    isEquipped: 0
+  - itemName: Island
+    price: 1000
+    icon: {fileID: -2207619908799101039, guid: cb2647cab19d26541a323f8f6db5dbf8, type: 3}
+    actualSprite: {fileID: -2207619908799101039, guid: cb2647cab19d26541a323f8f6db5dbf8, type: 3}
+    prefb: {fileID: 0}
+    isDefault: 0
+    itemType: 1
+    isPurchased: 0
+    isEquipped: 0
+  bladeItemList:
+  - itemName: Basic
+    price: 0
+    icon: {fileID: 7293598183456022363, guid: 977ecd6742e611949914d9668a15ff33, type: 3}
+    actualSprite: {fileID: 0}
+    prefb: {fileID: 6311237056519408263, guid: 22a02b0350138ac4cb69800f3589f30a, type: 3}
+    isDefault: 1
+    itemType: 0
+    isPurchased: 0
+    isEquipped: 0
+  - itemName: Ice Blade
+    price: 100
+    icon: {fileID: 7293598183456022363, guid: 977ecd6742e611949914d9668a15ff33, type: 3}
+    actualSprite: {fileID: 0}
+    prefb: {fileID: 6311237056519408263, guid: 08f372de6410a5c40afeef9446bc6712, type: 3}
+    isDefault: 0
+    itemType: 0
+    isPurchased: 0
+    isEquipped: 0
+  - itemName: CyberBlade
+    price: 100
+    icon: {fileID: 7293598183456022363, guid: 977ecd6742e611949914d9668a15ff33, type: 3}
+    actualSprite: {fileID: 0}
+    prefb: {fileID: 6311237056519408263, guid: de7e41fe840fa8e4f8f3490fa28992a7, type: 3}
+    isDefault: 0
+    itemType: 0
+    isPurchased: 0
+    isEquipped: 0
+  - itemName: Gold Blade
+    price: 100
+    icon: {fileID: 7293598183456022363, guid: 977ecd6742e611949914d9668a15ff33, type: 3}
+    actualSprite: {fileID: 0}
+    prefb: {fileID: 6311237056519408263, guid: d0c1fa5d2a06cfc4f8c9a231a332e05a, type: 3}
+    isDefault: 0
+    itemType: 0
+    isPurchased: 0
+    isEquipped: 0
+  - itemName: Gold Blade
+    price: 100
+    icon: {fileID: 7293598183456022363, guid: 977ecd6742e611949914d9668a15ff33, type: 3}
+    actualSprite: {fileID: 0}
+    prefb: {fileID: 6311237056519408263, guid: d0c1fa5d2a06cfc4f8c9a231a332e05a, type: 3}
+    isDefault: 0
+    itemType: 0
+    isPurchased: 0
+    isEquipped: 0
+  - itemName: FireBlade
+    price: 100
+    icon: {fileID: 7293598183456022363, guid: 977ecd6742e611949914d9668a15ff33, type: 3}
+    actualSprite: {fileID: 0}
+    prefb: {fileID: 6311237056519408263, guid: 3937a36bfe1fdb4418e7ab47fefb9af3, type: 3}
+    isDefault: 0
+    itemType: 0
+    isPurchased: 0
+    isEquipped: 0
+  - itemName: FireBlade
+    price: 100
+    icon: {fileID: 7293598183456022363, guid: 977ecd6742e611949914d9668a15ff33, type: 3}
+    actualSprite: {fileID: 0}
+    prefb: {fileID: 6311237056519408263, guid: 3937a36bfe1fdb4418e7ab47fefb9af3, type: 3}
+    isDefault: 0
+    itemType: 0
+    isPurchased: 0
+    isEquipped: 0
+  characterList:
+  - {fileID: 1867517093331897566, guid: 53f90fd28f816d740a9980852394e67c, type: 3}
+  - {fileID: 1867517093331897566, guid: 6c0b052cdb6a06240910d53afb9038b7, type: 3}
+  - {fileID: 1867517093331897566, guid: abb60ba28a6fe8942824838f594b3f76, type: 3}
+  - {fileID: 1867517093331897566, guid: 2dac9917e2abec943831a0e5ea2ea03e, type: 3}
+  currentTab: 0

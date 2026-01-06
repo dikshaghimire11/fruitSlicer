@@ -138,7 +138,7 @@ MonoBehaviour:
   rightHalf: {fileID: 3160838875326261666, guid: 3127d424f1b8c1849868ce069673897b, type: 3}
   sliceForce: 5
   rotationForce: 2
-  sliceSound: {fileID: 8300000, guid: 034e2c9e2eec04d4f90577452bd2a5bd, type: 3}
+  sliceSound: {fileID: 8300000, guid: 89151abea419a3e488cccc8bb6bedd5b, type: 3}
   points: 25
   missYPosition: -8
   juiceColor: {r: 0.98823535, g: 0.98823535, b: 0.9725491, a: 0}
@@ -191,7 +191,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: f636aee4ad855d24f9f19c59a49ecf3c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.535
   m_Pitch: 1
   Loop: 0
   Mute: 0

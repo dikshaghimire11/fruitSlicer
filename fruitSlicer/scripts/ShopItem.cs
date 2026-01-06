@@ -6,7 +6,11 @@ public class ShopItem
     public string itemName;
     public int price;
     public Sprite icon;          // The icon shown in the shop UI
-    public Sprite actualSprite;  // The actual background image or Sword Sprite for the game
+    public Sprite actualSprite;
+
+    public GameObject prefb;
+
+
 
     public bool isDefault;
     public enum ItemType { Blade, Background }

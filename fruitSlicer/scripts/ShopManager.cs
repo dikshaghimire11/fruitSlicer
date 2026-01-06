@@ -15,7 +15,7 @@ public class ShopManager : MonoBehaviour
     public TextMeshProUGUI coinsText;
 
     // Track current filter (Blades or Backgrounds)
-    private ShopItem.ItemType currentTab = ShopItem.ItemType.Blade;
+    
     private int totalCoins;
 
     void Awake()
@@ -37,7 +37,7 @@ public class ShopManager : MonoBehaviour
     // --- TAB SYSTEM ---
     public void ShowBlades()
     {
-        currentTab = ShopItem.ItemType.Blade;
+        ShopLists.instance.currentTab = ShopItem.ItemType.Blade;
         ShopLists.instance.selectedShopList = ShopLists.instance.bladeItemList;
         ShopLists.instance.LoadSavedData();
         RefreshUI();
@@ -45,7 +45,7 @@ public class ShopManager : MonoBehaviour
 
     public void ShowBackgrounds()
     {
-        currentTab = ShopItem.ItemType.Background;
+        ShopLists.instance.currentTab = ShopItem.ItemType.Background;
         ShopLists.instance.selectedShopList = ShopLists.instance.shopBackgroundList;
         ShopLists.instance.LoadSavedData();
         RefreshUI();
@@ -97,7 +97,7 @@ public class ShopManager : MonoBehaviour
 
             // Save Data
             PlayerPrefs.SetInt("TotalCoins", totalCoins);
-            PlayerPrefs.SetInt("Sold_" + id, 1);
+            PlayerPrefs.SetInt("Sold_" +item.itemType+"_"+id, 1);
 
             UpdateCoinUI();
             EquipItem(id); // Auto-equip on buy (optional, keeps UI snappy)
