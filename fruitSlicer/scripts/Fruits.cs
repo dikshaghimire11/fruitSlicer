@@ -1,16 +1,13 @@
 using UnityEngine;
 
-// public enum FruitType { Apple, Orange, Watermelon, Banana, Pineapple, Mango ,Kiwi ,Coconut}
-
 public class Fruit : MonoBehaviour
 {
-    // --- ASSIGN THIS IN INSPECTOR ---
-    // public FruitType fruitType; 
-
     public GameObject leftHalf;
     public GameObject rightHalf;
+
     public float sliceForce = 5f;
     public float rotationForce = 20f;
+
     public AudioClip sliceSound;
     public int points = 10;
     public float missYPosition = -8f;
@@ -19,16 +16,42 @@ public class Fruit : MonoBehaviour
 
     private bool isSliced = false;
 
+    // Shared AudioSource for all fruits
+    private static AudioSource sliceSource;
+
+    void Awake()
+    {
+        // Cache AudioSource ONCE (no runtime searching during slice)
+        if (sliceSource == null)
+        {
+            GameObject audioObj = GameObject.Find("SliceAudio");
+            if (audioObj != null)
+            {
+                sliceSource = audioObj.GetComponent<AudioSource>();
+            }
+            else
+            {
+                Debug.LogError("SliceAudio GameObject not found in scene!");
+            }
+        }
+    }
+
     public void Slice(Vector2 sliceDirection)
     {
         if (isSliced) return;
         isSliced = true;
 
-        if (sliceSound != null) AudioSource.PlayClipAtPoint(sliceSound, transform.position, 1.0f);
+        // PLAY SOUND INSTANTLY (NO DELAY)
+        if (sliceSound != null && sliceSource != null)
+        {
+            sliceSource.pitch = Random.Range(0.95f, 1.05f); // optional juicy effect
+            sliceSource.PlayOneShot(sliceSound);
+        }
 
-        GameObject mainFruit = this.gameObject;
-        mainFruit.SetActive(false);
+        // Hide main fruit
+        gameObject.SetActive(false);
 
+        // Spawn halves
         GameObject leftInst = Instantiate(leftHalf, transform.position, transform.rotation);
         GameObject rightInst = Instantiate(rightHalf, transform.position, transform.rotation);
 
@@ -38,10 +61,11 @@ public class Fruit : MonoBehaviour
         leftRb.AddForce((-sliceDirection + new Vector2(-0.5f, 0)) * sliceForce, ForceMode2D.Impulse);
         rightRb.AddForce((sliceDirection + new Vector2(0.5f, 0)) * sliceForce, ForceMode2D.Impulse);
 
-        float currentTorque = Random.Range(rotationForce * 0.8f, rotationForce * 1.2f);
-        leftRb.AddTorque(currentTorque, ForceMode2D.Impulse);
-        rightRb.AddTorque(-currentTorque, ForceMode2D.Impulse);
+        float torque = Random.Range(rotationForce * 0.8f, rotationForce * 1.2f);
+        leftRb.AddTorque(torque, ForceMode2D.Impulse);
+        rightRb.AddTorque(-torque, ForceMode2D.Impulse);
 
+        // Cleanup
         Destroy(gameObject);
         Destroy(leftInst, 4f);
         Destroy(rightInst, 4f);
@@ -51,10 +75,10 @@ public class Fruit : MonoBehaviour
     {
         if (transform.position.y < missYPosition)
         {
-            // ONLY LOSE LIFE IN INFINITE MODE
             if (ModeManager.Instance.currentMode == GameMode.Infinite)
             {
-                if (ScoreManager.instance != null) ScoreManager.instance.LoseLife();
+                if (ScoreManager.instance != null)
+                    ScoreManager.instance.LoseLife();
             }
             Destroy(gameObject);
         }

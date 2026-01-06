@@ -3,30 +3,59 @@ using UnityEngine;
 public class Bomb : MonoBehaviour
 {
     [Header("Explosion Settings")]
-    public GameObject explosionPrefab; 
-    public AudioClip explosionSound;   
-    
-    private bool isExploded = false;
+    public GameObject explosionPrefab;
+    public AudioClip explosionSound;
+
     [Header("Miss Settings")]
     public float missYPosition = -8f;
+
+    private bool isExploded = false;
+
+    // Shared AudioSource (same one used by Fruit)
+    private static AudioSource sliceSource;
+
+    void Awake()
+    {
+        // Cache AudioSource ONCE
+        if (sliceSource == null)
+        {
+            GameObject audioObj = GameObject.Find("SliceAudio");
+            if (audioObj != null)
+            {
+                sliceSource = audioObj.GetComponent<AudioSource>();
+            }
+            else
+            {
+                Debug.LogError("SliceAudio GameObject not found in scene!");
+            }
+        }
+    }
 
     public void Explode()
     {
         if (isExploded) return;
         isExploded = true;
 
-        // Visuals Only
-        if (explosionSound != null) AudioSource.PlayClipAtPoint(explosionSound, transform.position, 1.0f);
-        if (explosionPrefab != null) Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        // 🔊 INSTANT SOUND (NO DELAY)
+        if (explosionSound != null && sliceSource != null)
+        {
+            sliceSource.pitch = 1f;
+            sliceSource.PlayOneShot(explosionSound);
+        }
 
-        // NOTE: Score/Life logic is now inside Blade.cs CheckHit()
+        // 💥 VISUAL
+        if (explosionPrefab != null)
+        {
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        }
+
         Destroy(gameObject);
     }
 
     void Update()
     {
         if (transform.position.y < missYPosition)
-        {   
+        {
             Destroy(gameObject);
         }
     }

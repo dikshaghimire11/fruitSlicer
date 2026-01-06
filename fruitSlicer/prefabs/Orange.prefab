@@ -138,7 +138,7 @@ MonoBehaviour:
   rightHalf: {fileID: 3160838875326261666, guid: c25c08b89122e9d4483a17bf8614faef, type: 3}
   sliceForce: 5
   rotationForce: 2
-  sliceSound: {fileID: 8300000, guid: b07ef16d57a37ad4a930634df21b0546, type: 3}
+  sliceSound: {fileID: 8300000, guid: ab677e88520360e4cb643ecdabd9b126, type: 3}
   points: 15
   missYPosition: -6
   juiceColor: {r: 0.9294118, g: 0.6431373, b: 0.20392159, a: 0}
