@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,8 @@ public class SettingManager : MonoBehaviour
     [Header("Sprites")]
     public Sprite soundOnSprite;  
     public Sprite soundOffSprite; 
+
+    public TextMeshProUGUI onOffText;
 
     void Start()
     {
@@ -53,6 +56,7 @@ public class SettingManager : MonoBehaviour
         if (soundButtonIcon != null)
         {
             soundButtonIcon.sprite = isMuted ? soundOffSprite : soundOnSprite;
+            onOffText.text=isMuted?"OFF":"ON";
         }
 
         // 2. Lock or Unlock the Slider
