@@ -1,6 +1,8 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
+using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -16,6 +18,10 @@ public class ScoreManager : MonoBehaviour
 
     public TextMeshProUGUI missionPassEarnPoints;
 
+    public GameObject x2Button;
+
+    public GameObject addLifeButton;
+
     [Header("Victory Effect")]
     public GameObject victoryEffectPrefab;
 
@@ -28,6 +34,8 @@ public class ScoreManager : MonoBehaviour
     public bool isGameOver = false;
     private bool hasShownHighScoreMessage = false;
 
+    private int alreadySavedCoins;
+
     void Awake()
     {
         if (instance == null) { instance = this; }
@@ -35,6 +43,8 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
+        alreadySavedCoins = 0;
+        Debug.Log("Already Saved Coins:" + alreadySavedCoins);
 
         if (ModeManager.Instance.currentMode == GameMode.Infinite)
         {
@@ -143,6 +153,44 @@ public class ScoreManager : MonoBehaviour
         if (currentLives <= 0) EndGame();
     }
 
+    public void addLifeAndResumeGame()
+    {
+        addLifeButton.SetActive(false);
+        destroyAllSpawnnedObjects();
+        currentLives++;
+        if (livesText != null) livesText.text = currentLives.ToString();
+        gameOverPanel.SetActive(false);
+        if (FruitSpawner.instance != null) FruitSpawner.instance.ShowFruitsLayer();
+        isGameOver = false;
+        if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
+        {
+            JuiceManager.instance.isLevelActive = true;
+            JuiceManager.instance.currentTime = JuiceManager.instance.currentTime + 10;
+        }
+        Time.timeScale = 1f;
+        FruitSpawner.instance.startSpawnning();
+        Debug.Log("Should Start");
+    }
+
+    public void x2Reward()
+    {
+        int totalCoins = PlayerPrefs.GetInt("TotalCoins", 100);
+        PlayerPrefs.SetInt("TotalCoins", totalCoins + JuiceManager.instance.pointsPerLevel);
+        if (missionPassEarnPoints != null) missionPassEarnPoints.text = "+" + JuiceManager.instance.pointsPerLevel * 2;
+        x2Button.SetActive(false);
+    }
+
+    private void destroyAllSpawnnedObjects()
+    {
+        GameObject[] allObjects = FindObjectsOfType<GameObject>();
+        foreach (GameObject obj in allObjects)
+        {
+            if (obj.layer == 6)
+            {
+                GameObject.Destroy(obj);
+            }
+        }
+    }
     void EndGame()
     {
         isGameOver = true;
@@ -154,7 +202,8 @@ public class ScoreManager : MonoBehaviour
 
         // Save Score/Coins
         int totalCoins = PlayerPrefs.GetInt("TotalCoins", 100);
-        PlayerPrefs.SetInt("TotalCoins", score + totalCoins);
+        PlayerPrefs.SetInt("TotalCoins", score - alreadySavedCoins + totalCoins);
+        alreadySavedCoins = score;
         PlayerPrefs.Save();
 
         // High Score Logic (Infinite Mode)
@@ -181,7 +230,7 @@ public class ScoreManager : MonoBehaviour
                 finalScoreText.text = "SCORE: " + score + "\nHIGH SCORE: " + highScore;
             }
         }
-        
+
         if (SoundManager.instance != null)
         {
             SoundManager.instance.PlayGameOverSound();
@@ -190,6 +239,8 @@ public class ScoreManager : MonoBehaviour
 
     public void RestartGame()
     {
+        AdsManager.instance.playInterestialAd();
+
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         if (FruitSpawner.instance != null) FruitSpawner.instance.ShowFruitsLayer();

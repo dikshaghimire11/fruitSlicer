@@ -36,6 +36,8 @@ public class GameCanvasManager : MonoBehaviour
     public Image juiceColor;
 
 
+
+
     void Awake()
     {
         if (instance == null)
@@ -152,5 +154,31 @@ public class GameCanvasManager : MonoBehaviour
             missionAccomplishedPanel.SetActive(false);
             ScoreManager.instance.RestartGame();
         }
+    }
+
+    public void disableAllErrorMessages()
+    {
+        GameObject[] errorMessages = UnityEngine.Object.FindObjectsByType<GameObject>(FindObjectsSortMode.None);
+
+        foreach (GameObject obj in errorMessages)
+        {
+            if (obj.tag == "ErrorMessage")
+            {
+                GameObject.Destroy(obj);
+            }
+        }
+    }
+
+    public void getMoreLife()
+    {
+        AdsManager.instance.currentAdvertisement = AdsManager.AdvertisementType_.AddLife;
+
+        AdsManager.instance.onClickAddLife();
+    }
+
+    public void get2xReward()
+    {
+        AdsManager.instance.currentAdvertisement = AdsManager.AdvertisementType_.x2Reward;
+        AdsManager.instance.onClickAddLife();
     }
 }
