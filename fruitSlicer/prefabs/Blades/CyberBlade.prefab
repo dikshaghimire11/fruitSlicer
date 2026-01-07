@@ -239,12 +239,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2efe17dedc6ff224f9be3ac4c771dd30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Blade
-  minSlicingVelocity: 7
-  minSliceDistance: 0.5
+  minSlicingVelocity: 3
+  minSliceDistance: 0.12
+  sliceRadius: 0.15
   floatingTextPrefab: {fileID: 6631497170589391908, guid: 1ff7f96d3b19eea42abafc0b61e6051a, type: 3}
-  bladeMinVolume: 0.2
-  bladeMaxVolume: 1
   maxComboDelay: 0.5
+  minSoundVelocity: 2.5
+  maxSoundVelocity: 15
+  audioFadeSpeed: 6
 --- !u!82 &-1498622802490810624
 AudioSource:
   m_ObjectHideFlags: 0

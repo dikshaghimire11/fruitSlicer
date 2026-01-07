@@ -9,22 +9,25 @@ public class Blade : MonoBehaviour
     private Camera mainCamera;
 
     [Header("Blade Settings")]
-    public float minSlicingVelocity = 5.0f;
-    public float minSliceDistance = 0.1f;
+    public float minSlicingVelocity = 3.5f;
+    public float minSliceDistance = 0.15f;
+    public float minMovementForSlice = 0.08f;
     public GameObject floatingTextPrefab;
 
-    private bool isSlicing = false;
+    private bool isSlicing;
     private Vector3 previousPosition;
     private Vector2 currentSliceDirection;
+    private float accumulatedDistance;
 
-    private int comboCount = 0;
-    private float lastHitTime = 0f;
+    [Header("Combo Settings")]
     public float maxComboDelay = 0.2f;
+    private int comboCount;
+    private float lastHitTime;
 
     [Header("Blade Audio Settings")]
-    public float minSoundVelocity = 5.0f;
-    public float maxSoundVelocity = 20f;
-    public float audioFadeSpeed = 5f; // Speed of volume fade in/out
+    public float minSoundVelocity = 2.5f;
+    public float maxSoundVelocity = 15f;
+    public float audioFadeSpeed = 6f;
 
     void Awake()
     {
@@ -36,12 +39,11 @@ public class Blade : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Kinematic;
         bladeTrail.emitting = false;
 
-        // Disable collider if exists
         Collider2D col = GetComponent<Collider2D>();
         if (col != null) col.enabled = false;
 
-        audioSource.loop = true; // Loop the swoosh for smooth effect
-        audioSource.volume = 0f; // Start muted
+        audioSource.loop = true;
+        audioSource.volume = 0f;
     }
 
     void Update()
@@ -49,22 +51,28 @@ public class Blade : MonoBehaviour
         if (IsInputDown()) StartSlicing();
         else if (IsInputUp()) StopSlicing();
 
-        if (isSlicing) ContinueSlicing();
+        if (isSlicing)
+            ContinueSlicing();
     }
 
     bool IsInputDown()
     {
-        return Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began);
+        return Input.GetMouseButtonDown(0) ||
+              (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began);
     }
 
     bool IsInputUp()
     {
-        return Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended);
+        return Input.GetMouseButtonUp(0) ||
+              (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended);
     }
 
     Vector3 GetInputPosition()
     {
-        Vector3 screenPos = (Input.touchCount > 0) ? (Vector3)Input.GetTouch(0).position : Input.mousePosition;
+        Vector3 screenPos = Input.touchCount > 0
+            ? (Vector3)Input.GetTouch(0).position
+            : Input.mousePosition;
+
         screenPos.z = Mathf.Abs(mainCamera.transform.position.z);
         return mainCamera.ScreenToWorldPoint(screenPos);
     }
@@ -74,8 +82,11 @@ public class Blade : MonoBehaviour
         isSlicing = true;
         bladeTrail.Clear();
         bladeTrail.emitting = true;
+
         previousPosition = GetInputPosition();
         rb.position = previousPosition;
+
+        accumulatedDistance = 0f;
         comboCount = 0;
 
         if (!audioSource.isPlaying)
@@ -86,38 +97,60 @@ public class Blade : MonoBehaviour
     {
         isSlicing = false;
         bladeTrail.emitting = false;
+
+        audioSource.Stop();
+        audioSource.volume = 0f;
     }
 
     void ContinueSlicing()
     {
         Vector3 worldPos = GetInputPosition();
-        Vector3 directionV3 = worldPos - previousPosition;
-        float distance = directionV3.magnitude;
-        float velocity = distance / Time.unscaledDeltaTime;
+        Vector3 movement = worldPos - previousPosition;
+        float distance = movement.magnitude;
 
-        if (distance > minSliceDistance)
-            currentSliceDirection = directionV3.normalized;
+        if (distance <= 0f)
+            return;
+
+        float velocity = distance / Time.deltaTime;
+        accumulatedDistance += distance;
+
+        currentSliceDirection = movement.normalized;
+
+        // 🔊 Blade swoosh sound
         if (velocity > minSoundVelocity)
         {
-            float targetVolume = Mathf.Clamp01((velocity - minSoundVelocity) / (maxSoundVelocity - minSoundVelocity));
-            audioSource.volume = Mathf.MoveTowards(audioSource.volume, targetVolume, audioFadeSpeed * Time.unscaledDeltaTime);
-            float targetPitch = Mathf.Clamp(velocity / maxSoundVelocity, 0.8f, 1.5f);
-            audioSource.pitch = Mathf.MoveTowards(audioSource.pitch, targetPitch, audioFadeSpeed * Time.unscaledDeltaTime);
+            float targetVolume = Mathf.Clamp01(
+                (velocity - minSoundVelocity) / (maxSoundVelocity - minSoundVelocity));
+
+            audioSource.volume = Mathf.MoveTowards(
+                audioSource.volume, targetVolume, audioFadeSpeed * Time.deltaTime);
+
+            audioSource.pitch = Mathf.Lerp(0.85f, 1.4f, targetVolume);
 
             if (!audioSource.isPlaying)
                 audioSource.Play();
         }
         else
         {
-            audioSource.volume = Mathf.MoveTowards(audioSource.volume, 0f, audioFadeSpeed * Time.unscaledDeltaTime);
+            audioSource.volume = Mathf.MoveTowards(
+                audioSource.volume, 0f, audioFadeSpeed * Time.deltaTime);
+
+            if (audioSource.volume <= 0.01f)
+                audioSource.Stop();
         }
 
-        if (velocity > minSlicingVelocity && distance > minSliceDistance)
+        // 🗡️ SLICE DETECTION (Linecast)
+        if (
+            velocity > minSlicingVelocity &&
+            distance > minMovementForSlice &&
+            accumulatedDistance > minSliceDistance
+        )
         {
             RaycastHit2D[] hits = Physics2D.LinecastAll(previousPosition, worldPos);
+
             foreach (RaycastHit2D hit in hits)
             {
-                if (hit.collider != null)
+                if (hit.collider != null && hit.collider.enabled)
                     CheckHit(hit.collider);
             }
         }
@@ -128,24 +161,26 @@ public class Blade : MonoBehaviour
 
     void CheckHit(Collider2D other)
     {
+        if (!other.enabled) return;
+
         Fruit fruit = other.GetComponent<Fruit>();
         if (fruit != null)
         {
+            other.enabled = false;
             fruit.Slice(currentSliceDirection);
 
             if (ModeManager.Instance.currentMode == GameMode.Infinite)
             {
-                if (ScoreManager.instance != null)
-                    ScoreManager.instance.AddScore(fruit.points);
+                ScoreManager.instance?.AddScore(fruit.points);
+                ShowFloatingText("+" + fruit.points,
+                    new Color(0.28f, 0.57f, 0.86f),
+                    fruit.transform.position);
 
-                ShowFloatingText("+" + fruit.points, new Color(0.278f, 0.572f, 0.866f), fruit.transform.position);
                 HandleCombo(fruit);
             }
             else if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
             {
-                if (JuiceManager.instance != null)
-                    JuiceManager.instance.CheckFruit(fruit.gameObject.name);
-
+                JuiceManager.instance?.CheckFruit(fruit.name);
                 ShowFloatingText("SPLASH!", Color.cyan, fruit.transform.position);
             }
             return;
@@ -154,11 +189,10 @@ public class Blade : MonoBehaviour
         Bomb bomb = other.GetComponent<Bomb>();
         if (bomb != null)
         {
+            other.enabled = false;
             bomb.Explode();
             ShowFloatingText("BOOM!", Color.red, bomb.transform.position);
-            if (ScoreManager.instance != null)
-                ScoreManager.instance.HitBomb();
-
+            ScoreManager.instance?.HitBomb();
             comboCount = 0;
             return;
         }
@@ -166,6 +200,7 @@ public class Blade : MonoBehaviour
         Ice ice = other.GetComponent<Ice>();
         if (ice != null)
         {
+            other.enabled = false;
             ice.Slice(currentSliceDirection);
             ShowFloatingText("FREEZE!", Color.cyan, ice.transform.position);
         }
@@ -182,20 +217,20 @@ public class Blade : MonoBehaviour
         if (comboCount >= 2)
         {
             int bonus = comboCount * 5;
-            if (ScoreManager.instance != null)
-                ScoreManager.instance.AddScore(bonus);
-
-            ShowFloatingText("COMBO " + bonus, Color.yellow, fruit.transform.position);
+            ScoreManager.instance?.AddScore(bonus);
+            ShowFloatingText("COMBO +" + bonus, Color.yellow, fruit.transform.position);
         }
     }
 
     public void ShowFloatingText(string message, Color color, Vector3 position)
     {
-        if (floatingTextPrefab != null)
-        {
-            GameObject textObj = Instantiate(floatingTextPrefab, position + Vector3.up, Quaternion.identity);
-            FloatingText ft = textObj.GetComponent<FloatingText>();
-            if (ft != null) ft.Setup(message, color);
-        }
+        if (floatingTextPrefab == null) return;
+
+        GameObject obj = Instantiate(
+            floatingTextPrefab, position + Vector3.up, Quaternion.identity);
+
+        FloatingText ft = obj.GetComponent<FloatingText>();
+        if (ft != null)
+            ft.Setup(message, color);
     }
 }

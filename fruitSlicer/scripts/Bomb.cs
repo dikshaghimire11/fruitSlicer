@@ -39,8 +39,7 @@ public class Bomb : MonoBehaviour
         // 🔊 INSTANT SOUND (NO DELAY)
         if (explosionSound != null && sliceSource != null)
         {
-            sliceSource.volume = 3.0f; 
-            sliceSource.PlayOneShot(explosionSound);
+           sliceSource.PlayOneShot(explosionSound, 3f);
         }
 
         // 💥 VISUAL
