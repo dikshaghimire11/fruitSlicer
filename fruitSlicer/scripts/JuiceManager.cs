@@ -26,9 +26,9 @@ public class JuiceManager : MonoBehaviour
     // public FruitType targetFruit;
     public GameObject targetFruitNew;
 
-    private float currentTime;
+    public float currentTime;
     private int currentCuts = 0;
-    private bool isLevelActive = false;
+    public bool isLevelActive = false;
     private int lastTimeInt = -1;
 
     public TextMeshProUGUI missionText;
