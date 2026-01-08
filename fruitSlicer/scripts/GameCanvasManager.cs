@@ -35,6 +35,11 @@ public class GameCanvasManager : MonoBehaviour
 
     public Image juiceColor;
 
+    public GameObject addLifeOnlyObject;
+
+    public GameObject addLifeAndTimeObject;
+
+
 
 
 
@@ -62,6 +67,14 @@ public class GameCanvasManager : MonoBehaviour
 
         newObject = Instantiate(character, character.transform.position, character.transform.rotation, shopGameObject.transform);
         newObject.transform.SetSiblingIndex(0);
+        if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
+        {
+            addLifeAndTimeObject.SetActive(true);
+        }
+        else
+        {
+            addLifeOnlyObject.SetActive(true);
+        }
         if (SoundManager.instance != null) SoundManager.instance.PlayCharacterPopSound();
         StartCoroutine(MoveRoutine(new Vector2(-0.35f, -0.87f), 1, 1, newObject));
         StartCoroutine(MoveRoutine(new Vector2(0, -1.99f), 1, 0, workDesk));

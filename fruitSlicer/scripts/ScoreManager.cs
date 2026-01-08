@@ -3,6 +3,8 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
 using UnityEngine.UI;
+using JetBrains.Annotations;
+using System.Collections;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -35,6 +37,15 @@ public class ScoreManager : MonoBehaviour
     private bool hasShownHighScoreMessage = false;
 
     private int alreadySavedCoins;
+
+    public Sprite clockImage;
+    public Sprite LifeImage;
+
+    public Sprite coinImage;
+
+    public GameObject floatingReward;
+
+    public Transform gameCanvas;
 
     void Awake()
     {
@@ -166,11 +177,46 @@ public class ScoreManager : MonoBehaviour
         {
             JuiceManager.instance.isLevelActive = true;
             JuiceManager.instance.currentTime = JuiceManager.instance.currentTime + 10;
+            GameObject floatingClockIcon = Instantiate(floatingReward, new Vector2(-0.5f, 0.0f), Quaternion.identity, gameCanvas);
+
+            floatingClockIcon.GetComponentInChildren<Image>().sprite = clockImage;
+
+
+            GameObject floatingLifeIcon = Instantiate(floatingReward, new Vector2(+0.5f, 0.0f), Quaternion.identity, gameCanvas);
+            floatingLifeIcon.GetComponentInChildren<Image>().sprite = LifeImage;
+            floatingLifeIcon.GetComponentInChildren<TextMeshProUGUI>().text = "1";
+
+
+            StartCoroutine(moveFloatingRewardsAndDestroy(floatingLifeIcon));
+            StartCoroutine(moveFloatingRewardsAndDestroy(floatingClockIcon));
+        }
+        else
+        {
+            GameObject floatingLifeIcon = Instantiate(floatingReward, Vector2.zero, Quaternion.identity, gameCanvas);
+            floatingLifeIcon.GetComponentInChildren<Image>().sprite = LifeImage;
+            floatingLifeIcon.GetComponentInChildren<TextMeshProUGUI>().text = "1";
+            StartCoroutine(moveFloatingRewardsAndDestroy(floatingLifeIcon));
         }
         Time.timeScale = 1f;
         FruitSpawner.instance.startSpawnning();
         Debug.Log("Should Start");
     }
+
+    public IEnumerator moveFloatingRewardsAndDestroy(GameObject rewardObject)
+    {
+
+        float timer = 0f;
+
+        while (timer < 0.5f)
+        {
+            rewardObject.transform.Translate(Vector2.up * 3f * Time.deltaTime);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        GameObject.Destroy(rewardObject);
+    }
+
 
     public void x2Reward()
     {
@@ -178,6 +224,10 @@ public class ScoreManager : MonoBehaviour
         PlayerPrefs.SetInt("TotalCoins", totalCoins + JuiceManager.instance.pointsPerLevel);
         if (missionPassEarnPoints != null) missionPassEarnPoints.text = "+" + JuiceManager.instance.pointsPerLevel * 2;
         x2Button.SetActive(false);
+        GameObject floatingLifeIcon = Instantiate(floatingReward, Vector2.zero, Quaternion.identity, gameCanvas);
+        floatingLifeIcon.GetComponentInChildren<Image>().sprite = coinImage;
+        floatingLifeIcon.GetComponentInChildren<TextMeshProUGUI>().text = "x2";
+        StartCoroutine(moveFloatingRewardsAndDestroy(floatingLifeIcon));
     }
 
     private void destroyAllSpawnnedObjects()
