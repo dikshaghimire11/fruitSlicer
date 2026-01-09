@@ -2223,7 +2223,7 @@ MonoBehaviour:
   characterGoneSound: {fileID: 8300000, guid: 5cc3ccc40446e9f4bae471528fe99c73, type: 3}
   gameWinSound: {fileID: 8300000, guid: 746717cc714255b4499b45feb7fdc275, type: 3}
   highScoreSound: {fileID: 8300000, guid: f1022f1b7b8169c48836b4e601bb9abd, type: 3}
-  perfectSound: {fileID: 8300000, guid: 97a0f6fb9e6f29a47ac83934d92ae6b3, type: 3}
+  comboSound: {fileID: 8300000, guid: b879263f6c87b1748ba3bbe4c7f4dfd1, type: 3}
 --- !u!4 &1343208068
 Transform:
   m_ObjectHideFlags: 0

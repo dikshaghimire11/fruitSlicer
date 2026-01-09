@@ -34,7 +34,7 @@ public class JuiceManager : MonoBehaviour
     private int highScoreCareer = 0;
     public TextMeshProUGUI missionText;
     [Header("Bonus Settings")]
-    public int timeBonusMultiplier = 1;   // points per second remaining
+    public int timeBonusMultiplier = 1;  
     public int lifeBonusMultiplier = 5;
 
     void Awake() { instance = this; }
@@ -42,7 +42,6 @@ public class JuiceManager : MonoBehaviour
     void Start()
     {
         highScoreCareer = PlayerPrefs.GetInt("HighScoreCareer", 0);
-        // ... your existing code ...
 
         if (SoundManager.instance != null)
         {

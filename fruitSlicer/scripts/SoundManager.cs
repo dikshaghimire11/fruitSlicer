@@ -19,7 +19,8 @@ public class SoundManager : MonoBehaviour
     public AudioClip characterGoneSound;
     public AudioClip gameWinSound;
     public AudioClip highScoreSound;
-    public AudioClip perfectSound;
+   // public AudioClip perfectSound;
+    public AudioClip comboSound;
     // --- CONFIGURATION ---
     private const float MAX_MUSIC_VOLUME = 0.5f; // Slider at 100% = 0.5 actual volume
     private const float DEFAULT_SLIDER_VALUE = 0.04f; // 0.04 * 0.5 = 0.02 (Your requested default)
@@ -189,11 +190,18 @@ public class SoundManager : MonoBehaviour
             sfxSource.PlayOneShot(highScoreSound);
         }
     }
-    public void PlayPerfectSound()
+    // public void PlayPerfectSound()
+    // {
+    //     if (sfxSource != null && perfectSound != null)
+    //     {
+    //         sfxSource.PlayOneShot(perfectSound);
+    //     }
+    // }
+    public void PlayComboSound()
     {
-        if (sfxSource != null && perfectSound != null)
+        if (sfxSource != null && comboSound != null)
         {
-            sfxSource.PlayOneShot(perfectSound);
+            sfxSource.PlayOneShot(comboSound);
         }
     }
 }

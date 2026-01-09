@@ -223,6 +223,10 @@ public class Blade : MonoBehaviour
             int bonus = comboCount * 5;
             ScoreManager.instance?.AddScore(bonus);
             ShowFloatingText("COMBO +" + bonus, Color.yellow, fruit.transform.position);
+            if (SoundManager.instance != null)
+            {
+                SoundManager.instance.PlayComboSound();
+            }
         }
     }
 
