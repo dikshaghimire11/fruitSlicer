@@ -22,13 +22,11 @@ public class GameContainer : MonoBehaviour
     {
         float height = screenSize.y;
         transform.localScale = new Vector3(height * desiredRatio, height);
-        Debug.Log(transform.localScale);
     }
     else
     {
         float width = screenSize.x;
         transform.localScale = new Vector3(width, width / desiredRatio);
-        Debug.Log(transform.localScale);
     }
 }
     }

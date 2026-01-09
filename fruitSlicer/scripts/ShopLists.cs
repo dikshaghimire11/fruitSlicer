@@ -35,12 +35,9 @@ public class ShopLists : MonoBehaviour
   {
     for (int i = 0; i < selectedShopList.Length; i++)
     {
-      Debug.Log(selectedShopList[i].itemName);
       int sold = PlayerPrefs.GetInt("Sold_" +currentTab+"_"+i, selectedShopList[i].isDefault ? 1 : 0);
       selectedShopList[i].isPurchased = (sold == 1);
-      Debug.Log("Sold" + sold);
       int equippedID = PlayerPrefs.GetInt("Equipped_" + currentTab, -1);
-      Debug.Log("Equipped: " + equippedID);
       if (equippedID == -1 && selectedShopList[i].isDefault) equippedID = i;
 
       selectedShopList[i].isEquipped = (equippedID == i);

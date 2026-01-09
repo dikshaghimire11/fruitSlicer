@@ -23,7 +23,7 @@ public class LoadingManager : MonoBehaviour
     IEnumerator LoadSceneAsync()
     {
         // 1. Log what we are trying to load
-        Debug.Log("Attempting to load scene: " + TempData.sceneToLoad);
+
 
         // 2. Start loading
         AsyncOperation operation = SceneManager.LoadSceneAsync(TempData.sceneToLoad);

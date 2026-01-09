@@ -18,7 +18,6 @@ public class PauseManager : MonoBehaviour
 
     public void PauseGame()
     {
-        Debug.Log("Pressed Pause");
         pauseMenuPanel.SetActive(true);
         FruitSpawner.instance.HideFruitsLayer(); // Show the UI
         Time.timeScale = 0f;            // Stop game time
@@ -43,6 +42,5 @@ public class PauseManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
-        Debug.Log("Quitting Game...");
     }
 }

@@ -34,7 +34,6 @@ public class SoundManager : MonoBehaviour
 
         if (instance == null)
         {
-            Debug.Log("SoundManager instance set.");
             instance = this;
             DontDestroyOnLoad(gameObject);
 

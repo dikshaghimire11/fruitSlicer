@@ -55,7 +55,6 @@ public class MenuManager : MonoBehaviour
 
         if (SoundManager.instance != null)
         {
-            Debug.Log("Playing Menu Music from MenuManager Start");
             SoundManager.instance.PlayMenuMusic();
         }
     }
