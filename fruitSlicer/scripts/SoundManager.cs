@@ -15,8 +15,11 @@ public class SoundManager : MonoBehaviour
 
     public AudioClip lifeLostSound;
     public AudioClip gameOverSound;
-      public AudioClip characterPopSound;
-      public AudioClip characterGoneSound;
+    public AudioClip characterPopSound;
+    public AudioClip characterGoneSound;
+    public AudioClip gameWinSound;
+    public AudioClip highScoreSound;
+    public AudioClip perfectSound;
     // --- CONFIGURATION ---
     private const float MAX_MUSIC_VOLUME = 0.5f; // Slider at 100% = 0.5 actual volume
     private const float DEFAULT_SLIDER_VALUE = 0.04f; // 0.04 * 0.5 = 0.02 (Your requested default)
@@ -27,8 +30,10 @@ public class SoundManager : MonoBehaviour
 
     void Awake()
     {
+
         if (instance == null)
         {
+            Debug.Log("SoundManager instance set.");
             instance = this;
             DontDestroyOnLoad(gameObject);
 
@@ -105,24 +110,43 @@ public class SoundManager : MonoBehaviour
     // --- MUSIC PLAYING LOGIC ---
     // (Kept exactly the same)
     public void PlayMenuMusic() { PlayMusicFromList(menuMusicList); }
-    public void PlayCareerMusic() { PlayMusicFromList(careerMusicList); }
+    public void PlayCareerMusic()
+    {
+
+
+        PlayMusicFromList(careerMusicList);
+    }
     public void PlayInfiniteMusic() { PlayMusicFromList(infiniteMusicList); }
 
     private void PlayMusicFromList(AudioClip[] playlist)
     {
-        if (playlist.Length == 0) return;
-        int index = Random.Range(0, playlist.Length);
-        AudioClip newClip = playlist[index];
+        if (playlist == null || playlist.Length == 0 || musicSource == null)
+            return;
 
-        // Prevent restarting the same song
-        if (musicSource.clip == newClip && musicSource.isPlaying) return;
+        AudioClip newClip = null;
+
+        // If only one clip exists, just play it
+        if (playlist.Length == 1)
+        {
+            newClip = playlist[0];
+        }
+        else
+        {
+            // Pick a different clip than the currently playing one
+            do
+            {
+                int index = Random.Range(0, playlist.Length);
+                newClip = playlist[index];
+            }
+            while (newClip == musicSource.clip);
+        }
 
         musicSource.Stop();
         musicSource.clip = newClip;
-        musicSource.volume = isMuted ? 0 : savedSliderValue * MAX_MUSIC_VOLUME; // Ensure volume is correct on start
-
+        musicSource.volume = isMuted ? 0 : savedSliderValue * MAX_MUSIC_VOLUME;
         musicSource.Play();
     }
+
     public void PlayLifeLostSound()
     {
         if (sfxSource != null && lifeLostSound != null)
@@ -137,18 +161,39 @@ public class SoundManager : MonoBehaviour
             sfxSource.PlayOneShot(gameOverSound);
         }
     }
-        public void PlayCharacterPopSound()
+    public void PlayCharacterPopSound()
+    {
+        if (sfxSource != null && characterPopSound != null)
         {
-            if (sfxSource != null && characterPopSound != null)
-            {
-                sfxSource.PlayOneShot(characterPopSound);
-            }
+            sfxSource.PlayOneShot(characterPopSound);
         }
-        public void PlayCharacterGoneSound()
+    }
+    public void PlayCharacterGoneSound()
+    {
+        if (sfxSource != null && characterGoneSound != null)
         {
-            if (sfxSource != null && characterGoneSound != null)
-            {
-                sfxSource.PlayOneShot(characterGoneSound);
-            }
+            sfxSource.PlayOneShot(characterGoneSound);
         }
+    }
+    public void PlayGameWinSound()
+    {
+        if (sfxSource != null && gameWinSound != null)
+        {
+            sfxSource.PlayOneShot(gameWinSound);
+        }
+    }
+    public void PlayHighScoreSound()
+    {
+        if (sfxSource != null && highScoreSound != null)
+        {
+            sfxSource.PlayOneShot(highScoreSound);
+        }
+    }
+    public void PlayPerfectSound()
+    {
+        if (sfxSource != null && perfectSound != null)
+        {
+            sfxSource.PlayOneShot(perfectSound);
+        }
+    }
 }

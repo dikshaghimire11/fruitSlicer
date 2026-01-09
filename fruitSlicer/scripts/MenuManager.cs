@@ -24,14 +24,13 @@ public class MenuManager : MonoBehaviour
 
 
     public void setting()
-    {
-     Debug.Log("Navigating to Settings Scene");   
+    {  
         navigateToScene("SettingScene");
     }
 
     public void highScore()
     {
-        navigateToScene("ShopScene");
+        navigateToScene("HighScoreScene");
     }
 
     public void shop()
@@ -56,6 +55,7 @@ public class MenuManager : MonoBehaviour
 
         if (SoundManager.instance != null)
         {
+            Debug.Log("Playing Menu Music from MenuManager Start");
             SoundManager.instance.PlayMenuMusic();
         }
     }

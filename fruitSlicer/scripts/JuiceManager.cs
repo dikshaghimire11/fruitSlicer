@@ -21,6 +21,7 @@ public class JuiceManager : MonoBehaviour
     public float levelDuration = 60f;
     public int requiredCuts = 10;
     public int pointsPerLevel = 50;
+    public int finalPoints = 0;
 
     [Header("Game State")]
     // public FruitType targetFruit;
@@ -30,14 +31,17 @@ public class JuiceManager : MonoBehaviour
     private int currentCuts = 0;
     public bool isLevelActive = false;
     private int lastTimeInt = -1;
-
+    private int highScoreCareer = 0;
     public TextMeshProUGUI missionText;
+    [Header("Bonus Settings")]
+    public int timeBonusMultiplier = 1;   // points per second remaining
+    public int lifeBonusMultiplier = 5;
 
     void Awake() { instance = this; }
 
     void Start()
     {
-
+        highScoreCareer = PlayerPrefs.GetInt("HighScoreCareer", 0);
         // ... your existing code ...
 
         if (SoundManager.instance != null)
@@ -127,23 +131,22 @@ public class JuiceManager : MonoBehaviour
     // }
     // -------------------
 
-        void PickNewTargetNew()
+    void PickNewTargetNew()
     {
-        List<GameObject> fruitsPrefab=FruitSpawner.instance.fruitPrefabs;
+        List<GameObject> fruitsPrefab = FruitSpawner.instance.fruitPrefabs;
         // 1. Automatically count how many items are in the FruitType List
         // This will return '8' for your current list (Apple...Coconut)
-        int fruitCount =  UnityEngine.Random.Range(0, fruitsPrefab.Count);
-        Debug.Log("Count is: "+fruitCount);
+        int fruitCount = UnityEngine.Random.Range(0, fruitsPrefab.Count);
         // 2. Pick a random number between 0 and the Total Count
 
         targetFruitNew = fruitsPrefab[fruitCount];
 
         if (taskText != null)
         {
-    
+
             taskText.text = "" + targetFruitNew.name.ToString();
             missionText.text = "I want to have some fresh " + targetFruitNew.name.ToString() + " Juice...";
-            missionFruitIcon.sprite=targetFruitNew.GetComponent<SpriteRenderer>().sprite;
+            missionFruitIcon.sprite = targetFruitNew.GetComponent<SpriteRenderer>().sprite;
 
         }
     }
@@ -151,8 +154,7 @@ public class JuiceManager : MonoBehaviour
     public void CheckFruit(String slicedFruitName)
     {
         if (!isLevelActive) return;
-        Debug.Log(slicedFruitName+" - "+targetFruitNew.name+"(Clone)");
-        if (slicedFruitName == targetFruitNew.name+"(Clone)")
+        if (slicedFruitName == targetFruitNew.name + "(Clone)")
         {
             currentCuts++;
             UpdateCounterUI();
@@ -180,11 +182,35 @@ public class JuiceManager : MonoBehaviour
 
         if (playerWon)
         {
-            if (taskText != null) taskText.text = "VICTORY!";
+            if (taskText != null)
+                taskText.text = "VICTORY!";
+
+            finalPoints = pointsPerLevel;
+            int lifeBonus = 0;
+            int timeBonus = 0;
+            if (currentTime > 0)
+            {
+                 timeBonus = Mathf.FloorToInt(currentTime+1) * timeBonusMultiplier;
+                finalPoints += timeBonus;
+            }
+
+
             if (ScoreManager.instance != null)
             {
-                ScoreManager.instance.AddScore(pointsPerLevel);
-                ScoreManager.instance.WinGame(pointsPerLevel);
+                int livesRemaining = ScoreManager.instance.currentLives; // expose this
+                if (livesRemaining > 0)
+                {
+                    lifeBonus = livesRemaining * lifeBonusMultiplier;
+                    finalPoints += lifeBonus;
+                }
+                ScoreManager.instance.AddScore(finalPoints);
+                ScoreManager.instance.WinGame(pointsPerLevel, timeBonus, lifeBonus, finalPoints);
+            }
+            if (finalPoints > highScoreCareer)
+            {
+                highScoreCareer = finalPoints;
+                PlayerPrefs.SetInt("HighScoreCareer", highScoreCareer);
+                PlayerPrefs.Save();
             }
         }
         else

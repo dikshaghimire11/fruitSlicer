@@ -2208,23 +2208,21 @@ MonoBehaviour:
   musicSource: {fileID: 1343208066}
   sfxSource: {fileID: 1343208069}
   menuMusicList:
-  - {fileID: 8300000, guid: f99a950755fdae2468b7cbca9d343e7f, type: 3}
+  - {fileID: 8300000, guid: 2a68d33898321e24999a741af1229546, type: 3}
   careerMusicList:
-  - {fileID: 8300000, guid: 9a4e6ea1d66470347b6059f8bb12250e, type: 3}
-  - {fileID: 8300000, guid: efbeb3ebf2df1eb46917411400e3ed17, type: 3}
-  - {fileID: 8300000, guid: c9887e8689ebbb849b0627cc0e300165, type: 3}
-  - {fileID: 8300000, guid: 4f1a9fd9baad73041a807c76d1b102ee, type: 3}
-  - {fileID: 8300000, guid: 1c76e2e5273d5d944b2c940d0b6392e5, type: 3}
+  - {fileID: 8300000, guid: 64e1b3ff1c0fef247971d0e054c7bdf6, type: 3}
+  - {fileID: 8300000, guid: 0aa3c5840caf08a448540b01d54237be, type: 3}
+  - {fileID: 8300000, guid: fa3093a67194af74f8a091289a728a03, type: 3}
   infiniteMusicList:
-  - {fileID: 8300000, guid: 4f1a9fd9baad73041a807c76d1b102ee, type: 3}
-  - {fileID: 8300000, guid: efbeb3ebf2df1eb46917411400e3ed17, type: 3}
-  - {fileID: 8300000, guid: 9a4e6ea1d66470347b6059f8bb12250e, type: 3}
-  - {fileID: 8300000, guid: c9887e8689ebbb849b0627cc0e300165, type: 3}
-  - {fileID: 8300000, guid: 1c76e2e5273d5d944b2c940d0b6392e5, type: 3}
+  - {fileID: 8300000, guid: d862e5fac4ad28b4ea781d7973640c23, type: 3}
+  - {fileID: 8300000, guid: d7805bb4e8f9a634ab3189fb38370452, type: 3}
+  - {fileID: 8300000, guid: 3e71c6ca92c5283408f7ff6b567ff171, type: 3}
   lifeLostSound: {fileID: 8300000, guid: ec1cf918e967f974ea7eb889a52d087d, type: 3}
   gameOverSound: {fileID: 8300000, guid: 99b8fd69f9c286d4faaf641c36f4bd3f, type: 3}
   characterPopSound: {fileID: 8300000, guid: 8fce14620cb29a8488775d45ad700fae, type: 3}
   characterGoneSound: {fileID: 8300000, guid: 5cc3ccc40446e9f4bae471528fe99c73, type: 3}
+  gameWinSound: {fileID: 8300000, guid: 746717cc714255b4499b45feb7fdc275, type: 3}
+  highScoreSound: {fileID: 8300000, guid: f1022f1b7b8169c48836b4e601bb9abd, type: 3}
 --- !u!4 &1343208068
 Transform:
   m_ObjectHideFlags: 0

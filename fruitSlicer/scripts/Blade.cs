@@ -181,7 +181,11 @@ public class Blade : MonoBehaviour
             else if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
             {
                 JuiceManager.instance?.CheckFruit(fruit.name);
-                ShowFloatingText("SPLASH!", Color.cyan, fruit.transform.position);
+                ShowFloatingText("PERFECT!", Color.cyan, fruit.transform.position);
+                // if(SoundManager.instance != null)
+                // {
+                //     SoundManager.instance.PlayPerfectSound();
+                // }
             }
             return;
         }
