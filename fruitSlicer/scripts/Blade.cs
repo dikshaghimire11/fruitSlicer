@@ -88,7 +88,7 @@ public class Blade : MonoBehaviour
 
         accumulatedDistance = 0f;
         comboCount = 0;
-
+        audioSource.volume = 1.5f;
         if (!audioSource.isPlaying)
             audioSource.Play();
     }
@@ -223,10 +223,15 @@ public class Blade : MonoBehaviour
             int bonus = comboCount * 5;
             ScoreManager.instance?.AddScore(bonus);
             ShowFloatingText("COMBO +" + bonus, Color.yellow, fruit.transform.position);
+
             if (SoundManager.instance != null)
             {
-                SoundManager.instance.PlayComboSound();
+                float pitch = 0.8f + (comboCount - 2) * 0.1f;
+                pitch = Mathf.Clamp(pitch, 0.8f, 1.5f);
+
+                SoundManager.instance.PlayComboSound(pitch);
             }
+
         }
     }
 

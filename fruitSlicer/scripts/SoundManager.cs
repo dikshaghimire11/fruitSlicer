@@ -7,6 +7,7 @@ public class SoundManager : MonoBehaviour
     [Header("Audio Sources")]
     public AudioSource musicSource;
     public AudioSource sfxSource; // Ensure this is assigned in Inspector!
+    public AudioSource pitchChangingSource; // For combo sound effects
 
     [Header("Music Lists")]
     public AudioClip[] menuMusicList;
@@ -196,11 +197,12 @@ public class SoundManager : MonoBehaviour
     //         sfxSource.PlayOneShot(perfectSound);
     //     }
     // }
-    public void PlayComboSound()
+    public void PlayComboSound(float pitch)
     {
-        if (sfxSource != null && comboSound != null)
+        if (pitchChangingSource != null && comboSound != null)
         {
-            sfxSource.PlayOneShot(comboSound);
+            pitchChangingSource.pitch = pitch;
+            pitchChangingSource.PlayOneShot(comboSound,0.65f);
         }
     }
 }
