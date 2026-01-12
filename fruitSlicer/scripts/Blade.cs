@@ -176,17 +176,18 @@ public class Blade : MonoBehaviour
                     new Color(0.28f, 0.57f, 0.86f),
                     fruit.transform.position);
 
-                HandleCombo(fruit);
+
             }
             else if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
             {
-                JuiceManager.instance?.CheckFruit(fruit.name);
+                JuiceManager.instance?.CheckFruit(fruit.name); 
                 ShowFloatingText("PERFECT!", Color.cyan, fruit.transform.position);
                 // if(SoundManager.instance != null)
                 // {
                 //     SoundManager.instance.PlayPerfectSound();
                 // }
             }
+            HandleCombo(fruit);
             return;
         }
 
@@ -220,10 +221,20 @@ public class Blade : MonoBehaviour
 
         if (comboCount >= 2)
         {
-            int bonus = comboCount * 5;
-            ScoreManager.instance?.AddScore(bonus);
-            ShowFloatingText("COMBO +" + bonus, Color.yellow, fruit.transform.position);
+            if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
+            {
+                int bonus = comboCount * 2;
+                ScoreManager.instance?.addBonusAmount(bonus);
+                                  Vector3 textPosition = fruit.transform.position + new Vector3(0, 1.0f, 0);
+                ShowFloatingText("+" + bonus, Color.yellow, textPosition);
+            }
+            else
+            {
+                int bonus = comboCount * 5;
+                ScoreManager.instance?.AddScore(bonus);
 
+                ShowFloatingText("COMBO +" + bonus, Color.yellow, fruit.transform.position);
+            }
             if (SoundManager.instance != null)
             {
                 float pitch = 0.8f + (comboCount - 2) * 0.1f;

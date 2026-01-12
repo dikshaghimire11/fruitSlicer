@@ -15,6 +15,7 @@ public class ScoreManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI highScoreText;
     public TextMeshProUGUI livesText;
+
     public GameObject gameOverPanel;
     public TextMeshProUGUI finalScoreText;
 
@@ -22,6 +23,7 @@ public class ScoreManager : MonoBehaviour
     public TextMeshProUGUI timeBonusText;
     public TextMeshProUGUI lifeBonusText;
     public TextMeshProUGUI pointsPerLevelText;
+    public TextMeshProUGUI bonusPointsText;
 
 
     public GameObject x2Button;
@@ -36,6 +38,7 @@ public class ScoreManager : MonoBehaviour
     public int maxLives = 3;
 
     private int score = 0;
+    private int bonus = 0;
     private int highScore = 0;
 
     public int currentLives;
@@ -122,12 +125,13 @@ public class ScoreManager : MonoBehaviour
     public void AddScore(int amount)
     {
         if (isGameOver) return;
-        score += amount;
-        UpdateTexts();
+
 
         // High Score Logic (Infinite Mode Only)
         if (ModeManager.Instance.currentMode == GameMode.Infinite)
         {
+            score += amount;
+            UpdateTexts();
             if (score > highScore && highScore > 0 && !hasShownHighScoreMessage)
             {
                 hasShownHighScoreMessage = true;
@@ -140,6 +144,10 @@ public class ScoreManager : MonoBehaviour
             }
         }
 
+    }
+    public void addBonusAmount(int amount)
+    {
+        bonus += amount;
     }
 
     public void WinGame(int pointsPerLevel, int timeBonus, int lifeBonus, int finalPoints)
@@ -154,11 +162,12 @@ public class ScoreManager : MonoBehaviour
         }
         GameCanvasManager.instance.missionAccomplished();
         if (FruitSpawner.instance != null) FruitSpawner.instance.HideFruitsLayer();
-        if (missionPassEarnPoints != null) missionPassEarnPoints.text = "TOTAL=" + finalPoints;
+        if (missionPassEarnPoints != null) missionPassEarnPoints.text = "TOTAL=" + (finalPoints+bonus);
         if (timeBonusText != null) timeBonusText.text = "=" + timeBonus;
         if (lifeBonusText != null) lifeBonusText.text = "=" + lifeBonus;
         if (pointsPerLevelText != null) pointsPerLevelText.text = "" + pointsPerLevel;
-
+        if (bonusPointsText != null) bonusPointsText.text = "=" + bonus;
+        finalPoints = finalPoints + bonus;
         // Add Points to Total Coins
         int totalCoins = PlayerPrefs.GetInt("TotalCoins", 100);
         PlayerPrefs.SetInt("TotalCoins", totalCoins + finalPoints);
@@ -260,7 +269,7 @@ public class ScoreManager : MonoBehaviour
                 finalScoreText.text = "SCORE: " + score * 2 + "\nHIGH SCORE: " + highScore;
 
             }
-            PlayerPrefs.SetInt("TotalCoins", totalCoins + score );
+            PlayerPrefs.SetInt("TotalCoins", totalCoins + score);
             scoreText.text = (score * 2).ToString("D4");
             x2ButtonForCareer.SetActive(false);
             addLifeButton.SetActive(false);
@@ -292,7 +301,7 @@ public class ScoreManager : MonoBehaviour
         isGameOver = true;
 
 
-        
+
         // Time.timeScale = 0f;
 
 
