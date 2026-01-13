@@ -129,12 +129,12 @@ TextureImporter:
       name: Chef_0
       rect:
         serializedVersion: 2
-        x: 192
-        y: 51
+        x: 57
+        y: 6
         width: 1154
         height: 2366
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: a5f9a05e9d5935744bb2c29817e5dd62
     internalID: 0
     vertices: []
     indices: 

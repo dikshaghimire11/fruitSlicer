@@ -188,7 +188,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.9702189, b: 0.4039216, a: 1}
+      key0: {r: 0.4039216, g: 1, b: 0.93304014, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 0.97764707}
       key2: {r: 1, g: 1, b: 1, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -196,7 +196,7 @@ TrailRenderer:
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
-      ctime0: 59598
+      ctime0: 61757
       ctime1: 65535
       ctime2: 65535
       ctime3: 0
@@ -241,7 +241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Blade
   minSlicingVelocity: 3
   minSliceDistance: 0.12
-  sliceRadius: 0.15
+  minMovementForSlice: 0.08
   floatingTextPrefab: {fileID: 6631497170589391908, guid: 1ff7f96d3b19eea42abafc0b61e6051a, type: 3}
   maxComboDelay: 0.5
   minSoundVelocity: 2.5

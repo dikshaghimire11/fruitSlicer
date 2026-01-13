@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c38de719f6949f34da7055d31f5f49f3
+guid: 99b7ab792e54ee447bcf3f20091c03b3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1343518637512107228
-    second: forest_0
+      213: 7039951319672661524
+    second: jeansMan_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: forest_0
+      name: jeansMan_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1440
-        height: 2560
+        x: 232
+        y: 40
+        width: 750
+        height: 2337
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 42b59fddaecda5de0800000000000000
-      internalID: -1343518637512107228
+      spriteID: 416a12d0d6ee2b160800000000000000
+      internalID: 7039951319672661524
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      forest_0: -1343518637512107228
+      jeansMan_0: 7039951319672661524
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

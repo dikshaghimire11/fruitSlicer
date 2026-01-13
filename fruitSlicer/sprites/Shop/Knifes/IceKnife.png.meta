@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: cb2647cab19d26541a323f8f6db5dbf8
+guid: 6f0b76c695b96cc499d450e841214d27
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2207619908799101039
-    second: Island_0
+      213: 2766051724459457909
+    second: IceKnife_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Island_0
+      name: IceKnife_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1440
-        height: 2560
+        width: 1080
+        height: 1920
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 19703f0b365fc51e0800000000000000
-      internalID: -2207619908799101039
+      spriteID: 57d33c2636df26620800000000000000
+      internalID: 2766051724459457909
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Island_0: -2207619908799101039
+      IceKnife_0: 2766051724459457909
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4229631188309160659}
   - component: {fileID: 8180496736236735731}
   m_Layer: 5
-  m_Name: ChefCharacter
+  m_Name: Character 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -2.67, y: -0.87}
-  m_SizeDelta: {x: 993, y: 2333}
+  m_SizeDelta: {x: 678, y: 2416}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4229631188309160659
 CanvasRenderer:
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -6707068268653951271, guid: 1d5232fbb27ea36428d3649c94db86f4, type: 3}
+  m_Sprite: {fileID: -3634091196731740955, guid: 886de36b7f630dd4b881c66e6bfa73aa, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

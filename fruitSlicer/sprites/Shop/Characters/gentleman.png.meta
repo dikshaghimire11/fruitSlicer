@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c38de719f6949f34da7055d31f5f49f3
+guid: 6ac9edbe8fa5b4543ba5aad85c84db88
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1343518637512107228
-    second: forest_0
+      213: -2948328752080427336
+    second: gentleman_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,23 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: forest_0
+      name: gentleman_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 1440
-        height: 2560
+        y: 53
+        width: 947
+        height: 2339
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 42b59fddaecda5de0800000000000000
-      internalID: -1343518637512107228
+      spriteID: 8b6ec23fe9e6517d0800000000000000
+      internalID: -2948328752080427336
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: b957f3d5348c2a64691a2716422688b9
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      forest_0: -1343518637512107228
+      gentleman_0: -2948328752080427336
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

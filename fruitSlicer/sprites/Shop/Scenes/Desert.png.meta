@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c38de719f6949f34da7055d31f5f49f3
+guid: 17e6fca148dc5654da4d180f1b623d3e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1343518637512107228
-    second: forest_0
+      213: 130452656225014213
+    second: Desert_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,7 +126,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: forest_0
+      name: Desert_0
       rect:
         serializedVersion: 2
         x: 0
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 42b59fddaecda5de0800000000000000
-      internalID: -1343518637512107228
+      spriteID: 5c15c4aeff57fc100800000000000000
+      internalID: 130452656225014213
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      forest_0: -1343518637512107228
+      Desert_0: 130452656225014213
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
