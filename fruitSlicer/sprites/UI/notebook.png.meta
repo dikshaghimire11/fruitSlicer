@@ -129,12 +129,12 @@ TextureImporter:
       name: notebook_0
       rect:
         serializedVersion: 2
-        x: 26
-        y: 2
-        width: 206
-        height: 248
+        x: 0
+        y: 0
+        width: 500
+        height: 500
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: fa443edcabd3caa4fa834b3071fec8fa
     internalID: 0
     vertices: []
     indices: 

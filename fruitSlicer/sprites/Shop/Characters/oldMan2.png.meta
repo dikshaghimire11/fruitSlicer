@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 58f71e9b4e8e5874cbbd02d95f0fbe6e
+guid: 0687fc66a99980843a87bf7e82016930
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8931682745295710451
-    second: snowBackground_0
+      213: -5584510291177668606
+    second: oldMan2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,17 +109,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: snowBackground_0
+      name: oldMan2_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 768
-        height: 1365
+        x: 8
+        y: 59
+        width: 1073
+        height: 2255
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3f826df7226b3fb70800000000000000
-      internalID: 8931682745295710451
+      spriteID: 20087d96a75df72b0800000000000000
+      internalID: -5584510291177668606
       vertices: []
       indices: 
       edges: []
@@ -148,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      snowBackground_0: 8931682745295710451
+      oldMan2_0: -5584510291177668606
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

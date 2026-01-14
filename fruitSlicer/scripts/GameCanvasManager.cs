@@ -77,7 +77,7 @@ public class GameCanvasManager : MonoBehaviour
         }
         if (SoundManager.instance != null) SoundManager.instance.PlayCharacterPopSound();
         StartCoroutine(MoveRoutine(new Vector2(-0.35f, -0.87f), 1, 1, newObject));
-        StartCoroutine(MoveRoutine(new Vector2(0, -1.99f), 1, 0, workDesk));
+        StartCoroutine(MoveRoutine(new Vector2(0, 0), 1, 0, workDesk));
 
     }
 
@@ -92,7 +92,7 @@ public class GameCanvasManager : MonoBehaviour
         startSpawnAction();
         if (SoundManager.instance != null) SoundManager.instance.PlayCharacterGoneSound();
         StartCoroutine(MoveRoutine(new Vector2(-2.67f, -0.87f), 1, 2, newObject));
-        StartCoroutine(MoveRoutine(new Vector2(0f, -6f), 1, 2, workDesk));
+        StartCoroutine(MoveRoutine(new Vector2(0f, -4f), 1, 2, workDesk));
 
         // choppingBoard.SetActive(true);
 
@@ -152,7 +152,7 @@ public class GameCanvasManager : MonoBehaviour
             juiceColor.color = colorofJuice;
             if (SoundManager.instance != null) SoundManager.instance.PlayCharacterPopSound();
             StartCoroutine(MoveRoutine(new Vector2(-0.35f, -0.87f), 1, 0, newObject));
-            StartCoroutine(MoveRoutine(new Vector2(0, -1.99f), 1, 0, workDesk));
+            StartCoroutine(MoveRoutine(new Vector2(0, 0), 1, 0, workDesk));
             StartCoroutine(MoveRoutine(new Vector2(0, -1.25f), 1, 0, juiceContainer));
 
             missionAccomplishedPanel.SetActive(true);

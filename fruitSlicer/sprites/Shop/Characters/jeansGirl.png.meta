@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 6654ab58c33609249a7b67c4da986ed0
+guid: 8a084faaa9e7b6c42a11438e76a03ba8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1650733862681154054
-    second: backgroundonly_0
+      213: 26025923035120748
+    second: jeansGirl_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: backgroundonly_0
+      name: jeansGirl_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 78
         y: 0
-        width: 1080
-        height: 1920
+        width: 821
+        height: 2393
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: afd6e204c4a6719e0800000000000000
-      internalID: -1650733862681154054
+      spriteID: c64c57960767c5000800000000000000
+      internalID: 26025923035120748
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      backgroundonly_0: -1650733862681154054
+      jeansGirl_0: 26025923035120748
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
