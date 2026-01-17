@@ -176,8 +176,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.036041886, y: -0.12013629}
-  m_Radius: 1.9728326
+  m_Offset: {x: -0.02866447, y: 0.000033974648}
+  m_Radius: 2.342589
 --- !u!82 &-1221997151306062816
 AudioSource:
   m_ObjectHideFlags: 0

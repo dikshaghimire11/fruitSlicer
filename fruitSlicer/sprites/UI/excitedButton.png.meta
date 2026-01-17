@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 97ca8943f9660c243ae89bdb11c117b7
+guid: a3344ebee6415504c91fca97f26599fe
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7498619641557268895
-    second: HalfPapaya_0
+      213: -4952545055724868666
+    second: excitedButton_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,23 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HalfPapaya_0
+      name: excitedButton_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 500
-        height: 500
+        y: 29
+        width: 1118
+        height: 437
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 16646375a2d8fe790800000000000000
-      internalID: -7498619641557268895
+      spriteID: 6cbe663f286054bb0800000000000000
+      internalID: -4952545055724868666
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 0e787e030298dd24682372dab4fcc384
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      HalfPapaya_0: -7498619641557268895
+      excitedButton_0: -4952545055724868666
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
