@@ -21,7 +21,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip gameWinSound;
     public AudioClip highScoreSound;
    // public AudioClip perfectSound;
-   
+   public AudioClip buttonClickSound;
     public AudioClip comboSound;
     // --- CONFIGURATION ---
     private const float MAX_MUSIC_VOLUME = 0.5f; // Slider at 100% = 0.5 actual volume
@@ -204,6 +204,13 @@ public class SoundManager : MonoBehaviour
         {
             pitchChangingSource.pitch = pitch;
             pitchChangingSource.PlayOneShot(comboSound,0.50f);
+        }
+    }
+    public void PlayButtonClickSound()
+    {
+        if (sfxSource != null && buttonClickSound != null)
+        {
+            sfxSource.PlayOneShot(buttonClickSound);
         }
     }
 }
