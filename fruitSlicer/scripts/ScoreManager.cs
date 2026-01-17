@@ -162,7 +162,7 @@ public class ScoreManager : MonoBehaviour
         }
         GameCanvasManager.instance.missionAccomplished();
         if (FruitSpawner.instance != null) FruitSpawner.instance.HideFruitsLayer();
-        if (missionPassEarnPoints != null) missionPassEarnPoints.text = "TOTAL=" + (finalPoints+bonus);
+        if (missionPassEarnPoints != null) missionPassEarnPoints.text = "TOTAL=" + (finalPoints + bonus);
         if (timeBonusText != null) timeBonusText.text = "=" + timeBonus;
         if (lifeBonusText != null) lifeBonusText.text = "=" + lifeBonus;
         if (pointsPerLevelText != null) pointsPerLevelText.text = "" + pointsPerLevel;
@@ -254,6 +254,10 @@ public class ScoreManager : MonoBehaviour
 
     public void x2Reward()
     {
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayButtonClickSound();
+        }
         int totalCoins = PlayerPrefs.GetInt("TotalCoins", 100);
         if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
         {
@@ -355,6 +359,10 @@ public class ScoreManager : MonoBehaviour
 
     public void RestartGame()
     {
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayButtonClickSound();
+        }
         AdsManager.instance.playInterestialAd();
 
         Time.timeScale = 1f;
