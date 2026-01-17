@@ -37,6 +37,10 @@ public class ShopManager : MonoBehaviour
     // --- TAB SYSTEM ---
     public void ShowBlades()
     {
+        if(SoundManager.instance!=null)
+        {
+            SoundManager.instance.PlayButtonClickSound();
+        }
         ShopLists.instance.currentTab = ShopItem.ItemType.Blade;
         ShopLists.instance.selectedShopList = ShopLists.instance.bladeItemList;
         ShopLists.instance.LoadSavedData();
@@ -45,6 +49,10 @@ public class ShopManager : MonoBehaviour
 
     public void ShowBackgrounds()
     {
+         if(SoundManager.instance!=null)
+        {
+            SoundManager.instance.PlayButtonClickSound();
+        }
         ShopLists.instance.currentTab = ShopItem.ItemType.Background;
         ShopLists.instance.selectedShopList = ShopLists.instance.shopBackgroundList;
         ShopLists.instance.LoadSavedData();
