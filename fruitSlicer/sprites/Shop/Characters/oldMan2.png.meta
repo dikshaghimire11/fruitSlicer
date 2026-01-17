@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e3cb752aa418cc8498372bf4035f9cd1
+guid: 0687fc66a99980843a87bf7e82016930
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7358256641283522813
-    second: TestShopSnow_0
+      213: -5584510291177668606
+    second: oldMan2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TestShopSnow_0
+      name: oldMan2_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1920
-        height: 1080
+        x: 8
+        y: 59
+        width: 1073
+        height: 2255
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 30ff22a029832e990800000000000000
-      internalID: -7358256641283522813
+      spriteID: 20087d96a75df72b0800000000000000
+      internalID: -5584510291177668606
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      TestShopSnow_0: -7358256641283522813
+      oldMan2_0: -5584510291177668606
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

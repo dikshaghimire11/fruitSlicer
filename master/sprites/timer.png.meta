@@ -129,12 +129,12 @@ TextureImporter:
       name: timer_0
       rect:
         serializedVersion: 2
-        x: 41
-        y: 4
-        width: 417
-        height: 496
+        x: 0
+        y: 0
+        width: 500
+        height: 500
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: fb3700e4f143a154089b4fe7f11b6f42
     internalID: 0
     vertices: []
     indices: 
