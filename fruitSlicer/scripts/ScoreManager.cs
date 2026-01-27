@@ -207,7 +207,7 @@ public class ScoreManager : MonoBehaviour
 
     public void addLifeAndResumeGame()
     {
-      
+
         addLifeButton.SetActive(false);
         destroyAllSpawnnedObjects();
         currentLives++;
@@ -238,6 +238,10 @@ public class ScoreManager : MonoBehaviour
             floatingLifeIcon.GetComponentInChildren<Image>().sprite = LifeImage;
             floatingLifeIcon.GetComponentInChildren<TextMeshProUGUI>().text = "1";
             StartCoroutine(moveFloatingRewardsAndDestroy(floatingLifeIcon));
+        }
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayLiveAndBonusAddedSound();
         }
         Time.timeScale = 1f;
         FruitSpawner.instance.startSpawnning();
