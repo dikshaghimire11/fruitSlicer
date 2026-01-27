@@ -201,6 +201,7 @@ public class ScoreManager : MonoBehaviour
 
     public void addLifeAndResumeGame()
     {
+      
         addLifeButton.SetActive(false);
         destroyAllSpawnnedObjects();
         currentLives++;

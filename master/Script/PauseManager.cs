@@ -18,6 +18,10 @@ public class PauseManager : MonoBehaviour
 
     public void PauseGame()
     {
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayButtonClickSound();
+        }
         pauseMenuPanel.SetActive(true);
         FruitSpawner.instance.HideFruitsLayer(); // Show the UI
         Time.timeScale = 0f;            // Stop game time
@@ -26,6 +30,10 @@ public class PauseManager : MonoBehaviour
 
     public void ResumeGame()
     {
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayButtonClickSound();
+        }
         pauseMenuPanel.SetActive(false);
         FruitSpawner.instance.ShowFruitsLayer(); // Hide the UI
         Time.timeScale = 1f;             // Resume game time
@@ -34,6 +42,10 @@ public class PauseManager : MonoBehaviour
 
     public void LoadMainMenu()
     {
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayButtonClickSound();
+        }
         Time.timeScale = 1f;
         TempData.sceneToLoad = "MainMenuFruitSlicer";
         SceneManager.LoadScene("LoadingScene");
