@@ -25,6 +25,10 @@ public class ScoreManager : MonoBehaviour
     public TextMeshProUGUI pointsPerLevelText;
     public TextMeshProUGUI bonusPointsText;
 
+    public TextMeshProUGUI remainingLives;
+
+    public TextMeshProUGUI remainingTime;
+
 
     public GameObject x2Button;
     public GameObject x2ButtonForCareer;
@@ -162,8 +166,10 @@ public class ScoreManager : MonoBehaviour
         }
         GameCanvasManager.instance.missionAccomplished();
         if (FruitSpawner.instance != null) FruitSpawner.instance.HideFruitsLayer();
-        if (missionPassEarnPoints != null) missionPassEarnPoints.text = "TOTAL=" + (finalPoints+bonus);
+        if (missionPassEarnPoints != null) missionPassEarnPoints.text = "TOTAL=" + (finalPoints + bonus);
         if (timeBonusText != null) timeBonusText.text = "=" + timeBonus;
+        if (remainingLives != null) remainingLives.text = "+" + instance.currentLives;
+        if (remainingTime != null) remainingTime.text = "+" + Mathf.CeilToInt(JuiceManager.instance.currentTime);
         if (lifeBonusText != null) lifeBonusText.text = "=" + lifeBonus;
         if (pointsPerLevelText != null) pointsPerLevelText.text = "" + pointsPerLevel;
         if (bonusPointsText != null) bonusPointsText.text = "=" + bonus;
@@ -241,9 +247,9 @@ public class ScoreManager : MonoBehaviour
 
         float timer = 0f;
 
-        while (timer < 0.5f)
+        while (timer < 1f)
         {
-            rewardObject.transform.Translate(Vector2.up * 3f * Time.deltaTime);
+            rewardObject.transform.Translate(Vector2.up * 1.5f * Time.deltaTime);
             timer += Time.deltaTime;
             yield return null;
         }
