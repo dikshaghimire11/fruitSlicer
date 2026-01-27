@@ -80,6 +80,20 @@ public class Fruit : MonoBehaviour
                 if (ScoreManager.instance != null)
                     ScoreManager.instance.LoseLife();
             }
+            else
+            {
+                bool isTargetFruit =
+           JuiceManager.instance != null &&
+           JuiceManager.instance.targetFruitNew != null &&
+           gameObject.name.StartsWith(JuiceManager.instance.targetFruitNew.name);
+                if (isTargetFruit)
+                {
+                    if(SoundManager.instance != null)
+                    {
+                        SoundManager.instance.PlayMissTargetedFruitSound();
+                    }
+                }
+            }
             Destroy(gameObject);
         }
     }

@@ -140,7 +140,7 @@ MonoBehaviour:
   rotationForce: 2
   sliceSound: {fileID: 8300000, guid: b3a3130603ed2004e971e8b20fbc6f05, type: 3}
   points: 25
-  missYPosition: -8
+  missYPosition: -6
   juiceColor: {r: 0.98823535, g: 0.98823535, b: 0.9725491, a: 0}
 --- !u!58 &2613413523906398592
 CircleCollider2D:
