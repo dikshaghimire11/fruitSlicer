@@ -207,6 +207,7 @@ public class ScoreManager : MonoBehaviour
 
     public void addLifeAndResumeGame()
     {
+
         addLifeButton.SetActive(false);
         destroyAllSpawnnedObjects();
         currentLives++;
@@ -238,6 +239,10 @@ public class ScoreManager : MonoBehaviour
             floatingLifeIcon.GetComponentInChildren<TextMeshProUGUI>().text = "1";
             StartCoroutine(moveFloatingRewardsAndDestroy(floatingLifeIcon));
         }
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayLiveAndBonusAddedSound();
+        }
         Time.timeScale = 1f;
         FruitSpawner.instance.startSpawnning();
     }
@@ -260,6 +265,10 @@ public class ScoreManager : MonoBehaviour
 
     public void x2Reward()
     {
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayButtonClickSound();
+        }
         int totalCoins = PlayerPrefs.GetInt("TotalCoins", 100);
         if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
         {
@@ -361,6 +370,10 @@ public class ScoreManager : MonoBehaviour
 
     public void RestartGame()
     {
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayButtonClickSound();
+        }
         AdsManager.instance.playInterestialAd();
 
         Time.timeScale = 1f;

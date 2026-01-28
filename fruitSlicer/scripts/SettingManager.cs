@@ -40,6 +40,7 @@ public class SettingManager : MonoBehaviour
     {
         if (SoundManager.instance != null)
         {
+            SoundManager.instance.PlayButtonClickSound();
             SoundManager.instance.ToggleSound();
             UpdateUI(); // <--- CRITICAL: Refreshes the slider lock state
         }

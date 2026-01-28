@@ -76,8 +76,10 @@ public class GameCanvasManager : MonoBehaviour
             addLifeOnlyObject.SetActive(true);
         }
         if (SoundManager.instance != null) SoundManager.instance.PlayCharacterPopSound();
+
+
         StartCoroutine(MoveRoutine(new Vector2(-0.35f, -0.87f), 1, 1, newObject));
-        StartCoroutine(MoveRoutine(new Vector2(0, 0), 1, 0, workDesk));
+        StartCoroutine(MoveRoutine(new Vector2(0, 0f), 1, 0, workDesk));
 
     }
 
@@ -85,7 +87,10 @@ public class GameCanvasManager : MonoBehaviour
 
     public void missionAccepted()
     {
-
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayButtonClickSound();
+        }
 
         missionPanel.SetActive(false);
 
@@ -152,8 +157,8 @@ public class GameCanvasManager : MonoBehaviour
             juiceColor.color = colorofJuice;
             if (SoundManager.instance != null) SoundManager.instance.PlayCharacterPopSound();
             StartCoroutine(MoveRoutine(new Vector2(-0.35f, -0.87f), 1, 0, newObject));
-            StartCoroutine(MoveRoutine(new Vector2(0, 0), 1, 0, workDesk));
-            StartCoroutine(MoveRoutine(new Vector2(0, -1.25f), 1, 0, juiceContainer));
+            StartCoroutine(MoveRoutine(new Vector2(0, 0f), 1, 0, workDesk));
+            StartCoroutine(MoveRoutine(new Vector2(-0.2f, -1.7f), 1, 0, juiceContainer));
 
             missionAccomplishedPanel.SetActive(true);
         }
@@ -184,6 +189,10 @@ public class GameCanvasManager : MonoBehaviour
 
     public void getMoreLife()
     {
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayButtonClickSound();
+        }
         AdsManager.instance.currentAdvertisement = AdsManager.AdvertisementType_.AddLife;
 
         AdsManager.instance.onClickAddLife();
