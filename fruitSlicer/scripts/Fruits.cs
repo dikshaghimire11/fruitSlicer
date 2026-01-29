@@ -75,6 +75,11 @@ public class Fruit : MonoBehaviour
     {
         if (transform.position.y < missYPosition)
         {
+            if (ScoreManager.instance != null && ScoreManager.instance.isGameOver)
+            {
+                Destroy(gameObject);
+                return;
+            }
             if (ModeManager.Instance.currentMode == GameMode.Infinite)
             {
                 if (ScoreManager.instance != null)
