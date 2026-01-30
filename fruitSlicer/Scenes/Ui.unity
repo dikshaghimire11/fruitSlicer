@@ -5239,7 +5239,7 @@ MonoBehaviour:
   missionFruitIcon: {fileID: 7824571362230944169}
   levelDuration: 60
   requiredCuts: 40
-  pointsPerLevel: 900
+  pointsPerLevel: 500
   finalPoints: 0
   targetFruitNew: {fileID: 0}
   currentTime: 0

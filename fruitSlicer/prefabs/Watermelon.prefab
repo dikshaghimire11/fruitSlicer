@@ -139,7 +139,7 @@ MonoBehaviour:
   sliceForce: 5
   rotationForce: 2
   sliceSound: {fileID: 8300000, guid: dc24facb9a228b943a0c2411d5f342fc, type: 3}
-  points: 15
+  points: 5
   missYPosition: -6
   juiceColor: {r: 0.9058824, g: 0.29411766, b: 0.26666668, a: 0}
 --- !u!58 &2613413523906398592
