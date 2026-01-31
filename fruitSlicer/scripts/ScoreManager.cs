@@ -130,8 +130,6 @@ public class ScoreManager : MonoBehaviour
     {
         if (isGameOver) return;
 
-
-        // High Score Logic (Infinite Mode Only)
         if (ModeManager.Instance.currentMode == GameMode.Infinite)
         {
             score += amount;
@@ -140,7 +138,17 @@ public class ScoreManager : MonoBehaviour
             {
                 hasShownHighScoreMessage = true;
                 Blade blade = FindObjectOfType<Blade>();
-                if (blade != null) blade.ShowFloatingText("NEW HIGH SCORE!", Color.green, Vector3.zero);
+                if (blade != null)
+                {
+                    blade.ShowFloatingText(
+                        "NEW HIGH SCORE!",
+                        Color.green,
+                        blade.transform.position,
+                        0.5f,
+            0.2f
+                    );
+                }
+
                 if (SoundManager.instance != null)
                 {
                     SoundManager.instance.PlayHighScoreSound();
@@ -295,7 +303,10 @@ public class ScoreManager : MonoBehaviour
         floatingCoinIcon.GetComponentInChildren<Image>().sprite = coinImage;
         floatingCoinIcon.GetComponentInChildren<TextMeshProUGUI>().text = "x2";
         StartCoroutine(moveFloatingRewardsAndDestroy(floatingCoinIcon));
-
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayLiveAndBonusAddedSound();
+        }
 
 
     }

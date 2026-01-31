@@ -102,114 +102,127 @@ public class Blade : MonoBehaviour
         audioSource.volume = 0f;
     }
 
-    void ContinueSlicing()
+   void ContinueSlicing()
+{
+    Vector3 worldPos = GetInputPosition();
+    Vector3 movement = worldPos - previousPosition;
+    float distance = movement.magnitude;
+
+    if (distance <= 0f) return;
+
+    float velocity = distance / Time.deltaTime;
+    accumulatedDistance += distance;
+
+    currentSliceDirection = movement.normalized;
+
+    // Blade sound handling
+    if (velocity > minSoundVelocity)
     {
-        Vector3 worldPos = GetInputPosition();
-        Vector3 movement = worldPos - previousPosition;
-        float distance = movement.magnitude;
+        float targetVolume = Mathf.Clamp01(
+            (velocity - minSoundVelocity) / (maxSoundVelocity - minSoundVelocity));
 
-        if (distance <= 0f)
-            return;
+        audioSource.volume = Mathf.MoveTowards(audioSource.volume, targetVolume, audioFadeSpeed * Time.deltaTime);
+        audioSource.pitch = Mathf.Lerp(0.85f, 1.4f, targetVolume);
 
-        float velocity = distance / Time.deltaTime;
-        accumulatedDistance += distance;
-
-        currentSliceDirection = movement.normalized;
-
-        // 🔊 Blade swoosh sound
-        if (velocity > minSoundVelocity)
-        {
-            float targetVolume = Mathf.Clamp01(
-                (velocity - minSoundVelocity) / (maxSoundVelocity - minSoundVelocity));
-
-            audioSource.volume = Mathf.MoveTowards(
-                audioSource.volume, targetVolume, audioFadeSpeed * Time.deltaTime);
-
-            audioSource.pitch = Mathf.Lerp(0.85f, 1.4f, targetVolume);
-
-            if (!audioSource.isPlaying)
-                audioSource.Play();
-        }
-        else
-        {
-            audioSource.volume = Mathf.MoveTowards(
-                audioSource.volume, 0f, audioFadeSpeed * Time.deltaTime);
-
-            if (audioSource.volume <= 0.01f)
-                audioSource.Stop();
-        }
-
-        // 🗡️ SLICE DETECTION (Linecast)
-        if (
-            velocity > minSlicingVelocity &&
-            distance > minMovementForSlice &&
-            accumulatedDistance > minSliceDistance
-        )
-        {
-            RaycastHit2D[] hits = Physics2D.LinecastAll(previousPosition, worldPos);
-
-            foreach (RaycastHit2D hit in hits)
-            {
-                if (hit.collider != null && hit.collider.enabled)
-                    CheckHit(hit.collider);
-            }
-        }
-
-        rb.MovePosition(worldPos);
-        previousPosition = worldPos;
+        if (!audioSource.isPlaying)
+            audioSource.Play();
+    }
+    else
+    {
+        audioSource.volume = Mathf.MoveTowards(audioSource.volume, 0f, audioFadeSpeed * Time.deltaTime);
+        if (audioSource.volume <= 0.01f)
+            audioSource.Stop();
     }
 
-    void CheckHit(Collider2D other)
+    // Check slicing hits
+    if (velocity > minSlicingVelocity && distance > minMovementForSlice && accumulatedDistance > minSliceDistance)
     {
-        if (!other.enabled) return;
+        RaycastHit2D[] hits = Physics2D.LinecastAll(previousPosition, worldPos);
 
-        Fruit fruit = other.GetComponent<Fruit>();
-        if (fruit != null)
+        foreach (RaycastHit2D hit in hits)
         {
-            other.enabled = false;
-            fruit.Slice(currentSliceDirection);
-
-            if (ModeManager.Instance.currentMode == GameMode.Infinite)
-            {
-                ScoreManager.instance?.AddScore(fruit.points);
-                ShowFloatingText("+" + fruit.points,
-                    new Color(0.28f, 0.57f, 0.86f),
-                    fruit.transform.position);
-
-
-            }
-            else if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
-            {
-                JuiceManager.instance?.CheckFruit(fruit.name); 
-                ShowFloatingText("PERFECT!", Color.cyan, fruit.transform.position);
-                // if(SoundManager.instance != null)
-                // {
-                //     SoundManager.instance.PlayPerfectSound();
-                // }
-            }
-            HandleCombo(fruit);
-            return;
-        }
-
-        Bomb bomb = other.GetComponent<Bomb>();
-        if (bomb != null)
-        {
-            other.enabled = false;
-            bomb.Explode();
-            ShowFloatingText("BOOM!", Color.red, bomb.transform.position);
-            ScoreManager.instance?.HitBomb();
-            comboCount = 0;
-            return;
-        }
-
-        Ice ice = other.GetComponent<Ice>();
-        if (ice != null)
-        {
-            other.enabled = false;
-            ice.Slice(currentSliceDirection);
-            ShowFloatingText("FREEZE!", Color.cyan, ice.transform.position);
+            if (hit.collider != null && hit.collider.enabled)
+                CheckHit(hit.collider);
         }
     }
+
+    rb.MovePosition(worldPos);
+    previousPosition = worldPos;
+}
+
+void CheckHit(Collider2D other)
+{
+    if (!other.enabled) return;
+
+    // --- Fruit Handling ---
+    Fruit fruit = other.GetComponent<Fruit>();
+    if (fruit != null)
+    {
+        other.enabled = false;
+        fruit.Slice(currentSliceDirection);
+
+        if (ModeManager.Instance.currentMode == GameMode.Infinite)
+        {
+            ScoreManager.instance?.AddScore(fruit.points);
+            ShowFloatingText(
+                "+" + fruit.points,
+                Color.cyan,
+                fruit.transform.position,
+                0.5f, // smaller size
+                0.2f  // smaller Y offset
+            );
+        }
+        else if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
+        {
+            JuiceManager.instance?.CheckFruit(fruit.name);
+            ShowFloatingText(
+                "PERFECT!",
+                Color.cyan,
+                fruit.transform.position,
+                0.6f, // smaller size
+                0.25f // smaller Y offset
+            );
+        }
+
+        HandleCombo(fruit);
+        return;
+    }
+
+    // --- Bomb Handling ---
+    Bomb bomb = other.GetComponent<Bomb>();
+    if (bomb != null)
+    {
+        other.enabled = false;
+        bomb.Explode();
+        ShowFloatingText(
+            "BOOM!",
+            Color.red,
+            bomb.transform.position,
+            0.6f, // smaller size
+            0.25f // smaller Y offset
+        );
+
+        ScoreManager.instance?.HitBomb();
+        comboCount = 0;
+        return;
+    }
+
+    // --- Ice Handling ---
+    Ice ice = other.GetComponent<Ice>();
+    if (ice != null)
+    {
+        other.enabled = false;
+        ice.Slice(currentSliceDirection);
+        ShowFloatingText(
+            "FREEZE!",
+            Color.cyan,
+            ice.transform.position,
+            0.5f, // smaller size
+            0.2f  // smaller Y offset
+        );
+    }
+}
+
 
     void HandleCombo(Fruit fruit)
     {
@@ -219,42 +232,77 @@ public class Blade : MonoBehaviour
         lastHitTime = Time.time;
         comboCount++;
 
-        if (comboCount >= 2)
+        if (comboCount < 2) return;
+        float textSize = Mathf.Clamp(0.5f + (comboCount - 2) * 0.05f, 0.5f, 1.0f);
+
+        int bonus;
+
+        if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
         {
-            if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
-            {
-                int bonus = comboCount * 2;
-                ScoreManager.instance?.addBonusAmount(bonus);
-                                  Vector3 textPosition = fruit.transform.position + new Vector3(0, 1.0f, 0);
-                ShowFloatingText("+" + bonus, Color.yellow, textPosition);
-            }
-            else
-            {
-                int bonus = comboCount * 5;
-                ScoreManager.instance?.AddScore(bonus);
+            bonus = comboCount * 2;
+            ScoreManager.instance?.addBonusAmount(bonus);
+            ShowFloatingText(
+                "+" + bonus,
+                Color.yellow,
+                fruit.transform.position,
+                textSize,
+                0f
+            );
+        }
+        else
+        {
+            bonus = comboCount * 5;
+            ScoreManager.instance?.AddScore(bonus);
+            ShowFloatingText(
+                "COMBO",
+                Color.yellow,
+                fruit.transform.position + new Vector3(-0.2f, 0f, 0f), // left of fruit
+                textSize,
+                0f
+            );
 
-                ShowFloatingText("COMBO +" + bonus, Color.yellow, fruit.transform.position);
-            }
-            if (SoundManager.instance != null)
-            {
-                float pitch = 0.8f + (comboCount - 2) * 0.1f;
-                pitch = Mathf.Clamp(pitch, 0.8f, 1.5f);
+            // Show bonus number slightly right
+            ShowFloatingText(
+                "+" + bonus,
+                Color.yellow,
+                fruit.transform.position + new Vector3(0.2f, 0f, 0f), // right of fruit
+                textSize,
+                0f
+            );
+        }
 
-                SoundManager.instance.PlayComboSound(pitch);
-            }
+        if (SoundManager.instance != null)
+        {
+            float pitch = 0.8f + (comboCount - 2) * 0.1f;
+            pitch = Mathf.Clamp(pitch, 0.8f, 1.5f);
 
+            SoundManager.instance.PlayComboSound(pitch);
         }
     }
 
-    public void ShowFloatingText(string message, Color color, Vector3 position)
+
+
+    public void ShowFloatingText(
+      string message,
+      Color color,
+      Vector3 position,
+      float size,
+      float yOffset
+  )
     {
         if (floatingTextPrefab == null) return;
 
         GameObject obj = Instantiate(
-            floatingTextPrefab, position + Vector3.up, Quaternion.identity);
+            floatingTextPrefab,
+            position + new Vector3(0f, yOffset, 0f),
+            Quaternion.identity
+        );
+
+        obj.transform.localScale = Vector3.one * size;
 
         FloatingText ft = obj.GetComponent<FloatingText>();
         if (ft != null)
             ft.Setup(message, color);
     }
+
 }

@@ -3,7 +3,7 @@ using TMPro; // We need this for TextMeshPro
 
 public class FloatingText : MonoBehaviour
 {
-    public float moveSpeed = 2f;
+    public float moveSpeed = 1.5f;
     public float destroyTime = 1f;
    public TMP_Text textMesh;
 
