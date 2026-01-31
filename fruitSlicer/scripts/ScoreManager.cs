@@ -94,6 +94,7 @@ public class ScoreManager : MonoBehaviour
 
         Time.timeScale = 1f;
         if (gameOverPanel != null) gameOverPanel.SetActive(false);
+        GameCanvasManager.instance.unHideUiInteraction();
 
         // Apply the correct Mode Settings immediately
         UpdateUIStateBasedOnMode();
@@ -221,6 +222,7 @@ public class ScoreManager : MonoBehaviour
         currentLives++;
         if (livesText != null) livesText.text = currentLives.ToString();
         gameOverPanel.SetActive(false);
+        GameCanvasManager.instance.unHideUiInteraction();
         if (FruitSpawner.instance != null) FruitSpawner.instance.ShowFruitsLayer();
         isGameOver = false;
         if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
@@ -332,6 +334,7 @@ public class ScoreManager : MonoBehaviour
 
 
         if (gameOverPanel != null) gameOverPanel.SetActive(true);
+        GameCanvasManager.instance.hideUIInterction();
         if (FruitSpawner.instance != null) FruitSpawner.instance.HideFruitsLayer();
 
         // Save Score/Coins
