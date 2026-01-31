@@ -5,11 +5,12 @@ public class GameContainer : MonoBehaviour
     private Camera mainCamera;
 
     public float offsetMultiplier=100;
+    public float zposition;
 
    void Start()
 {
     mainCamera = Camera.main;
-    transform.position = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 0);
+    transform.position = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, zposition);
     
     Vector3 bottomLeft = mainCamera.ViewportToWorldPoint(Vector3.zero) * offsetMultiplier;
     Vector3 topRight = mainCamera.ViewportToWorldPoint(new Vector3(mainCamera.rect.width, mainCamera.rect.height)) * offsetMultiplier;
