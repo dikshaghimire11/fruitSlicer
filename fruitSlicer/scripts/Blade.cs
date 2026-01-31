@@ -166,7 +166,7 @@ public class Blade : MonoBehaviour
         {
             other.enabled = false;
             fruit.Slice(currentSliceDirection);
-
+            bool isCorrectFruit = false;
             if (ModeManager.Instance.currentMode == GameMode.Infinite)
             {
                 ScoreManager.instance?.AddScore(fruit.points);
@@ -174,11 +174,16 @@ public class Blade : MonoBehaviour
             }
             else if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
             {
-                JuiceManager.instance?.CheckFruit(fruit.name);
-                ShowFloatingText("PERFECT!", Color.cyan, fruit.transform.position, 0.6f, 0.25f);
+                isCorrectFruit = JuiceManager.instance?.CheckFruit(fruit.name) ?? false;
+                if (isCorrectFruit)
+                {
+                    ShowFloatingText("PERFECT!", Color.cyan, fruit.transform.position, 0.6f, 0.2f);
+                }
+
+
             }
 
-            HandleCombo(fruit);
+            HandleCombo(fruit, isCorrectFruit);
             return;
         }
 
@@ -202,21 +207,37 @@ public class Blade : MonoBehaviour
         }
     }
 
-    void HandleCombo(Fruit fruit)
+    void HandleCombo(Fruit fruit, bool isCorrectFruit)
     {
         if (Time.time - lastHitTime > maxComboDelay)
             comboCount = 0;
 
         lastHitTime = Time.time;
-        comboCount++;
+
+        if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
+        {
+            if (!isCorrectFruit)
+            {
+                comboCount = 0;   
+                return;
+            }
+
+            comboCount++;        
+        }
+        else
+        {
+            comboCount++;        
+        }
 
         if (comboCount < 2) return;
-        float textSize = 0.6f;
 
+        float textSize = 0.6f;
         int bonus;
 
         if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
         {
+            Debug.Log("Correct fruit combo: " + comboCount);
+
             bonus = comboCount * 2;
             ScoreManager.instance?.addBonusAmount(bonus);
             ShowFloatingText("+" + bonus, Color.yellow, fruit.transform.position, textSize, 0f);
@@ -238,8 +259,8 @@ public class Blade : MonoBehaviour
 
             SoundManager.instance.PlayComboSound(pitch);
         }
-
     }
+
 
     public void ShowFloatingText(string message, Color color, Vector3 position, float size, float yOffset)
     {

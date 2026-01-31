@@ -70,10 +70,6 @@ public class MenuManager : MonoBehaviour
     public void navigateToScene(String sceneName)
 
     {
-        if (SoundManager.instance != null)
-        {
-            SoundManager.instance.PlayButtonClickSound();
-        }
         TempData.sceneToLoad = sceneName;
         SceneManager.LoadSceneAsync("LoadingScene");
     }

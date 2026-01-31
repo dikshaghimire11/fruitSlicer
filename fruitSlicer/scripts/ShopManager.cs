@@ -15,12 +15,12 @@ public class ShopManager : MonoBehaviour
     public TextMeshProUGUI coinsText;
 
     // Track current filter (Blades or Backgrounds)
-    
+
     private int totalCoins;
 
     void Awake()
     {
-          if (instance == null) { instance = this; } 
+        if (instance == null) { instance = this; }
 
         // 1. Load Coin Balance (Default 1000 for testing)
         totalCoins = PlayerPrefs.GetInt("TotalCoins", 100);
@@ -29,15 +29,18 @@ public class ShopManager : MonoBehaviour
     void Start()
     {
         UpdateCoinUI();
-        ShowBlades();
+        ShowBlades(false); // Don't play sound on initial load
+    }
+    public void showBlades()
+    {
+        ShowBlades(true);
     }
 
- 
 
-    // --- TAB SYSTEM ---
-    public void ShowBlades()
+    public void ShowBlades(bool playSound = true)
     {
-        if(SoundManager.instance!=null)
+        Debug.Log("Show Blades " + playSound);
+        if (SoundManager.instance != null && playSound)
         {
             SoundManager.instance.PlayButtonClickSound();
         }
@@ -49,7 +52,7 @@ public class ShopManager : MonoBehaviour
 
     public void ShowBackgrounds()
     {
-         if(SoundManager.instance!=null)
+        if (SoundManager.instance != null)
         {
             SoundManager.instance.PlayButtonClickSound();
         }
@@ -105,14 +108,13 @@ public class ShopManager : MonoBehaviour
 
             // Save Data
             PlayerPrefs.SetInt("TotalCoins", totalCoins);
-            PlayerPrefs.SetInt("Sold_" +item.itemType+"_"+id, 1);
+            PlayerPrefs.SetInt("Sold_" + item.itemType + "_" + id, 1);
 
             UpdateCoinUI();
             EquipItem(id); // Auto-equip on buy (optional, keeps UI snappy)
         }
         else
         {
-            Debug.Log("Not enough coins!");
             // Optional: Show a "Not enough money" popup
         }
     }
@@ -145,6 +147,6 @@ public class ShopManager : MonoBehaviour
     {
         coinsText.text = totalCoins.ToString(); // Format as needed (e.g., "1,500")
     }
-    
+
 
 }

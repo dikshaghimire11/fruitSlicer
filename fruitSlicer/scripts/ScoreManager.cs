@@ -139,6 +139,10 @@ public class ScoreManager : MonoBehaviour
             {
                 hasShownHighScoreMessage = true;
 
+                if (SoundManager.instance != null)
+                {
+                    SoundManager.instance.PlayHighScoreSound();
+                }
                 Blade blade = FindObjectOfType<Blade>();
 
                 if (blade != null)
@@ -158,10 +162,6 @@ public class ScoreManager : MonoBehaviour
                 }
 
 
-                if (SoundManager.instance != null)
-                {
-                    SoundManager.instance.PlayHighScoreSound();
-                }
             }
         }
     }

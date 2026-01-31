@@ -150,9 +150,9 @@ public class JuiceManager : MonoBehaviour
         }
     }
 
-    public void CheckFruit(String slicedFruitName)
+    public bool CheckFruit(String slicedFruitName)
     {
-        if (!isLevelActive) return;
+        if (!isLevelActive) return false;
         if (slicedFruitName == targetFruitNew.name + "(Clone)")
         {
             currentCuts++;
@@ -162,10 +162,12 @@ public class JuiceManager : MonoBehaviour
             {
                 EndLevel(true);
             }
+            return true;
         }
         else
         {
             if (ScoreManager.instance != null) ScoreManager.instance.LoseLife();
+            return false;
         }
     }
 
