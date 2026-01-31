@@ -129,12 +129,12 @@ TextureImporter:
       name: MaroonButton_0
       rect:
         serializedVersion: 2
-        x: 33
-        y: 97
-        width: 1053
-        height: 326
+        x: 26
+        y: 88
+        width: 1068
+        height: 348
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: e135af97427a281448636e05a1d27e52
     internalID: 0
     vertices: []
     indices: 
