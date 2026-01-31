@@ -59,7 +59,7 @@ public class JuiceManager : MonoBehaviour
         if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
         {
             if (timersParent != null) timersParent.SetActive(true);
-            if (taskText != null) taskText.gameObject.SetActive(true);
+            //if (taskText != null) taskText.gameObject.SetActive(true);
             if (counterText != null) counterText.gameObject.SetActive(true);
             if (missionFruitIcon != null) missionFruitIcon.gameObject.SetActive(true);
 
@@ -143,7 +143,7 @@ public class JuiceManager : MonoBehaviour
         if (taskText != null)
         {
 
-            taskText.text = "" + targetFruitNew.name.ToString();
+           // taskText.text = "" + targetFruitNew.name.ToString();
             missionText.text = "I want to have some fresh " + targetFruitNew.name.ToString() + " Juice...";
             missionFruitIcon.sprite = targetFruitNew.GetComponent<SpriteRenderer>().sprite;
 
@@ -181,8 +181,8 @@ public class JuiceManager : MonoBehaviour
 
         if (playerWon)
         {
-            if (taskText != null)
-                taskText.text = "VICTORY!";
+            // if (taskText != null)
+            //     taskText.text = "VICTORY!";
 
             finalPoints = pointsPerLevel;
             int lifeBonus = 0;
@@ -214,7 +214,7 @@ public class JuiceManager : MonoBehaviour
         }
         else
         {
-            if (taskText != null) taskText.text = "TIME'S UP!";
+            // if (taskText != null) taskText.text = "TIME'S UP!";
             if (ScoreManager.instance != null) ScoreManager.instance.ForceGameOver();
         }
     }

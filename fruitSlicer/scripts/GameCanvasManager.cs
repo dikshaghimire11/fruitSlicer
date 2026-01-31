@@ -200,6 +200,10 @@ public class GameCanvasManager : MonoBehaviour
 
     public void get2xReward()
     {
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayButtonClickSound();
+        }
         AdsManager.instance.currentAdvertisement = AdsManager.AdvertisementType_.x2Reward;
         AdsManager.instance.onClickAddLife();
     }
