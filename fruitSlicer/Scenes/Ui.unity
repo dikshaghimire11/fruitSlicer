@@ -357,6 +357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameContainer
   offsetMultiplier: 345
+  zposition: 0
 --- !u!4 &294674266
 Transform:
   m_ObjectHideFlags: 0
