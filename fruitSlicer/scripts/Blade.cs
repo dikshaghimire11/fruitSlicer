@@ -231,16 +231,19 @@ public class Blade : MonoBehaviour
 
         if (SoundManager.instance != null)
         {
-            float pitch = 0.8f + (comboCount - 2) * 0.1f;
-            pitch = Mathf.Clamp(pitch, 0.8f, 1.5f);
+            int cappedCombo = Mathf.Min(comboCount, 3);
+
+            float pitch = 0.75f + (cappedCombo - 2) * 0.08f;
+            pitch = Mathf.Clamp(pitch, 0.75f, 0.95f);
+
             SoundManager.instance.PlayComboSound(pitch);
         }
+
     }
 
     public void ShowFloatingText(string message, Color color, Vector3 position, float size, float yOffset)
     {
         if (floatingTextPrefab == null) return;
-
         GameObject obj = Instantiate(
             floatingTextPrefab,
             position + new Vector3(0f, yOffset, 0f),

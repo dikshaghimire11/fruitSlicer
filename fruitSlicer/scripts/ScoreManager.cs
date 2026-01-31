@@ -84,7 +84,6 @@ public class ScoreManager : MonoBehaviour
             scoreParent = scoreText.transform.parent.gameObject;
         }
         // ---------------------------------
-
         highScore = PlayerPrefs.GetInt("HighScore", 0);
 
         currentLives = maxLives;
@@ -135,20 +134,29 @@ public class ScoreManager : MonoBehaviour
         {
             score += amount;
             UpdateTexts();
-            if (score > highScore && highScore > 0 && !hasShownHighScoreMessage)
+
+            if (score > highScore && !hasShownHighScoreMessage)
             {
                 hasShownHighScoreMessage = true;
+
                 Blade blade = FindObjectOfType<Blade>();
+
                 if (blade != null)
                 {
+                    Vector3 worldPos = Camera.main.transform.position + Camera.main.transform.forward * 5f;
+
                     blade.ShowFloatingText(
                         "NEW HIGH SCORE!",
                         Color.green,
-                        blade.transform.position,
-                        0.5f,
-            0.2f
+                        worldPos,
+                        1.5f,
+                        0.5f
                     );
+
+
+
                 }
+
 
                 if (SoundManager.instance != null)
                 {
@@ -156,8 +164,8 @@ public class ScoreManager : MonoBehaviour
                 }
             }
         }
-
     }
+
     public void addBonusAmount(int amount)
     {
         bonus += amount;

@@ -130,7 +130,6 @@ GameObject:
   - component: {fileID: 57905827}
   - component: {fileID: 57905829}
   - component: {fileID: 57905828}
-  - component: {fileID: 57905830}
   m_Layer: 5
   m_Name: HIdeUIPanel
   m_TagString: Untagged
@@ -195,22 +194,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 57905826}
   m_CullTransparentMesh: 1
---- !u!114 &57905830
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 57905826}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95654c5fde9618149a6dfbbfcffe1b37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  gameOverPanel: {fileID: 3197797609608023470}
-  missionPanel: {fileID: 158338042650811614}
-  missionCompletePanel: {fileID: 4220438344246138256}
-  pausePanel: {fileID: 2903436588435690968}
 --- !u!1 &98734545
 GameObject:
   m_ObjectHideFlags: 0

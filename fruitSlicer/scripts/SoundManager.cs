@@ -205,7 +205,7 @@ public class SoundManager : MonoBehaviour
         if (pitchChangingSource != null && comboSound != null)
         {
             pitchChangingSource.pitch = pitch;
-            pitchChangingSource.PlayOneShot(comboSound, 0.50f);
+            pitchChangingSource.PlayOneShot(comboSound, 0.2f);
         }
     }
     public void PlayButtonClickSound()
