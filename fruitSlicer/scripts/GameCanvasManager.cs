@@ -39,6 +39,10 @@ public class GameCanvasManager : MonoBehaviour
 
     public GameObject addLifeAndTimeObject;
 
+    public GameObject hideUIPausePanel;
+
+
+
 
 
 
@@ -93,6 +97,7 @@ public class GameCanvasManager : MonoBehaviour
         }
 
         missionPanel.SetActive(false);
+        unHideUiInteraction();
 
         startSpawnAction();
         if (SoundManager.instance != null) SoundManager.instance.PlayCharacterGoneSound();
@@ -142,6 +147,7 @@ public class GameCanvasManager : MonoBehaviour
         if (type == 1)
         {
             missionPanel.SetActive(true);
+            hideUIInterction();
             // shopGameObject.SetActive(false);
         }
 
@@ -161,6 +167,7 @@ public class GameCanvasManager : MonoBehaviour
             StartCoroutine(MoveRoutine(new Vector2(-0.2f, -1.7f), 1, 0, juiceContainer));
 
             missionAccomplishedPanel.SetActive(true);
+            hideUIInterction();
         }
     }
 
@@ -170,6 +177,7 @@ public class GameCanvasManager : MonoBehaviour
         {
 
             missionAccomplishedPanel.SetActive(false);
+            unHideUiInteraction();
             ScoreManager.instance.RestartGame();
         }
     }
@@ -206,5 +214,34 @@ public class GameCanvasManager : MonoBehaviour
         }
         AdsManager.instance.currentAdvertisement = AdsManager.AdvertisementType_.x2Reward;
         AdsManager.instance.onClickAddLife();
+    }
+
+    public void hideUIInterction()
+    {
+        if (hideUIPausePanel != null)
+        {
+            hideUIPausePanel.GetComponent<UnityEngine.UI.Image>().enabled=true;
+        }
+        GameObject bladeInstance=GameObject.FindGameObjectWithTag("Blade");
+        if (bladeInstance != null)
+        {
+            TrailRenderer trailRenderer=bladeInstance.GetComponent<TrailRenderer>();  
+            trailRenderer.enabled=false;
+        }
+
+    }
+
+    public void unHideUiInteraction()
+    {
+      if (hideUIPausePanel != null)
+        {
+            hideUIPausePanel.GetComponent<UnityEngine.UI.Image>().enabled=false;
+        } 
+           GameObject bladeInstance=GameObject.FindGameObjectWithTag("Blade");
+        if (bladeInstance != null)
+        {
+            TrailRenderer trailRenderer=bladeInstance.GetComponent<TrailRenderer>();  
+            trailRenderer.enabled=true;
+        } 
     }
 }

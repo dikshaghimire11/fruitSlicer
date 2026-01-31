@@ -23,6 +23,7 @@ public class PauseManager : MonoBehaviour
             SoundManager.instance.PlayButtonClickSound();
         }
         pauseMenuPanel.SetActive(true);
+        GameCanvasManager.instance.hideUIInterction();
         FruitSpawner.instance.HideFruitsLayer(); // Show the UI
         Time.timeScale = 0f;            // Stop game time
         isPaused = true;
@@ -35,6 +36,7 @@ public class PauseManager : MonoBehaviour
             SoundManager.instance.PlayButtonClickSound();
         }
         pauseMenuPanel.SetActive(false);
+        GameCanvasManager.instance.unHideUiInteraction();
         FruitSpawner.instance.ShowFruitsLayer(); // Hide the UI
         Time.timeScale = 1f;             // Resume game time
         isPaused = false;
