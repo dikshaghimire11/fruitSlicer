@@ -56,10 +56,9 @@ public class AdsManager : MonoBehaviour
 
     public IEnumerator interstitialAdCounter()
     {
-        Debug.Log("Reset");
+
         yield return new WaitForSeconds(120f);
         canShowInterstitialAd = true;
-        Debug.Log("Can be shown");
         yield break;
     }
 
