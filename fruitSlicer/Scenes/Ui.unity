@@ -119,64 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &53976001
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 53976003}
-  - component: {fileID: 53976002}
-  m_Layer: 0
-  m_Name: JuiceManager (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &53976002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 53976001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ef51828c44b9b94a93fe3842bca2a1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::JuiceManager
-  taskText: {fileID: 7967268522632332416}
-  timerText: {fileID: 2378873374450250083}
-  counterText: {fileID: 1311117001530735373}
-  missionFruitIcon: {fileID: 7824571362230944169}
-  levelDuration: 60
-  requiredCuts: 40
-  pointsPerLevel: 500
-  finalPoints: 0
-  targetFruitNew: {fileID: 0}
-  currentTime: 0
-  isLevelActive: 0
-  missionText: {fileID: 59753668006913586}
-  timeBonusMultiplier: 5
-  lifeBonusMultiplier: 20
---- !u!4 &53976003
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 53976001}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.70389, y: 0.13089, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &57905826
 GameObject:
   m_ObjectHideFlags: 0
@@ -2214,6 +2156,81 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 16.222383}
   m_EdgeRadius: 0
+--- !u!1 &823349573
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 823349574}
+  - component: {fileID: 823349576}
+  - component: {fileID: 823349575}
+  m_Layer: 5
+  m_Name: FruitImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &823349574
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823349573}
+  m_LocalRotation: {x: 0.015822254, y: 0.014128048, z: -0.2410381, w: 0.97028387}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.001000284, y: 0.0010099866, z: 0.001000284}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5776536174618592992}
+  m_LocalEulerAnglesHint: {x: 2.15, y: 1.135, z: -4347.881}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.68, y: 1.389}
+  m_SizeDelta: {x: 476, y: 454}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &823349575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823349573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 4064962867673614258, guid: b0503c7b066bcc44fa11f3733b91a00b, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &823349576
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823349573}
+  m_CullTransparentMesh: 1
 --- !u!1 &831473200
 GameObject:
   m_ObjectHideFlags: 0
@@ -5915,6 +5932,7 @@ MonoBehaviour:
   timerText: {fileID: 2378873374450250083}
   counterText: {fileID: 1311117001530735373}
   missionFruitIcon: {fileID: 7824571362230944169}
+  fruitIconInMissionPanel: {fileID: 823349575}
   levelDuration: 60
   requiredCuts: 40
   pointsPerLevel: 500
@@ -6736,8 +6754,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4278318079
+  m_fontColor: {r: 1, g: 0.9516099, b: 0.0056602955, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -6754,12 +6772,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 17.05
-  m_fontSizeBase: 36
+  m_fontSize: 14
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 8
-  m_fontSizeMax: 72
+  m_fontSizeMin: 12
+  m_fontSizeMax: 14
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -6793,7 +6811,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -63.63681, y: -23.167707, z: -37.356533, w: -42.641518}
+  m_margin: {x: -63.63681, y: -22.980326, z: -37.356533, w: -26.117939}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -11162,6 +11180,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8524402994804838322}
+  - {fileID: 823349574}
   - {fileID: 8864408549266358296}
   - {fileID: 2492135489257444740}
   - {fileID: 2142985791}
@@ -12678,8 +12697,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.661, y: 1.698}
-  m_SizeDelta: {x: 138.7007, y: 82.0782}
+  m_AnchoredPosition: {x: 0.661, y: 1.7325}
+  m_SizeDelta: {x: 138.7007, y: 107.9611}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8618520706599760109
 CanvasRenderer:
@@ -12778,7 +12797,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50.787518, y: -48.1708}
+  m_AnchoredPosition: {x: 50.787518, y: -48.023}
   m_SizeDelta: {x: 11.93, y: 2.5733}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &8908321555632070409
@@ -12832,7 +12851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.84705883}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.47843137}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -12974,7 +12993,6 @@ SceneRoots:
   - {fileID: 354375539}
   - {fileID: 98734548}
   - {fileID: 2002546103}
-  - {fileID: 53976003}
   - {fileID: 404942764}
   - {fileID: 1789351988}
   - {fileID: 2045955220}

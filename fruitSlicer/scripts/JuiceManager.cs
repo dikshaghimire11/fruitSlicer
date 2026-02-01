@@ -16,6 +16,7 @@ public class JuiceManager : MonoBehaviour
 
 
     public Image missionFruitIcon;
+    public Image fruitIconInMissionPanel;
 
     [Header("Level Settings")]
     public float levelDuration = 60f;
@@ -33,6 +34,7 @@ public class JuiceManager : MonoBehaviour
     private int lastTimeInt = -1;
     private int highScoreCareer = 0;
     public TextMeshProUGUI missionText;
+
     [Header("Bonus Settings")]
     public int timeBonusMultiplier = 1;  
     public int lifeBonusMultiplier = 5;
@@ -62,6 +64,7 @@ public class JuiceManager : MonoBehaviour
             //if (taskText != null) taskText.gameObject.SetActive(true);
             if (counterText != null) counterText.gameObject.SetActive(true);
             if (missionFruitIcon != null) missionFruitIcon.gameObject.SetActive(true);
+            // if(fruitIconInMissionPanel!=null)fruitIconInMissionPanel.gameObject.SetActive(true);
 
             StartLevel();
         }
@@ -72,6 +75,7 @@ public class JuiceManager : MonoBehaviour
             if (counterText != null) counterText.gameObject.SetActive(false);
 
             if (missionFruitIcon != null) missionFruitIcon.gameObject.SetActive(false);
+            // if(fruitIconInMissionPanel!=null)fruitIconInMissionPanel.gameObject.SetActive(false);
             gameObject.SetActive(false);
         }
     }
@@ -146,6 +150,7 @@ public class JuiceManager : MonoBehaviour
            // taskText.text = "" + targetFruitNew.name.ToString();
             missionText.text = "I want to have some fresh " + targetFruitNew.name.ToString() + " Juice...";
             missionFruitIcon.sprite = targetFruitNew.GetComponent<SpriteRenderer>().sprite;
+            fruitIconInMissionPanel.sprite=missionFruitIcon.sprite;
 
         }
     }
