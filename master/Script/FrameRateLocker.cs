@@ -4,10 +4,14 @@ public class FrameRateLocker : MonoBehaviour
 {
     void Awake()
     {
-        // 1. Disable VSync (Essential: Unity ignores targetFrameRate if VSync is on)
-        QualitySettings.vSyncCount = 0;
+    //     // 1. Disable VSync (Essential: Unity ignores targetFrameRate if VSync is on)
+    //     QualitySettings.vSyncCount = 0;
 
-        // 2. Lock the frame rate to 60
-        Application.targetFrameRate = 60;
+    //     // 2. Lock the frame rate to 60
+    //     Application.targetFrameRate = 60;
+    // }
+
+    QualitySettings.vSyncCount = 1;
+    Application.targetFrameRate = -1;
     }
 }
