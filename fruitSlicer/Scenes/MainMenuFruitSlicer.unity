@@ -2578,7 +2578,7 @@ MonoBehaviour:
   characterPopSound: {fileID: 8300000, guid: 8fce14620cb29a8488775d45ad700fae, type: 3}
   characterGoneSound: {fileID: 8300000, guid: 5cc3ccc40446e9f4bae471528fe99c73, type: 3}
   gameWinSound: {fileID: 8300000, guid: 746717cc714255b4499b45feb7fdc275, type: 3}
-  highScoreSound: {fileID: 8300000, guid: f1022f1b7b8169c48836b4e601bb9abd, type: 3}
+  highScoreSound: {fileID: 8300000, guid: a0a9e53516571754c89cf3386f93594d, type: 3}
   buttonClickSound: {fileID: 8300000, guid: 0fd8ed8e79f14514eafeace455b89569, type: 3}
   comboSound: {fileID: 8300000, guid: b879263f6c87b1748ba3bbe4c7f4dfd1, type: 3}
   liveAndBonusAddedSound: {fileID: 8300000, guid: ef6583964b0ddfd429cc9eaf0bb6f9b8, type: 3}
