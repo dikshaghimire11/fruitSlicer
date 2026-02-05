@@ -179,6 +179,10 @@ public class Blade : MonoBehaviour
                 {
                     ShowFloatingText("PERFECT!", Color.cyan, fruit.transform.position, 0.6f, 0.2f);
                 }
+                else
+                {
+                    ShowFloatingText("X", Color.red, fruit.transform.position, 0.7f, 0.2f);
+                }
 
 
             }
