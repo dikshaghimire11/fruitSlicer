@@ -6,6 +6,8 @@ using NUnit.Framework;
 using Random = UnityEngine.Random;
 using System.Numerics;
 using Vector2 = UnityEngine.Vector2;
+using UnityEngine.Video;
+
 
 public class GameCanvasManager : MonoBehaviour
 {
@@ -40,8 +42,10 @@ public class GameCanvasManager : MonoBehaviour
     public GameObject addLifeAndTimeObject;
 
     public GameObject hideUIPausePanel;
+    public GameObject tutorialPanel;
 
-
+    public VideoPlayer tutorialVideoPlayer;
+    public GameObject closeButton;
 
 
 
@@ -56,6 +60,7 @@ public class GameCanvasManager : MonoBehaviour
     }
     void Start()
     {
+        tutorialVideoPlayer.loopPointReached += OnVideoFinished;
         // StartMoving();
         GameObject character;
         if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
@@ -96,13 +101,25 @@ public class GameCanvasManager : MonoBehaviour
             SoundManager.instance.PlayButtonClickSound();
         }
 
-        missionPanel.SetActive(false);
-        unHideUiInteraction();
 
-        startSpawnAction();
+        missionPanel.SetActive(false);
         if (SoundManager.instance != null) SoundManager.instance.PlayCharacterGoneSound();
-        StartCoroutine(MoveRoutine(new Vector2(-2.67f, -0.87f), 1, 2, newObject));
-        StartCoroutine(MoveRoutine(new Vector2(0f, -4f), 1, 2, workDesk));
+        bool hasSeenTutorial = PlayerPrefs.GetInt("HasSeenTutorial", 0) == 1;
+        if (!hasSeenTutorial)
+        {
+            PlayTutorialVideo();
+        }
+        else
+        {
+
+            unHideUiInteraction();
+
+            startSpawnAction();
+
+            StartCoroutine(MoveRoutine(new Vector2(-2.67f, -0.87f), 1, 2, newObject));
+            StartCoroutine(MoveRoutine(new Vector2(0f, -4f), 1, 2, workDesk));
+
+        }
 
         // choppingBoard.SetActive(true);
 
@@ -220,28 +237,52 @@ public class GameCanvasManager : MonoBehaviour
     {
         if (hideUIPausePanel != null)
         {
-            hideUIPausePanel.GetComponent<UnityEngine.UI.Image>().enabled=true;
+            hideUIPausePanel.GetComponent<UnityEngine.UI.Image>().enabled = true;
         }
-        GameObject bladeInstance=GameObject.FindGameObjectWithTag("Blade");
+        GameObject bladeInstance = GameObject.FindGameObjectWithTag("Blade");
         if (bladeInstance != null)
         {
-            TrailRenderer trailRenderer=bladeInstance.GetComponent<TrailRenderer>();  
-            trailRenderer.enabled=false;
+            TrailRenderer trailRenderer = bladeInstance.GetComponent<TrailRenderer>();
+            trailRenderer.enabled = false;
         }
 
     }
 
     public void unHideUiInteraction()
     {
-      if (hideUIPausePanel != null)
+        if (hideUIPausePanel != null)
         {
-            hideUIPausePanel.GetComponent<UnityEngine.UI.Image>().enabled=false;
-        } 
-           GameObject bladeInstance=GameObject.FindGameObjectWithTag("Blade");
+            hideUIPausePanel.GetComponent<UnityEngine.UI.Image>().enabled = false;
+        }
+        GameObject bladeInstance = GameObject.FindGameObjectWithTag("Blade");
         if (bladeInstance != null)
         {
-            TrailRenderer trailRenderer=bladeInstance.GetComponent<TrailRenderer>();  
-            trailRenderer.enabled=true;
-        } 
+            TrailRenderer trailRenderer = bladeInstance.GetComponent<TrailRenderer>();
+            trailRenderer.enabled = true;
+        }
+    }
+    public void PlayTutorialVideo()
+    {
+        tutorialPanel.SetActive(true);
+        tutorialVideoPlayer.time = 0;  
+        tutorialVideoPlayer.Play();
+    }
+    void OnVideoFinished(VideoPlayer vp)
+    {
+        closeButton.SetActive(true);    // show button when video ends
+    }
+    public void CloseTutorial()
+    {
+        tutorialVideoPlayer.Stop();
+        tutorialPanel.SetActive(false);
+
+        PlayerPrefs.SetInt("HasSeenTutorial", 1);
+        PlayerPrefs.Save();
+        unHideUiInteraction();
+
+        startSpawnAction();
+
+        StartCoroutine(MoveRoutine(new Vector2(-2.67f, -0.87f), 1, 2, newObject));
+        StartCoroutine(MoveRoutine(new Vector2(0f, -4f), 1, 2, workDesk));
     }
 }
