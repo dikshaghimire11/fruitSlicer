@@ -181,7 +181,7 @@ public class Blade : MonoBehaviour
                 }
                 else
                 {
-                    ShowFloatingText("X", Color.red, fruit.transform.position, 0.7f, 0.2f);
+                    ShowFloatingText("X", Color.red, fruit.transform.position, 1.5f, 0.2f);
                 }
 
 

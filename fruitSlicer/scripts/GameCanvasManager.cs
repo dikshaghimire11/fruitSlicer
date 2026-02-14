@@ -61,7 +61,6 @@ public class GameCanvasManager : MonoBehaviour
     }
     void Start()
     {
-        tutorialVideoPlayer.loopPointReached += OnVideoFinished;
         bool navigateToShop = PlayerPrefs.GetInt("NavigateToShop", 0) == 1;
         bool hasSeenTutorial = PlayerPrefs.GetInt("HasSeenTutorial", 0) == 1;
         if (!navigateToShop && hasSeenTutorial)
@@ -116,6 +115,8 @@ public class GameCanvasManager : MonoBehaviour
 
         missionPanel.SetActive(false);
         if (SoundManager.instance != null) SoundManager.instance.PlayCharacterGoneSound();
+        PlayerPrefs.SetInt("HasSeenTutorial", 0);
+        PlayerPrefs.Save(); 
         bool hasSeenTutorial = PlayerPrefs.GetInt("HasSeenTutorial", 0) == 1;
         if (!hasSeenTutorial)
         {
@@ -283,10 +284,6 @@ public class GameCanvasManager : MonoBehaviour
         tutorialPanel.SetActive(true);
         tutorialVideoPlayer.time = 0;
         tutorialVideoPlayer.Play();
-    }
-    void OnVideoFinished(VideoPlayer vp)
-    {
-        closeButton.SetActive(true);    // show button when video ends
     }
     public void CloseTutorial()
     {
