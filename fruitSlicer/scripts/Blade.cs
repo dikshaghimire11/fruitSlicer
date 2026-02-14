@@ -240,7 +240,6 @@ public class Blade : MonoBehaviour
 
         if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
         {
-            Debug.Log("Correct fruit combo: " + comboCount);
 
             bonus = comboCount * 2;
             ScoreManager.instance?.addBonusAmount(bonus);

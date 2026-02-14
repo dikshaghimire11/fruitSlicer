@@ -30,6 +30,7 @@ public class ScoreManager : MonoBehaviour
     public TextMeshProUGUI remainingTime;
 
 
+
     public GameObject x2Button;
     public GameObject x2ButtonForCareer;
 
@@ -369,7 +370,10 @@ public class ScoreManager : MonoBehaviour
             JuiceManager.instance.isLevelActive = false;
         }
 
-
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayGameOverSound();
+        }
         // Final Text Logic
         if (finalScoreText != null)
         {
@@ -381,12 +385,25 @@ public class ScoreManager : MonoBehaviour
             else
             {
                 finalScoreText.text = "SCORE: " + score + "\nHIGH SCORE: " + highScore;
+
             }
         }
+    }
 
-        if (SoundManager.instance != null)
+    public void ShowShopPanelAfterDelay()
+    {
+
+        if (GameCanvasManager.instance != null)
         {
-            SoundManager.instance.PlayGameOverSound();
+            GameCanvasManager.instance.showGoToShopPanel();
+            if (GameCanvasManager.instance.missionAccomplishedPanel != null)
+            {
+                GameCanvasManager.instance.missionAccomplishedPanel.SetActive(false);
+            }
+            if (gameOverPanel != null)
+            {
+                gameOverPanel.SetActive(false);
+            }
         }
     }
 
@@ -396,11 +413,20 @@ public class ScoreManager : MonoBehaviour
         {
             SoundManager.instance.PlayButtonClickSound();
         }
-        AdsManager.instance.playInterestialAd();
+        bool navigateToShop = PlayerPrefs.GetInt("NavigateToShop", 0) == 1;
+        if (!navigateToShop)
+        {
+            ShowShopPanelAfterDelay();
 
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        if (FruitSpawner.instance != null) FruitSpawner.instance.ShowFruitsLayer();
+        }
+        else
+        {
+            AdsManager.instance.playInterestialAd();
+
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            if (FruitSpawner.instance != null) FruitSpawner.instance.ShowFruitsLayer();
+        }
 
     }
 

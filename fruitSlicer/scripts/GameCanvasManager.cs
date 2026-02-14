@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 using System.Numerics;
 using Vector2 = UnityEngine.Vector2;
 using UnityEngine.Video;
-
+using UnityEngine.SceneManagement;
 
 public class GameCanvasManager : MonoBehaviour
 {
@@ -46,6 +46,7 @@ public class GameCanvasManager : MonoBehaviour
 
     public VideoPlayer tutorialVideoPlayer;
     public GameObject closeButton;
+    public GameObject goToShopPanel;
 
 
 
@@ -61,34 +62,45 @@ public class GameCanvasManager : MonoBehaviour
     void Start()
     {
         tutorialVideoPlayer.loopPointReached += OnVideoFinished;
-        // StartMoving();
-        GameObject character;
-        if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
+        bool navigateToShop = PlayerPrefs.GetInt("NavigateToShop", 0) == 1;
+        bool hasSeenTutorial = PlayerPrefs.GetInt("HasSeenTutorial", 0) == 1;
+        if (!navigateToShop && hasSeenTutorial)
         {
-            int length = ShopLists.instance.characterList.Length;
-            character = ShopLists.instance.characterList[Random.Range(0, length)];
-            choppingBoard.SetActive(false);
+            showGoToShopPanel();
+
         }
         else
         {
-            character = freeModeCharacter;
-        }
 
-        newObject = Instantiate(character, character.transform.position, character.transform.rotation, shopGameObject.transform);
-        newObject.transform.SetSiblingIndex(0);
-        if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
-        {
-            addLifeAndTimeObject.SetActive(true);
-        }
-        else
-        {
-            addLifeOnlyObject.SetActive(true);
-        }
-        if (SoundManager.instance != null) SoundManager.instance.PlayCharacterPopSound();
+            // StartMoving();
+            GameObject character;
+            if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
+            {
+                int length = ShopLists.instance.characterList.Length;
+                character = ShopLists.instance.characterList[Random.Range(0, length)];
+                choppingBoard.SetActive(false);
+            }
+            else
+            {
+                character = freeModeCharacter;
+            }
+
+            newObject = Instantiate(character, character.transform.position, character.transform.rotation, shopGameObject.transform);
+            newObject.transform.SetSiblingIndex(0);
+            if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
+            {
+                addLifeAndTimeObject.SetActive(true);
+            }
+            else
+            {
+                addLifeOnlyObject.SetActive(true);
+            }
+            if (SoundManager.instance != null) SoundManager.instance.PlayCharacterPopSound();
 
 
-        StartCoroutine(MoveRoutine(new Vector2(-0.35f, -0.87f), 1, 1, newObject));
-        StartCoroutine(MoveRoutine(new Vector2(0, 0f), 1, 0, workDesk));
+            StartCoroutine(MoveRoutine(new Vector2(-0.35f, -0.87f), 1, 1, newObject));
+            StartCoroutine(MoveRoutine(new Vector2(0, 0f), 1, 0, workDesk));
+        }
 
     }
 
@@ -167,6 +179,10 @@ public class GameCanvasManager : MonoBehaviour
             hideUIInterction();
             // shopGameObject.SetActive(false);
         }
+        else if (type == 3)
+        {
+            goToShopPanel.SetActive(true);
+        }
 
 
     }
@@ -184,6 +200,7 @@ public class GameCanvasManager : MonoBehaviour
             StartCoroutine(MoveRoutine(new Vector2(-0.2f, -1.7f), 1, 0, juiceContainer));
 
             missionAccomplishedPanel.SetActive(true);
+
             hideUIInterction();
         }
     }
@@ -264,7 +281,7 @@ public class GameCanvasManager : MonoBehaviour
     public void PlayTutorialVideo()
     {
         tutorialPanel.SetActive(true);
-        tutorialVideoPlayer.time = 0;  
+        tutorialVideoPlayer.time = 0;
         tutorialVideoPlayer.Play();
     }
     void OnVideoFinished(VideoPlayer vp)
@@ -284,5 +301,25 @@ public class GameCanvasManager : MonoBehaviour
 
         StartCoroutine(MoveRoutine(new Vector2(-2.67f, -0.87f), 1, 2, newObject));
         StartCoroutine(MoveRoutine(new Vector2(0f, -4f), 1, 2, workDesk));
+    }
+    public void showGoToShopPanel()
+    {
+        newObject = Instantiate(freeModeCharacter, freeModeCharacter.transform.position, freeModeCharacter.transform.rotation, shopGameObject.transform);
+        newObject.transform.SetSiblingIndex(0);
+
+        StartCoroutine(MoveRoutine(new Vector2(-0.35f, -0.87f), 1, 3, newObject));
+        StartCoroutine(MoveRoutine(new Vector2(0, 0f), 1, 3, workDesk));
+    }
+    public void goToShop()
+    {
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayButtonClickSound();
+        }
+        goToShopPanel.SetActive(false);
+        PlayerPrefs.SetInt("NavigateToShop", 1);
+        PlayerPrefs.Save();
+        SceneManager.LoadSceneAsync("ShopScene");
+
     }
 }
