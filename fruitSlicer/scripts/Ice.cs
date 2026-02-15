@@ -87,6 +87,7 @@ public class Ice : MonoBehaviour
 
     IEnumerator FreezeAndShowSnow()
     {
+        StartCoroutine(ScoreManager.instance.showTimer(freezeDuration));
         startSlowMotion();
         yield return new WaitForSecondsRealtime(freezeDuration);
         stopSlowMotion();

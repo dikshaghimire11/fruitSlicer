@@ -115,8 +115,6 @@ public class GameCanvasManager : MonoBehaviour
 
         missionPanel.SetActive(false);
         if (SoundManager.instance != null) SoundManager.instance.PlayCharacterGoneSound();
-        PlayerPrefs.SetInt("HasSeenTutorial", 0);
-        PlayerPrefs.Save(); 
         bool hasSeenTutorial = PlayerPrefs.GetInt("HasSeenTutorial", 0) == 1;
         if (!hasSeenTutorial)
         {

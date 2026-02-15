@@ -176,6 +176,7 @@ MonoBehaviour:
   rotationForce: 20
   breakSound: {fileID: 8300000, guid: 9abe5afa29815cd45a9ebab2ae7a43ff, type: 3}
   freezeDuration: 5
+  freezeCountdownText: {fileID: 0}
 --- !u!82 &-4806058399553740773
 AudioSource:
   m_ObjectHideFlags: 0

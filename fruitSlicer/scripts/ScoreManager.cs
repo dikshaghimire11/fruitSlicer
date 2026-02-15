@@ -60,6 +60,8 @@ public class ScoreManager : MonoBehaviour
     public GameObject floatingReward;
 
     public Transform gameCanvas;
+    public TextMeshProUGUI freezeCountdownText;
+    private GameObject timerParent;
 
 
     void Awake()
@@ -449,4 +451,29 @@ public class ScoreManager : MonoBehaviour
         // Lives are always visible in both modes
         if (livesText != null) livesText.text = currentLives.ToString();
     }
+    public IEnumerator showTimer(float freezeDuration) // ✅ IEnumerator
+    {
+        if (timerParent == null && freezeCountdownText != null)
+        {
+            timerParent = freezeCountdownText.transform.parent.gameObject;
+        }
+
+        if (timerParent != null)
+            timerParent.SetActive(true);
+
+        float timer = freezeDuration;
+        freezeCountdownText.gameObject.SetActive(true);
+
+        while (timer > 0)
+        {
+            freezeCountdownText.text = Mathf.Ceil(timer).ToString();
+            timer -= Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        freezeCountdownText.gameObject.SetActive(false);
+        timerParent.SetActive(false);
+    }
+
+
 }
