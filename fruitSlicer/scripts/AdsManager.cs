@@ -53,7 +53,7 @@ public class AdsManager : MonoBehaviour
     public IEnumerator interstitialAdCounter()
     {
 
-        yield return new WaitForSeconds(60f);
+        yield return new WaitForSeconds(120f);
         canShowInterstitialAd = true;
         yield break;
     }
@@ -265,6 +265,7 @@ public class AdsManager : MonoBehaviour
     {
         Debug.Log("Auto Time stamp: " + Time.timeScale);
         Debug.Log($"[LevelPlaySample] Received InterstitialAdClosedEvent With AdInfo: {adInfo}");
+        interstitialAd.LoadAd();
     }
 
     void InterstitialOnAdInfoChangedEvent(LevelPlayAdInfo adInfo)

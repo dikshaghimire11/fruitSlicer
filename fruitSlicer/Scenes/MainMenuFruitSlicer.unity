@@ -2566,11 +2566,9 @@ MonoBehaviour:
   menuMusicList:
   - {fileID: 8300000, guid: 1c3ca108508abb547a5da1dd36a5e157, type: 3}
   careerMusicList:
-  - {fileID: 8300000, guid: c0bb3286ebc4068488ad90ee79b560e1, type: 3}
   - {fileID: 8300000, guid: 59b551fd451f1f2449b98a1e579be641, type: 3}
   - {fileID: 8300000, guid: c1578f71fe69674409fdf6b33e3b7a56, type: 3}
   infiniteMusicList:
-  - {fileID: 8300000, guid: c0bb3286ebc4068488ad90ee79b560e1, type: 3}
   - {fileID: 8300000, guid: 59b551fd451f1f2449b98a1e579be641, type: 3}
   - {fileID: 8300000, guid: c1578f71fe69674409fdf6b33e3b7a56, type: 3}
   lifeLostSound: {fileID: 8300000, guid: ec1cf918e967f974ea7eb889a52d087d, type: 3}

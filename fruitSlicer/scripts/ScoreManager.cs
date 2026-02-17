@@ -79,8 +79,7 @@ public class ScoreManager : MonoBehaviour
             {
                 SoundManager.instance.PlayInfiniteMusic();
             }
-        }
-        else if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
+        }else if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
         {
             if (SoundManager.instance != null)
             {
