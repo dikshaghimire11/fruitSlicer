@@ -357,7 +357,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.63, y: -1.666}
+  m_AnchoredPosition: {x: 0.63, y: -1.284}
   m_SizeDelta: {x: 42.7373, y: 12.984001}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &239908782
@@ -1052,7 +1052,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.61, y: -1.21}
+  m_AnchoredPosition: {x: 0.61, y: -1.651}
   m_SizeDelta: {x: 42.7373, y: 12.984001}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &519944509
@@ -2566,9 +2566,9 @@ MonoBehaviour:
   menuMusicList:
   - {fileID: 8300000, guid: 1c3ca108508abb547a5da1dd36a5e157, type: 3}
   careerMusicList:
-  - {fileID: 8300000, guid: 64e1b3ff1c0fef247971d0e054c7bdf6, type: 3}
-  - {fileID: 8300000, guid: 0aa3c5840caf08a448540b01d54237be, type: 3}
-  - {fileID: 8300000, guid: fa3093a67194af74f8a091289a728a03, type: 3}
+  - {fileID: 8300000, guid: c0bb3286ebc4068488ad90ee79b560e1, type: 3}
+  - {fileID: 8300000, guid: 59b551fd451f1f2449b98a1e579be641, type: 3}
+  - {fileID: 8300000, guid: c1578f71fe69674409fdf6b33e3b7a56, type: 3}
   infiniteMusicList:
   - {fileID: 8300000, guid: c0bb3286ebc4068488ad90ee79b560e1, type: 3}
   - {fileID: 8300000, guid: 59b551fd451f1f2449b98a1e579be641, type: 3}
@@ -4511,7 +4511,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7145522064328538423, guid: aef0793ad792d6741bc4bc4addb039a1, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1.21
+      value: -1.651
       objectReference: {fileID: 0}
     - target: {fileID: 7276893451968125620, guid: aef0793ad792d6741bc4bc4addb039a1, type: 3}
       propertyPath: m_Name

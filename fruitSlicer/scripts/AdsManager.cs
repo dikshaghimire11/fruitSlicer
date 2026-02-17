@@ -53,7 +53,7 @@ public class AdsManager : MonoBehaviour
     public IEnumerator interstitialAdCounter()
     {
 
-        yield return new WaitForSeconds(120f);
+        yield return new WaitForSeconds(60f);
         canShowInterstitialAd = true;
         yield break;
     }

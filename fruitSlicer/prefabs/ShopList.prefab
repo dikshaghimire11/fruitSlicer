@@ -56,7 +56,7 @@ MonoBehaviour:
     isPurchased: 0
     isEquipped: 0
   - itemName: Forest
-    price: 5000
+    price: 10000
     icon: {fileID: -1343518637512107228, guid: c38de719f6949f34da7055d31f5f49f3, type: 3}
     actualSprite: {fileID: -1343518637512107228, guid: c38de719f6949f34da7055d31f5f49f3, type: 3}
     prefb: {fileID: 0}
@@ -65,7 +65,7 @@ MonoBehaviour:
     isPurchased: 0
     isEquipped: 0
   - itemName: Mountain
-    price: 10000
+    price: 25000
     icon: {fileID: -6680556436121249758, guid: 2cdba57273996fa418bbfb3f61358f39, type: 3}
     actualSprite: {fileID: -6680556436121249758, guid: 2cdba57273996fa418bbfb3f61358f39, type: 3}
     prefb: {fileID: 0}
@@ -74,7 +74,7 @@ MonoBehaviour:
     isPurchased: 0
     isEquipped: 0
   - itemName: Desert
-    price: 15000
+    price: 50000
     icon: {fileID: 130452656225014213, guid: 17e6fca148dc5654da4d180f1b623d3e, type: 3}
     actualSprite: {fileID: 130452656225014213, guid: 17e6fca148dc5654da4d180f1b623d3e, type: 3}
     prefb: {fileID: 0}
@@ -102,7 +102,7 @@ MonoBehaviour:
     isPurchased: 0
     isEquipped: 0
   - itemName: CyberBlade
-    price: 7000
+    price: 10000
     icon: {fileID: 4555310059249648806, guid: f2046f5343c26214b96602e8b252d205, type: 3}
     actualSprite: {fileID: 0}
     prefb: {fileID: 6311237056519408263, guid: de7e41fe840fa8e4f8f3490fa28992a7, type: 3}
@@ -111,7 +111,7 @@ MonoBehaviour:
     isPurchased: 0
     isEquipped: 0
   - itemName: Fire Blade
-    price: 10000
+    price: 25000
     icon: {fileID: 7928803683018547842, guid: f1161446a0147a94fa6bfd739357cca9, type: 3}
     actualSprite: {fileID: 0}
     prefb: {fileID: 6311237056519408263, guid: 3937a36bfe1fdb4418e7ab47fefb9af3, type: 3}
@@ -120,7 +120,7 @@ MonoBehaviour:
     isPurchased: 0
     isEquipped: 0
   - itemName: Gold Blade
-    price: 15000
+    price: 50000
     icon: {fileID: 4398459047656103549, guid: d13149128de3619499fcc78b6cde1391, type: 3}
     actualSprite: {fileID: 0}
     prefb: {fileID: 6311237056519408263, guid: d0c1fa5d2a06cfc4f8c9a231a332e05a, type: 3}

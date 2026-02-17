@@ -83,7 +83,6 @@ public class GameCanvasManager : MonoBehaviour
             {
                 character = freeModeCharacter;
             }
-
             newObject = Instantiate(character, character.transform.position, character.transform.rotation, shopGameObject.transform);
             newObject.transform.SetSiblingIndex(0);
             if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
@@ -299,6 +298,10 @@ public class GameCanvasManager : MonoBehaviour
     }
     public void showGoToShopPanel()
     {
+        if (newObject != null)
+        {
+            Destroy(newObject);
+        }
         newObject = Instantiate(freeModeCharacter, freeModeCharacter.transform.position, freeModeCharacter.transform.rotation, shopGameObject.transform);
         newObject.transform.SetSiblingIndex(0);
 
