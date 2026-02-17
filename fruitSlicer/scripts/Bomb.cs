@@ -24,10 +24,7 @@ public class Bomb : MonoBehaviour
             {
                 sliceSource = audioObj.GetComponent<AudioSource>();
             }
-            else
-            {
-                Debug.LogError("SliceAudio GameObject not found in scene!");
-            }
+          
         }
     }
 

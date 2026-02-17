@@ -39,7 +39,6 @@ public class ShopManager : MonoBehaviour
 
     public void ShowBlades(bool playSound = true)
     {
-        Debug.Log("Show Blades " + playSound);
         if (SoundManager.instance != null && playSound)
         {
             SoundManager.instance.PlayButtonClickSound();

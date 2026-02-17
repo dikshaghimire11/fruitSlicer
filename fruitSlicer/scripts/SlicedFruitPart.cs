@@ -16,7 +16,6 @@ public class SlicedFruitPart : MonoBehaviour
 
         if (spriteRenderer == null)
         {
-            Debug.LogError($"{gameObject.name} is missing SpriteRenderer!");
             Destroy(this);
             return;
         }

@@ -37,17 +37,13 @@ public class AdsManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Start()
     {
-        Debug.Log("[LevelPlaySample] LevelPlay.ValidateIntegration");
         LevelPlay.ValidateIntegration();
 
-        Debug.Log($"[LevelPlaySample] Unity version {LevelPlay.UnityVersion}");
 
-        Debug.Log("[LevelPlaySample] Register initialization callbacks");
         LevelPlay.OnInitSuccess += SdkInitializationCompletedEvent;
         LevelPlay.OnInitFailed += SdkInitializationFailedEvent;
 
         // SDK init
-        Debug.Log("[LevelPlaySample] LevelPlay SDK initialization");
         LevelPlay.Init(LevelPlayConfig.AppKey);
         StartCoroutine(interstitialAdCounter());
 
@@ -69,7 +65,6 @@ public class AdsManager : MonoBehaviour
     }
     void SdkInitializationCompletedEvent(LevelPlayConfiguration config)
     {
-        Debug.Log($"[LevelPlaySample] Received SdkInitializationCompletedEvent with Config: {config}");
         EnableAds();
         // isAdsEnabled = true;
     }
@@ -157,8 +152,7 @@ public class AdsManager : MonoBehaviour
 
     void RewardedVideoOnAdRewardedEvent(LevelPlayAdInfo adInfo, LevelPlayReward reward)
     {
-        Debug.Log($"[LevelPlaySample] Received RewardedVideoOnAdRewardedEvent With AdInfo: {adInfo} and Reward: {reward}");
-
+      
         if (currentAdvertisement == AdvertisementType_.AddLife)
         {
             ScoreManager.instance.addLifeAndResumeGame();

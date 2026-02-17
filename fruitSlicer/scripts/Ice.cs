@@ -29,10 +29,6 @@ public class Ice : MonoBehaviour
             {
                 sliceSource = audioObj.GetComponent<AudioSource>();
             }
-            else
-            {
-                Debug.LogError("SliceAudio GameObject not found in scene!");
-            }
         }
     }
 
@@ -97,7 +93,7 @@ public class Ice : MonoBehaviour
     public IEnumerator decreaseSpwanDelay()
     {
         float originalDelay = FruitSpawner.instance.spawnDelay;
-        FruitSpawner.instance.spawnDelay = 0.1f;
+        FruitSpawner.instance.spawnDelay =0.25f;
         yield return new WaitForSeconds(1f);
         FruitSpawner.instance.spawnDelay = originalDelay;
     }

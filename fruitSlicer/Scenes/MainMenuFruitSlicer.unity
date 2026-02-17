@@ -2564,15 +2564,15 @@ MonoBehaviour:
   sfxSource: {fileID: 1343208069}
   pitchChangingSource: {fileID: 1343208070}
   menuMusicList:
-  - {fileID: 8300000, guid: 2a68d33898321e24999a741af1229546, type: 3}
+  - {fileID: 8300000, guid: 1c3ca108508abb547a5da1dd36a5e157, type: 3}
   careerMusicList:
   - {fileID: 8300000, guid: 64e1b3ff1c0fef247971d0e054c7bdf6, type: 3}
   - {fileID: 8300000, guid: 0aa3c5840caf08a448540b01d54237be, type: 3}
   - {fileID: 8300000, guid: fa3093a67194af74f8a091289a728a03, type: 3}
   infiniteMusicList:
-  - {fileID: 8300000, guid: d862e5fac4ad28b4ea781d7973640c23, type: 3}
-  - {fileID: 8300000, guid: d7805bb4e8f9a634ab3189fb38370452, type: 3}
-  - {fileID: 8300000, guid: 3e71c6ca92c5283408f7ff6b567ff171, type: 3}
+  - {fileID: 8300000, guid: c0bb3286ebc4068488ad90ee79b560e1, type: 3}
+  - {fileID: 8300000, guid: 59b551fd451f1f2449b98a1e579be641, type: 3}
+  - {fileID: 8300000, guid: c1578f71fe69674409fdf6b33e3b7a56, type: 3}
   lifeLostSound: {fileID: 8300000, guid: ec1cf918e967f974ea7eb889a52d087d, type: 3}
   gameOverSound: {fileID: 8300000, guid: 99b8fd69f9c286d4faaf641c36f4bd3f, type: 3}
   characterPopSound: {fileID: 8300000, guid: 8fce14620cb29a8488775d45ad700fae, type: 3}

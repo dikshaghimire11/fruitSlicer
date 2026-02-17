@@ -79,6 +79,12 @@ public class ScoreManager : MonoBehaviour
             {
                 SoundManager.instance.PlayInfiniteMusic();
             }
+        }else if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
+        {
+            if (SoundManager.instance != null)
+            {
+                SoundManager.instance.PlayCareerMusic();
+            }
         }
         // --- 1. AUTO-FIND PARENT LOGIC ---
         // If "ScoreParent" is empty, we find it automatically using the scoreText!

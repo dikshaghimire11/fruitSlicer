@@ -66,7 +66,6 @@ public class FruitSpawner : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Game Container is missing! Assign it in the Inspector.");
             yield break;
         }
 
@@ -77,17 +76,17 @@ public class FruitSpawner : MonoBehaviour
                 yield break;
             }
             ;
-      
-                if (calculateDelay)
-                {
-                    randomDelay = Random.Range(spawnDelay/2f, spawnDelay);
-                }
-                yield return new WaitForSeconds(randomDelay);
+
+            if (calculateDelay)
+            {
+                randomDelay = Random.Range(spawnDelay / 2f, spawnDelay);
+            }
+            yield return new WaitForSeconds(randomDelay);
 
 
 
             // 2. Spawn Logic
-            if ( fruitPrefabs.Count > 0)
+            if (fruitPrefabs.Count > 0)
             {
 
                 GameObject prefabToSpawn = null;
@@ -137,7 +136,7 @@ public class FruitSpawner : MonoBehaviour
                 }
 
                 // 3. Execute Spawn
-                if (prefabToSpawn != null && Random.Range(0f, 1.1f)>0.5f)
+                if (prefabToSpawn != null && Random.Range(0f, 1.1f) > 0.5f)
                 {
                     SpawnObject(prefabToSpawn, corners);
                 }
@@ -187,50 +186,50 @@ public class FruitSpawner : MonoBehaviour
                 }
             }
 
-        
 
-        if (prefabToSpawn != null) SpawnObject(prefabToSpawn, corners);
 
-        yield return new WaitForSeconds(1f);
+            if (prefabToSpawn != null) SpawnObject(prefabToSpawn, corners);
+
+            yield return new WaitForSeconds(1f);
+        }
     }
-}
 
-// --- 3. HELPER FUNCTION TO LAUNCH OBJECTS ---
-void SpawnObject(GameObject prefab, Vector3[] corners)
-{
-    if (prefab == null) return;
-
-    float screenWidth = corners[3].x - corners[0].x;
-
-    float upsetWidth = screenWidth * 0.2f;
-
-    float randomX = Random.Range(corners[0].x + upsetWidth, corners[3].x - upsetWidth);
-    Vector3 spawnPosition = new Vector3(randomX, -4f, -10f);
-
-    GameObject newObj = Instantiate(prefab, spawnPosition, Quaternion.identity);
-    Rigidbody2D rb = newObj.GetComponent<Rigidbody2D>();
-
-    if (rb != null)
+    // --- 3. HELPER FUNCTION TO LAUNCH OBJECTS ---
+    void SpawnObject(GameObject prefab, Vector3[] corners)
     {
-        rb.AddForce(Vector2.up * spawnForce, ForceMode2D.Impulse);
-        float randomHorizontalForce = Random.Range(-spawnForce / 2, spawnForce / 2);
-        rb.AddForce(new Vector2(randomHorizontalForce, 0), ForceMode2D.Impulse);
+        if (prefab == null) return;
+
+        float screenWidth = corners[3].x - corners[0].x;
+
+        float upsetWidth = screenWidth * 0.2f;
+
+        float randomX = Random.Range(corners[0].x + upsetWidth, corners[3].x - upsetWidth);
+        Vector3 spawnPosition = new Vector3(randomX, -4f, -10f);
+
+        GameObject newObj = Instantiate(prefab, spawnPosition, Quaternion.identity);
+        Rigidbody2D rb = newObj.GetComponent<Rigidbody2D>();
+
+        if (rb != null)
+        {
+            rb.AddForce(Vector2.up * spawnForce, ForceMode2D.Impulse);
+            float randomHorizontalForce = Random.Range(-spawnForce / 2, spawnForce / 2);
+            rb.AddForce(new Vector2(randomHorizontalForce, 0), ForceMode2D.Impulse);
+        }
     }
-}
 
-public void HideFruitsLayer()
-{
+    public void HideFruitsLayer()
+    {
 
-    if (mainCamera != null)
-        mainCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Fruits"));
+        if (mainCamera != null)
+            mainCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Fruits"));
 
-}
+    }
 
-public void ShowFruitsLayer()
-{
-    if (mainCamera != null)
-        mainCamera.cullingMask |= (1 << LayerMask.NameToLayer("Fruits"));
-}
+    public void ShowFruitsLayer()
+    {
+        if (mainCamera != null)
+            mainCamera.cullingMask |= (1 << LayerMask.NameToLayer("Fruits"));
+    }
 
     // Your existing helper function
     // public GameObject GetFruitsOfType(FruitType type)

@@ -45,11 +45,6 @@ public class JuiceManager : MonoBehaviour
     {
         highScoreCareer = PlayerPrefs.GetInt("HighScoreCareer", 0);
 
-        if (SoundManager.instance != null)
-        {
-            SoundManager.instance.PlayCareerMusic();
-        }
-
         if (ModeManager.Instance == null) return;
 
         // Auto-find logic
