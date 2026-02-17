@@ -422,8 +422,6 @@ public class ScoreManager : MonoBehaviour
         {
             SoundManager.instance.PlayButtonClickSound();
         }
-        PlayerPrefs.SetInt("NavigateToShop", 0);
-        PlayerPrefs.Save();
         bool navigateToShop = PlayerPrefs.GetInt("NavigateToShop", 0) == 1;
         if (!navigateToShop)
         {
