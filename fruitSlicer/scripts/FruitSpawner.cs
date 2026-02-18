@@ -29,6 +29,7 @@ public class FruitSpawner : MonoBehaviour
     private int lastFruitIndex = -1;
     private int lastSpecialType = -1;
     private float randomDelay;
+  private int bombCounter = 0;
 
     private Camera mainCamera;
 
@@ -145,55 +146,52 @@ public class FruitSpawner : MonoBehaviour
     }
 
     // --- 2. SPECIAL ITEM (BOMB/ICE) ROUTINE ---
-    IEnumerator SpawnBombAndIceRoutine()
+     IEnumerator SpawnBombAndIceRoutine()
     {
         Vector3[] corners = new Vector3[4];
-        if (gameContainer != null) gameContainer.GetComponent<RectTransform>().GetWorldCorners(corners);
+
+        if (gameContainer != null)
+            gameContainer.GetComponent<RectTransform>().GetWorldCorners(corners);
+        else
+            yield break;
 
         while (true)
         {
-
             yield return new WaitForSeconds(specialSpawnDelay);
-            while (ScoreManager.instance.isGameOver)
-            {
+
+            if (ScoreManager.instance.isGameOver)
                 yield break;
-            }
-            ;
+
             yield return new WaitForSeconds(1f);
 
             GameObject prefabToSpawn = null;
 
             if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
             {
-
+                // In Juice Mode → Only Bomb
                 prefabToSpawn = bombPrefab;
-
             }
-
-
             else
             {
-                // Simple toggle: If 0, spawn Ice. If anything else (like -1 or 1), spawn Bomb.
-                if (lastSpecialType == 0)
+                // 🔥 Pattern: 3 Bombs → 1 Ice
+                if (bombCounter < 3)
                 {
-                    prefabToSpawn = icePrefab;
-                    lastSpecialType = 1; // Next time will be Bomb
+                    prefabToSpawn = bombPrefab;
+                    bombCounter++;
                 }
                 else
                 {
-                    prefabToSpawn = bombPrefab;
-                    lastSpecialType = 0; // Next time will be Ice
+                    prefabToSpawn = icePrefab;
+                    bombCounter = 0; // reset after ice
                 }
             }
 
-
-
-            if (prefabToSpawn != null) SpawnObject(prefabToSpawn, corners);
+            if (prefabToSpawn != null)
+                SpawnObject(prefabToSpawn, corners);
 
             yield return new WaitForSeconds(1f);
         }
     }
-
     // --- 3. HELPER FUNCTION TO LAUNCH OBJECTS ---
     void SpawnObject(GameObject prefab, Vector3[] corners)
     {

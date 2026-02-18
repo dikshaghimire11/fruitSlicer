@@ -3557,7 +3557,7 @@ MonoBehaviour:
   - {fileID: 7767628628793562763, guid: 904ee6df875b0304885923d148bec93a, type: 3}
   - {fileID: 7767628628793562763, guid: d4a0dd5590153a54e814e1c116749386, type: 3}
   - {fileID: 7767628628793562763, guid: 73fd01f1792d0014a99d066e059b99b5, type: 3}
-  spawnDelay: 1.5
+  spawnDelay: 1.3
   spawnForce: 6
   gameContainer: {fileID: 3157106755508781862}
   targetFruitChance: 0.8
@@ -9565,7 +9565,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7232620994714346332, guid: 760afb29f009a1641a63be6fc69f45bb, type: 3}
       propertyPath: spawnDelay
-      value: 1.5
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: 7232620994714346332, guid: 760afb29f009a1641a63be6fc69f45bb, type: 3}
       propertyPath: spawnForce
