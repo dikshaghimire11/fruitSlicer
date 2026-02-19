@@ -3557,7 +3557,7 @@ MonoBehaviour:
   - {fileID: 7767628628793562763, guid: 904ee6df875b0304885923d148bec93a, type: 3}
   - {fileID: 7767628628793562763, guid: d4a0dd5590153a54e814e1c116749386, type: 3}
   - {fileID: 7767628628793562763, guid: 73fd01f1792d0014a99d066e059b99b5, type: 3}
-  spawnDelay: 1.3
+  spawnDelay: 1
   spawnForce: 6
   gameContainer: {fileID: 3157106755508781862}
   targetFruitChance: 0.8
@@ -7557,7 +7557,7 @@ MonoBehaviour:
   counterText: {fileID: 1311117001530735373}
   missionFruitIcon: {fileID: 7824571362230944169}
   fruitIconInMissionPanel: {fileID: 823349575}
-  levelDuration: 60
+  levelDuration: 40
   requiredCuts: 40
   pointsPerLevel: 500
   finalPoints: 0
@@ -9565,7 +9565,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7232620994714346332, guid: 760afb29f009a1641a63be6fc69f45bb, type: 3}
       propertyPath: spawnDelay
-      value: 1.3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7232620994714346332, guid: 760afb29f009a1641a63be6fc69f45bb, type: 3}
       propertyPath: spawnForce
@@ -10138,7 +10138,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 60
+  m_text: 40
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4749856e5c6abcb44b2a907fadc3def7, type: 2}
   m_sharedMaterial: {fileID: 3948449159148442010, guid: 4749856e5c6abcb44b2a907fadc3def7, type: 2}

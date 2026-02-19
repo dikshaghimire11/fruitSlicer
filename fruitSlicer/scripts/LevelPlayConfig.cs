@@ -7,8 +7,6 @@ public class LevelPlayConfig
     public static string addlifeRewardedVideoKey => GetAddLifeRewardedVideo();
     public static string InterstitialAdKey => getInterstitialAd();
 
-
-    public static string x2RewardKey => getx2ReawardedAd();
     static string GetAppKey()
     {
 #if UNITY_ANDROID
@@ -33,20 +31,11 @@ public class LevelPlayConfig
     static string getInterstitialAd()
     {
 #if UNITY_ANDROID
-        return "ux5u0c5odzxzptkn";
+        return "zrr51mm97kely1i7";
         // return "76yy3nay3ceui2a3"; // Test Only
 #else
             return "unexpected_platform";
 #endif
     }
 
-    static string getx2ReawardedAd()
-    {
-#if UNITY_ANDROID
-        return "ttrm5pvl3arr38gd";
-        // return "76yy3nay3ceui2a3"; // Test Only
-#else
-            return "unexpected_platform";
-#endif
-    }
 }
