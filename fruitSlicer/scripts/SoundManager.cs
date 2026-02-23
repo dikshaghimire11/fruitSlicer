@@ -190,7 +190,7 @@ public class SoundManager : MonoBehaviour
     {
         if (sfxSource != null && highScoreSound != null)
         {
-            sfxSource.PlayOneShot(highScoreSound, 0.75f);
+            sfxSource.PlayOneShot(highScoreSound, 0.3f);
         }
     }
     // public void PlayPerfectSound()

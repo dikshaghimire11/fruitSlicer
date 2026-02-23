@@ -64,6 +64,7 @@ public class ScoreManager : MonoBehaviour
     private GameObject timerParent;
 
 
+
     void Awake()
     {
         if (instance == null) { instance = this; }
@@ -79,7 +80,8 @@ public class ScoreManager : MonoBehaviour
             {
                 SoundManager.instance.PlayInfiniteMusic();
             }
-        }else if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
+        }
+        else if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
         {
             if (SoundManager.instance != null)
             {
@@ -143,8 +145,9 @@ public class ScoreManager : MonoBehaviour
         {
             score += amount;
             UpdateTexts();
+            bool isFirstTime = PlayerPrefs.GetInt("HasPlayedBefore", 0) == 0;
 
-            if (score > highScore && !hasShownHighScoreMessage)
+            if (!isFirstTime && score > highScore && !hasShownHighScoreMessage)
             {
                 hasShownHighScoreMessage = true;
 
@@ -201,7 +204,7 @@ public class ScoreManager : MonoBehaviour
         if (bonusPointsText != null) bonusPointsText.text = "=" + bonus;
         finalPoints = finalPoints + bonus;
         // Add Points to Total Coins
-        int totalCoins = PlayerPrefs.GetInt("TotalCoins", 100);
+        int totalCoins = PlayerPrefs.GetInt("TotalCoins", PlayerConfig.defaultCoins);
         PlayerPrefs.SetInt("TotalCoins", totalCoins + finalPoints);
         PlayerPrefs.Save();
 
@@ -296,7 +299,7 @@ public class ScoreManager : MonoBehaviour
         {
             SoundManager.instance.PlayButtonClickSound();
         }
-        int totalCoins = PlayerPrefs.GetInt("TotalCoins", 100);
+        int totalCoins = PlayerPrefs.GetInt("TotalCoins", PlayerConfig.defaultCoins);
         if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
         {
             PlayerPrefs.SetInt("TotalCoins", totalCoins + JuiceManager.instance.finalPoints);
@@ -361,7 +364,7 @@ public class ScoreManager : MonoBehaviour
         if (ModeManager.Instance.currentMode == GameMode.Infinite)
         {
 
-            int totalCoins = PlayerPrefs.GetInt("TotalCoins", 100);
+            int totalCoins = PlayerPrefs.GetInt("TotalCoins", PlayerConfig.defaultCoins);
             PlayerPrefs.SetInt("TotalCoins", score - alreadySavedCoins + totalCoins);
             alreadySavedCoins = score;
             PlayerPrefs.Save();
@@ -371,6 +374,8 @@ public class ScoreManager : MonoBehaviour
                 PlayerPrefs.SetInt("HighScore", highScore);
                 PlayerPrefs.Save();
             }
+            PlayerPrefs.SetInt("HasPlayedBefore", 1);
+            PlayerPrefs.Save();
 
         }
         else
@@ -387,8 +392,8 @@ public class ScoreManager : MonoBehaviour
         {
             if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
             {
-                if (currentLives > 0) finalScoreText.text = "TIME'S UP!\nMISSION FAILED";
-                else finalScoreText.text = "LIVES LOST!\nMISSION FAILED";
+                if (currentLives > 0) finalScoreText.text = "LIVES LOST!\nMISSION FAILED";
+                else finalScoreText.text = "TIME'S UP!\nMISSION FAILED";
             }
             else
             {

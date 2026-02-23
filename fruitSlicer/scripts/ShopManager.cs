@@ -22,8 +22,8 @@ public class ShopManager : MonoBehaviour
     {
         if (instance == null) { instance = this; }
 
-        // 1. Load Coin Balance (Default 1000 for testing)
-        totalCoins = PlayerPrefs.GetInt("TotalCoins", 100);
+        // 1. Load Coin Balance (Default 100 for testing)
+        totalCoins = PlayerPrefs.GetInt("TotalCoins", PlayerConfig.defaultCoins);
 
     }
     void Start()
