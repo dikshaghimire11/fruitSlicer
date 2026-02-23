@@ -14,6 +14,8 @@ public class FruitSpawner : MonoBehaviour
     public float spawnForce = 12f;
     public GameObject gameContainer;
 
+    public AudioClip[] fruitsSliceSounds;
+
     // --- JUICE MODE SETTINGS (NEW) ---
     [Header("Juice Mode Settings")]
     [Range(0f, 1f)]
@@ -29,7 +31,7 @@ public class FruitSpawner : MonoBehaviour
     private int lastFruitIndex = -1;
     private int lastSpecialType = -1;
     private float randomDelay;
-  private int bombCounter = 0;
+    private int bombCounter = 0;
 
     private Camera mainCamera;
 
@@ -146,7 +148,7 @@ public class FruitSpawner : MonoBehaviour
     }
 
     // --- 2. SPECIAL ITEM (BOMB/ICE) ROUTINE ---
-     IEnumerator SpawnBombAndIceRoutine()
+    IEnumerator SpawnBombAndIceRoutine()
     {
         Vector3[] corners = new Vector3[4];
 
@@ -213,6 +215,12 @@ public class FruitSpawner : MonoBehaviour
             float randomHorizontalForce = Random.Range(-spawnForce / 2, spawnForce / 2);
             rb.AddForce(new Vector2(randomHorizontalForce, 0), ForceMode2D.Impulse);
         }
+        Fruit fruitComp = newObj.GetComponent<Fruit>();
+        if (fruitComp != null && fruitsSliceSounds.Length > 0)
+        {
+            fruitComp.sliceSound = fruitsSliceSounds[Random.Range(0, fruitsSliceSounds.Length)];
+        }
+
     }
 
     public void HideFruitsLayer()

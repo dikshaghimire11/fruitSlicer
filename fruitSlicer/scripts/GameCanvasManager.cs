@@ -48,6 +48,9 @@ public class GameCanvasManager : MonoBehaviour
     public GameObject closeButton;
     public GameObject goToShopPanel;
 
+    public GameObject reviewPanel;
+    private bool waitingForReview;
+
 
 
 
@@ -63,41 +66,25 @@ public class GameCanvasManager : MonoBehaviour
     {
         bool navigateToShop = PlayerPrefs.GetInt("NavigateToShop", 0) == 1;
         bool hasSeenTutorial = PlayerPrefs.GetInt("HasSeenTutorial", 0) == 1;
+        bool hasReviewedMission = PlayerPrefs.GetInt("HasReview", 0) == 1;
+        int totalCoins = PlayerPrefs.GetInt("TotalCoins", PlayerConfig.defaultCoins);
+
         if (!navigateToShop && hasSeenTutorial)
         {
             showGoToShopPanel();
 
         }
+        else if (navigateToShop && !hasReviewedMission && totalCoins > 2000)
+        {
+            showGoToReviewPanel();
+        }
+
         else
         {
+            startGame();
 
             // StartMoving();
-            GameObject character;
-            if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
-            {
-                int length = ShopLists.instance.characterList.Length;
-                character = ShopLists.instance.characterList[Random.Range(0, length)];
-                choppingBoard.SetActive(false);
-            }
-            else
-            {
-                character = freeModeCharacter;
-            }
-            newObject = Instantiate(character, character.transform.position, character.transform.rotation, shopGameObject.transform);
-            newObject.transform.SetSiblingIndex(0);
-            if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
-            {
-                addLifeAndTimeObject.SetActive(true);
-            }
-            else
-            {
-                addLifeOnlyObject.SetActive(true);
-            }
-            if (SoundManager.instance != null) SoundManager.instance.PlayCharacterPopSound();
 
-
-            StartCoroutine(MoveRoutine(new Vector2(-0.35f, -0.87f), 1, 1, newObject));
-            StartCoroutine(MoveRoutine(new Vector2(0, 0f), 1, 0, workDesk));
         }
 
     }
@@ -180,6 +167,10 @@ public class GameCanvasManager : MonoBehaviour
         else if (type == 3)
         {
             goToShopPanel.SetActive(true);
+        }
+        else if (type == 4)
+        {
+            reviewPanel.SetActive(true);
         }
 
 
@@ -320,4 +311,96 @@ public class GameCanvasManager : MonoBehaviour
         SceneManager.LoadSceneAsync("ShopScene");
 
     }
+    public void showGoToReviewPanel()
+    {
+        if (newObject != null)
+        {
+            Destroy(newObject);
+        }
+        newObject = Instantiate(freeModeCharacter, freeModeCharacter.transform.position, freeModeCharacter.transform.rotation, shopGameObject.transform);
+        newObject.transform.SetSiblingIndex(0);
+
+        StartCoroutine(MoveRoutine(new Vector2(-0.35f, -0.87f), 1, 4, newObject));
+        StartCoroutine(MoveRoutine(new Vector2(0, 0f), 1, 4, workDesk));
+    }
+
+
+    public void goToPlayStore()
+    {
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayButtonClickSound();
+        }
+        reviewPanel.SetActive(false);
+        PlayerPrefs.SetInt("HasReview", 1);
+        PlayerPrefs.Save();
+        waitingForReview = true;
+        OpenPlayStoreReview();
+
+    }
+
+    public void OpenPlayStoreReview()
+    {
+#if UNITY_ANDROID
+    string packageName = Application.identifier;
+
+    // Open Play Store app directly to the review page
+    string reviewUrl = "market://details?id=" + packageName + "&reviewId=0";
+    string fallbackUrl = "https://play.google.com/store/apps/details?id=" + packageName;
+
+    try
+    {
+        Application.OpenURL(reviewUrl);
+    }
+    catch
+    {
+        Application.OpenURL(fallbackUrl); 
+    }
+#else
+        // Non-Android platforms: open web page
+        Application.OpenURL("https://play.google.com/store/apps/details?id=" + Application.identifier);
+#endif
+    }
+    private void OnApplicationPause(bool pause)
+    {
+        if (!pause && waitingForReview)
+        {
+            if (newObject != null)
+            {
+                Destroy(newObject);
+            }
+            startGame();
+            waitingForReview = false;
+        }
+    }
+    public void startGame()
+    {
+        GameObject character;
+        if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
+        {
+            int length = ShopLists.instance.characterList.Length;
+            character = ShopLists.instance.characterList[Random.Range(0, length)];
+            choppingBoard.SetActive(false);
+        }
+        else
+        {
+            character = freeModeCharacter;
+        }
+        newObject = Instantiate(character, character.transform.position, character.transform.rotation, shopGameObject.transform);
+        newObject.transform.SetSiblingIndex(0);
+        if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
+        {
+            addLifeAndTimeObject.SetActive(true);
+        }
+        else
+        {
+            addLifeOnlyObject.SetActive(true);
+        }
+        if (SoundManager.instance != null) SoundManager.instance.PlayCharacterPopSound();
+
+
+        StartCoroutine(MoveRoutine(new Vector2(-0.35f, -0.87f), 1, 1, newObject));
+        StartCoroutine(MoveRoutine(new Vector2(0, 0f), 1, 0, workDesk));
+    }
+
 }
