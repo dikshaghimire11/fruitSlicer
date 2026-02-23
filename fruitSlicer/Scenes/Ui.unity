@@ -882,6 +882,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewEmptyCSharpScript
   shopBackground: {fileID: 7921866028573119937}
+  blurredShopBackground: {fileID: 908746516}
   GameCanvas: {fileID: 3157106755508781862}
 --- !u!4 &404942764
 Transform:
@@ -3044,6 +3045,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 882272592}
+  m_CullTransparentMesh: 1
+--- !u!1 &908746514
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 908746515}
+  - component: {fileID: 908746517}
+  - component: {fileID: 908746516}
+  m_Layer: 5
+  m_Name: BlurredBackground
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &908746515
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908746514}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalScale: {x: 0.0051957876, y: 0.0051957886, z: 0.51957875}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3894230602764016268}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.0063951015, y: 0}
+  m_SizeDelta: {x: 608.79, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &908746516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908746514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -3666884473917519839, guid: 7087f3b313f626544a5fa760924f1903, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &908746517
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908746514}
   m_CullTransparentMesh: 1
 --- !u!1 &936022327
 GameObject:
@@ -6792,6 +6868,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5139106960391300893, guid: 07f16581bdde37849aff9603148fa1ff, type: 3}
+      propertyPath: shopBackgroundList.Array.data[1].blurredSprite
+      value: 
+      objectReference: {fileID: -9055192626705066375, guid: 4717b305269a1c84ba9ee889c3443e2c, type: 3}
+    - target: {fileID: 5139106960391300893, guid: 07f16581bdde37849aff9603148fa1ff, type: 3}
+      propertyPath: shopBackgroundList.Array.data[2].blurredSprite
+      value: 
+      objectReference: {fileID: 6617642490607179941, guid: 1c31225bdcefc1f41ad597415dd3b6bc, type: 3}
+    - target: {fileID: 5139106960391300893, guid: 07f16581bdde37849aff9603148fa1ff, type: 3}
+      propertyPath: shopBackgroundList.Array.data[3].blurredSprite
+      value: 
+      objectReference: {fileID: 5004877566587047478, guid: 5133e384c864f3647a30b8a3ca27d702, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9292,6 +9380,7 @@ MonoBehaviour:
   tutorialVideoPlayer: {fileID: 1827677475}
   closeButton: {fileID: 1763933487}
   goToShopPanel: {fileID: 405239797}
+  notBlurredShopBackground: {fileID: 1025487430366865980}
 --- !u!114 &1311117001530735373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11485,6 +11574,7 @@ RectTransform:
   m_LocalScale: {x: 0.0009259259, y: 0.00052083336, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 908746515}
   - {fileID: 4510946600635457}
   - {fileID: 3513221687035560658}
   - {fileID: 439217405531476107}

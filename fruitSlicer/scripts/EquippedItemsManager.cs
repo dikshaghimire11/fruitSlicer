@@ -4,6 +4,8 @@ using UnityEngine.UI;
 public class EquippedItemsManager : MonoBehaviour
 {
     public Image shopBackground;
+
+    public Image blurredShopBackground;
     public GameObject GameCanvas;
 
 
@@ -15,6 +17,8 @@ public class EquippedItemsManager : MonoBehaviour
                                                                     // Access your ShopManager array or a duplicate list to find sprite
                                                                     // (A better way is to make ShopManager a singleton that doesn't destroy on load)
         shopBackground.sprite = ShopLists.instance.shopBackgroundList[bgIndex].actualSprite;
+
+        blurredShopBackground.sprite = ShopLists.instance.shopBackgroundList[bgIndex].blurredSprite;
 
         int bladeIndex = PlayerPrefs.GetInt("Equipped_Blade", 0);
 

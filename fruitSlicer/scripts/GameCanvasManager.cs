@@ -48,6 +48,8 @@ public class GameCanvasManager : MonoBehaviour
     public GameObject closeButton;
     public GameObject goToShopPanel;
 
+    public GameObject notBlurredShopBackground;
+
 
 
 
@@ -111,7 +113,7 @@ public class GameCanvasManager : MonoBehaviour
             SoundManager.instance.PlayButtonClickSound();
         }
 
-
+        notBlurredShopBackground.SetActive(false);
         missionPanel.SetActive(false);
         if (SoundManager.instance != null) SoundManager.instance.PlayCharacterGoneSound();
         bool hasSeenTutorial = PlayerPrefs.GetInt("HasSeenTutorial", 0) == 1;
