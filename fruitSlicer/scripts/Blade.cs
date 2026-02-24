@@ -29,6 +29,8 @@ public class Blade : MonoBehaviour
     public float maxSoundVelocity = 15f;
     public float audioFadeSpeed = 6f;
 
+    private GameObject fingerObject;
+
     void Awake()
     {
         mainCamera = Camera.main;
@@ -47,8 +49,14 @@ public class Blade : MonoBehaviour
         audioSource.Stop();
     }
 
+    void Start()
+    {
+        fingerObject = GameObject.Find("Finger");
+    }
+
     void Update()
     {
+        fingerObject.transform.position = previousPosition;
         if (IsInputDown()) StartSlicing();
         else if (IsInputUp()) StopSlicing();
 
@@ -222,15 +230,15 @@ public class Blade : MonoBehaviour
         {
             if (!isCorrectFruit)
             {
-                comboCount = 0;   
+                comboCount = 0;
                 return;
             }
 
-            comboCount++;        
+            comboCount++;
         }
         else
         {
-            comboCount++;        
+            comboCount++;
         }
 
         if (comboCount < 2) return;
