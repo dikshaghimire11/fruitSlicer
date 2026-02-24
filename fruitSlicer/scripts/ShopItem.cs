@@ -8,6 +8,8 @@ public class ShopItem
     public Sprite icon;          // The icon shown in the shop UI
     public Sprite actualSprite;
 
+    public Sprite blurredSprite;
+
     public GameObject prefb;
 
 

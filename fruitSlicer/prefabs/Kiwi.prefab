@@ -141,7 +141,7 @@ MonoBehaviour:
   sliceSound: {fileID: 8300000, guid: ec2cbefa939196042a95b1800e612ee5, type: 3}
   points: 5
   missYPosition: -6
-  juiceColor: {r: 0.78823537, g: 0.8235295, b: 0.43921572, a: 1}
+  juiceColor: {r: 0.74465525, g: 1, b: 0.17924517, a: 1}
 --- !u!58 &2613413523906398592
 CircleCollider2D:
   m_ObjectHideFlags: 0

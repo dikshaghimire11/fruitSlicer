@@ -48,8 +48,12 @@ public class GameCanvasManager : MonoBehaviour
     public GameObject closeButton;
     public GameObject goToShopPanel;
 
+
     public GameObject reviewPanel;
     private bool waitingForReview;
+
+    public GameObject notBlurredShopBackground;
+
 
 
 
@@ -74,7 +78,7 @@ public class GameCanvasManager : MonoBehaviour
             showGoToShopPanel();
 
         }
-        else if (navigateToShop && !hasReviewedMission && totalCoins > 2000)
+        else if (navigateToShop && !hasReviewedMission && totalCoins > (2000))
         {
             showGoToReviewPanel();
         }
@@ -88,9 +92,6 @@ public class GameCanvasManager : MonoBehaviour
         }
 
     }
-
-
-
     public void missionAccepted()
     {
         if (SoundManager.instance != null)
@@ -98,7 +99,7 @@ public class GameCanvasManager : MonoBehaviour
             SoundManager.instance.PlayButtonClickSound();
         }
 
-
+        notBlurredShopBackground.SetActive(false);
         missionPanel.SetActive(false);
         if (SoundManager.instance != null) SoundManager.instance.PlayCharacterGoneSound();
         bool hasSeenTutorial = PlayerPrefs.GetInt("HasSeenTutorial", 0) == 1;
@@ -373,6 +374,22 @@ public class GameCanvasManager : MonoBehaviour
             waitingForReview = false;
         }
     }
+    public void closeReviewPanel()
+    {
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayButtonClickSound();
+        }
+        if (newObject != null)
+        {
+            Destroy(newObject);
+        }
+        PlayerPrefs.SetInt("HasReview", 1);
+        PlayerPrefs.Save();
+        reviewPanel.SetActive(false);
+        startGame();
+    }
+
     public void startGame()
     {
         GameObject character;

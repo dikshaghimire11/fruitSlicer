@@ -53,7 +53,7 @@ public class AdsManager : MonoBehaviour
     public IEnumerator interstitialAdCounter()
     {
 
-        yield return new WaitForSeconds(120f);
+        yield return new WaitForSeconds(300f);
         canShowInterstitialAd = true;
         yield break;
     }
@@ -152,7 +152,7 @@ public class AdsManager : MonoBehaviour
 
     void RewardedVideoOnAdRewardedEvent(LevelPlayAdInfo adInfo, LevelPlayReward reward)
     {
-      
+
         if (currentAdvertisement == AdvertisementType_.AddLife)
         {
             ScoreManager.instance.addLifeAndResumeGame();
@@ -162,7 +162,7 @@ public class AdsManager : MonoBehaviour
         {
             ScoreManager.instance.x2Reward();
         }
-    
+
         addLifeRewardVideo.LoadAd();
 
     }

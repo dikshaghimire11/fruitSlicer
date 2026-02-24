@@ -135,7 +135,7 @@ MonoBehaviour:
   delayBeforeFade: 0.5
   fadeDuration: 0.5
   juicePrefab: {fileID: 4892252734919827426, guid: 71a81f525bd9f764cb0d35d595aeeee9, type: 3}
-  specificJuiceColor: {r: 0.5921569, g: 0.69411767, b: 0.30980393, a: 1}
+  specificJuiceColor: {r: 0.74509805, g: 1, b: 0.18039216, a: 0.69411767}
   useSpriteColor: 0
   scaleMultiplier: 0.5
   randomizeRotation: 1
