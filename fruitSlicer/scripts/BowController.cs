@@ -160,7 +160,7 @@ public class BowController : MonoBehaviour
         Vector3 mousePos = GetInputPosition();
         mousePos.z = 0f;
 
-        Vector3 direction = mousePos - transform.position;
+        Vector3 direction = transform.position - mousePos;
 
         transform.right = direction;
     }
