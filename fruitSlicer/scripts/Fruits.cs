@@ -98,7 +98,7 @@ public class Fruit : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
+        Destroy(gameObject);
         switch (ModeManager.Instance.currentMode)
         {
             case GameMode.Infinite:
@@ -123,7 +123,7 @@ public class Fruit : MonoBehaviour
                 }
                 break;
 
-                Destroy(gameObject);
+
         }
     }
 }

@@ -276,11 +276,13 @@ public class ScoreManager : MonoBehaviour
         gameOverPanel.SetActive(false);
         GameCanvasManager.instance.unHideUiInteraction();
         if (FruitSpawner.instance != null) FruitSpawner.instance.ShowFruitsLayer();
+        if (ArcheryFruitSpawner.instance != null) ArcheryFruitSpawner.instance.ShowFruitsLayer();
         isGameOver = false;
         GameObject floatingLifeIcon;
         switch (ModeManager.Instance.currentMode)
         {
             case GameMode.Infinite:
+            case GameMode.Archery:
                 floatingLifeIcon = Instantiate(floatingReward, Vector2.zero, Quaternion.identity, gameCanvas);
                 floatingLifeIcon.GetComponentInChildren<Image>().sprite = LifeImage;
                 floatingLifeIcon.GetComponentInChildren<TextMeshProUGUI>().text = "1";
@@ -308,7 +310,17 @@ public class ScoreManager : MonoBehaviour
             SoundManager.instance.PlayLiveAndBonusAddedSound();
         }
         Time.timeScale = 1f;
-        FruitSpawner.instance.startSpawnning();
+        switch (ModeManager.Instance.currentMode)
+        {
+
+            case GameMode.Archery:
+                ArcheryFruitSpawner.instance.startSpawnning();
+                break;
+            case GameMode.JuiceMaking:
+            case GameMode.Infinite:
+                FruitSpawner.instance.startSpawnning();
+                break;
+        }
     }
 
     public IEnumerator moveFloatingRewardsAndDestroy(GameObject rewardObject)
@@ -337,6 +349,7 @@ public class ScoreManager : MonoBehaviour
         switch (ModeManager.Instance.currentMode)
         {
             case GameMode.Infinite:
+            case GameMode.Archery:
                 if (finalScoreText != null)
                 {
 

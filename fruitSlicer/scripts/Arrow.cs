@@ -67,16 +67,16 @@ public class Arrow : MonoBehaviour
             return;
         }
 
-        Bomb bomb = other.GetComponent<Bomb>();
-        if (bomb != null)
-        {
-            other.enabled = false;
-            bomb.Explode();
-            ShowFloatingText("BOOM!", Color.red, bomb.transform.position, 0.6f, 0.25f);
-            ScoreManager.instance?.HitBomb();
-            comboCount = 0;
-            return;
-        }
+        // Bomb bomb = other.GetComponent<Bomb>();
+        // if (bomb != null)
+        // {
+        //     other.enabled = false;
+        //     bomb.Explode();
+        //     ShowFloatingText("BOOM!", Color.red, bomb.transform.position, 0.6f, 0.25f);
+        //     ScoreManager.instance?.HitBomb();
+        //     comboCount = 0;
+        //     return;
+        // }
 
     }
 

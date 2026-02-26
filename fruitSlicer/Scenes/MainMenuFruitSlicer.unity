@@ -2302,7 +2302,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Archery
+  m_text: ARCHERY
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4749856e5c6abcb44b2a907fadc3def7, type: 2}
   m_sharedMaterial: {fileID: 3948449159148442010, guid: 4749856e5c6abcb44b2a907fadc3def7, type: 2}
@@ -3348,6 +3348,9 @@ MonoBehaviour:
   infiniteMusicList:
   - {fileID: 8300000, guid: 59b551fd451f1f2449b98a1e579be641, type: 3}
   - {fileID: 8300000, guid: c1578f71fe69674409fdf6b33e3b7a56, type: 3}
+  archeryMusicList:
+  - {fileID: 8300000, guid: c1578f71fe69674409fdf6b33e3b7a56, type: 3}
+  - {fileID: 8300000, guid: 59b551fd451f1f2449b98a1e579be641, type: 3}
   lifeLostSound: {fileID: 8300000, guid: ec1cf918e967f974ea7eb889a52d087d, type: 3}
   gameOverSound: {fileID: 8300000, guid: 99b8fd69f9c286d4faaf641c36f4bd3f, type: 3}
   characterPopSound: {fileID: 8300000, guid: 8fce14620cb29a8488775d45ad700fae, type: 3}

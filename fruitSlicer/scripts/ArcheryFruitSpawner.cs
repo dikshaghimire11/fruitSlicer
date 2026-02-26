@@ -26,6 +26,7 @@ public class ArcheryFruitSpawner : MonoBehaviour
     public RectTransform deSpawnArea;
 
     public float[] spawnPositions;
+    private int lastSpawnIndex = -1;
 
     void Awake()
     {
@@ -64,6 +65,11 @@ public class ArcheryFruitSpawner : MonoBehaviour
         while (true)
         {
 
+            while (ScoreManager.instance.isGameOver)
+            {
+                yield break;
+            }
+            ;
             yield return new WaitForSeconds(spawnDelay);
 
             // 2. Spawn Logic
@@ -92,15 +98,15 @@ public class ArcheryFruitSpawner : MonoBehaviour
         }
     }
     // --- BOMB SPAWN ROUTINE ---
-    IEnumerator SpawnBombRoutine()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(specialSpawnDelay);
-            if (bombPrefab != null)
-                SpawnObject(bombPrefab);
-        }
-    }
+    // IEnumerator SpawnBombRoutine()
+    // {
+    //     while (true)
+    //     {
+    //         yield return new WaitForSeconds(specialSpawnDelay);
+    //         if (bombPrefab != null)
+    //             SpawnObject(bombPrefab);
+    //     }
+    // }
     // --- SPAWN OBJECT ---
     void SpawnObject(GameObject prefab)
     {
@@ -125,7 +131,15 @@ public class ArcheryFruitSpawner : MonoBehaviour
 
         if (spawnPositions != null && spawnPositions.Length > 0)
         {
-            int randomIndex = Random.Range(0, spawnPositions.Length);
+            int randomIndex;
+
+            do
+            {
+                randomIndex = Random.Range(0, spawnPositions.Length);
+            }
+            while (randomIndex == lastSpawnIndex && spawnPositions.Length > 1);
+
+            lastSpawnIndex = randomIndex;
             randomY = spawnPositions[randomIndex];
         }
         else
@@ -155,12 +169,12 @@ public class ArcheryFruitSpawner : MonoBehaviour
                 newObj.transform.localScale *= fruitComp.uniformScale;
             }
         }
-        Bomb bombComp = newObj.GetComponent<Bomb>();
-        if (bombComp != null)
-        {
-            bombComp.transform.localScale *= 0.8f;
+        // Bomb bombComp = newObj.GetComponent<Bomb>();
+        // if (bombComp != null)
+        // {
+        //     bombComp.transform.localScale *= 0.8f;
 
-        }
+        // }
     }
     IEnumerator MoveDownWorld(GameObject obj, float duration, float rightX)
     {
