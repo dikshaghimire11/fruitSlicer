@@ -12,6 +12,8 @@ public class Fruit : MonoBehaviour
     public int points = 10;
     public float missYPosition = -8f;
 
+    public float missXPosition = 3f;
+
     public Color juiceColor;
 
     private bool isSliced = false;
@@ -69,34 +71,43 @@ public class Fruit : MonoBehaviour
 
     void Update()
     {
+      
         if (transform.position.y < missYPosition)
         {
-            if (ScoreManager.instance != null && ScoreManager.instance.isGameOver)
-            {
-                Destroy(gameObject);
-                return;
-            }
-            if (ModeManager.Instance.currentMode == GameMode.Infinite)
-            {
-                if (ScoreManager.instance != null)
-                    ScoreManager.instance.LoseLife();
+            fruitCrossedBoundary();
+        }
+    }
+
+
+    public void fruitCrossedBoundary()
+    {
+
+        if (ScoreManager.instance != null && ScoreManager.instance.isGameOver)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        if (ModeManager.Instance.currentMode == GameMode.Infinite)
+        {
+            if (ScoreManager.instance != null)
+                ScoreManager.instance.LoseLife();
+            if (SoundManager.instance != null)
                 SoundManager.instance.PlayMissTargetedFruitSound();
-            }
-            else
+        }
+        else
+        {
+            bool isTargetFruit =
+       JuiceManager.instance != null &&
+       JuiceManager.instance.targetFruitNew != null &&
+       gameObject.name.StartsWith(JuiceManager.instance.targetFruitNew.name);
+            if (isTargetFruit)
             {
-                bool isTargetFruit =
-           JuiceManager.instance != null &&
-           JuiceManager.instance.targetFruitNew != null &&
-           gameObject.name.StartsWith(JuiceManager.instance.targetFruitNew.name);
-                if (isTargetFruit)
+                if (SoundManager.instance != null)
                 {
-                    if (SoundManager.instance != null)
-                    {
-                        SoundManager.instance.PlayMissTargetedFruitSound();
-                    }
+                    SoundManager.instance.PlayMissTargetedFruitSound();
                 }
             }
-            Destroy(gameObject);
         }
+        Destroy(gameObject);
     }
 }
