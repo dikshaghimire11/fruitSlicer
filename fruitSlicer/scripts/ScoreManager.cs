@@ -104,7 +104,16 @@ public class ScoreManager : MonoBehaviour
             scoreParent = scoreText.transform.parent.gameObject;
         }
         // ---------------------------------
-        highScore = PlayerPrefs.GetInt("HighScore", 0);
+        switch (ModeManager.Instance.currentMode)
+        {
+            case GameMode.Infinite:
+                highScore = PlayerPrefs.GetInt("HighScore", 0);
+                break;
+            case GameMode.Archery:
+                highScore = PlayerPrefs.GetInt("HighScoreForArchery", 0);
+                break;
+        }
+
 
         currentLives = maxLives;
         score = 0;
@@ -149,7 +158,6 @@ public class ScoreManager : MonoBehaviour
 
 
     }
-
     public void AddScore(int amount)
     {
         if (isGameOver) return;
@@ -197,9 +205,6 @@ public class ScoreManager : MonoBehaviour
                             0.5f
                         );
                     }
-
-
-
                 }
                 break;
         }
@@ -384,17 +389,18 @@ public class ScoreManager : MonoBehaviour
         if (gameOverPanel != null) gameOverPanel.SetActive(true);
         GameCanvasManager.instance.hideUIInterction();
         if (FruitSpawner.instance != null) FruitSpawner.instance.HideFruitsLayer();
+        if (ArcheryFruitSpawner.instance != null) ArcheryFruitSpawner.instance.HideFruitsLayer();
 
         // Save Score/Coins
 
 
         // High Score Logic (Infinite Mode)
-
+        int totalCoins = PlayerPrefs.GetInt("TotalCoins", PlayerConfig.defaultCoins);
         switch
         (ModeManager.Instance.currentMode)
         {
             case GameMode.Infinite:
-                int totalCoins = PlayerPrefs.GetInt("TotalCoins", PlayerConfig.defaultCoins);
+
                 PlayerPrefs.SetInt("TotalCoins", score - alreadySavedCoins + totalCoins);
                 alreadySavedCoins = score;
                 PlayerPrefs.Save();
@@ -411,6 +417,20 @@ public class ScoreManager : MonoBehaviour
             case GameMode.JuiceMaking:
                 JuiceManager.instance.isLevelActive = false;
                 break;
+            case GameMode.Archery:
+                PlayerPrefs.SetInt("TotalCoins", score - alreadySavedCoins + totalCoins);
+                alreadySavedCoins = score;
+                PlayerPrefs.Save();
+                if (score > highScore)
+                {
+                    highScore = score;
+                    PlayerPrefs.SetInt("HighScoreForArchery", highScore);
+                    PlayerPrefs.Save();
+                }
+                PlayerPrefs.SetInt("HasPlayedBefore", 1);
+                PlayerPrefs.Save();
+
+                break;
         }
         ;
 
@@ -424,12 +444,14 @@ public class ScoreManager : MonoBehaviour
             switch (ModeManager.Instance.currentMode)
             {
                 case GameMode.Infinite:
+                case GameMode.Archery:
                     finalScoreText.text = "SCORE: " + score + "\nHIGH SCORE: " + highScore;
                     break;
                 case GameMode.JuiceMaking:
                     if (currentLives > 0) finalScoreText.text = "MISSION FAILED!\nTIME'S UP!";
                     else finalScoreText.text = "MISSION FAILED!\nLIVES LOST!";
                     break;
+
             }
 
 
@@ -472,6 +494,7 @@ public class ScoreManager : MonoBehaviour
             Time.timeScale = 1f;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             if (FruitSpawner.instance != null) FruitSpawner.instance.ShowFruitsLayer();
+            if (ArcheryFruitSpawner.instance != null) ArcheryFruitSpawner.instance.ShowFruitsLayer();
         }
 
     }

@@ -167,24 +167,24 @@ public class Blade : MonoBehaviour
             other.enabled = false;
             fruit.Slice(currentSliceDirection);
             bool isCorrectFruit = false;
-            if (ModeManager.Instance.currentMode == GameMode.Infinite)
+            switch (ModeManager.Instance.currentMode)
             {
-                ScoreManager.instance?.AddScore(fruit.points);
-                ShowFloatingText("+" + fruit.points, Color.cyan, fruit.transform.position, 0.5f, 0.2f);
-            }
-            else if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
-            {
-                isCorrectFruit = JuiceManager.instance?.CheckFruit(fruit.name) ?? false;
-                if (isCorrectFruit)
-                {
-                    ShowFloatingText("PERFECT!", Color.cyan, fruit.transform.position, 0.6f, 0.2f);
-                }
-                else
-                {
-                    ShowFloatingText("X", Color.red, fruit.transform.position, 1.5f, 0.2f);
-                }
+                case GameMode.Infinite:
+                    ScoreManager.instance?.AddScore(fruit.points);
+                    ShowFloatingText("+" + fruit.points, Color.cyan, fruit.transform.position, 0.5f, 0.2f);
+                    break;
 
-
+                case GameMode.JuiceMaking:
+                    isCorrectFruit = JuiceManager.instance?.CheckFruit(fruit.name) ?? false;
+                    if (isCorrectFruit)
+                    {
+                        ShowFloatingText("PERFECT!", Color.cyan, fruit.transform.position, 0.6f, 0.2f);
+                    }
+                    else
+                    {
+                        ShowFloatingText("X", Color.red, fruit.transform.position, 1.5f, 0.2f);
+                    }
+                    break;
             }
 
             HandleCombo(fruit, isCorrectFruit);
@@ -222,15 +222,15 @@ public class Blade : MonoBehaviour
         {
             if (!isCorrectFruit)
             {
-                comboCount = 0;   
+                comboCount = 0;
                 return;
             }
 
-            comboCount++;        
+            comboCount++;
         }
         else
         {
-            comboCount++;        
+            comboCount++;
         }
 
         if (comboCount < 2) return;
@@ -238,19 +238,20 @@ public class Blade : MonoBehaviour
         float textSize = 0.6f;
         int bonus;
 
-        if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
+        switch (ModeManager.Instance.currentMode)
         {
+            case GameMode.JuiceMaking:
+                bonus = comboCount * 2;
+                ScoreManager.instance?.addBonusAmount(bonus);
+                ShowFloatingText("+" + bonus, Color.yellow, fruit.transform.position, textSize, 0f);
+                break;
 
-            bonus = comboCount * 2;
-            ScoreManager.instance?.addBonusAmount(bonus);
-            ShowFloatingText("+" + bonus, Color.yellow, fruit.transform.position, textSize, 0f);
-        }
-        else
-        {
-            bonus = comboCount * 5;
-            ScoreManager.instance?.AddScore(bonus);
-            ShowFloatingText("COMBO", Color.yellow, fruit.transform.position + new Vector3(-0.2f, 0f, 0f), textSize, 0f);
-            ShowFloatingText("+" + bonus, Color.yellow, fruit.transform.position + new Vector3(0.2f, 0f, 0f), textSize, 0f);
+            case GameMode.Infinite:
+                bonus = comboCount * 5;
+                ScoreManager.instance?.AddScore(bonus);
+                ShowFloatingText("COMBO", Color.yellow, fruit.transform.position + new Vector3(-0.2f, 0f, 0f), textSize, 0f);
+                ShowFloatingText("+" + bonus, Color.yellow, fruit.transform.position + new Vector3(0.2f, 0f, 0f), textSize, 0f);
+                break;
         }
 
         if (SoundManager.instance != null)

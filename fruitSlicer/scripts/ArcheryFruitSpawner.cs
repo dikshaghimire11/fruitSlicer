@@ -45,7 +45,7 @@ public class ArcheryFruitSpawner : MonoBehaviour
     {
         StartCoroutine(SpawnFruitsRoutine());
         // StartCoroutine(SpawnFruitsRoutine(false));
-        StartCoroutine(SpawnBombRoutine());
+        //StartCoroutine(SpawnBombRoutine());
     }
     IEnumerator SpawnFruitsRoutine()
     {

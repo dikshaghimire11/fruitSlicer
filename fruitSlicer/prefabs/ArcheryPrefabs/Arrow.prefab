@@ -126,6 +126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Arrow
   shootPower: 10
+  floatingTextPrefab: {fileID: 6631497170589391908, guid: 1ff7f96d3b19eea42abafc0b61e6051a, type: 3}
+  maxComboDelay: 0.2
 --- !u!68 &6775445109825443117
 EdgeCollider2D:
   m_ObjectHideFlags: 0

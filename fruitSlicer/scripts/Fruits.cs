@@ -98,27 +98,33 @@ public class Fruit : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        if (ModeManager.Instance.currentMode == GameMode.Infinite)
+
+        switch (ModeManager.Instance.currentMode)
         {
-            if (ScoreManager.instance != null)
-                ScoreManager.instance.LoseLife();
-            if (SoundManager.instance != null)
-                SoundManager.instance.PlayMissTargetedFruitSound();
-        }
-        else
-        {
-            bool isTargetFruit =
-       JuiceManager.instance != null &&
-       JuiceManager.instance.targetFruitNew != null &&
-       gameObject.name.StartsWith(JuiceManager.instance.targetFruitNew.name);
-            if (isTargetFruit)
-            {
+            case GameMode.Infinite:
+            case GameMode.Archery:
+                if (ScoreManager.instance != null)
+                    ScoreManager.instance.LoseLife();
                 if (SoundManager.instance != null)
-                {
                     SoundManager.instance.PlayMissTargetedFruitSound();
+                break;
+
+            case GameMode.JuiceMaking:
+                bool isTargetFruit =
+        JuiceManager.instance != null &&
+        JuiceManager.instance.targetFruitNew != null &&
+        gameObject.name.StartsWith(JuiceManager.instance.targetFruitNew.name);
+                if (isTargetFruit)
+                {
+                    if (SoundManager.instance != null)
+                    {
+                        SoundManager.instance.PlayMissTargetedFruitSound();
+                    }
                 }
-            }
+                break;
+
+                Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
 }
+
