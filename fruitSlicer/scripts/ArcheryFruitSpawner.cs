@@ -1,6 +1,8 @@
 using UnityEngine;
+
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 
 public class ArcheryFruitSpawner : MonoBehaviour
 {
@@ -20,6 +22,8 @@ public class ArcheryFruitSpawner : MonoBehaviour
     private float randomDelay;
     private Camera mainCamera;
     public RectTransform spawnArea;
+
+    public RectTransform deSpawnArea;
 
     void Awake()
     {
@@ -45,7 +49,7 @@ public class ArcheryFruitSpawner : MonoBehaviour
     {
 
 
-        Vector3[] corners = new Vector3[4];
+        UnityEngine.Vector3[] corners = new  UnityEngine.Vector3[4];
         if (gameContainer != null)
         {
             gameContainer.GetComponent<RectTransform>().GetWorldCorners(corners);
@@ -112,24 +116,43 @@ public class ArcheryFruitSpawner : MonoBehaviour
     {
         if (prefab == null) return;
 
+
+
+
+        // Array to store the 4 corners
+        UnityEngine.Vector3[] corners = new UnityEngine.Vector3[4];
+
+        // Get the corners in world space
+        spawnArea.GetWorldCorners(corners);
+
+        // corners order: 0 = bottom-left, 1 = top-left, 2 = top-right, 3 = bottom-right
+
+
+
+
         // Get top of screen in world
-        Vector3 topLeft = mainCamera.ViewportToWorldPoint(new Vector3(0, 1, 0));
-        Vector3 topRight = mainCamera.ViewportToWorldPoint(new Vector3(1, 1, 0));
+        // Vector3 topLeft = mainCamera.ViewportToWorldPoint(new Vector3(0, 1, 0));
+        UnityEngine.Vector3 topRight = corners[2];
+        UnityEngine.Vector3 bottomRight = corners[3];
 
         float horizontalMargin = 0.5f;
 
-        float randomX = Random.Range(topLeft.x + horizontalMargin, topRight.x - horizontalMargin);
+        float randomY = Random.Range(topRight.y + horizontalMargin, bottomRight.y - horizontalMargin);
 
-        float spawnY = topLeft.y + 1f; // little above screen
+        float spawnX = topRight.x; // little left of Screen
 
-        Vector3 spawnPos = new Vector3(randomX, spawnY, -10f);
+        UnityEngine.Vector3 spawnPos = new UnityEngine.Vector3(spawnX, randomY, -10f);
 
-        GameObject newObj = Instantiate(prefab, spawnPos, Quaternion.identity);
+        GameObject newObj = Instantiate(prefab, spawnPos, UnityEngine.Quaternion.identity);
+
+
+
+
 
         // Bottom of screen
-        float bottomY = mainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).y;
+        float rightX = deSpawnArea.transform.position.x;
 
-        StartCoroutine(MoveDownWorld(newObj, fallDuration, bottomY));
+        StartCoroutine(MoveDownWorld(newObj, fallDuration, rightX));
 
         // Assign random slice sound
         Fruit fruitComp = newObj.GetComponent<Fruit>();
@@ -150,16 +173,16 @@ public class ArcheryFruitSpawner : MonoBehaviour
         Bomb bombComp = newObj.GetComponent<Bomb>();
         if (bombComp != null)
         {
-            newObj.transform.localScale *= 0.8f; 
+            newObj.transform.localScale *= 0.8f;
 
         }
     }
-    IEnumerator MoveDownWorld(GameObject obj, float duration, float bottomY)
+    IEnumerator MoveDownWorld(GameObject obj, float duration, float rightX)
     {
         if (obj == null) yield break;
 
-        Vector3 startPos = obj.transform.position;
-        Vector3 endPos = new Vector3(startPos.x, bottomY - 1f, startPos.z);
+         UnityEngine.Vector3 startPos = obj.transform.position;
+         UnityEngine.Vector3 endPos = new  UnityEngine.Vector3(rightX, startPos.y, startPos.z);
 
         float elapsed = 0f;
 
@@ -168,7 +191,7 @@ public class ArcheryFruitSpawner : MonoBehaviour
             elapsed += Time.deltaTime;
             float t = elapsed / duration;
 
-            obj.transform.position = Vector3.Lerp(startPos, endPos, t);
+            obj.transform.position =  UnityEngine.Vector3.Lerp(startPos, endPos, t);
 
             yield return null;
         }
