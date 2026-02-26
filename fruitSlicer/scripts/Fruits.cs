@@ -53,6 +53,13 @@ public class Fruit : MonoBehaviour
         // Spawn halves
         GameObject leftInst = Instantiate(leftHalf, transform.position, transform.rotation);
         GameObject rightInst = Instantiate(rightHalf, transform.position, transform.rotation);
+        if (ModeManager.Instance.currentMode == GameMode.Archery)
+        {
+            Vector3 newScale = transform.localScale * 1f;
+
+            leftInst.transform.localScale = newScale;
+            rightInst.transform.localScale = newScale;
+        }
 
         Rigidbody2D leftRb = leftInst.GetComponent<Rigidbody2D>();
         Rigidbody2D rightRb = rightInst.GetComponent<Rigidbody2D>();
