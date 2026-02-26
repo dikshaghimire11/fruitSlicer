@@ -12,7 +12,7 @@ public class Fruit : MonoBehaviour
     public int points = 10;
     public float missYPosition = -8f;
 
-    public float missXPosition = 3f;
+    private float missXPosition = 1.7f;
 
     public Color juiceColor;
 
@@ -71,11 +71,21 @@ public class Fruit : MonoBehaviour
 
     void Update()
     {
-      
-        if (transform.position.y < missYPosition)
+        if (ModeManager.Instance.currentMode != GameMode.Archery)
         {
-            fruitCrossedBoundary();
+            if (transform.position.y < missYPosition)
+            {
+                fruitCrossedBoundary();
+            }
         }
+        else
+        {
+            if (transform.position.x > missXPosition)
+            {
+                 fruitCrossedBoundary();  
+            }
+        }
+
     }
 
 

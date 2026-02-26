@@ -10,7 +10,7 @@ public class ArcheryModeManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        FruitSpawner fs = FruitSpawner.instance;
+        ArcheryFruitSpawner fs = ArcheryFruitSpawner.instance;
         fs.spawnDelay = spawnDelay;
         fs.specialSpawnDelay = specialSpawnDelay;
 

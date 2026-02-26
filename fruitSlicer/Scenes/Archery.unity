@@ -331,6 +331,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 59790833}
   m_CullTransparentMesh: 1
+--- !u!1 &82741372
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 82741373}
+  - component: {fileID: 82741374}
+  m_Layer: 5
+  m_Name: SpawnArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &82741373
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 82741372}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.04502, y: 0.05433, z: 0.03881}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 152005838}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -2.1636214, y: 0.739732}
+  m_SizeDelta: {x: 15.5, y: 48.3}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &82741374
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 82741372}
+  m_CullTransparentMesh: 1
 --- !u!1 &98734545
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,6 +466,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 465756042057718760}
+  - {fileID: 82741373}
+  - {fileID: 1012485833}
   - {fileID: 1114196468}
   - {fileID: 57905827}
   m_Father: {fileID: 354375539}
@@ -4376,8 +4422,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 979263250}
-  - component: {fileID: 979263249}
   - component: {fileID: 979263251}
+  - component: {fileID: 979263252}
   m_Layer: 0
   m_Name: FruitSpwaner
   m_TagString: Untagged
@@ -4385,46 +4431,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &979263249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 7232620994714346332, guid: 760afb29f009a1641a63be6fc69f45bb, type: 3}
-  m_PrefabInstance: {fileID: 1414377581954318712}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 979263248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff3d29482b7236e4c9e1f4f40fa36e19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fruitPrefabs:
-  - {fileID: 7767628628793562763, guid: 76b3c104e6de8c148b59e3eb40aa5495, type: 3}
-  - {fileID: 7767628628793562763, guid: e30b83241e41e6948964b3dceef461d8, type: 3}
-  - {fileID: 7767628628793562763, guid: 133a40416cffa814e828f04fb96f653e, type: 3}
-  - {fileID: 7767628628793562763, guid: cc9f585352d768e4ca1809fda84509f5, type: 3}
-  - {fileID: 7767628628793562763, guid: 686ed0b373523f045b3be9bce3909cd0, type: 3}
-  - {fileID: 7767628628793562763, guid: 26506adfa30fd41499b57ac0dbde3a41, type: 3}
-  - {fileID: 7767628628793562763, guid: c76ee44b31f51644ab1a63b52923c7d0, type: 3}
-  - {fileID: 7767628628793562763, guid: 904ee6df875b0304885923d148bec93a, type: 3}
-  - {fileID: 7767628628793562763, guid: d4a0dd5590153a54e814e1c116749386, type: 3}
-  - {fileID: 7767628628793562763, guid: 73fd01f1792d0014a99d066e059b99b5, type: 3}
-  spawnDelay: 1
-  spawnForce: 6
-  gameContainer: {fileID: 3157106755508781862}
-  fruitsSliceSounds:
-  - {fileID: 8300000, guid: 21e190296c3f4b64484e0d04c7099e1c, type: 3}
-  - {fileID: 8300000, guid: d3fa4a05f2a1af54685c36711dcec45b, type: 3}
-  - {fileID: 8300000, guid: 0a46bb91182e6ff4f8bda4c0919f3d99, type: 3}
-  - {fileID: 8300000, guid: ec2cbefa939196042a95b1800e612ee5, type: 3}
-  - {fileID: 8300000, guid: a5179d5e47ee6a84689feccb937fd087, type: 3}
-  - {fileID: 8300000, guid: ab677e88520360e4cb643ecdabd9b126, type: 3}
-  - {fileID: 8300000, guid: 5a541b6d93438bc4db55376bc10bfbbd, type: 3}
-  - {fileID: 8300000, guid: a35fdc1d09ca56a43b9cbd6084c651d9, type: 3}
-  - {fileID: 8300000, guid: dc24facb9a228b943a0c2411d5f342fc, type: 3}
-  targetFruitChance: 0.8
-  bombPrefab: {fileID: 7767628628793562763, guid: 685ce3e9ffefedb47a3b605920ef9da7, type: 3}
-  icePrefab: {fileID: 7767628628793562763, guid: 22c1d944d0981bb4badaa7757e51ce85, type: 3}
-  specialSpawnDelay: 3
 --- !u!4 &979263250
 Transform:
   m_ObjectHideFlags: 0
@@ -4477,6 +4483,46 @@ MonoBehaviour:
   floatingReward: {fileID: 8461159639994695420, guid: d8096b9a49f5179468d1cd73b044b27e, type: 3}
   gameCanvas: {fileID: 3894230602764016268}
   freezeCountdownText: {fileID: 301385897}
+--- !u!114 &979263252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 979263248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da32c6be7b181a4996c249498733bf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArcheryFruitSpwaner
+  fruitPrefabs:
+  - {fileID: 7767628628793562763, guid: 76b3c104e6de8c148b59e3eb40aa5495, type: 3}
+  - {fileID: 7767628628793562763, guid: e30b83241e41e6948964b3dceef461d8, type: 3}
+  - {fileID: 7767628628793562763, guid: 133a40416cffa814e828f04fb96f653e, type: 3}
+  - {fileID: 7767628628793562763, guid: cc9f585352d768e4ca1809fda84509f5, type: 3}
+  - {fileID: 7767628628793562763, guid: 686ed0b373523f045b3be9bce3909cd0, type: 3}
+  - {fileID: 7767628628793562763, guid: 73fd01f1792d0014a99d066e059b99b5, type: 3}
+  - {fileID: 7767628628793562763, guid: 26506adfa30fd41499b57ac0dbde3a41, type: 3}
+  - {fileID: 7767628628793562763, guid: c76ee44b31f51644ab1a63b52923c7d0, type: 3}
+  - {fileID: 7767628628793562763, guid: d4a0dd5590153a54e814e1c116749386, type: 3}
+  - {fileID: 7767628628793562763, guid: 904ee6df875b0304885923d148bec93a, type: 3}
+  spawnDelay: 2
+  fallDuration: 7
+  fruitsSliceSounds:
+  - {fileID: 8300000, guid: 21e190296c3f4b64484e0d04c7099e1c, type: 3}
+  - {fileID: 8300000, guid: d3fa4a05f2a1af54685c36711dcec45b, type: 3}
+  - {fileID: 8300000, guid: 0a46bb91182e6ff4f8bda4c0919f3d99, type: 3}
+  - {fileID: 8300000, guid: ec2cbefa939196042a95b1800e612ee5, type: 3}
+  - {fileID: 8300000, guid: a5179d5e47ee6a84689feccb937fd087, type: 3}
+  - {fileID: 8300000, guid: ab677e88520360e4cb643ecdabd9b126, type: 3}
+  - {fileID: 8300000, guid: 5a541b6d93438bc4db55376bc10bfbbd, type: 3}
+  - {fileID: 8300000, guid: a35fdc1d09ca56a43b9cbd6084c651d9, type: 3}
+  - {fileID: 8300000, guid: dc24facb9a228b943a0c2411d5f342fc, type: 3}
+  bombPrefab: {fileID: 7767628628793562763, guid: 685ce3e9ffefedb47a3b605920ef9da7, type: 3}
+  specialSpawnDelay: 10
+  gameContainer: {fileID: 3157106755508781862}
+  spawnArea: {fileID: 82741373}
+  deSpawnArea: {fileID: 1012485833}
 --- !u!1 &991989588
 GameObject:
   m_ObjectHideFlags: 0
@@ -4551,6 +4597,50 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 991989588}
+  m_CullTransparentMesh: 1
+--- !u!1 &1012485832
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1012485833}
+  - component: {fileID: 1012485834}
+  m_Layer: 5
+  m_Name: DeSpawnArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1012485833
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012485832}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.04502, y: 0.05433, z: 0.03881}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 152005838}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 2.1237185, y: 0.739732}
+  m_SizeDelta: {x: 15.5, y: 48.3}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1012485834
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012485832}
   m_CullTransparentMesh: 1
 --- !u!1 &1065256554
 GameObject:
@@ -10899,7 +10989,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: FruitSpwaner
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
