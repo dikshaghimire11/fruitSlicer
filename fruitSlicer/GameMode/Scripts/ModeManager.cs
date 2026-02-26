@@ -4,7 +4,8 @@ using UnityEngine.UI;
 public enum GameMode
 {
     Infinite,
-    JuiceMaking
+    JuiceMaking,
+    Archery
 }
 
 public class ModeManager : MonoBehaviour

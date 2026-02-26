@@ -20,15 +20,24 @@ public class EquippedItemsManager : MonoBehaviour
 
         blurredShopBackground.sprite = ShopLists.instance.shopBackgroundList[bgIndex].blurredSprite;
 
-        int bladeIndex = PlayerPrefs.GetInt("Equipped_Blade", 0);
-
-        GameObject equippedBlade = ShopLists.instance.bladeItemList[bladeIndex].prefb;
-        Instantiate(equippedBlade, GameCanvas.transform);
+        if (ModeManager.Instance.currentMode != GameMode.Archery)
+        {
+            equipBlade();
+        }
 
         // --- LOAD BLADE ---
         // int bladeIndex = PlayerPrefs.GetInt("Equipped_Blade", 0);
         // currentBladeRenderer.material.mainTexture = ShopManager.instance.allItems[bladeIndex].actualSprite.texture;
     }
+    public void equipBlade()
+    {
+        int bladeIndex = PlayerPrefs.GetInt("Equipped_Blade", 0);
+        GameObject equippedBlade = ShopLists.instance.bladeItemList[bladeIndex].prefb;
+        Instantiate(equippedBlade, GameCanvas.transform);
+    }
 }
+
+
+
 
 

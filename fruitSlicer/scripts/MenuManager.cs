@@ -36,6 +36,20 @@ public class MenuManager : MonoBehaviour
         navigateToScene("UI");
     }
 
+    public void archeryMode()
+    {
+        {
+            if (SoundManager.instance != null)
+            {
+                SoundManager.instance.PlayButtonClickSound();
+            }
+            ModeManager.Instance.currentMode = GameMode.Archery;
+
+            // FIX: Matches the scene name in your Build Settings screenshot
+            navigateToScene("Archery");
+        }
+    }
+
 
     public void setting()
     {
