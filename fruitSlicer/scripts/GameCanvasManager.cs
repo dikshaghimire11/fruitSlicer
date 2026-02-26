@@ -126,7 +126,7 @@ public class GameCanvasManager : MonoBehaviour
     public void startSpawnAction()
     {
         startSpawning = true;
-        FruitSpawner.instance.startSpawnning();
+        ArcheryFruitSpawner.instance.startSpawnning();
     }
     // public void StartMoving()
     // {

@@ -80,7 +80,8 @@ public class Fruit : MonoBehaviour
             {
                 if (ScoreManager.instance != null)
                     ScoreManager.instance.LoseLife();
-                SoundManager.instance.PlayMissTargetedFruitSound();
+                if (SoundManager.instance != null)
+                    SoundManager.instance.PlayMissTargetedFruitSound();
             }
             else
             {
