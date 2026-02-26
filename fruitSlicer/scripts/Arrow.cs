@@ -4,10 +4,10 @@ using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using System.Collections;
 
 public class Arrow : MonoBehaviour
 {
-    private Rigidbody2D arrowRb;
     private Collider2D collider;
 
     public float shootPower;
@@ -15,19 +15,30 @@ public class Arrow : MonoBehaviour
 
     void Awake()
     {
-        arrowRb = transform.GetComponent<Rigidbody2D>();
         collider = transform.GetComponent<Collider2D>();
-        arrowRb.isKinematic = true;
     }
 
 
     public void ShootArrow(Transform releasedArrows)
     {
-        arrowRb.isKinematic = false;
-        arrowRb.AddForce(transform.right * shootPower, ForceMode2D.Impulse);
+
+        StartCoroutine(moveArrow(1f));
         transform.SetParent(releasedArrows);
         collider.isTrigger = false;
-        GameObject.Destroy(transform.gameObject, 1f);
+        GameObject.Destroy(transform.gameObject, 1.5f);
+    }
+    IEnumerator moveArrow(float delay)
+    {
+        float startTime = Time.time;
+
+        while (Time.time < startTime + delay) // run for 2 seconds
+        {
+            transform.Translate(UnityEngine.Vector3.right * shootPower * Time.deltaTime);
+
+            yield return null; // wait until next frame
+        }
+
+
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -86,5 +97,21 @@ public class Arrow : MonoBehaviour
             ice.Slice(new UnityEngine.Vector2(0, 0));
             // ShowFloatingText("FREEZE!", Color.cyan, ice.transform.position, 0.5f, 0.2f);
         }
+    }
+
+    public void ShowFloatingText(string message, Color color, Vector3 position, float size, float yOffset)
+    {
+        if (floatingTextPrefab == null) return;
+        GameObject obj = Instantiate(
+            floatingTextPrefab,
+            position + new Vector3(0f, yOffset, 0f),
+            Quaternion.identity
+        );
+
+        obj.transform.localScale = Vector3.one * size;
+
+        FloatingText ft = obj.GetComponent<FloatingText>();
+        if (ft != null)
+            ft.Setup(message, color);
     }
 }

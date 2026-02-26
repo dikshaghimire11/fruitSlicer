@@ -15,6 +15,7 @@ public class Fruit : MonoBehaviour
     private float missXPosition = 1.7f;
 
     public Color juiceColor;
+    public float uniformScale = 1f;
 
     private bool isSliced = false;
 
@@ -82,7 +83,7 @@ public class Fruit : MonoBehaviour
         {
             if (transform.position.x > missXPosition)
             {
-                 fruitCrossedBoundary();  
+                fruitCrossedBoundary();
             }
         }
 

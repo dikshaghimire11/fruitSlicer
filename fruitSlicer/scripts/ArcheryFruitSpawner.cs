@@ -25,6 +25,8 @@ public class ArcheryFruitSpawner : MonoBehaviour
 
     public RectTransform deSpawnArea;
 
+    public float[] spawnPositions;
+
     void Awake()
     {
         if (instance == null)
@@ -41,15 +43,15 @@ public class ArcheryFruitSpawner : MonoBehaviour
 
     public void startSpawnning()
     {
-        StartCoroutine(SpawnFruitsRoutine(true));
-        StartCoroutine(SpawnFruitsRoutine(false));
+        StartCoroutine(SpawnFruitsRoutine());
+        // StartCoroutine(SpawnFruitsRoutine(false));
         StartCoroutine(SpawnBombRoutine());
     }
-    IEnumerator SpawnFruitsRoutine(bool calculateDelay)
+    IEnumerator SpawnFruitsRoutine()
     {
 
 
-        UnityEngine.Vector3[] corners = new  UnityEngine.Vector3[4];
+        UnityEngine.Vector3[] corners = new UnityEngine.Vector3[4];
         if (gameContainer != null)
         {
             gameContainer.GetComponent<RectTransform>().GetWorldCorners(corners);
@@ -61,15 +63,8 @@ public class ArcheryFruitSpawner : MonoBehaviour
 
         while (true)
         {
-            ;
 
-            if (calculateDelay)
-            {
-                randomDelay = Random.Range(spawnDelay / 2f, spawnDelay);
-            }
-            yield return new WaitForSeconds(randomDelay);
-
-
+            yield return new WaitForSeconds(spawnDelay);
 
             // 2. Spawn Logic
             if (fruitPrefabs.Count > 0)
@@ -91,12 +86,8 @@ public class ArcheryFruitSpawner : MonoBehaviour
                     lastFruitIndex = randomIndex;
                     prefabToSpawn = fruitPrefabs[randomIndex];
                 }
+                SpawnObject(prefabToSpawn);
 
-                // 3. Execute Spawn
-                if (prefabToSpawn != null && Random.Range(0f, 1.1f) > 0.5f)
-                {
-                    SpawnObject(prefabToSpawn);
-                }
             }
         }
     }
@@ -110,15 +101,10 @@ public class ArcheryFruitSpawner : MonoBehaviour
                 SpawnObject(bombPrefab);
         }
     }
-
     // --- SPAWN OBJECT ---
     void SpawnObject(GameObject prefab)
     {
         if (prefab == null) return;
-
-
-
-
         // Array to store the 4 corners
         UnityEngine.Vector3[] corners = new UnityEngine.Vector3[4];
 
@@ -126,10 +112,6 @@ public class ArcheryFruitSpawner : MonoBehaviour
         spawnArea.GetWorldCorners(corners);
 
         // corners order: 0 = bottom-left, 1 = top-left, 2 = top-right, 3 = bottom-right
-
-
-
-
         // Get top of screen in world
         // Vector3 topLeft = mainCamera.ViewportToWorldPoint(new Vector3(0, 1, 0));
         UnityEngine.Vector3 topRight = corners[2];
@@ -137,18 +119,21 @@ public class ArcheryFruitSpawner : MonoBehaviour
 
         float horizontalMargin = 0.5f;
 
-        float randomY = Random.Range(topRight.y + horizontalMargin, bottomRight.y - horizontalMargin);
+        float spawnX = topRight.x;
 
-        float spawnX = topRight.x; // little left of Screen
+        float randomY;
 
+        if (spawnPositions != null && spawnPositions.Length > 0)
+        {
+            int randomIndex = Random.Range(0, spawnPositions.Length);
+            randomY = spawnPositions[randomIndex];
+        }
+        else
+        {
+            randomY = Random.Range(topRight.y, bottomRight.y);
+        }
         UnityEngine.Vector3 spawnPos = new UnityEngine.Vector3(spawnX, randomY, -10f);
-
         GameObject newObj = Instantiate(prefab, spawnPos, UnityEngine.Quaternion.identity);
-
-
-
-
-
         // Bottom of screen
         float rightX = deSpawnArea.transform.position.x;
 
@@ -157,23 +142,23 @@ public class ArcheryFruitSpawner : MonoBehaviour
         // Assign random slice sound
         Fruit fruitComp = newObj.GetComponent<Fruit>();
 
-        if (!newObj.name.StartsWith("Coconut"))
+        if (fruitComp != null)
         {
-            newObj.transform.localScale *= 0.7f;
-
-            if (fruitComp != null)
+            if (!newObj.name.StartsWith("Coconut"))
             {
+                newObj.transform.localScale *= fruitComp.uniformScale;
                 fruitComp.sliceSound = fruitsSliceSounds[Random.Range(0, fruitsSliceSounds.Length)];
+
             }
-        }
-        else
-        {
-            newObj.transform.localScale *= 0.7f;
+            else
+            {
+                newObj.transform.localScale *= fruitComp.uniformScale;
+            }
         }
         Bomb bombComp = newObj.GetComponent<Bomb>();
         if (bombComp != null)
         {
-            newObj.transform.localScale *= 0.8f;
+            bombComp.transform.localScale *= 0.8f;
 
         }
     }
@@ -181,8 +166,8 @@ public class ArcheryFruitSpawner : MonoBehaviour
     {
         if (obj == null) yield break;
 
-         UnityEngine.Vector3 startPos = obj.transform.position;
-         UnityEngine.Vector3 endPos = new  UnityEngine.Vector3(rightX, startPos.y, startPos.z);
+        UnityEngine.Vector3 startPos = obj.transform.position;
+        UnityEngine.Vector3 endPos = new UnityEngine.Vector3(rightX, startPos.y, startPos.z);
 
         float elapsed = 0f;
 
@@ -191,9 +176,22 @@ public class ArcheryFruitSpawner : MonoBehaviour
             elapsed += Time.deltaTime;
             float t = elapsed / duration;
 
-            obj.transform.position =  UnityEngine.Vector3.Lerp(startPos, endPos, t);
+            obj.transform.position = UnityEngine.Vector3.Lerp(startPos, endPos, t);
 
             yield return null;
         }
+    }
+    public void HideFruitsLayer()
+    {
+
+        if (mainCamera != null)
+            mainCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Fruits"));
+
+    }
+
+    public void ShowFruitsLayer()
+    {
+        if (mainCamera != null)
+            mainCamera.cullingMask |= (1 << LayerMask.NameToLayer("Fruits"));
     }
 }

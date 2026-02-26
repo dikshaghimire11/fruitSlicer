@@ -142,6 +142,7 @@ MonoBehaviour:
   points: 5
   missYPosition: -6
   juiceColor: {r: 0.98490566, g: 0.4736542, b: 0.12450692, a: 0}
+  uniformScale: 0.7
 --- !u!58 &2613413523906398592
 CircleCollider2D:
   m_ObjectHideFlags: 0

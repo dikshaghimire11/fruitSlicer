@@ -13,7 +13,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip[] menuMusicList;
     public AudioClip[] careerMusicList;
     public AudioClip[] infiniteMusicList;
-
+    public AudioClip[] archeryMusicList;
     public AudioClip lifeLostSound;
     public AudioClip gameOverSound;
     public AudioClip characterPopSound;
@@ -228,5 +228,9 @@ public class SoundManager : MonoBehaviour
         {
             sfxSource.PlayOneShot(missTargetedFruitSound);
         }
+    }
+    public void PlayArcheryMusic()
+    {
+        PlayMusicFromList(archeryMusicList);
     }
 }

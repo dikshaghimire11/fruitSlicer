@@ -142,6 +142,7 @@ MonoBehaviour:
   points: 5
   missYPosition: -6
   juiceColor: {r: 1, g: 0.9557321, b: 0.6622641, a: 0}
+  uniformScale: 0.7
 --- !u!82 &7633907316377481445
 AudioSource:
   m_ObjectHideFlags: 0

@@ -74,20 +74,29 @@ public class ScoreManager : MonoBehaviour
     {
         alreadySavedCoins = 0;
 
-        if (ModeManager.Instance.currentMode == GameMode.Infinite)
+        switch (ModeManager.Instance.currentMode)
         {
-            if (SoundManager.instance != null)
-            {
-                SoundManager.instance.PlayInfiniteMusic();
-            }
+            case GameMode.Infinite:
+                if (SoundManager.instance != null)
+                {
+                    SoundManager.instance.PlayInfiniteMusic();
+                }
+                break;
+            case GameMode.JuiceMaking:
+                if (SoundManager.instance != null)
+                {
+                    SoundManager.instance.PlayCareerMusic();
+                }
+                break;
+            case GameMode.Archery:
+                if (SoundManager.instance != null)
+                {
+                    SoundManager.instance.PlayArcheryMusic();
+                }
+                break;
         }
-        else if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
-        {
-            if (SoundManager.instance != null)
-            {
-                SoundManager.instance.PlayCareerMusic();
-            }
-        }
+
+
         // --- 1. AUTO-FIND PARENT LOGIC ---
         // If "ScoreParent" is empty, we find it automatically using the scoreText!
         if (scoreParent == null && scoreText != null)
@@ -115,66 +124,71 @@ public class ScoreManager : MonoBehaviour
     void UpdateUIStateBasedOnMode()
     {
         if (ModeManager.Instance == null) return;
-
-        bool isJuiceMode = (ModeManager.Instance.currentMode == GameMode.JuiceMaking);
-        if (scoreParent != null)
+        switch (ModeManager.Instance.currentMode)
         {
-            if (isJuiceMode)
-            {
-                // 🍹 Juice Mode
-                scoreParent.SetActive(false);
-                if (x2ButtonForCareer != null)
-                    x2ButtonForCareer.SetActive(false);
-            }
-            else
-            {
-                // ♾️ Infinite / Career Mode
+            case GameMode.Infinite:
                 scoreParent.SetActive(true);    // Show score UI
                 if (x2Button != null)
                     x2Button.SetActive(false);
-            }
+                break;
+            case GameMode.JuiceMaking:
+                scoreParent.SetActive(false);
+                if (x2ButtonForCareer != null)
+                    x2ButtonForCareer.SetActive(false);
+                break;
+            default:
+                // Default to showing score for safety
+                if (scoreParent != null) scoreParent.SetActive(true);
+                break;
+            case GameMode.Archery:
+                scoreParent.SetActive(true);    // Show score UI
+                if (x2Button != null)
+                    x2Button.SetActive(false);
+                break;
         }
+
 
     }
 
     public void AddScore(int amount)
     {
         if (isGameOver) return;
-
-        if (ModeManager.Instance.currentMode == GameMode.Infinite)
+        switch (ModeManager.Instance.currentMode)
         {
-            score += amount;
-            UpdateTexts();
-            bool isFirstTime = PlayerPrefs.GetInt("HasPlayedBefore", 0) == 0;
+            case GameMode.Infinite:
+                score += amount;
+                UpdateTexts();
+                bool isFirstTime = PlayerPrefs.GetInt("HasPlayedBefore", 0) == 0;
 
-            if (!isFirstTime && score > highScore && !hasShownHighScoreMessage)
-            {
-                hasShownHighScoreMessage = true;
-
-                if (SoundManager.instance != null)
+                if (!isFirstTime && score > highScore && !hasShownHighScoreMessage)
                 {
-                    SoundManager.instance.PlayHighScoreSound();
+                    hasShownHighScoreMessage = true;
+
+                    if (SoundManager.instance != null)
+                    {
+                        SoundManager.instance.PlayHighScoreSound();
+                    }
+                    Blade blade = FindObjectOfType<Blade>();
+
+                    if (blade != null)
+                    {
+                        Vector3 worldPos = Camera.main.transform.position + Camera.main.transform.forward * 5f;
+
+                        blade.ShowFloatingText(
+                            "NEW HIGH SCORE!",
+                            Color.green,
+                            worldPos,
+                            1.5f,
+                            0.5f
+                        );
+
+
+
+                    }
+
+
                 }
-                Blade blade = FindObjectOfType<Blade>();
-
-                if (blade != null)
-                {
-                    Vector3 worldPos = Camera.main.transform.position + Camera.main.transform.forward * 5f;
-
-                    blade.ShowFloatingText(
-                        "NEW HIGH SCORE!",
-                        Color.green,
-                        worldPos,
-                        1.5f,
-                        0.5f
-                    );
-
-
-
-                }
-
-
-            }
+                break;
         }
     }
 
@@ -245,29 +259,31 @@ public class ScoreManager : MonoBehaviour
         GameCanvasManager.instance.unHideUiInteraction();
         if (FruitSpawner.instance != null) FruitSpawner.instance.ShowFruitsLayer();
         isGameOver = false;
-        if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
+        GameObject floatingLifeIcon;
+        switch (ModeManager.Instance.currentMode)
         {
-            JuiceManager.instance.isLevelActive = true;
-            JuiceManager.instance.currentTime = JuiceManager.instance.currentTime + 10;
-            GameObject floatingClockIcon = Instantiate(floatingReward, new Vector2(-0.5f, 0.0f), Quaternion.identity, gameCanvas);
+            case GameMode.Infinite:
+                floatingLifeIcon = Instantiate(floatingReward, Vector2.zero, Quaternion.identity, gameCanvas);
+                floatingLifeIcon.GetComponentInChildren<Image>().sprite = LifeImage;
+                floatingLifeIcon.GetComponentInChildren<TextMeshProUGUI>().text = "1";
+                StartCoroutine(moveFloatingRewardsAndDestroy(floatingLifeIcon));
+                break;
+            case GameMode.JuiceMaking:
+                JuiceManager.instance.isLevelActive = true;
+                JuiceManager.instance.currentTime = JuiceManager.instance.currentTime + 10;
+                GameObject floatingClockIcon = Instantiate(floatingReward, new Vector2(-0.5f, 0.0f), Quaternion.identity, gameCanvas);
 
-            floatingClockIcon.GetComponentInChildren<Image>().sprite = clockImage;
+                floatingClockIcon.GetComponentInChildren<Image>().sprite = clockImage;
 
 
-            GameObject floatingLifeIcon = Instantiate(floatingReward, new Vector2(+0.5f, 0.0f), Quaternion.identity, gameCanvas);
-            floatingLifeIcon.GetComponentInChildren<Image>().sprite = LifeImage;
-            floatingLifeIcon.GetComponentInChildren<TextMeshProUGUI>().text = "1";
+                floatingLifeIcon = Instantiate(floatingReward, new Vector2(+0.5f, 0.0f), Quaternion.identity, gameCanvas);
+                floatingLifeIcon.GetComponentInChildren<Image>().sprite = LifeImage;
+                floatingLifeIcon.GetComponentInChildren<TextMeshProUGUI>().text = "1";
 
 
-            StartCoroutine(moveFloatingRewardsAndDestroy(floatingLifeIcon));
-            StartCoroutine(moveFloatingRewardsAndDestroy(floatingClockIcon));
-        }
-        else
-        {
-            GameObject floatingLifeIcon = Instantiate(floatingReward, Vector2.zero, Quaternion.identity, gameCanvas);
-            floatingLifeIcon.GetComponentInChildren<Image>().sprite = LifeImage;
-            floatingLifeIcon.GetComponentInChildren<TextMeshProUGUI>().text = "1";
-            StartCoroutine(moveFloatingRewardsAndDestroy(floatingLifeIcon));
+                StartCoroutine(moveFloatingRewardsAndDestroy(floatingLifeIcon));
+                StartCoroutine(moveFloatingRewardsAndDestroy(floatingClockIcon));
+                break;
         }
         if (SoundManager.instance != null)
         {
@@ -300,26 +316,25 @@ public class ScoreManager : MonoBehaviour
             SoundManager.instance.PlayButtonClickSound();
         }
         int totalCoins = PlayerPrefs.GetInt("TotalCoins", PlayerConfig.defaultCoins);
-        if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
+        switch (ModeManager.Instance.currentMode)
         {
-            PlayerPrefs.SetInt("TotalCoins", totalCoins + JuiceManager.instance.finalPoints);
-            if (missionPassEarnPoints != null) missionPassEarnPoints.text = "+" + JuiceManager.instance.finalPoints * 2;
-            x2Button.SetActive(false);
-        }
-        else
-        {
-            if (finalScoreText != null)
-            {
+            case GameMode.Infinite:
+                if (finalScoreText != null)
+                {
 
-                finalScoreText.text = "SCORE: " + score * 2 + "\nHIGH SCORE: " + highScore;
+                    finalScoreText.text = "SCORE: " + score * 2 + "\nHIGH SCORE: " + highScore;
 
-            }
-            PlayerPrefs.SetInt("TotalCoins", totalCoins + score);
-            scoreText.text = (score * 2).ToString("D4");
-            x2ButtonForCareer.SetActive(false);
-            addLifeButton.SetActive(false);
-
-
+                }
+                PlayerPrefs.SetInt("TotalCoins", totalCoins + score);
+                scoreText.text = (score * 2).ToString("D4");
+                x2ButtonForCareer.SetActive(false);
+                addLifeButton.SetActive(false);
+                break;
+            case GameMode.JuiceMaking:
+                PlayerPrefs.SetInt("TotalCoins", totalCoins + JuiceManager.instance.finalPoints);
+                if (missionPassEarnPoints != null) missionPassEarnPoints.text = "+" + JuiceManager.instance.finalPoints * 2;
+                x2Button.SetActive(false);
+                break;
         }
         GameObject floatingCoinIcon = Instantiate(floatingReward, Vector2.zero, Quaternion.identity, gameCanvas);
         floatingCoinIcon.GetComponentInChildren<Image>().sprite = coinImage;
@@ -361,27 +376,30 @@ public class ScoreManager : MonoBehaviour
 
 
         // High Score Logic (Infinite Mode)
-        if (ModeManager.Instance.currentMode == GameMode.Infinite)
-        {
 
-            int totalCoins = PlayerPrefs.GetInt("TotalCoins", PlayerConfig.defaultCoins);
-            PlayerPrefs.SetInt("TotalCoins", score - alreadySavedCoins + totalCoins);
-            alreadySavedCoins = score;
-            PlayerPrefs.Save();
-            if (score > highScore)
-            {
-                highScore = score;
-                PlayerPrefs.SetInt("HighScore", highScore);
+        switch
+        (ModeManager.Instance.currentMode)
+        {
+            case GameMode.Infinite:
+                int totalCoins = PlayerPrefs.GetInt("TotalCoins", PlayerConfig.defaultCoins);
+                PlayerPrefs.SetInt("TotalCoins", score - alreadySavedCoins + totalCoins);
+                alreadySavedCoins = score;
                 PlayerPrefs.Save();
-            }
-            PlayerPrefs.SetInt("HasPlayedBefore", 1);
-            PlayerPrefs.Save();
+                if (score > highScore)
+                {
+                    highScore = score;
+                    PlayerPrefs.SetInt("HighScore", highScore);
+                    PlayerPrefs.Save();
+                }
+                PlayerPrefs.SetInt("HasPlayedBefore", 1);
+                PlayerPrefs.Save();
 
+                break;
+            case GameMode.JuiceMaking:
+                JuiceManager.instance.isLevelActive = false;
+                break;
         }
-        else
-        {
-            JuiceManager.instance.isLevelActive = false;
-        }
+        ;
 
         if (SoundManager.instance != null)
         {
@@ -390,16 +408,18 @@ public class ScoreManager : MonoBehaviour
         // Final Text Logic
         if (finalScoreText != null)
         {
-            if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
+            switch (ModeManager.Instance.currentMode)
             {
-                if (currentLives > 0) finalScoreText.text = "LIVES LOST!\nMISSION FAILED";
-                else finalScoreText.text = "TIME'S UP!\nMISSION FAILED";
+                case GameMode.Infinite:
+                    finalScoreText.text = "SCORE: " + score + "\nHIGH SCORE: " + highScore;
+                    break;
+                case GameMode.JuiceMaking:
+                    if (currentLives > 0) finalScoreText.text = "MISSION FAILED!\nTIME'S UP!";
+                    else finalScoreText.text = "MISSION FAILED!\nLIVES LOST!";
+                    break;
             }
-            else
-            {
-                finalScoreText.text = "SCORE: " + score + "\nHIGH SCORE: " + highScore;
 
-            }
+
         }
     }
 

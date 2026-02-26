@@ -30,6 +30,7 @@ public class GameCanvasManager : MonoBehaviour
     public GameObject missionPanel;
 
     public GameObject freeModeCharacter;
+    public GameObject archeryCharacter;
 
     public GameObject missionAccomplishedPanel;
 
@@ -53,6 +54,7 @@ public class GameCanvasManager : MonoBehaviour
     private bool waitingForReview;
 
     public GameObject notBlurredShopBackground;
+    public GameObject bowPrefab;
 
 
 
@@ -98,6 +100,11 @@ public class GameCanvasManager : MonoBehaviour
         {
             SoundManager.instance.PlayButtonClickSound();
         }
+        if (ModeManager.Instance.currentMode == GameMode.Archery)
+        {
+            GameObject bow = Instantiate(bowPrefab, bowPrefab.transform.position, bowPrefab.transform.rotation, this.transform);
+
+        }
 
         notBlurredShopBackground.SetActive(false);
         missionPanel.SetActive(false);
@@ -126,7 +133,19 @@ public class GameCanvasManager : MonoBehaviour
     public void startSpawnAction()
     {
         startSpawning = true;
-        ArcheryFruitSpawner.instance.startSpawnning();
+        switch (ModeManager.Instance.currentMode)
+        {
+
+            case GameMode.Archery:
+
+
+                ArcheryFruitSpawner.instance.startSpawnning();
+                break;
+            case GameMode.JuiceMaking:
+            case GameMode.Infinite:
+                FruitSpawner.instance.startSpawnning();
+                break;
+        }
     }
     // public void StartMoving()
     // {
@@ -392,27 +411,26 @@ public class GameCanvasManager : MonoBehaviour
 
     public void startGame()
     {
-        GameObject character;
-        if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
+        GameObject character = null;
+        switch (ModeManager.Instance.currentMode)
         {
-            int length = ShopLists.instance.characterList.Length;
-            character = ShopLists.instance.characterList[Random.Range(0, length)];
-            choppingBoard.SetActive(false);
-        }
-        else
-        {
-            character = freeModeCharacter;
+            case GameMode.Archery:
+                character = archeryCharacter;
+                addLifeOnlyObject.SetActive(true);
+                break;
+            case GameMode.JuiceMaking:
+                int length = ShopLists.instance.characterList.Length;
+                character = ShopLists.instance.characterList[Random.Range(0, length)];
+                choppingBoard.SetActive(false);
+                addLifeAndTimeObject.SetActive(true);
+                break;
+            case GameMode.Infinite:
+                character = freeModeCharacter;
+                addLifeOnlyObject.SetActive(true);
+                break;
         }
         newObject = Instantiate(character, character.transform.position, character.transform.rotation, shopGameObject.transform);
         newObject.transform.SetSiblingIndex(0);
-        if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
-        {
-            addLifeAndTimeObject.SetActive(true);
-        }
-        else
-        {
-            addLifeOnlyObject.SetActive(true);
-        }
         if (SoundManager.instance != null) SoundManager.instance.PlayCharacterPopSound();
 
 

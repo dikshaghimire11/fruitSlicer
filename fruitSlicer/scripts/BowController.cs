@@ -14,7 +14,7 @@ public class BowController : MonoBehaviour
     public LineRenderer line;
 
 
-    public Transform releasedArrows;
+    private Transform releasedArrows;
 
     public float coolDownTimer;
 
@@ -31,6 +31,7 @@ public class BowController : MonoBehaviour
         mainCamera = Camera.main;
         // arrowRb = arrow.GetComponent<Rigidbody2D>();
         startPosition = arrow.position;
+        releasedArrows = GameObject.Find("ReleasedArrows").transform;
         // arrowRb.isKinematic = true;
         ReleaseRubber();
     }
