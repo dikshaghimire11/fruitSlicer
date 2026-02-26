@@ -156,6 +156,7 @@ public class ScoreManager : MonoBehaviour
         switch (ModeManager.Instance.currentMode)
         {
             case GameMode.Infinite:
+            case GameMode.Archery:
                 score += amount;
                 UpdateTexts();
                 bool isFirstTime = PlayerPrefs.GetInt("HasPlayedBefore", 0) == 0;
@@ -181,10 +182,22 @@ public class ScoreManager : MonoBehaviour
                             1.5f,
                             0.5f
                         );
-
-
-
                     }
+
+                    Arrow arrow = FindObjectOfType<Arrow>();
+                    if (arrow != null)
+                    {
+                        Vector3 worldPos = Camera.main.transform.position + Camera.main.transform.forward * 5f;
+
+                        arrow.ShowFloatingText(
+                            "NEW HIGH SCORE!",
+                            Color.green,
+                            worldPos,
+                            1.5f,
+                            0.5f
+                        );
+                    }
+
 
 
                 }

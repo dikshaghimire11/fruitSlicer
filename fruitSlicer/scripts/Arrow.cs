@@ -1,6 +1,5 @@
 using System;
 using System.Diagnostics;
-using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -11,6 +10,10 @@ public class Arrow : MonoBehaviour
     private Collider2D collider;
 
     public float shootPower;
+    public GameObject floatingTextPrefab;
+    public float maxComboDelay = 0.2f;
+    private int comboCount;
+    private float lastHitTime;
 
 
     void Awake()
@@ -55,27 +58,12 @@ public class Arrow : MonoBehaviour
             other.enabled = false;
             fruit.Slice(new UnityEngine.Vector2(0, 0));
             bool isCorrectFruit = false;
-            if (ModeManager.Instance.currentMode == GameMode.Infinite)
+            if (ModeManager.Instance.currentMode == GameMode.Archery)
             {
                 ScoreManager.instance?.AddScore(fruit.points);
-                // ShowFloatingText("+" + fruit.points, Color.cyan, fruit.transform.position, 0.5f, 0.2f);
+                ShowFloatingText("+" + fruit.points, Color.cyan, fruit.transform.position, 0.5f, 0.2f);
             }
-            else if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
-            {
-                isCorrectFruit = JuiceManager.instance?.CheckFruit(fruit.name) ?? false;
-                if (isCorrectFruit)
-                {
-                    // ShowFloatingText("PERFECT!", Color.cyan, fruit.transform.position, 0.6f, 0.2f);
-                }
-                else
-                {
-                    // ShowFloatingText("X", Color.red, fruit.transform.position, 1.5f, 0.2f);
-                }
-
-
-            }
-
-            // HandleCombo(fruit, isCorrectFruit);
+            HandleCombo(fruit, isCorrectFruit);
             return;
         }
 
@@ -84,19 +72,12 @@ public class Arrow : MonoBehaviour
         {
             other.enabled = false;
             bomb.Explode();
-            // ShowFloatingText("BOOM!", Color.red, bomb.transform.position, 0.6f, 0.25f);
+            ShowFloatingText("BOOM!", Color.red, bomb.transform.position, 0.6f, 0.25f);
             ScoreManager.instance?.HitBomb();
-            // comboCount = 0;
+            comboCount = 0;
             return;
         }
 
-        Ice ice = other.GetComponent<Ice>();
-        if (ice != null)
-        {
-            other.enabled = false;
-            ice.Slice(new UnityEngine.Vector2(0, 0));
-            // ShowFloatingText("FREEZE!", Color.cyan, ice.transform.position, 0.5f, 0.2f);
-        }
     }
 
     public void ShowFloatingText(string message, Color color, Vector3 position, float size, float yOffset)
@@ -114,4 +95,51 @@ public class Arrow : MonoBehaviour
         if (ft != null)
             ft.Setup(message, color);
     }
+
+    void HandleCombo(Fruit fruit, bool isCorrectFruit)
+    {
+        if (Time.time - lastHitTime > maxComboDelay)
+            comboCount = 0;
+
+        lastHitTime = Time.time;
+
+        if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
+        {
+            if (!isCorrectFruit)
+            {
+                comboCount = 0;
+                return;
+            }
+
+            comboCount++;
+        }
+        else
+        {
+            comboCount++;
+        }
+
+        if (comboCount < 2) return;
+
+        float textSize = 0.6f;
+        int bonus;
+
+        if (ModeManager.Instance.currentMode == GameMode.Archery)
+        {
+            bonus = comboCount * 5;
+            ScoreManager.instance?.AddScore(bonus);
+            ShowFloatingText("COMBO", Color.yellow, fruit.transform.position + new Vector3(-0.2f, 0f, 0f), textSize, 0f);
+            ShowFloatingText("+" + bonus, Color.yellow, fruit.transform.position + new Vector3(0.2f, 0f, 0f), textSize, 0f);
+        }
+
+        if (SoundManager.instance != null)
+        {
+            int cappedCombo = Mathf.Min(comboCount, 3);
+
+            float pitch = 0.75f + (cappedCombo - 2) * 0.08f;
+            pitch = Mathf.Clamp(pitch, 0.75f, 0.95f);
+
+            SoundManager.instance.PlayComboSound(pitch);
+        }
+    }
+
 }
