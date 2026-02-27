@@ -66,7 +66,6 @@ public class GameCanvasManager : MonoBehaviour
     }
     void Start()
     {
-        PlayerPrefs.DeleteAll();
         bool navigateToShop = PlayerPrefs.GetInt("NavigateToShop", 0) == 1;
         bool hasSeenTutorial = PlayerPrefs.GetInt("HasSeenTutorial", 0) == 1;
         bool hasReviewedMission = PlayerPrefs.GetInt("HasReview", 0) == 1;
