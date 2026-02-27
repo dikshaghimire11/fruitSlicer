@@ -139,15 +139,19 @@ public class GameCanvasManager : MonoBehaviour
         {
 
             case GameMode.Archery:
-
-
-                ArcheryFruitSpawner.instance.startSpawnning();
+                StartCoroutine(StartArcheryWithDelay());
                 break;
             case GameMode.JuiceMaking:
             case GameMode.Infinite:
                 FruitSpawner.instance.startSpawnning();
                 break;
         }
+    }
+    IEnumerator StartArcheryWithDelay()
+    {
+        yield return new WaitForSeconds(1.5f); 
+
+        ArcheryFruitSpawner.instance.startSpawnning();
     }
     // public void StartMoving()
     // {
