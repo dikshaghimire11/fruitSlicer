@@ -14,12 +14,20 @@ public class BowController : MonoBehaviour
 
     public LineRenderer line;
 
+    private Transform leftPositionButton;
+
+    private Transform middlePositionButton;
+
+
+    private Transform rightPositionButton;
+
+
 
     private Transform releasedArrows;
 
     public float coolDownTimer;
 
-    private float streachBowTimer=0.5f;
+    private float streachBowTimer = 0.5f;
 
 
 
@@ -32,7 +40,7 @@ public class BowController : MonoBehaviour
     public GameObject arrowPrefab;
 
     void Start()
-    {
+    { 
         mainCamera = Camera.main;
         // arrowRb = arrow.GetComponent<Rigidbody2D>();
         startPosition = arrow.position;
@@ -40,6 +48,7 @@ public class BowController : MonoBehaviour
         // arrowRb.isKinematic = true;
         ReleaseRubber();
         StartCoroutine(WaitAndShoot(streachBowTimer));
+        middlePositionClicked();
     }
 
     public void setdefaultArrowPositon()
@@ -120,7 +129,7 @@ public class BowController : MonoBehaviour
         arrowScript.ShootArrow(releasedArrows);
         arrow = null;
         arrowPoint = null;
-        StartCoroutine(AttachNewArrow(coolDownTimer-streachBowTimer));
+        StartCoroutine(AttachNewArrow(coolDownTimer - streachBowTimer));
 
     }
 
@@ -174,6 +183,46 @@ public class BowController : MonoBehaviour
 
         transform.right = direction;
 
+
+    }
+
+    public void leftPositionClicked()
+    {
+        if (BowLocationButtons.instance.hiddenPositionButton != null)
+        {
+            BowLocationButtons.instance.hiddenPositionButton.gameObject.SetActive(true);
+        }
+        BowLocationButtons.instance.hiddenPositionButton = BowLocationButtons.instance.leftButton;
+        updateBowPosition(BowLocationButtons.instance.hiddenPositionButton.position);
+        BowLocationButtons.instance.hiddenPositionButton.gameObject.SetActive(false);
+    }
+
+    public void middlePositionClicked()
+    {
+        BowLocationButtons.instance.leftButton.gameObject.SetActive(true);
+        if (BowLocationButtons.instance.hiddenPositionButton != null)
+        {
+            BowLocationButtons.instance.hiddenPositionButton.gameObject.SetActive(true);
+        }
+        BowLocationButtons.instance.hiddenPositionButton = BowLocationButtons.instance.middleButton;
+        updateBowPosition(BowLocationButtons.instance.hiddenPositionButton.position);
+        BowLocationButtons.instance.hiddenPositionButton.gameObject.SetActive(false);
+    }
+
+    public void rightPositionClicked()
+    {
+        if (BowLocationButtons.instance.hiddenPositionButton != null)
+        {
+            BowLocationButtons.instance.hiddenPositionButton.gameObject.SetActive(true);
+        }
+        BowLocationButtons.instance.hiddenPositionButton = BowLocationButtons.instance.rightButton;
+        updateBowPosition(BowLocationButtons.instance.hiddenPositionButton.position);
+        BowLocationButtons.instance.hiddenPositionButton.gameObject.SetActive(false);
+    }
+
+    public void updateBowPosition(Vector3 Position)
+    {
+        GameObject.FindGameObjectWithTag("Bow").transform.position = Position;
 
     }
 
