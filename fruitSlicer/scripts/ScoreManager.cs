@@ -286,6 +286,11 @@ public class ScoreManager : MonoBehaviour
         if (FruitSpawner.instance != null) FruitSpawner.instance.ShowFruitsLayer();
         if (ArcheryFruitSpawner.instance != null) ArcheryFruitSpawner.instance.ShowFruitsLayer();
         isGameOver = false;
+        if (specialRewardButton != null && sliceCount > 0)
+        {
+            specialRewardButton.gameObject.SetActive(true);
+            specialRewardText.text = "" + sliceCount;
+        }
         GameObject floatingLifeIcon;
         switch (ModeManager.Instance.currentMode)
         {
