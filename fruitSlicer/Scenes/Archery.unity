@@ -6030,8 +6030,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a58a0f3b5d18904d9b7f65b8e60e863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArcheryModeManager
-  spawnDelay: 0.6
-  specialSpawnDelay: 12
 --- !u!4 &1513482828
 Transform:
   m_ObjectHideFlags: 0
