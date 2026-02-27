@@ -48,7 +48,7 @@ public class BowController : MonoBehaviour
         // arrowRb.isKinematic = true;
         ReleaseRubber();
         startShooting();
-        middlePositionClicked();
+        // middlePositionClicked();
     }
 
     public void startShooting()
@@ -207,45 +207,45 @@ public class BowController : MonoBehaviour
 
     }
 
-    public void leftPositionClicked()
-    {
-        if (BowLocationButtons.instance.hiddenPositionButton != null)
-        {
-            BowLocationButtons.instance.hiddenPositionButton.gameObject.SetActive(true);
-        }
-        BowLocationButtons.instance.hiddenPositionButton = BowLocationButtons.instance.leftButton;
-        updateBowPosition(BowLocationButtons.instance.hiddenPositionButton.position);
-        BowLocationButtons.instance.hiddenPositionButton.gameObject.SetActive(false);
-    }
+    // public void leftPositionClicked()
+    // {
+    //     if (BowLocationButtons.instance.hiddenPositionButton != null)
+    //     {
+    //         BowLocationButtons.instance.hiddenPositionButton.gameObject.SetActive(true);
+    //     }
+    //     BowLocationButtons.instance.hiddenPositionButton = BowLocationButtons.instance.leftButton;
+    //     updateBowPosition(BowLocationButtons.instance.hiddenPositionButton.position);
+    //     BowLocationButtons.instance.hiddenPositionButton.gameObject.SetActive(false);
+    // }
 
-    public void middlePositionClicked()
-    {
-        BowLocationButtons.instance.leftButton.gameObject.SetActive(true);
-        if (BowLocationButtons.instance.hiddenPositionButton != null)
-        {
-            BowLocationButtons.instance.hiddenPositionButton.gameObject.SetActive(true);
-        }
-        BowLocationButtons.instance.hiddenPositionButton = BowLocationButtons.instance.middleButton;
-        updateBowPosition(BowLocationButtons.instance.hiddenPositionButton.position);
-        BowLocationButtons.instance.hiddenPositionButton.gameObject.SetActive(false);
-    }
+    // public void middlePositionClicked()
+    // {
+    //     BowLocationButtons.instance.leftButton.gameObject.SetActive(true);
+    //     if (BowLocationButtons.instance.hiddenPositionButton != null)
+    //     {
+    //         BowLocationButtons.instance.hiddenPositionButton.gameObject.SetActive(true);
+    //     }
+    //     BowLocationButtons.instance.hiddenPositionButton = BowLocationButtons.instance.middleButton;
+    //     updateBowPosition(BowLocationButtons.instance.hiddenPositionButton.position);
+    //     BowLocationButtons.instance.hiddenPositionButton.gameObject.SetActive(false);
+    // }
 
-    public void rightPositionClicked()
-    {
-        if (BowLocationButtons.instance.hiddenPositionButton != null)
-        {
-            BowLocationButtons.instance.hiddenPositionButton.gameObject.SetActive(true);
-        }
-        BowLocationButtons.instance.hiddenPositionButton = BowLocationButtons.instance.rightButton;
-        updateBowPosition(BowLocationButtons.instance.hiddenPositionButton.position);
-        BowLocationButtons.instance.hiddenPositionButton.gameObject.SetActive(false);
-    }
+    // public void rightPositionClicked()
+    // {
+    //     if (BowLocationButtons.instance.hiddenPositionButton != null)
+    //     {
+    //         BowLocationButtons.instance.hiddenPositionButton.gameObject.SetActive(true);
+    //     }
+    //     BowLocationButtons.instance.hiddenPositionButton = BowLocationButtons.instance.rightButton;
+    //     updateBowPosition(BowLocationButtons.instance.hiddenPositionButton.position);
+    //     BowLocationButtons.instance.hiddenPositionButton.gameObject.SetActive(false);
+    // }
 
-    public void updateBowPosition(Vector3 Position)
-    {
-        GameObject.FindGameObjectWithTag("Bow").transform.position = Position;
+    // public void updateBowPosition(Vector3 Position)
+    // {
+    //     GameObject.FindGameObjectWithTag("Bow").transform.position = Position;
 
-    }
+    // }
 
 
 
