@@ -292,7 +292,6 @@ public class AdsManager : MonoBehaviour
         GameCanvas = GameObject.Find("GameCanvas");
         if (!addLifeRewardVideo.IsAdReady())
         {
-            Debug.Log("Gamecanvas: " + GameCanvas);
             GameObject error = Instantiate(errorMessagePrefab, GameCanvas.transform);
             error.GetComponentInChildren<TextMeshProUGUI>().text = "Sorry! Cant Load Advertisement Video";
             return;
