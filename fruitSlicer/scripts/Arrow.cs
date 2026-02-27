@@ -109,20 +109,9 @@ public class Arrow : MonoBehaviour
 
         lastHitTime = Time.time;
 
-        if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
-        {
-            if (!isCorrectFruit)
-            {
-                comboCount = 0;
-                return;
-            }
 
-            comboCount++;
-        }
-        else
-        {
-            comboCount++;
-        }
+        comboCount++;
+
 
         if (comboCount < 2) return;
 
