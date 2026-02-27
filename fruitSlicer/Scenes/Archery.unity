@@ -4321,8 +4321,8 @@ MonoBehaviour:
   - {fileID: 7767628628793562763, guid: c76ee44b31f51644ab1a63b52923c7d0, type: 3}
   - {fileID: 7767628628793562763, guid: d4a0dd5590153a54e814e1c116749386, type: 3}
   - {fileID: 7767628628793562763, guid: 904ee6df875b0304885923d148bec93a, type: 3}
-  spawnDelay: 1
-  fallDuration: 7
+  spawnDelay: 0.5
+  fallDuration: 5
   fruitsSliceSounds:
   - {fileID: 8300000, guid: 21e190296c3f4b64484e0d04c7099e1c, type: 3}
   - {fileID: 8300000, guid: d3fa4a05f2a1af54685c36711dcec45b, type: 3}
@@ -6030,7 +6030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a58a0f3b5d18904d9b7f65b8e60e863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArcheryModeManager
-  spawnDelay: 1
+  spawnDelay: 0.6
   specialSpawnDelay: 12
 --- !u!4 &1513482828
 Transform:

@@ -144,7 +144,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -1.5}
+  m_AnchoredPosition: {x: 0, y: -1}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7823584012426800724
@@ -164,7 +164,7 @@ MonoBehaviour:
   arrow: {fileID: 4093314611135402802}
   arrowPoint: {fileID: 5001159580722666087}
   line: {fileID: 2772973680754511589}
-  coolDownTimer: 0.5
+  coolDownTimer: 1
   arrowPrefab: {fileID: 7719835141615181571, guid: 33bf03862b29c7d42a4e51bc0b1e8733, type: 3}
 --- !u!1 &8335589342355611258
 GameObject:

@@ -2,6 +2,7 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class BowController : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class BowController : MonoBehaviour
     private Transform releasedArrows;
 
     public float coolDownTimer;
+
+    private float streachBowTimer=0.5f;
+
+
 
     // private Rigidbody2D arrowRb;
     private Vector2 startPosition;
@@ -34,6 +39,7 @@ public class BowController : MonoBehaviour
         releasedArrows = GameObject.Find("ReleasedArrows").transform;
         // arrowRb.isKinematic = true;
         ReleaseRubber();
+        StartCoroutine(WaitAndShoot(streachBowTimer));
     }
 
     public void setdefaultArrowPositon()
@@ -59,10 +65,9 @@ public class BowController : MonoBehaviour
         if (IsInputUp())
         {
             isDragging = false;
-            Shoot();
         }
 
-        if (isDragging && arrow != null)
+        if (arrow != null)
         {
             setStreachArrowPosition();
         }
@@ -115,7 +120,7 @@ public class BowController : MonoBehaviour
         arrowScript.ShootArrow(releasedArrows);
         arrow = null;
         arrowPoint = null;
-        StartCoroutine(AttachNewArrow(coolDownTimer));
+        StartCoroutine(AttachNewArrow(coolDownTimer-streachBowTimer));
 
     }
 
@@ -126,8 +131,13 @@ public class BowController : MonoBehaviour
         arrow = Instantiate(arrowPrefab, transform).transform;
         arrow.transform.localPosition = new Vector2(210, 0);
         arrowPoint = arrow.GetChild(0);
+        StartCoroutine(WaitAndShoot(streachBowTimer));
+    }
 
-
+    IEnumerator WaitAndShoot(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        Shoot();
     }
 
 
@@ -163,6 +173,8 @@ public class BowController : MonoBehaviour
         Vector3 direction = transform.position - mousePos;
 
         transform.right = direction;
+
+
     }
 
 
