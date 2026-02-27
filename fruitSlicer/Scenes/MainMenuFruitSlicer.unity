@@ -3361,8 +3361,8 @@ MonoBehaviour:
   comboSound: {fileID: 8300000, guid: b879263f6c87b1748ba3bbe4c7f4dfd1, type: 3}
   liveAndBonusAddedSound: {fileID: 8300000, guid: ef6583964b0ddfd429cc9eaf0bb6f9b8, type: 3}
   missTargetedFruitSound: {fileID: 8300000, guid: cdb459d6da7d6434e927642ab5f8f6e9, type: 3}
-  shootArrowSound: {fileID: 8300000, guid: 7867d5021650e6249b8e65ac5e98c75d, type: 3}
-  streatchBowSound: {fileID: 8300000, guid: f636aee4ad855d24f9f19c59a49ecf3c, type: 3}
+  shootArrowSound: {fileID: 8300000, guid: c9312aab94968a94f9db828bd1551576, type: 3}
+  streatchBowSound: {fileID: 8300000, guid: 9db2df4072c86fe448774c03285e78b4, type: 3}
 --- !u!4 &1343208068
 Transform:
   m_ObjectHideFlags: 0
