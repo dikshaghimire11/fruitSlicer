@@ -47,10 +47,14 @@ public class BowController : MonoBehaviour
         releasedArrows = GameObject.Find("ReleasedArrows").transform;
         // arrowRb.isKinematic = true;
         ReleaseRubber();
-        StartCoroutine(WaitAndShoot(streachBowTimer));
+        startShooting();
         middlePositionClicked();
     }
 
+    public void startShooting()
+    {
+        StartCoroutine(WaitAndShoot(streachBowTimer));
+    }
     public void setdefaultArrowPositon()
     {
         // arrow.transform.localPosition = new Vector2(210, 0);

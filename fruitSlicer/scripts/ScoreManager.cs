@@ -130,7 +130,7 @@ public class ScoreManager : MonoBehaviour
 
         Time.timeScale = 1f;
         if (gameOverPanel != null) gameOverPanel.SetActive(false);
-        GameCanvasManager.instance.unHideUiInteraction();
+       // GameCanvasManager.instance.unHideUiInteraction();
 
         // Apply the correct Mode Settings immediately
         UpdateUIStateBasedOnMode();
@@ -295,7 +295,6 @@ public class ScoreManager : MonoBehaviour
         switch (ModeManager.Instance.currentMode)
         {
             case GameMode.Infinite:
-            case GameMode.Archery:
                 floatingLifeIcon = Instantiate(floatingReward, Vector2.zero, Quaternion.identity, gameCanvas);
                 floatingLifeIcon.GetComponentInChildren<Image>().sprite = LifeImage;
                 floatingLifeIcon.GetComponentInChildren<TextMeshProUGUI>().text = "1";
@@ -316,6 +315,14 @@ public class ScoreManager : MonoBehaviour
 
                 StartCoroutine(moveFloatingRewardsAndDestroy(floatingLifeIcon));
                 StartCoroutine(moveFloatingRewardsAndDestroy(floatingClockIcon));
+                break;
+            case GameMode.Archery:
+                floatingLifeIcon = Instantiate(floatingReward, Vector2.zero, Quaternion.identity, gameCanvas);
+                floatingLifeIcon.GetComponentInChildren<Image>().sprite = LifeImage;
+                floatingLifeIcon.GetComponentInChildren<TextMeshProUGUI>().text = "1";
+                StartCoroutine(moveFloatingRewardsAndDestroy(floatingLifeIcon));
+                
+                
                 break;
         }
         if (SoundManager.instance != null)
@@ -598,6 +605,10 @@ public class ScoreManager : MonoBehaviour
         if (sliceCount <= 0)
         {
             specialRewardButton.gameObject.SetActive(false);
+        }
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayArrowAttackedSound();
         }
     }
 

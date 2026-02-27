@@ -102,11 +102,7 @@ public class GameCanvasManager : MonoBehaviour
         {
             SoundManager.instance.PlayButtonClickSound();
         }
-        if (ModeManager.Instance.currentMode == GameMode.Archery)
-        {
-            GameObject bow = Instantiate(bowPrefab, bowPrefab.transform.position, bowPrefab.transform.rotation, this.transform);
 
-        }
 
         notBlurredShopBackground.SetActive(false);
         missionPanel.SetActive(false);
@@ -149,7 +145,7 @@ public class GameCanvasManager : MonoBehaviour
     }
     IEnumerator StartArcheryWithDelay()
     {
-        yield return new WaitForSeconds(1.5f); 
+        yield return new WaitForSeconds(1.5f);
 
         ArcheryFruitSpawner.instance.startSpawnning();
     }
@@ -277,10 +273,13 @@ public class GameCanvasManager : MonoBehaviour
             TrailRenderer trailRenderer = bladeInstance.GetComponent<TrailRenderer>();
             trailRenderer.enabled = false;
         }
-        bowInstance = GameObject.FindGameObjectWithTag("Bow");
-        if (bowInstance != null)
+        if (ModeManager.Instance.currentMode == GameMode.Archery)
         {
-            bowInstance.SetActive(false);
+            bowInstance = GameObject.FindGameObjectWithTag("Bow");
+            if (bowInstance != null)
+            {
+                GameObject.Destroy(bowInstance);
+            }
         }
 
     }
@@ -297,9 +296,10 @@ public class GameCanvasManager : MonoBehaviour
             TrailRenderer trailRenderer = bladeInstance.GetComponent<TrailRenderer>();
             trailRenderer.enabled = true;
         }
-        if (bowInstance != null)
+        if (ModeManager.Instance.currentMode == GameMode.Archery)
         {
-            bowInstance.SetActive(true);
+            GameObject bow = Instantiate(bowPrefab, bowPrefab.transform.position, bowPrefab.transform.rotation, this.transform);
+
         }
     }
     public void PlayTutorialVideo()
@@ -319,7 +319,7 @@ public class GameCanvasManager : MonoBehaviour
 
         startSpawnAction();
 
-      StartCoroutine(MoveRoutine(new Vector2(-3f, -0.87f), 1, 2, newObject));
+        StartCoroutine(MoveRoutine(new Vector2(-3f, -0.87f), 1, 2, newObject));
         StartCoroutine(MoveRoutine(new Vector2(0f, -4f), 1, 2, workDesk));
     }
     public void showGoToShopPanel()

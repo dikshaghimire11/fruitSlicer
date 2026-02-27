@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d10fe8fcfce634f823acee2868d812, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpecialObject
-  breakSound: {fileID: 8300000, guid: 5cc3ccc40446e9f4bae471528fe99c73, type: 3}
+  breakSound: {fileID: 8300000, guid: b879263f6c87b1748ba3bbe4c7f4dfd1, type: 3}
 --- !u!212 &9107649882707727357
 SpriteRenderer:
   serializedVersion: 2

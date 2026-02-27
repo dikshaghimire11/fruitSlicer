@@ -3363,6 +3363,7 @@ MonoBehaviour:
   missTargetedFruitSound: {fileID: 8300000, guid: cdb459d6da7d6434e927642ab5f8f6e9, type: 3}
   shootArrowSound: {fileID: 8300000, guid: c9312aab94968a94f9db828bd1551576, type: 3}
   streatchBowSound: {fileID: 8300000, guid: 9db2df4072c86fe448774c03285e78b4, type: 3}
+  arrowAttackedSound: {fileID: 8300000, guid: 68508dc239f54014bb3879d0e9819588, type: 3}
 --- !u!4 &1343208068
 Transform:
   m_ObjectHideFlags: 0
