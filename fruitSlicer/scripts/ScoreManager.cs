@@ -54,6 +54,7 @@ public class ScoreManager : MonoBehaviour
 
     public Sprite clockImage;
     public Sprite LifeImage;
+    public Sprite bonusImage;
 
     public Sprite coinImage;
 
@@ -62,6 +63,11 @@ public class ScoreManager : MonoBehaviour
     public Transform gameCanvas;
     public TextMeshProUGUI freezeCountdownText;
     private GameObject timerParent;
+    public Button specialRewardButton;
+
+    private int sliceCount = 0;
+
+    public TextMeshProUGUI specialRewardText;
 
 
 
@@ -431,6 +437,7 @@ public class ScoreManager : MonoBehaviour
                 JuiceManager.instance.isLevelActive = false;
                 break;
             case GameMode.Archery:
+
                 PlayerPrefs.SetInt("TotalCoins", score - alreadySavedCoins + totalCoins);
                 alreadySavedCoins = score;
                 PlayerPrefs.Save();
@@ -442,7 +449,8 @@ public class ScoreManager : MonoBehaviour
                 }
                 PlayerPrefs.SetInt("HasPlayedBefore", 1);
                 PlayerPrefs.Save();
-
+                if(specialRewardButton != null)
+                specialRewardButton.gameObject.SetActive(false);
                 break;
         }
         ;
@@ -553,6 +561,29 @@ public class ScoreManager : MonoBehaviour
 
         freezeCountdownText.gameObject.SetActive(false);
         timerParent.SetActive(false);
+    }
+
+    public void addSpecialReward()
+    {
+        if (specialRewardButton != null)
+        {
+            specialRewardButton.gameObject.SetActive(true);
+        }
+        sliceCount += 1;
+        if (specialRewardText != null)
+        {
+            specialRewardText.text = "" + sliceCount;
+        }
+        GameObject floatingLifeIcon;
+        floatingLifeIcon = Instantiate(floatingReward, Vector2.zero, Quaternion.identity, gameCanvas);
+        floatingLifeIcon.GetComponentInChildren<Image>().sprite = bonusImage;
+        floatingLifeIcon.GetComponentInChildren<TextMeshProUGUI>().text = "1";
+        StartCoroutine(moveFloatingRewardsAndDestroy(floatingLifeIcon));
+    }
+
+    public void consumeSpecialReward()
+    {
+
     }
 
 
