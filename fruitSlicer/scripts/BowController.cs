@@ -83,12 +83,13 @@ public class BowController : MonoBehaviour
     void StreachRubber()
     {
         {
+
+            if (line.positionCount != 3)
+                line.positionCount = 3;
             if (SoundManager.instance != null)
             {
                 SoundManager.instance.PlayStreatchBowSound();
             }
-            if (line.positionCount != 3)
-                line.positionCount = 3;
 
             line.SetPosition(0, new Vector3(leftPoint.transform.position.x, leftPoint.transform.position.y, -14));
             line.SetPosition(1, new Vector3(arrowPoint.transform.position.x, arrowPoint.transform.position.y, -14));
