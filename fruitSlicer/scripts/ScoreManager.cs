@@ -65,9 +65,11 @@ public class ScoreManager : MonoBehaviour
     private GameObject timerParent;
     public Button specialRewardButton;
 
-    private int sliceCount = 0;
+    private int sliceCount = 1;
 
     public TextMeshProUGUI specialRewardText;
+
+    public Sprite archeryArrowttackSprite;
 
 
 
@@ -449,8 +451,8 @@ public class ScoreManager : MonoBehaviour
                 }
                 PlayerPrefs.SetInt("HasPlayedBefore", 1);
                 PlayerPrefs.Save();
-                if(specialRewardButton != null)
-                specialRewardButton.gameObject.SetActive(false);
+                if (specialRewardButton != null)
+                    specialRewardButton.gameObject.SetActive(false);
                 break;
         }
         ;
@@ -576,14 +578,22 @@ public class ScoreManager : MonoBehaviour
         }
         GameObject floatingLifeIcon;
         floatingLifeIcon = Instantiate(floatingReward, Vector2.zero, Quaternion.identity, gameCanvas);
-        floatingLifeIcon.GetComponentInChildren<Image>().sprite = bonusImage;
+        floatingLifeIcon.GetComponentInChildren<Image>().sprite = archeryArrowttackSprite;
         floatingLifeIcon.GetComponentInChildren<TextMeshProUGUI>().text = "1";
         StartCoroutine(moveFloatingRewardsAndDestroy(floatingLifeIcon));
     }
 
-    public void consumeSpecialReward()
+    public void reduceArrowAttackCount()
     {
-
+        sliceCount -= 1;
+        if (specialRewardText != null)
+        {
+            specialRewardText.text = "" + sliceCount;
+        }
+        if (sliceCount <= 0)
+        {
+            specialRewardButton.gameObject.SetActive(false);
+        }
     }
 
 

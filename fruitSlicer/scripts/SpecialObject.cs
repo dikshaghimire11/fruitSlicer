@@ -32,9 +32,10 @@ public class SpecialObject : MonoBehaviour
         }
         if (ScoreManager.instance != null)
         {
-            ScoreManager.instance.addSpecialReward(); 
+            ScoreManager.instance.addSpecialReward();
         }
         Destroy(gameObject);
+
     }
 
 }

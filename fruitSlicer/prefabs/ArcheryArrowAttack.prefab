@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2883618368177893958}
   - component: {fileID: 9107649882707727357}
   m_Layer: 6
-  m_Name: SpecialObject
+  m_Name: ArcheryArrowAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -258,7 +258,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 3822108714260272289, guid: afa030f8e90b0b641806a138b81b5174, type: 3}
+  m_Sprite: {fileID: 8497999544059793281, guid: a442d34ad6c106d4ca397cf63547ff26, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
