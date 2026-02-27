@@ -52,7 +52,7 @@ public class ArcheryFruitSpawner : MonoBehaviour
         if (fruitPrefabs == null || fruitPrefabs.Count == 0)
             yield break;
 
-        GameObject specialFruit = fruitPrefabs[0]; 
+        GameObject specialFruit = fruitPrefabs[0];
 
         float nextSpecialTime = Time.time + 15f;
 
@@ -66,7 +66,7 @@ public class ArcheryFruitSpawner : MonoBehaviour
             if (Time.time >= nextSpecialTime)
             {
                 prefabToSpawn = specialFruit;
-                nextSpecialTime = Time.time + 15f; 
+                nextSpecialTime = Time.time + 15f;
             }
             else
             {
@@ -145,9 +145,14 @@ public class ArcheryFruitSpawner : MonoBehaviour
 
         // Assign random slice sound
         Fruit fruitComp = newObj.GetComponent<Fruit>();
-
+        AudioSource audio = newObj.GetComponentInChildren<AudioSource>();
+        if (audio != null)
+        {
+            audio.Stop();
+        }
         if (fruitComp != null)
         {
+
             newObj.transform.localScale *= fruitComp.uniformScale;
             if (!newObj.name.StartsWith("Coconut"))
             {
