@@ -55,6 +55,8 @@ public class GameCanvasManager : MonoBehaviour
 
     public GameObject notBlurredShopBackground;
     public GameObject bowPrefab;
+    private GameObject bowInstance;
+
 
 
 
@@ -271,6 +273,11 @@ public class GameCanvasManager : MonoBehaviour
             TrailRenderer trailRenderer = bladeInstance.GetComponent<TrailRenderer>();
             trailRenderer.enabled = false;
         }
+        bowInstance = GameObject.FindGameObjectWithTag("Bow");
+        if (bowInstance != null)
+        {
+            bowInstance.SetActive(false);
+        }
 
     }
 
@@ -285,6 +292,10 @@ public class GameCanvasManager : MonoBehaviour
         {
             TrailRenderer trailRenderer = bladeInstance.GetComponent<TrailRenderer>();
             trailRenderer.enabled = true;
+        }
+        if (bowInstance != null)
+        {
+            bowInstance.SetActive(true);
         }
     }
     public void PlayTutorialVideo()

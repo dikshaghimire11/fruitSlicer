@@ -2,7 +2,6 @@ using UnityEngine;
 
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 
 public class ArcheryFruitSpawner : MonoBehaviour
 {
@@ -148,6 +147,7 @@ public class ArcheryFruitSpawner : MonoBehaviour
         }
         UnityEngine.Vector3 spawnPos = new UnityEngine.Vector3(spawnX, randomY, -10f);
         GameObject newObj = Instantiate(prefab, spawnPos, UnityEngine.Quaternion.identity);
+
         // Bottom of screen
         float rightX = deSpawnArea.transform.position.x;
 

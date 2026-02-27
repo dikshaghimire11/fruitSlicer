@@ -9395,7 +9395,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2097522738
 Transform:
   m_ObjectHideFlags: 0
@@ -9693,7 +9693,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: CHOP , CHOP ! CUSTOMERS ARE WAITING !!
+  m_text: DRAW, AIM! SHOW YOUR ARCHERY SKILL!!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4749856e5c6abcb44b2a907fadc3def7, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 3e18916f3b9602c4f899f242575b00b7, type: 2}
