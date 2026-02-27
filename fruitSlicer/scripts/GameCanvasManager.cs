@@ -123,7 +123,7 @@ public class GameCanvasManager : MonoBehaviour
 
             startSpawnAction();
 
-            StartCoroutine(MoveRoutine(new Vector2(-2.67f, -0.87f), 1, 2, newObject));
+            StartCoroutine(MoveRoutine(new Vector2(-3f, -0.87f), 1, 2, newObject));
             StartCoroutine(MoveRoutine(new Vector2(0f, -4f), 1, 2, workDesk));
 
         }
@@ -315,7 +315,7 @@ public class GameCanvasManager : MonoBehaviour
 
         startSpawnAction();
 
-        StartCoroutine(MoveRoutine(new Vector2(-2.67f, -0.87f), 1, 2, newObject));
+      StartCoroutine(MoveRoutine(new Vector2(-3f, -0.87f), 1, 2, newObject));
         StartCoroutine(MoveRoutine(new Vector2(0f, -4f), 1, 2, workDesk));
     }
     public void showGoToShopPanel()

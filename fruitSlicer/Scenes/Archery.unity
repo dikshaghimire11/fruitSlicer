@@ -11549,7 +11549,7 @@ MonoBehaviour:
   workDesk: {fileID: 3602834368512839101}
   missionPanel: {fileID: 158338042650811614}
   freeModeCharacter: {fileID: 1867517093331897566, guid: 850188bd0bf23af4493785bcef9cd233, type: 3}
-  archeryCharacter: {fileID: 1867517093331897566, guid: 5e4147cdc0e22df4bbf623a9681eec6f, type: 3}
+  archeryCharacter: {fileID: 1867517093331897566, guid: 434589078a199e6458a0b534907c03bd, type: 3}
   missionAccomplishedPanel: {fileID: 4220438344246138256}
   juiceContainer: {fileID: 7684435317907443232}
   juiceColor: {fileID: 2747685104290848845}
