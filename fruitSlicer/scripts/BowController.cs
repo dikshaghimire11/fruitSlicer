@@ -93,10 +93,10 @@ public class BowController : MonoBehaviour
     {
         {
 
-            if (SoundManager.instance != null)
-            {
-                SoundManager.instance.PlayStreatchBowSound();
-            }
+            // if (SoundManager.instance != null)
+            // {
+            //     SoundManager.instance.PlayStreatchBowSound();
+            // }
 
             if (line.positionCount != 3)
                 line.positionCount = 3;
@@ -105,6 +105,7 @@ public class BowController : MonoBehaviour
             line.SetPosition(0, new Vector3(leftPoint.transform.position.x, leftPoint.transform.position.y, -14));
             line.SetPosition(1, new Vector3(arrowPoint.transform.position.x, arrowPoint.transform.position.y, -14));
             line.SetPosition(2, new Vector3(rightPoint.transform.position.x, rightPoint.transform.position.y, -14));
+            if (!SoundManager.instance.GetComponent<AudioSource>().isPlaying) SoundManager.instance.PlayStreatchBowSound();
         }
     }
 
