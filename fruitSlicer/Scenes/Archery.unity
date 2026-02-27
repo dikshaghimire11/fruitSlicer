@@ -861,7 +861,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &182600723
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4909,6 +4909,7 @@ MonoBehaviour:
   gameCanvas: {fileID: 3894230602764016268}
   freezeCountdownText: {fileID: 301385897}
   specialRewardButton: {fileID: 182600726}
+  sliceCount: 1
   specialRewardText: {fileID: 1612821050}
   archeryArrowttackSprite: {fileID: 8497999544059793281, guid: a442d34ad6c106d4ca397cf63547ff26, type: 3}
 --- !u!114 &979263252
@@ -10907,7 +10908,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &162946005365102379
 RectTransform:
   m_ObjectHideFlags: 0
