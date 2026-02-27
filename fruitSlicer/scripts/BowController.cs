@@ -40,7 +40,7 @@ public class BowController : MonoBehaviour
     public GameObject arrowPrefab;
 
     void Start()
-    { 
+    {
         mainCamera = Camera.main;
         // arrowRb = arrow.GetComponent<Rigidbody2D>();
         startPosition = arrow.position;
@@ -92,10 +92,6 @@ public class BowController : MonoBehaviour
     void StreachRubber()
     {
         {
-            if (SoundManager.instance != null)
-            {
-                SoundManager.instance.PlayStreatchBowSound();
-            }
             if (line.positionCount != 3)
                 line.positionCount = 3;
 
@@ -146,7 +142,10 @@ public class BowController : MonoBehaviour
     IEnumerator AttachNewArrow(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayStreatchBowSound();
+        }
         arrow = Instantiate(arrowPrefab, transform).transform;
         arrow.transform.localPosition = new Vector2(210, 0);
         arrowPoint = arrow.GetChild(0);
