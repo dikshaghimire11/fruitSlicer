@@ -57,12 +57,6 @@ public class GameCanvasManager : MonoBehaviour
     public GameObject bowPrefab;
     private GameObject bowInstance;
 
-
-
-
-
-
-
     void Awake()
     {
         if (instance == null)
@@ -72,6 +66,7 @@ public class GameCanvasManager : MonoBehaviour
     }
     void Start()
     {
+        PlayerPrefs.DeleteAll();
         bool navigateToShop = PlayerPrefs.GetInt("NavigateToShop", 0) == 1;
         bool hasSeenTutorial = PlayerPrefs.GetInt("HasSeenTutorial", 0) == 1;
         bool hasReviewedMission = PlayerPrefs.GetInt("HasReview", 0) == 1;
@@ -102,30 +97,48 @@ public class GameCanvasManager : MonoBehaviour
         {
             SoundManager.instance.PlayButtonClickSound();
         }
-
-
         notBlurredShopBackground.SetActive(false);
         missionPanel.SetActive(false);
         if (SoundManager.instance != null) SoundManager.instance.PlayCharacterGoneSound();
         bool hasSeenTutorial = PlayerPrefs.GetInt("HasSeenTutorial", 0) == 1;
-        if (!hasSeenTutorial)
+        bool hasSeenArcheryTutorial = PlayerPrefs.GetInt("HasSeenArcheryTutorial", 0) == 1;
+        switch (ModeManager.Instance.currentMode)
         {
-            PlayTutorialVideo();
-        }
-        else
-        {
+            case GameMode.Archery:
+                if (!hasSeenArcheryTutorial)
+                {
+                    PlayTutorialVideo();
 
-            unHideUiInteraction();
-
-            startSpawnAction();
-
-            StartCoroutine(MoveRoutine(new Vector2(-3f, -0.87f), 1, 2, newObject));
-            StartCoroutine(MoveRoutine(new Vector2(0f, -4f), 1, 2, workDesk));
-
+                }
+                else
+                {
+                    startSpawningFruits();
+                }
+                break;
+            case GameMode.JuiceMaking:
+            case GameMode.Infinite:
+                if (!hasSeenTutorial)
+                {
+                    PlayTutorialVideo();
+                }
+                else
+                {
+                    startSpawningFruits();
+                }
+                break;
         }
 
         // choppingBoard.SetActive(true);
 
+    }
+    public void startSpawningFruits()
+    {
+        unHideUiInteraction();
+
+        startSpawnAction();
+
+        StartCoroutine(MoveRoutine(new Vector2(-3f, -0.87f), 1, 2, newObject));
+        StartCoroutine(MoveRoutine(new Vector2(0f, -4f), 1, 2, workDesk));
     }
 
     public void startSpawnAction()
@@ -280,6 +293,11 @@ public class GameCanvasManager : MonoBehaviour
             {
                 GameObject.Destroy(bowInstance);
             }
+            if (ScoreManager.instance.specialRewardButton != null)
+            {
+                ScoreManager.instance.specialRewardButton.gameObject.SetActive(false);
+                // ScoreManager.instance.specialRewardText.text = "" + ScoreManager.instance.sliceCount;
+            }
         }
 
     }
@@ -300,6 +318,12 @@ public class GameCanvasManager : MonoBehaviour
         {
             GameObject bow = Instantiate(bowPrefab, bowPrefab.transform.position, bowPrefab.transform.rotation, this.transform);
 
+            if (ScoreManager.instance.specialRewardButton != null && ScoreManager.instance.sliceCount > 0)
+            {
+                ScoreManager.instance.specialRewardButton.gameObject.SetActive(true);
+                ScoreManager.instance.specialRewardText.text = "" + ScoreManager.instance.sliceCount;
+            }
+
         }
     }
     public void PlayTutorialVideo()
@@ -312,9 +336,19 @@ public class GameCanvasManager : MonoBehaviour
     {
         tutorialVideoPlayer.Stop();
         tutorialPanel.SetActive(false);
+        switch (ModeManager.Instance.currentMode)
+        {
+            case GameMode.Archery:
+                PlayerPrefs.SetInt("HasSeenArcheryTutorial", 1);
+                PlayerPrefs.Save();
+                break;
+            case GameMode.JuiceMaking:
+            case GameMode.Infinite:
 
-        PlayerPrefs.SetInt("HasSeenTutorial", 1);
-        PlayerPrefs.Save();
+                PlayerPrefs.SetInt("HasSeenTutorial", 1);
+                PlayerPrefs.Save();
+                break;
+        }
         unHideUiInteraction();
 
         startSpawnAction();
