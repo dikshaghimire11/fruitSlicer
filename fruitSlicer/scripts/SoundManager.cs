@@ -25,6 +25,8 @@ public class SoundManager : MonoBehaviour
     public AudioClip comboSound;
     public AudioClip liveAndBonusAddedSound;
     public AudioClip missTargetedFruitSound;
+    public AudioClip shootArrowSound;
+    public AudioClip streatchBowSound;
     // --- CONFIGURATION ---
     private const float MAX_MUSIC_VOLUME = 0.5f; // Slider at 100% = 0.5 actual volume
     private const float DEFAULT_SLIDER_VALUE = 0.25f; // 0.04 * 0.5 = 0.02 (Your requested default)
@@ -232,5 +234,19 @@ public class SoundManager : MonoBehaviour
     public void PlayArcheryMusic()
     {
         PlayMusicFromList(archeryMusicList);
+    }
+    public void PlayShootArrowSound()
+    {
+        if (sfxSource != null && shootArrowSound != null)
+        {
+            sfxSource.PlayOneShot(shootArrowSound);
+        }
+    }
+    public void PlayStreatchBowSound()
+    {
+        if (sfxSource != null && streatchBowSound != null)
+        {
+            sfxSource.PlayOneShot(streatchBowSound);
+        }
     }
 }

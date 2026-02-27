@@ -49,51 +49,40 @@ public class ArcheryFruitSpawner : MonoBehaviour
     }
     IEnumerator SpawnFruitsRoutine()
     {
-
-
-        UnityEngine.Vector3[] corners = new UnityEngine.Vector3[4];
-        if (gameContainer != null)
-        {
-            gameContainer.GetComponent<RectTransform>().GetWorldCorners(corners);
-        }
-        else
-        {
+        if (fruitPrefabs == null || fruitPrefabs.Count == 0)
             yield break;
-        }
+
+        GameObject specialFruit = fruitPrefabs[0]; 
+
+        float nextSpecialTime = Time.time + 60f;
 
         while (true)
         {
-
-            while (ScoreManager.instance.isGameOver)
-            {
+            if (ScoreManager.instance.isGameOver)
                 yield break;
-            }
-            ;
-            yield return new WaitForSeconds(spawnDelay);
 
-            // 2. Spawn Logic
-            if (fruitPrefabs.Count > 0)
+            GameObject prefabToSpawn = null;
+
+            if (Time.time >= nextSpecialTime)
             {
-
-                GameObject prefabToSpawn = null;
-                if (prefabToSpawn == null)
-                {
-                    int randomIndex = Random.Range(0, fruitPrefabs.Count);
-
-                    // Prevent same fruit twice in a row (Visual variety)
-                    if (fruitPrefabs.Count > 1)
-                    {
-                        while (randomIndex == lastFruitIndex)
-                        {
-                            randomIndex = Random.Range(0, fruitPrefabs.Count);
-                        }
-                    }
-                    lastFruitIndex = randomIndex;
-                    prefabToSpawn = fruitPrefabs[randomIndex];
-                }
-                SpawnObject(prefabToSpawn);
-
+                prefabToSpawn = specialFruit;
+                nextSpecialTime = Time.time + 60f; 
             }
+            else
+            {
+                List<GameObject> normalFruits = new List<GameObject>(fruitPrefabs);
+                normalFruits.Remove(specialFruit);
+
+                if (normalFruits.Count > 0)
+                {
+                    int randomIndex = Random.Range(0, normalFruits.Count);
+                    prefabToSpawn = normalFruits[randomIndex];
+                }
+            }
+
+            if (prefabToSpawn != null)
+                SpawnObject(prefabToSpawn);
+            yield return new WaitForSeconds(spawnDelay);
         }
     }
     // --- BOMB SPAWN ROUTINE ---
@@ -148,6 +137,7 @@ public class ArcheryFruitSpawner : MonoBehaviour
         UnityEngine.Vector3 spawnPos = new UnityEngine.Vector3(spawnX, randomY, -10f);
         GameObject newObj = Instantiate(prefab, spawnPos, UnityEngine.Quaternion.identity);
 
+
         // Bottom of screen
         float rightX = deSpawnArea.transform.position.x;
 
@@ -169,6 +159,12 @@ public class ArcheryFruitSpawner : MonoBehaviour
                 newObj.transform.localScale *= fruitComp.uniformScale;
             }
         }
+        SpecialObject specialComp = newObj.GetComponent<SpecialObject>();
+        if (specialComp != null)
+        {
+            newObj.transform.localScale *= 0.8f;
+        }
+
         // Bomb bombComp = newObj.GetComponent<Bomb>();
         // if (bombComp != null)
         // {

@@ -66,6 +66,12 @@ public class Arrow : MonoBehaviour
             HandleCombo(fruit, isCorrectFruit);
             return;
         }
+        SpecialObject special = other.GetComponent<SpecialObject>();
+        if (special != null)
+        {
+            special.Slice(new UnityEngine.Vector2(0, 0));
+            return;
+        }
 
         // Bomb bomb = other.GetComponent<Bomb>();
         // if (bomb != null)

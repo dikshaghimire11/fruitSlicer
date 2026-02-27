@@ -19,7 +19,7 @@ public class BowController : MonoBehaviour
 
     public float coolDownTimer;
 
-    private float streachBowTimer=0.5f;
+    private float streachBowTimer = 0.5f;
 
 
 
@@ -83,6 +83,10 @@ public class BowController : MonoBehaviour
     void StreachRubber()
     {
         {
+            if (SoundManager.instance != null)
+            {
+                SoundManager.instance.PlayStreatchBowSound();
+            }
             if (line.positionCount != 3)
                 line.positionCount = 3;
 
@@ -94,13 +98,15 @@ public class BowController : MonoBehaviour
 
     void ReleaseRubber()
     {
-        {
-            if (line.positionCount != 2)
-                line.positionCount = 2;
 
-            line.SetPosition(0, new Vector3(leftPoint.transform.position.x, leftPoint.transform.position.y, -14));
-            line.SetPosition(1, new Vector3(rightPoint.transform.position.x, rightPoint.transform.position.y, -14));
-        }
+
+        if (line.positionCount != 2)
+            line.positionCount = 2;
+
+
+        line.SetPosition(0, new Vector3(leftPoint.transform.position.x, leftPoint.transform.position.y, -14));
+        line.SetPosition(1, new Vector3(rightPoint.transform.position.x, rightPoint.transform.position.y, -14));
+
     }
 
     // void Shoot()
@@ -116,11 +122,15 @@ public class BowController : MonoBehaviour
         {
             return;
         }
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayShootArrowSound();
+        }
         Arrow arrowScript = arrow.GetComponent<Arrow>();
         arrowScript.ShootArrow(releasedArrows);
         arrow = null;
         arrowPoint = null;
-        StartCoroutine(AttachNewArrow(coolDownTimer-streachBowTimer));
+        StartCoroutine(AttachNewArrow(coolDownTimer - streachBowTimer));
 
     }
 

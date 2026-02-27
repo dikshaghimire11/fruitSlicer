@@ -33,8 +33,6 @@ public class LoadingManager : MonoBehaviour
         // We must check this to prevent the game from freezing/crashing.
         if (operation == null)
         {
-            Debug.LogError("CRITICAL ERROR: Scene '" + TempData.sceneToLoad + "' not found!");
-            Debug.LogError("Solution: Go to File > Build Settings and ensure '" + TempData.sceneToLoad + "' is in the list and CHECKED.");
             if (progressText != null) progressText.text = "Error: Scene Not Found";
             yield break; // Stop here safely
         }
