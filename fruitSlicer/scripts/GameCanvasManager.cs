@@ -4,7 +4,6 @@ using System.Collections;
 using System;
 using NUnit.Framework;
 using Random = UnityEngine.Random;
-using System.Numerics;
 using Vector2 = UnityEngine.Vector2;
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
@@ -316,6 +315,7 @@ public class GameCanvasManager : MonoBehaviour
         if (ModeManager.Instance.currentMode == GameMode.Archery)
         {
             GameObject bow = Instantiate(bowPrefab, bowPrefab.transform.position, bowPrefab.transform.rotation, this.transform);
+            bow.transform.rotation = Quaternion.Euler(0, 0, 90);
 
             if (ScoreManager.instance.specialRewardButton != null && ScoreManager.instance.sliceCount > 0)
             {

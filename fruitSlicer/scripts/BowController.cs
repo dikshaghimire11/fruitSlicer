@@ -69,8 +69,6 @@ public class BowController : MonoBehaviour
 
     void Update()
     {
-
-        updateBowRotation();
         if (IsInputDown())
         {
             isDragging = true;
@@ -87,6 +85,10 @@ public class BowController : MonoBehaviour
         else
         {
             setdefaultArrowPositon();
+        }
+        if(isDragging)
+        {
+            updateBowRotation();
         }
 
 

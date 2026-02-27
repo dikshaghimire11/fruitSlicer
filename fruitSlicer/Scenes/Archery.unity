@@ -8707,7 +8707,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "SWIPE THE SCREEN\n TO CUT FRUITS."
+  m_text: HOW TO PLAY?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4749856e5c6abcb44b2a907fadc3def7, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 3e18916f3b9602c4f899f242575b00b7, type: 2}
@@ -9037,11 +9037,11 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1827677473}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: e129c9163de62ad45a1f3608746f642b, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 82448c6b93b51c5438fb99c4c2636c08, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 519420031}
-  m_TargetTexture: {fileID: 8400000, guid: f824a4a347a2f9842a3cf4f378c138d7, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: a7f8aa5b8437f684cb1f36d541344d64, type: 2}
   m_TimeReference: 0
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: <noninit>
@@ -9848,7 +9848,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 8400000, guid: f824a4a347a2f9842a3cf4f378c138d7, type: 2}
+  m_Texture: {fileID: 8400000, guid: a7f8aa5b8437f684cb1f36d541344d64, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0

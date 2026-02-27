@@ -130,7 +130,7 @@ public class ScoreManager : MonoBehaviour
 
         Time.timeScale = 1f;
         if (gameOverPanel != null) gameOverPanel.SetActive(false);
-       // GameCanvasManager.instance.unHideUiInteraction();
+        // GameCanvasManager.instance.unHideUiInteraction();
 
         // Apply the correct Mode Settings immediately
         UpdateUIStateBasedOnMode();
@@ -316,8 +316,8 @@ public class ScoreManager : MonoBehaviour
                 floatingLifeIcon.GetComponentInChildren<Image>().sprite = LifeImage;
                 floatingLifeIcon.GetComponentInChildren<TextMeshProUGUI>().text = "1";
                 StartCoroutine(moveFloatingRewardsAndDestroy(floatingLifeIcon));
-                
-                
+
+
                 break;
         }
         if (SoundManager.instance != null)
@@ -592,6 +592,12 @@ public class ScoreManager : MonoBehaviour
 
     public void reduceArrowAttackCount()
     {
+        GameObject bowInstance = GameObject.FindGameObjectWithTag("Bow");
+
+        if (bowInstance != null)
+        {
+            bowInstance.transform.rotation = Quaternion.Euler(0, 0, 90);
+        }
         sliceCount -= 1;
         if (specialRewardText != null)
         {
