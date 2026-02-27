@@ -879,7 +879,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 1.0776, y: -2.8271}
+  m_AnchoredPosition: {x: 1.0776, y: -4.24}
   m_SizeDelta: {x: 13.8346, y: 12.984}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &182600724
@@ -10785,7 +10785,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: DRAW, AIM! SHOW YOUR ARCHERY SKILL!!
+  m_text: PROVE YOUR AIM. SHOOT DOWN THE FRUITS!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4749856e5c6abcb44b2a907fadc3def7, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 3e18916f3b9602c4f899f242575b00b7, type: 2}
@@ -10816,7 +10816,7 @@ MonoBehaviour:
   m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 12
+  m_fontSizeMin: 10
   m_fontSizeMax: 14
   m_fontStyle: 0
   m_HorizontalAlignment: 2
@@ -10851,7 +10851,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -63.63681, y: -22.980326, z: -37.356533, w: -26.117939}
+  m_margin: {x: -63.63681, y: -22.980326, z: -43.226242, w: -26.117939}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -13771,7 +13771,6 @@ RectTransform:
   - {fileID: 439217405531476107}
   - {fileID: 4151633660799686097}
   - {fileID: 8338052997763537333}
-  - {fileID: 182600723}
   - {fileID: 4631742033105863886}
   - {fileID: 405239798}
   - {fileID: 3797793438502931271}
@@ -13780,6 +13779,7 @@ RectTransform:
   - {fileID: 1065256555}
   - {fileID: 1525215569}
   - {fileID: 173796946}
+  - {fileID: 182600723}
   - {fileID: 6651173097760880596}
   m_Father: {fileID: 294674266}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
