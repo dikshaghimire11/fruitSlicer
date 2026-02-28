@@ -256,12 +256,7 @@ public class Blade : MonoBehaviour
 
         if (SoundManager.instance != null)
         {
-            int cappedCombo = Mathf.Min(comboCount, 3);
-
-            float pitch = 0.75f + (cappedCombo - 2) * 0.08f;
-            pitch = Mathf.Clamp(pitch, 0.75f, 0.95f);
-
-            SoundManager.instance.PlayComboSound(pitch);
+            SoundManager.instance.PlayComboSound(comboCount);
         }
     }
 

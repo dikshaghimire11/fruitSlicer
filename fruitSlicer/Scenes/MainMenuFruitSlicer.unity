@@ -4051,6 +4051,15 @@ MonoBehaviour:
   shootArrowSound: {fileID: 8300000, guid: c9312aab94968a94f9db828bd1551576, type: 3}
   streatchBowSound: {fileID: 8300000, guid: 9db2df4072c86fe448774c03285e78b4, type: 3}
   arrowAttackedSound: {fileID: 8300000, guid: 68508dc239f54014bb3879d0e9819588, type: 3}
+  combo2Sounds:
+  - {fileID: 8300000, guid: 64e1b3ff1c0fef247971d0e054c7bdf6, type: 3}
+  - {fileID: 8300000, guid: 0aa3c5840caf08a448540b01d54237be, type: 3}
+  combo3Sounds:
+  - {fileID: 8300000, guid: fa3093a67194af74f8a091289a728a03, type: 3}
+  - {fileID: 8300000, guid: d7805bb4e8f9a634ab3189fb38370452, type: 3}
+  combo4Sounds:
+  - {fileID: 8300000, guid: c1578f71fe69674409fdf6b33e3b7a56, type: 3}
+  - {fileID: 8300000, guid: 2a68d33898321e24999a741af1229546, type: 3}
 --- !u!4 &1343208068
 Transform:
   m_ObjectHideFlags: 0

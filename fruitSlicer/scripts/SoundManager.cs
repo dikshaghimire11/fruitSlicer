@@ -28,6 +28,9 @@ public class SoundManager : MonoBehaviour
     public AudioClip shootArrowSound;
     public AudioClip streatchBowSound;
     public AudioClip arrowAttackedSound;
+    public AudioClip[] combo2Sounds; // For variety in combo sound effects
+    public AudioClip[] combo3Sounds;
+    public AudioClip[] combo4Sounds;
     // --- CONFIGURATION ---
     private const float MAX_MUSIC_VOLUME = 0.5f; // Slider at 100% = 0.5 actual volume
     private const float DEFAULT_SLIDER_VALUE = 0.25f; // 0.04 * 0.5 = 0.02 (Your requested default)
@@ -203,14 +206,14 @@ public class SoundManager : MonoBehaviour
     //         sfxSource.PlayOneShot(perfectSound);
     //     }
     // }
-    public void PlayComboSound(float pitch)
-    {
-        if (pitchChangingSource != null && comboSound != null)
-        {
-            pitchChangingSource.pitch = pitch;
-            pitchChangingSource.PlayOneShot(comboSound, 0.2f);
-        }
-    }
+    // public void PlayComboSound(float pitch)
+    // {
+    //     if (pitchChangingSource != null && comboSound != null)
+    //     {
+    //         pitchChangingSource.pitch = pitch;
+    //         pitchChangingSource.PlayOneShot(comboSound, 0.2f);
+    //     }
+    // }
     public void PlayButtonClickSound()
     {
         if (sfxSource != null && buttonClickSound != null)
@@ -255,6 +258,59 @@ public class SoundManager : MonoBehaviour
         if (sfxSource != null && arrowAttackedSound != null)
         {
             sfxSource.PlayOneShot(arrowAttackedSound);
+        }
+    }
+    private int lastIndex2 = -1;
+    private int lastIndex3 = -1;
+    private int lastIndex4 = -1;
+
+    public void PlayComboSound(int comboCount)
+    {
+        if (sfxSource == null) return;
+
+        AudioClip[] selectedArray = null;
+        int index = 0;
+
+        if (comboCount == 2 && combo2Sounds.Length > 0)
+        {
+            selectedArray = combo2Sounds;
+
+            do
+            {
+                index = Random.Range(0, selectedArray.Length);
+            }
+            while (index == lastIndex2 && selectedArray.Length > 1);
+
+            lastIndex2 = index;
+        }
+        else if (comboCount == 3 && combo3Sounds.Length > 0)
+        {
+            selectedArray = combo3Sounds;
+
+            do
+            {
+                index = Random.Range(0, selectedArray.Length);
+            }
+            while (index == lastIndex3 && selectedArray.Length > 1);
+
+            lastIndex3 = index;
+        }
+        else if (comboCount >= 4 && combo4Sounds.Length > 0)
+        {
+            selectedArray = combo4Sounds;
+
+            do
+            {
+                index = Random.Range(0, selectedArray.Length);
+            }
+            while (index == lastIndex4 && selectedArray.Length > 1);
+
+            lastIndex4 = index;
+        }
+
+        if (selectedArray != null)
+        {
+            sfxSource.PlayOneShot(selectedArray[index], 0.25f);
         }
     }
 }
