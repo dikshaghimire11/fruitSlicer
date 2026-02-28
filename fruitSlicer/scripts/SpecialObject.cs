@@ -28,7 +28,7 @@ public class SpecialObject : MonoBehaviour
         if (breakSound != null && sliceSource != null)
         {
             sliceSource.pitch = Random.Range(0.95f, 1.05f);
-            sliceSource.PlayOneShot(breakSound);
+            sliceSource.PlayOneShot(breakSound,0.5f);
         }
         if (ScoreManager.instance != null)
         {

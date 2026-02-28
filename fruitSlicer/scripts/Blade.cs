@@ -233,7 +233,7 @@ public class Blade : MonoBehaviour
             comboCount++;
         }
 
-        if (comboCount < 3) return;
+        if (comboCount < 2) return;
 
         float textSize = 0.6f;
         int bonus;

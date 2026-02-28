@@ -70,6 +70,7 @@ public class ScoreManager : MonoBehaviour
     public TextMeshProUGUI specialRewardText;
 
     public Sprite archeryArrowttackSprite;
+    
 
 
 

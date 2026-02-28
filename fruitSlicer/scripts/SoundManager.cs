@@ -33,6 +33,8 @@ public class SoundManager : MonoBehaviour
     public AudioClip[] combo3Sounds;
     public AudioClip[] combo4Sounds;
 
+    public AudioClip mildComboSound;
+
     private Coroutine comboCoroutine;
 
     private AudioClip highestPriorityAudio;
@@ -264,7 +266,7 @@ public class SoundManager : MonoBehaviour
     {
         if (sfxSource != null && arrowAttackedSound != null)
         {
-            sfxSource.PlayOneShot(arrowAttackedSound);
+            sfxSource.PlayOneShot(arrowAttackedSound, 0.5f);
         }
     }
     private int lastIndex2 = -1;
@@ -276,7 +278,7 @@ public class SoundManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         // sfxSource.clip = highestPriorityAudio;
         // sfxSource.volume = 1f;
-        sfxSource.PlayOneShot(highestPriorityAudio,2f);
+        sfxSource.PlayOneShot(highestPriorityAudio, 2f);
         audioPriority = 0;
         comboCoroutine = null;
     }
@@ -286,21 +288,24 @@ public class SoundManager : MonoBehaviour
 
         AudioClip[] selectedArray = null;
         int index = 0;
+        float comboPitch = 1f;
 
-        if (comboCount == 2 && combo2Sounds.Length > 0)
+        // if (comboCount == 2 && combo2Sounds.Length > 0)
+        // {
+        //     comboPitch = 1f;
+        //     // selectedArray = combo2Sounds;
+
+        //     // do
+        //     // {
+        //     //     index = Random.Range(0, selectedArray.Length);
+        //     // }
+        //     // while (index == lastIndex2 && selectedArray.Length > 1);
+
+        //     // lastIndex2 = index;
+        // }
+        if (comboCount == 3 && combo3Sounds.Length > 0)
         {
-            selectedArray = combo2Sounds;
-
-            do
-            {
-                index = Random.Range(0, selectedArray.Length);
-            }
-            while (index == lastIndex2 && selectedArray.Length > 1);
-
-            lastIndex2 = index;
-        }
-        else if (comboCount == 3 && combo3Sounds.Length > 0)
-        {
+            comboPitch = 1.5f;
             selectedArray = combo3Sounds;
 
             do
@@ -313,6 +318,7 @@ public class SoundManager : MonoBehaviour
         }
         else if (comboCount >= 4 && combo4Sounds.Length > 0)
         {
+            comboPitch = 2f;
             selectedArray = combo4Sounds;
 
             do
@@ -322,6 +328,13 @@ public class SoundManager : MonoBehaviour
             while (index == lastIndex4 && selectedArray.Length > 1);
 
             lastIndex4 = index;
+        }
+
+        pitchChangingSource.pitch = comboPitch;
+        pitchChangingSource.PlayOneShot(mildComboSound, comboCount * 0.1f + 0.1f);
+        if (comboCount <= 2)
+        {
+            return;
         }
 
         if (selectedArray != null)
