@@ -44,7 +44,7 @@ public class Fruit : MonoBehaviour
         if (sliceSound != null && sliceSource != null)
         {
             sliceSource.pitch = Random.Range(0.95f, 1.05f); // optional juicy effect
-            sliceSource.PlayOneShot(sliceSound);
+            sliceSource.PlayOneShot(sliceSound, 0.5f);
         }
 
         // Hide main fruit

@@ -4036,8 +4036,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 59b551fd451f1f2449b98a1e579be641, type: 3}
   - {fileID: 8300000, guid: c1578f71fe69674409fdf6b33e3b7a56, type: 3}
   archeryMusicList:
-  - {fileID: 8300000, guid: c1578f71fe69674409fdf6b33e3b7a56, type: 3}
-  - {fileID: 8300000, guid: 59b551fd451f1f2449b98a1e579be641, type: 3}
+  - {fileID: 8300000, guid: 158ac76611d726948998011171f287c3, type: 3}
   lifeLostSound: {fileID: 8300000, guid: ec1cf918e967f974ea7eb889a52d087d, type: 3}
   gameOverSound: {fileID: 8300000, guid: 99b8fd69f9c286d4faaf641c36f4bd3f, type: 3}
   characterPopSound: {fileID: 8300000, guid: 8fce14620cb29a8488775d45ad700fae, type: 3}
@@ -4052,14 +4051,17 @@ MonoBehaviour:
   streatchBowSound: {fileID: 8300000, guid: 9db2df4072c86fe448774c03285e78b4, type: 3}
   arrowAttackedSound: {fileID: 8300000, guid: 68508dc239f54014bb3879d0e9819588, type: 3}
   combo2Sounds:
-  - {fileID: 8300000, guid: 64e1b3ff1c0fef247971d0e054c7bdf6, type: 3}
-  - {fileID: 8300000, guid: 0aa3c5840caf08a448540b01d54237be, type: 3}
+  - {fileID: 8300000, guid: c1b61b27fc5cf45479609867ac5cb4cf, type: 3}
+  - {fileID: 8300000, guid: 4bbfa306f55ef3a428ca6e9e055bfd78, type: 3}
+  - {fileID: 8300000, guid: 001468e416adb234b8e48a26f054d873, type: 3}
   combo3Sounds:
-  - {fileID: 8300000, guid: fa3093a67194af74f8a091289a728a03, type: 3}
-  - {fileID: 8300000, guid: d7805bb4e8f9a634ab3189fb38370452, type: 3}
+  - {fileID: 8300000, guid: 2bd378a9111ecea428769006440101c6, type: 3}
+  - {fileID: 8300000, guid: 9e5d3edca3e434e4391886eb74985659, type: 3}
+  - {fileID: 8300000, guid: 499dbe7729bf068419e8b65248eeb32c, type: 3}
   combo4Sounds:
-  - {fileID: 8300000, guid: c1578f71fe69674409fdf6b33e3b7a56, type: 3}
-  - {fileID: 8300000, guid: 2a68d33898321e24999a741af1229546, type: 3}
+  - {fileID: 8300000, guid: ee5220db9eb21eb41a0d7cf0ac0d25b0, type: 3}
+  - {fileID: 8300000, guid: 24309546799d6d649a13e3f266556539, type: 3}
+  - {fileID: 8300000, guid: 59ba8d02905db0448811288e24a67da9, type: 3}
 --- !u!4 &1343208068
 Transform:
   m_ObjectHideFlags: 0

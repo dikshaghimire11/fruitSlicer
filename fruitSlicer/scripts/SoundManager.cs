@@ -310,7 +310,10 @@ public class SoundManager : MonoBehaviour
 
         if (selectedArray != null)
         {
-            sfxSource.PlayOneShot(selectedArray[index], 0.25f);
+            sfxSource.Stop(); 
+            sfxSource.clip = selectedArray[index];
+            sfxSource.volume = 0.5f;
+            sfxSource.Play();
         }
     }
 }
