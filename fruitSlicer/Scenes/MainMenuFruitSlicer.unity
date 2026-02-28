@@ -4051,17 +4051,28 @@ MonoBehaviour:
   streatchBowSound: {fileID: 8300000, guid: 9db2df4072c86fe448774c03285e78b4, type: 3}
   arrowAttackedSound: {fileID: 8300000, guid: 68508dc239f54014bb3879d0e9819588, type: 3}
   combo2Sounds:
-  - {fileID: 8300000, guid: c1b61b27fc5cf45479609867ac5cb4cf, type: 3}
-  - {fileID: 8300000, guid: 4bbfa306f55ef3a428ca6e9e055bfd78, type: 3}
-  - {fileID: 8300000, guid: 001468e416adb234b8e48a26f054d873, type: 3}
+  - {fileID: 8300000, guid: a4507ed6f96f97743b09bc5cc75a4978, type: 3}
+  - {fileID: 8300000, guid: 5d3de7aa45a476249b29f32dc6c9e9ed, type: 3}
+  - {fileID: 8300000, guid: ffde6f7eb9a3dfd4d8dd3adea85f4996, type: 3}
+  - {fileID: 8300000, guid: 55dc1191725ae4d4b8a186029d141d35, type: 3}
+  - {fileID: 8300000, guid: f96a348e9682cc5479df767ec2fd39b2, type: 3}
+  - {fileID: 8300000, guid: 37d05822722709e418b52efb5d2a9dc9, type: 3}
+  - {fileID: 8300000, guid: c5d1ecaf377ceb1458423ef5ed51520b, type: 3}
+  - {fileID: 8300000, guid: bb77faafb5a8184409eb356a9780b1ec, type: 3}
+  - {fileID: 8300000, guid: 2b8147496c22d214c98557cd61169566, type: 3}
   combo3Sounds:
-  - {fileID: 8300000, guid: 2bd378a9111ecea428769006440101c6, type: 3}
-  - {fileID: 8300000, guid: 9e5d3edca3e434e4391886eb74985659, type: 3}
-  - {fileID: 8300000, guid: 499dbe7729bf068419e8b65248eeb32c, type: 3}
+  - {fileID: 8300000, guid: e4538fd8a7a7d5747b3f51d3713aea18, type: 3}
+  - {fileID: 8300000, guid: 8c66e33d359b6aa48852297c2d4dc5d9, type: 3}
+  - {fileID: 8300000, guid: 5d9b65d88251a7a43abccfb0fb92aa3a, type: 3}
+  - {fileID: 8300000, guid: 9f7f55d691a24174ca285b2de94d37f1, type: 3}
+  - {fileID: 8300000, guid: bf68a9ec1f5f78a48aff0b07e3333511, type: 3}
   combo4Sounds:
-  - {fileID: 8300000, guid: ee5220db9eb21eb41a0d7cf0ac0d25b0, type: 3}
-  - {fileID: 8300000, guid: 24309546799d6d649a13e3f266556539, type: 3}
-  - {fileID: 8300000, guid: 59ba8d02905db0448811288e24a67da9, type: 3}
+  - {fileID: 8300000, guid: c618c1fc2a8ce2343aff952d0b04bcf7, type: 3}
+  - {fileID: 8300000, guid: 0fedfe364701d7444a5ba3e1f3a0b3dd, type: 3}
+  - {fileID: 8300000, guid: 8d3c1eee7b0d76e4aa7ac49e403d3abd, type: 3}
+  - {fileID: 8300000, guid: 0e8ca96e78488e845bfe54424a2e177c, type: 3}
+  - {fileID: 8300000, guid: 66adce20d107e8a45875ffe03026b646, type: 3}
+  - {fileID: 8300000, guid: 8cf9ddffd4e9daf4c86075ff4410cfbc, type: 3}
 --- !u!4 &1343208068
 Transform:
   m_ObjectHideFlags: 0
