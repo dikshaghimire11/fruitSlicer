@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c7fea4c22639dc6408522a0baf446164
+guid: 707d70150eaec01458689d71c4fadab1
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -129,9 +129,9 @@ TextureImporter:
       name: bow_0
       rect:
         serializedVersion: 2
-        x: 312
+        x: 311
         y: 40
-        width: 256
+        width: 257
         height: 922
       alignment: 0
       pivot: {x: 0, y: 0}

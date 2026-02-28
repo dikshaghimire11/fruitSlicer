@@ -583,11 +583,11 @@ public class ScoreManager : MonoBehaviour
         {
             specialRewardText.text = "" + sliceCount;
         }
-        GameObject floatingLifeIcon;
-        floatingLifeIcon = Instantiate(floatingReward, Vector2.zero, Quaternion.identity, gameCanvas);
-        floatingLifeIcon.GetComponentInChildren<Image>().sprite = archeryArrowttackSprite;
-        floatingLifeIcon.GetComponentInChildren<TextMeshProUGUI>().text = "1";
-        StartCoroutine(moveFloatingRewardsAndDestroy(floatingLifeIcon));
+        // GameObject floatingLifeIcon;
+        // floatingLifeIcon = Instantiate(floatingReward, Vector2.zero, Quaternion.identity, gameCanvas);
+        // floatingLifeIcon.GetComponentInChildren<Image>().sprite = archeryArrowttackSprite;
+        // floatingLifeIcon.GetComponentInChildren<TextMeshProUGUI>().text = "1";
+        // StartCoroutine(moveFloatingRewardsAndDestroy(floatingLifeIcon));
     }
 
     public void reduceArrowAttackCount()

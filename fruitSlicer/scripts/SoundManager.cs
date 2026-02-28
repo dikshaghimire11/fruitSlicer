@@ -32,6 +32,12 @@ public class SoundManager : MonoBehaviour
     public AudioClip[] combo2Sounds; // For variety in combo sound effects
     public AudioClip[] combo3Sounds;
     public AudioClip[] combo4Sounds;
+
+    private Coroutine comboCoroutine;
+
+    private AudioClip highestPriorityAudio;
+
+    private float audioPriority = 0;
     // --- CONFIGURATION ---
     private const float MAX_MUSIC_VOLUME = 0.5f; // Slider at 100% = 0.5 actual volume
     private const float DEFAULT_SLIDER_VALUE = 0.25f; // 0.04 * 0.5 = 0.02 (Your requested default)
@@ -265,9 +271,14 @@ public class SoundManager : MonoBehaviour
     private int lastIndex3 = -1;
     private int lastIndex4 = -1;
 
-    public IEnumerator waitForSomeDelayAndPlay(float wait)
+    public IEnumerator waitForSomeDelayAndPlay()
     {
-        yield return new WaitForSeconds(wait);
+        yield return new WaitForSeconds(0.5f);
+        // sfxSource.clip = highestPriorityAudio;
+        // sfxSource.volume = 1f;
+        sfxSource.PlayOneShot(highestPriorityAudio,2f);
+        audioPriority = 0;
+        comboCoroutine = null;
     }
     public void PlayComboSound(int comboCount)
     {
@@ -315,11 +326,18 @@ public class SoundManager : MonoBehaviour
 
         if (selectedArray != null)
         {
+            if (audioPriority < comboCount)
+            {
+                audioPriority = comboCount;
+                highestPriorityAudio = selectedArray[index];
+            }
+            if (comboCoroutine != null)
+            {
+                StopCoroutine(comboCoroutine);
 
-            sfxSource.Stop();
-            sfxSource.clip = selectedArray[index];
-            sfxSource.volume = 1f;
-            sfxSource.Play();
+            }
+            comboCoroutine = StartCoroutine(waitForSomeDelayAndPlay());
+
         }
     }
 }

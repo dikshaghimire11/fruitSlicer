@@ -216,6 +216,12 @@ public class FruitSpawner : MonoBehaviour
             rb.AddForce(new Vector2(randomHorizontalForce, 0), ForceMode2D.Impulse);
         }
         Fruit fruitComp = newObj.GetComponent<Fruit>();
+        AudioSource audio = newObj.GetComponentInChildren<AudioSource>();
+        if (audio != null)
+        {
+            audio.Stop();
+        }
+
         if (!newObj.name.StartsWith("Coconut"))
         {
             if (fruitComp != null)
