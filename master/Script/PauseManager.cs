@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,7 +25,15 @@ public class PauseManager : MonoBehaviour
         }
         pauseMenuPanel.SetActive(true);
         GameCanvasManager.instance.hideUIInterction();
-        FruitSpawner.instance.HideFruitsLayer(); // Show the UI
+        if (ModeManager.Instance.currentMode != GameMode.Archery)
+        {
+            FruitSpawner.instance.HideFruitsLayer();
+        }
+        else
+        {
+            ArcheryFruitSpawner.instance.HideFruitsLayer();
+        }
+        // Show the UI
         Time.timeScale = 0f;            // Stop game time
         isPaused = true;
     }
@@ -37,7 +46,14 @@ public class PauseManager : MonoBehaviour
         }
         pauseMenuPanel.SetActive(false);
         GameCanvasManager.instance.unHideUiInteraction();
-        FruitSpawner.instance.ShowFruitsLayer(); // Hide the UI
+        if (ModeManager.Instance.currentMode != GameMode.Archery)
+        {
+            FruitSpawner.instance.ShowFruitsLayer();
+        }
+        else
+        {
+            ArcheryFruitSpawner.instance.ShowFruitsLayer();
+        }
         Time.timeScale = 1f;             // Resume game time
         isPaused = false;
     }

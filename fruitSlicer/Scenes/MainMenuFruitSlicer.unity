@@ -1387,7 +1387,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1851052138}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: archeryMode
+        m_MethodName: tryNowArcheryMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1862,7 +1862,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -2.49, y: -0.87}
-  m_SizeDelta: {x: 993, y: 2333}
+  m_SizeDelta: {x: 1279, y: 2336}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &596755842
 MonoBehaviour:

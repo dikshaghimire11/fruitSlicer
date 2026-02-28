@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
@@ -264,6 +265,10 @@ public class SoundManager : MonoBehaviour
     private int lastIndex3 = -1;
     private int lastIndex4 = -1;
 
+    public IEnumerator waitForSomeDelayAndPlay(float wait)
+    {
+        yield return new WaitForSeconds(wait);
+    }
     public void PlayComboSound(int comboCount)
     {
         if (sfxSource == null) return;
@@ -310,9 +315,10 @@ public class SoundManager : MonoBehaviour
 
         if (selectedArray != null)
         {
-            sfxSource.Stop(); 
+
+            sfxSource.Stop();
             sfxSource.clip = selectedArray[index];
-            sfxSource.volume = 0.5f;
+            sfxSource.volume = 1f;
             sfxSource.Play();
         }
     }

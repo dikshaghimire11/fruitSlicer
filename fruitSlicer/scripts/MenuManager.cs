@@ -132,6 +132,13 @@ public class MenuManager : MonoBehaviour
         PlayerPrefs.SetInt("ShownModeAddedNotice", 1);
         PlayerPrefs.Save();
     }
+
+    public void tryNowArcheryMode()
+    {
+        PlayerPrefs.SetInt("ShownModeAddedNotice", 1);
+        PlayerPrefs.Save();
+        archeryMode();
+    }
     public void CloseNoticePanel()
     {
         if (SoundManager.instance != null)

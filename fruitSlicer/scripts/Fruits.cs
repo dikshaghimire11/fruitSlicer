@@ -43,8 +43,8 @@ public class Fruit : MonoBehaviour
         // PLAY SOUND INSTANTLY (NO DELAY)
         if (sliceSound != null && sliceSource != null)
         {
-            sliceSource.pitch = Random.Range(0.95f, 1.05f); // optional juicy effect
-            sliceSource.PlayOneShot(sliceSound, 0.5f);
+            sliceSource.pitch = Random.Range(1.2f,1.3f); // optional juicy effect
+            sliceSource.PlayOneShot(sliceSound, 0.4f);
         }
 
         // Hide main fruit
