@@ -54,7 +54,7 @@ public class ArcheryFruitSpawner : MonoBehaviour
 
         GameObject specialFruit = fruitPrefabs[0];
 
-        float nextSpecialTime = Time.time + 15f;
+        float nextSpecialTime = Time.time + 25f;
 
         while (true)
         {
@@ -66,7 +66,7 @@ public class ArcheryFruitSpawner : MonoBehaviour
             if (Time.time >= nextSpecialTime)
             {
                 prefabToSpawn = specialFruit;
-                nextSpecialTime = Time.time + 15f;
+                nextSpecialTime = Time.time + 25f;
             }
             else
             {
@@ -164,7 +164,7 @@ public class ArcheryFruitSpawner : MonoBehaviour
         SpecialObject specialComp = newObj.GetComponent<SpecialObject>();
         if (specialComp != null)
         {
-            newObj.transform.localScale *= 0.8f;
+            newObj.transform.localScale *= 0.7f;
         }
 
         // Bomb bombComp = newObj.GetComponent<Bomb>();

@@ -10,6 +10,10 @@ public class MenuManager : MonoBehaviour
     public GameObject noticeCharacter;
     public GameObject noticeMessage;
 
+    public GameObject modeAddedNoticePanel;
+    public GameObject modeAddedNoticeCharacter;
+    public GameObject modeAddedNoticeMessage;
+
     // --- CAREER BUTTON (Juice Mode) ---
     public void careerMode()
     {
@@ -95,7 +99,6 @@ public class MenuManager : MonoBehaviour
     }
     void Start()
     {
-        // ... your existing code ...
 
         if (SoundManager.instance != null)
         {
@@ -103,6 +106,7 @@ public class MenuManager : MonoBehaviour
         }
 
         bool hasShownNotice = PlayerPrefs.GetInt("ShownNotice", 0) == 1;
+        bool hasShownModeAddedNotice = PlayerPrefs.GetInt("ShownModeAddedNotice", 0) == 1;
 
         if (!hasShownNotice)
         {
@@ -110,7 +114,23 @@ public class MenuManager : MonoBehaviour
             noticePanel.SetActive(true);
 
         }
+        if (hasShownNotice && !hasShownModeAddedNotice)
+        {
+            StartCoroutine(MoveRoutine(new Vector2(-0.35f, -0.87f), 1, 3, modeAddedNoticeCharacter));
+            modeAddedNoticePanel.SetActive(true);
+        }
 
+    }
+    public void CloseModeAddedNoticePanel()
+    {
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayButtonClickSound();
+        }
+        StartCoroutine(MoveRoutine(new Vector2(-2.67f, -0.87f), 1, 4, modeAddedNoticeCharacter));
+        modeAddedNoticePanel.SetActive(false);
+        PlayerPrefs.SetInt("ShownModeAddedNotice", 1);
+        PlayerPrefs.Save();
     }
     public void CloseNoticePanel()
     {
@@ -122,6 +142,18 @@ public class MenuManager : MonoBehaviour
         noticePanel.SetActive(false);
         PlayerPrefs.SetInt("ShownNotice", 1);
         PlayerPrefs.Save();
+    }
+    public void tryNowButton()
+    {
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayButtonClickSound();
+        }
+        StartCoroutine(MoveRoutine(new Vector2(-2.67f, -0.87f), 1, 2, noticeCharacter));
+        noticePanel.SetActive(false);
+        PlayerPrefs.SetInt("ShownNotice", 1);
+        PlayerPrefs.Save();
+        archeryMode();
     }
 
     private IEnumerator MoveRoutine(Vector2 target, float time, int type, GameObject targetObject)
@@ -156,6 +188,14 @@ public class MenuManager : MonoBehaviour
         else if (type == 2)
         {
             noticeMessage.SetActive(false);
+        }
+        else if (type == 3)
+        {
+            modeAddedNoticeMessage.SetActive(true);
+        }
+        else if (type == 4)
+        {
+            modeAddedNoticeMessage.SetActive(false);
         }
 
 
