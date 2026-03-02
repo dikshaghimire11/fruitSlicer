@@ -237,14 +237,22 @@ public class FruitSpawner : MonoBehaviour
     {
 
         if (mainCamera != null)
+        {
             mainCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Fruits"));
+            mainCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("FruitsDown"));
+        }
+
 
     }
 
     public void ShowFruitsLayer()
     {
         if (mainCamera != null)
+        {
             mainCamera.cullingMask |= (1 << LayerMask.NameToLayer("Fruits"));
+            mainCamera.cullingMask |= (1 << LayerMask.NameToLayer("FruitsDown"));
+        }
+
     }
 
     // Your existing helper function

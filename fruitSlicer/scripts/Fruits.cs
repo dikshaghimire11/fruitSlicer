@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Fruit : MonoBehaviour
 {
@@ -22,6 +23,10 @@ public class Fruit : MonoBehaviour
     // Shared AudioSource for all fruits
     private static AudioSource sliceSource;
 
+
+
+    private Rigidbody2D rb;
+
     void Awake()
     {
         // Cache AudioSource ONCE (no runtime searching during slice)
@@ -32,7 +37,15 @@ public class Fruit : MonoBehaviour
             {
                 sliceSource = audioObj.GetComponent<AudioSource>();
             }
+
+
+
         }
+    }
+
+    void Start()
+    {
+                  rb = transform.GetComponent<Rigidbody2D>();  
     }
 
     public void Slice(Vector2 sliceDirection)
@@ -43,7 +56,7 @@ public class Fruit : MonoBehaviour
         // PLAY SOUND INSTANTLY (NO DELAY)
         if (sliceSound != null && sliceSource != null)
         {
-            sliceSource.pitch = Random.Range(1.2f,1.3f); // optional juicy effect
+            sliceSource.pitch = Random.Range(1.2f, 1.3f); // optional juicy effect
             sliceSource.PlayOneShot(sliceSound, 0.4f);
         }
 
@@ -84,6 +97,14 @@ public class Fruit : MonoBehaviour
             if (transform.position.y < missYPosition)
             {
                 fruitCrossedBoundary();
+            }
+            if (rb.linearVelocity.y > 0)
+            {
+                gameObject.layer = LayerMask.NameToLayer("Fruits");
+            }
+            else if (rb.linearVelocity.y < 0)
+            {
+                gameObject.layer = LayerMask.NameToLayer("FruitsDown");
             }
         }
         else

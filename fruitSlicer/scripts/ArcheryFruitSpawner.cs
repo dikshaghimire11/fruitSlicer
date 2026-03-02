@@ -197,7 +197,12 @@ public class ArcheryFruitSpawner : MonoBehaviour
     {
 
         if (mainCamera != null)
-            mainCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Fruits"));
+        {
+                    mainCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Fruits"));
+                    mainCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("FruitsDown"));  
+
+        }
+  
 
     }
 
@@ -205,5 +210,7 @@ public class ArcheryFruitSpawner : MonoBehaviour
     {
         if (mainCamera != null)
             mainCamera.cullingMask |= (1 << LayerMask.NameToLayer("Fruits"));
+            mainCamera.cullingMask |= (1 << LayerMask.NameToLayer("FruitsDown"));
+
     }
 }

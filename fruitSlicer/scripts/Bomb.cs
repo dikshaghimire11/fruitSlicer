@@ -10,6 +10,7 @@ public class Bomb : MonoBehaviour
     public float missYPosition = -8f;
 
     private bool isExploded = false;
+    private Rigidbody2D rb;
 
     // Shared AudioSource (same one used by Fruit)
     private static AudioSource sliceSource;
@@ -24,8 +25,12 @@ public class Bomb : MonoBehaviour
             {
                 sliceSource = audioObj.GetComponent<AudioSource>();
             }
-          
+
         }
+    }
+    void Start()
+    {
+        rb = transform.GetComponent<Rigidbody2D>();
     }
 
     public void Explode()
@@ -36,7 +41,7 @@ public class Bomb : MonoBehaviour
         // 🔊 INSTANT SOUND (NO DELAY)
         if (explosionSound != null && sliceSource != null)
         {
-           sliceSource.PlayOneShot(explosionSound, 3f);
+            sliceSource.PlayOneShot(explosionSound, 3f);
         }
 
         // 💥 VISUAL
@@ -54,5 +59,18 @@ public class Bomb : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if (ModeManager.Instance.currentMode != GameMode.Archery)
+        {
+            if (rb.linearVelocity.y > 0)
+            {
+                gameObject.layer = LayerMask.NameToLayer("Fruits");
+            }
+            else if (rb.linearVelocity.y < 0)
+            {
+                gameObject.layer = LayerMask.NameToLayer("FruitsDown");
+            }
+        }
+
     }
 }
