@@ -117,6 +117,7 @@ public class MenuManager : MonoBehaviour
         if (hasShownNotice && !hasShownModeAddedNotice)
         {
             StartCoroutine(MoveRoutine(new Vector2(-0.35f, -0.87f), 1, 3, modeAddedNoticeCharacter));
+            if(modeAddedNoticePanel != null)
             modeAddedNoticePanel.SetActive(true);
         }
 

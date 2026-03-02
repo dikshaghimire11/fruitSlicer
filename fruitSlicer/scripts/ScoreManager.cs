@@ -70,7 +70,7 @@ public class ScoreManager : MonoBehaviour
     public TextMeshProUGUI specialRewardText;
 
     public Sprite archeryArrowttackSprite;
-    
+
 
 
 
@@ -173,7 +173,7 @@ public class ScoreManager : MonoBehaviour
         switch (ModeManager.Instance.currentMode)
         {
             case GameMode.Infinite:
-            case GameMode.Archery:
+
                 score += amount;
                 UpdateTexts();
                 bool isFirstTime = PlayerPrefs.GetInt("HasPlayedBefore", 0) == 0;
@@ -200,6 +200,21 @@ public class ScoreManager : MonoBehaviour
                             0.5f
                         );
                     }
+                }
+                break;
+            case GameMode.Archery:
+                score += amount;
+                UpdateTexts();
+                bool isFirstTime1 = PlayerPrefs.GetInt("HasArcheryPlayedBefore", 0) == 0;
+
+                if (!isFirstTime1 && score > highScore && !hasShownHighScoreMessage)
+                {
+                    hasShownHighScoreMessage = true;
+
+                    if (SoundManager.instance != null)
+                    {
+                        SoundManager.instance.PlayHighScoreSound();
+                    }
 
                     Arrow arrow = FindObjectOfType<Arrow>();
                     if (arrow != null)
@@ -216,6 +231,7 @@ public class ScoreManager : MonoBehaviour
                     }
                 }
                 break;
+
         }
     }
 
@@ -457,7 +473,8 @@ public class ScoreManager : MonoBehaviour
                     PlayerPrefs.SetInt("HighScoreForArchery", highScore);
                     PlayerPrefs.Save();
                 }
-                PlayerPrefs.SetInt("HasPlayedBefore", 1);
+
+                PlayerPrefs.SetInt("HasArcheryPlayedBefore", 1);
                 PlayerPrefs.Save();
                 if (specialRewardButton != null)
                     specialRewardButton.gameObject.SetActive(false);
