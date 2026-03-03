@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -7901853113013229406}
   m_Layer: 6
   m_Name: Watermelon
-  m_TagString: Untagged
+  m_TagString: Fruits
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

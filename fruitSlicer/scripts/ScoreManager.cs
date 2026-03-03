@@ -70,6 +70,7 @@ public class ScoreManager : MonoBehaviour
     public TextMeshProUGUI specialRewardText;
 
     public Sprite archeryArrowttackSprite;
+    public GameObject handObject;
 
 
 
@@ -610,6 +611,13 @@ public class ScoreManager : MonoBehaviour
 
     public void reduceArrowAttackCount()
     {
+        if (handObject.activeSelf)
+        {
+            handObject.SetActive(false);
+            Time.timeScale = 1f;
+            PlayerPrefs.SetInt("ShownHandObject", 1);
+            PlayerPrefs.Save();
+        }
         GameObject bowInstance = GameObject.FindGameObjectWithTag("Bow");
 
         if (bowInstance != null)
@@ -628,6 +636,32 @@ public class ScoreManager : MonoBehaviour
         if (SoundManager.instance != null)
         {
             SoundManager.instance.PlayArrowAttackedSound();
+        }
+    }
+    public void HighlightSpecialRewardButton()
+    {
+        bool hasShownNotice = PlayerPrefs.GetInt("ShownHandObject", 0) == 1;
+        if (specialRewardButton.gameObject.activeSelf && handObject != null && !hasShownNotice)
+        {
+            Time.timeScale = 0f;
+
+            handObject.SetActive(true);
+
+            Vector3 pos = handObject.transform.position;
+            handObject.transform.position = pos;
+
+            StartCoroutine(HandPulseEffect());
+        }
+    }
+    IEnumerator HandPulseEffect()
+    {
+        while (handObject.activeSelf)
+        {
+            handObject.transform.localScale = Vector3.one * 1.15f;
+            yield return new WaitForSecondsRealtime(0.3f);
+
+            handObject.transform.localScale = Vector3.one;
+            yield return new WaitForSecondsRealtime(0.3f);
         }
     }
 
