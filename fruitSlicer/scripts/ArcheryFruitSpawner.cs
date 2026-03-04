@@ -1,5 +1,4 @@
 using UnityEngine;
-
 using System.Collections;
 using System.Collections.Generic;
 
@@ -9,37 +8,34 @@ public class ArcheryFruitSpawner : MonoBehaviour
 
     [Header("Fruit Settings")]
     public List<GameObject> fruitPrefabs;
-    public float spawnDelay = 2f;
-    public float fallDuration = 4f;
     public AudioClip[] fruitsSliceSounds;
 
-    [Header("Special Items Settings")]
-    public GameObject bombPrefab;
-    public float specialSpawnDelay = 10f;
-    private int lastFruitIndex = -1;
-    public GameObject gameContainer;
-    private float randomDelay;
-    private Camera mainCamera;
+    // [Header("Special Items Settings")]
+    // public GameObject bombPrefab;
     public RectTransform spawnArea;
-
     public RectTransform deSpawnArea;
-
     public float[] spawnPositions;
+    private int fruitThresholdForHint = 8;
+
+    [Header("Level Configuration")]
+    public List<ArcheryWaveDTO> levels;
+
+    private ArcheryWaveDTO currentLevelData;
     private int lastSpawnIndex = -1;
-    public int fruitThresholdForHint = 8;
+
+    private Camera mainCamera;
 
     void Awake()
     {
-        if (instance == null)
-            instance = this;
+        if (instance == null) instance = this;
     }
 
     void Start()
     {
-        if (mainCamera == null)
-        {
-            mainCamera = Camera.main;
-        }
+        if (mainCamera == null) mainCamera = Camera.main;
+
+        int playerLevel = PlayerPrefs.GetInt("ArcheryPlayerLevel", 1);
+        SetLevel(playerLevel);
     }
 
     public void startSpawnning()
@@ -48,182 +44,144 @@ public class ArcheryFruitSpawner : MonoBehaviour
         // StartCoroutine(SpawnFruitsRoutine(false));
         //StartCoroutine(SpawnBombRoutine());
     }
+
     IEnumerator SpawnFruitsRoutine()
     {
-        if (fruitPrefabs == null || fruitPrefabs.Count == 0)
+        if (fruitPrefabs == null || fruitPrefabs.Count == 0 || currentLevelData == null)
+        {
             yield break;
+        }
 
         GameObject specialFruit = fruitPrefabs[0];
+        float nextSpecialTime = Time.time + currentLevelData.specialFruitInterval;
 
-        float nextSpecialTime = Time.time + 25f;
+        int spawnedCount = 0;
 
-        while (true)
+        while (spawnedCount < currentLevelData.totalFruits)
         {
-            if (ScoreManager.instance.isGameOver)
-                yield break;
+            if (ScoreManager.instance.isGameOver) yield break;
 
             GameObject prefabToSpawn = null;
 
-            if (Time.time >= nextSpecialTime)
+            // Spawn special fruit if interval reached
+            if (Time.time >= nextSpecialTime && specialFruit != null)
             {
                 prefabToSpawn = specialFruit;
-                nextSpecialTime = Time.time + 25f;
+                nextSpecialTime = Time.time + currentLevelData.specialFruitInterval;
             }
             else
             {
+                // Normal fruits
                 List<GameObject> normalFruits = new List<GameObject>(fruitPrefabs);
-                normalFruits.Remove(specialFruit);
+                if (specialFruit != null) normalFruits.Remove(specialFruit);
 
                 if (normalFruits.Count > 0)
-                {
-                    int randomIndex = Random.Range(0, normalFruits.Count);
-                    prefabToSpawn = normalFruits[randomIndex];
-                }
+                    prefabToSpawn = normalFruits[Random.Range(0, normalFruits.Count)];
+                else
+                    prefabToSpawn = fruitPrefabs[0]; // fallback if only 1 fruit exists
             }
 
             if (prefabToSpawn != null)
-
+            {
                 SpawnObject(prefabToSpawn);
+                spawnedCount++;
+            }
+
             CheckFruitCount();
-            yield return new WaitForSeconds(spawnDelay);
+
+            yield return new WaitForSeconds(currentLevelData.spawnDelay);
         }
     }
-    // --- BOMB SPAWN ROUTINE ---
-    // IEnumerator SpawnBombRoutine()
-    // {
-    //     while (true)
-    //     {
-    //         yield return new WaitForSeconds(specialSpawnDelay);
-    //         if (bombPrefab != null)
-    //             SpawnObject(bombPrefab);
-    //     }
-    // }
-    // --- SPAWN OBJECT ---
+
     void SpawnObject(GameObject prefab)
     {
         if (prefab == null) return;
-        // Array to store the 4 corners
-        UnityEngine.Vector3[] corners = new UnityEngine.Vector3[4];
 
-        // Get the corners in world space
+        Vector3[] corners = new Vector3[4];
         spawnArea.GetWorldCorners(corners);
-
-        // corners order: 0 = bottom-left, 1 = top-left, 2 = top-right, 3 = bottom-right
-        // Get top of screen in world
-        // Vector3 topLeft = mainCamera.ViewportToWorldPoint(new Vector3(0, 1, 0));
-        UnityEngine.Vector3 topRight = corners[2];
-        UnityEngine.Vector3 bottomRight = corners[3];
-
-        float horizontalMargin = 0.5f;
+        Vector3 topRight = corners[2];
+        Vector3 bottomRight = corners[3];
 
         float spawnX = topRight.x;
+        float randomY = spawnPositions != null && spawnPositions.Length > 0 ?
+                        spawnPositions[Random.Range(0, spawnPositions.Length)] :
+                        Random.Range(topRight.y, bottomRight.y);
 
-        float randomY;
+        Vector3 spawnPos = new Vector3(spawnX, randomY, -10f);
+        GameObject newObj = Instantiate(prefab, spawnPos, Quaternion.identity);
 
-        if (spawnPositions != null && spawnPositions.Length > 0)
-        {
-            int randomIndex;
+        float distance = Mathf.Abs(spawnPos.x - deSpawnArea.position.x);
+        float moveDuration = currentLevelData.fruitSpeed > 0 ? distance / currentLevelData.fruitSpeed : 4f;
 
-            do
-            {
-                randomIndex = Random.Range(0, spawnPositions.Length);
-            }
-            while (randomIndex == lastSpawnIndex && spawnPositions.Length > 1);
+        StartCoroutine(MoveDownWorld(newObj, moveDuration, deSpawnArea.position.x));
 
-            lastSpawnIndex = randomIndex;
-            randomY = spawnPositions[randomIndex];
-        }
-        else
-        {
-            randomY = Random.Range(topRight.y, bottomRight.y);
-        }
-        UnityEngine.Vector3 spawnPos = new UnityEngine.Vector3(spawnX, randomY, -10f);
-        GameObject newObj = Instantiate(prefab, spawnPos, UnityEngine.Quaternion.identity);
-
-
-        // Bottom of screen
-        float rightX = deSpawnArea.transform.position.x;
-
-        StartCoroutine(MoveDownWorld(newObj, fallDuration, rightX));
-
-        // Assign random slice sound
+        // Assign slice sound
         Fruit fruitComp = newObj.GetComponent<Fruit>();
         AudioSource audio = newObj.GetComponentInChildren<AudioSource>();
-        if (audio != null)
-        {
-            audio.Stop();
-        }
+        if (audio != null) audio.Stop();
+
         if (fruitComp != null)
         {
-
             newObj.transform.localScale *= fruitComp.uniformScale;
             if (!newObj.name.StartsWith("Coconut"))
-            {
                 fruitComp.sliceSound = fruitsSliceSounds[Random.Range(0, fruitsSliceSounds.Length)];
-
-
-            }
         }
+
         SpecialObject specialComp = newObj.GetComponent<SpecialObject>();
-        if (specialComp != null)
-        {
-            newObj.transform.localScale *= 0.7f;
-        }
-
-        // Bomb bombComp = newObj.GetComponent<Bomb>();
-        // if (bombComp != null)
-        // {
-        //     bombComp.transform.localScale *= 0.8f;
-
-        // }
+        if (specialComp != null) newObj.transform.localScale *= 0.7f;
     }
+
     IEnumerator MoveDownWorld(GameObject obj, float duration, float rightX)
     {
         if (obj == null) yield break;
 
-        UnityEngine.Vector3 startPos = obj.transform.position;
-        UnityEngine.Vector3 endPos = new UnityEngine.Vector3(rightX, startPos.y, startPos.z);
-
+        Vector3 startPos = obj.transform.position;
+        Vector3 endPos = new Vector3(rightX, startPos.y, startPos.z);
         float elapsed = 0f;
 
         while (elapsed < duration && obj != null)
         {
             elapsed += Time.deltaTime;
-            float t = elapsed / duration;
-
-            obj.transform.position = UnityEngine.Vector3.Lerp(startPos, endPos, t);
-
+            obj.transform.position = Vector3.Lerp(startPos, endPos, elapsed / duration);
             yield return null;
         }
     }
+
+    void CheckFruitCount()
+    {
+        int fruitCount = GameObject.FindGameObjectsWithTag("Fruits").Length;
+        if (fruitCount >= fruitThresholdForHint)
+        {
+            ScoreManager.instance?.HighlightSpecialRewardButton();
+        }
+    }
+
+    public void SetLevel(int playerLevel)
+    {
+        if (levels == null || levels.Count == 0) return;
+
+        int index = Mathf.Clamp(playerLevel - 1, 0, levels.Count - 1);
+        currentLevelData = levels[index];
+
+        fruitThresholdForHint = currentLevelData.fruitThresholdForHint;
+
+       // Debug.Log($"Loaded Level {playerLevel} | Total Fruits: {currentLevelData.totalFruits} | Speed: {currentLevelData.fruitSpeed}");
+    }
     public void HideFruitsLayer()
     {
-
         if (mainCamera != null)
         {
             mainCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Fruits"));
             mainCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("FruitsDown"));
-
         }
-
-
     }
 
     public void ShowFruitsLayer()
     {
         if (mainCamera != null)
-            mainCamera.cullingMask |= (1 << LayerMask.NameToLayer("Fruits"));
-        mainCamera.cullingMask |= (1 << LayerMask.NameToLayer("FruitsDown"));
-
-    }
-    void CheckFruitCount()
-    {
-        int fruitCount = GameObject.FindGameObjectsWithTag("Fruits").Length;
-
-        if (fruitCount >= fruitThresholdForHint)
         {
-            ScoreManager.instance?.HighlightSpecialRewardButton();
+            mainCamera.cullingMask |= (1 << LayerMask.NameToLayer("Fruits"));
+            mainCamera.cullingMask |= (1 << LayerMask.NameToLayer("FruitsDown"));
         }
-
     }
 }

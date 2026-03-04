@@ -4934,8 +4934,6 @@ MonoBehaviour:
   - {fileID: 7767628628793562763, guid: 686ed0b373523f045b3be9bce3909cd0, type: 3}
   - {fileID: 7767628628793562763, guid: 73fd01f1792d0014a99d066e059b99b5, type: 3}
   - {fileID: 7767628628793562763, guid: 26506adfa30fd41499b57ac0dbde3a41, type: 3}
-  spawnDelay: 0.6
-  fallDuration: 5
   fruitsSliceSounds:
   - {fileID: 8300000, guid: 21e190296c3f4b64484e0d04c7099e1c, type: 3}
   - {fileID: 8300000, guid: d3fa4a05f2a1af54685c36711dcec45b, type: 3}
@@ -4946,9 +4944,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5a541b6d93438bc4db55376bc10bfbbd, type: 3}
   - {fileID: 8300000, guid: a35fdc1d09ca56a43b9cbd6084c651d9, type: 3}
   - {fileID: 8300000, guid: dc24facb9a228b943a0c2411d5f342fc, type: 3}
-  bombPrefab: {fileID: 7767628628793562763, guid: 685ce3e9ffefedb47a3b605920ef9da7, type: 3}
-  specialSpawnDelay: 10
-  gameContainer: {fileID: 3157106755508781862}
   spawnArea: {fileID: 82741373}
   deSpawnArea: {fileID: 1012485833}
   spawnPositions:
@@ -4956,7 +4951,13 @@ MonoBehaviour:
   - 1.1
   - 0.7
   - 0.3
-  fruitThresholdForHint: 6
+  levels:
+  - fruitSpeed: 2
+    spawnDelay: 1
+    totalFruits: 5
+    fruitThresholdForHint: 4
+    specialFruitInterval: 5
+    fallDuration: 4
 --- !u!1 &991989588
 GameObject:
   m_ObjectHideFlags: 0
