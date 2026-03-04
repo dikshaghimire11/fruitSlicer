@@ -2638,7 +2638,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &3904355522156303750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2688,9 +2688,20 @@ MonoBehaviour:
   workDesk: {fileID: 5245599332366471274}
   missionPanel: {fileID: 7023271003698128619}
   freeModeCharacter: {fileID: 1867517093331897566, guid: 850188bd0bf23af4493785bcef9cd233, type: 3}
+  archeryCharacter: {fileID: 0}
   missionAccomplishedPanel: {fileID: 3445647759897494957}
   juiceContainer: {fileID: 1929376113660152008}
   juiceColor: {fileID: 3918323168773502796}
+  addLifeOnlyObject: {fileID: 0}
+  addLifeAndTimeObject: {fileID: 0}
+  hideUIPausePanel: {fileID: 0}
+  tutorialPanel: {fileID: 0}
+  tutorialVideoPlayer: {fileID: 0}
+  closeButton: {fileID: 0}
+  goToShopPanel: {fileID: 0}
+  reviewPanel: {fileID: 0}
+  notBlurredShopBackground: {fileID: 0}
+  bowPrefab: {fileID: 0}
 --- !u!1 &4838731551711814116
 GameObject:
   m_ObjectHideFlags: 0

@@ -323,7 +323,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -3010375928418161858, guid: 4031f91270bff8743b20eed43c49931a, type: 3}
+  m_Sprite: {fileID: 8524827877590128127, guid: c25ca432b5575944a8b70d88988eca8e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -560,7 +560,7 @@ GameObject:
   - component: {fileID: 6586387342123058684}
   - component: {fileID: 8612457626458169876}
   m_Layer: 5
-  m_Name: ItemContainer
+  m_Name: V1ItemContaiiner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

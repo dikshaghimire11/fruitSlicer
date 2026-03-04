@@ -15,6 +15,10 @@ public class ShopItemUI : MonoBehaviour
     private int myIndexInManager;
     private ShopManager managerRef;
 
+    public TextMeshProUGUI description;
+
+    public TextMeshProUGUI specialAbility;
+
     public void Setup(ShopItem item, int index, ShopManager manager)
     {
         myIndexInManager = index;
@@ -23,6 +27,8 @@ public class ShopItemUI : MonoBehaviour
         // 1. Set Visuals
         nameText.text = item.itemName;
         itemIcon.sprite = item.icon;
+        description.text = item.description;
+        specialAbility.text = item.specialAbility;
 
         // 2. Set Button State logic
         if (item.isEquipped)
@@ -35,7 +41,7 @@ public class ShopItemUI : MonoBehaviour
         else if (item.isPurchased)
         {
             priceText.text = "PURCHASED";
-            actionButtonText.text="EQUIP";
+            actionButtonText.text = "EQUIP";
             coinIcon.SetActive(false);
             actionButton.interactable = true;
             actionButton.image.color = Color.yellow; // Make button look like "Equip"
@@ -55,7 +61,6 @@ public class ShopItemUI : MonoBehaviour
 
     void OnClickButton()
     {
-        // Tell the manager: "Item #5 was clicked!"
         managerRef.OnItemButtonClicked(myIndexInManager);
     }
 }

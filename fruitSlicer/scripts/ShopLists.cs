@@ -11,6 +11,8 @@ public class ShopLists : MonoBehaviour
 
   public ShopItem[] bladeItemList;
 
+  public ShopItem[] bowItemsList;
+
   public GameObject[] characterList;
   public static ShopLists instance;
 
@@ -35,7 +37,7 @@ public class ShopLists : MonoBehaviour
   {
     for (int i = 0; i < selectedShopList.Length; i++)
     {
-      int sold = PlayerPrefs.GetInt("Sold_" +currentTab+"_"+i, selectedShopList[i].isDefault ? 1 : 0);
+      int sold = PlayerPrefs.GetInt("Sold_" + currentTab + "_" + i, selectedShopList[i].isDefault ? 1 : 0);
       selectedShopList[i].isPurchased = (sold == 1);
       int equippedID = PlayerPrefs.GetInt("Equipped_" + currentTab, -1);
       if (equippedID == -1 && selectedShopList[i].isDefault) equippedID = i;
