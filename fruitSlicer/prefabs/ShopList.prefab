@@ -48,40 +48,48 @@ MonoBehaviour:
   shopBackgroundList:
   - itemName: Beach
     price: 0
-    icon: {fileID: -3260171324595997514, guid: 8568f701337b9bf4eb187afe53c20a5e, type: 3}
+    icon: {fileID: 9014729351590859027, guid: 60af54fcec765154292b6b5d4839ce78, type: 3}
     actualSprite: {fileID: -3260171324595997514, guid: 8568f701337b9bf4eb187afe53c20a5e, type: 3}
     blurredSprite: {fileID: 2939814833929168162, guid: b651946bd1a79774291656a8bbf8e8b3, type: 3}
     prefb: {fileID: 0}
+    description: This is beach location, Very very beautiful
+    specialAbility: 
     isDefault: 1
     itemType: 1
     isPurchased: 0
     isEquipped: 0
   - itemName: Forest
     price: 10000
-    icon: {fileID: -1343518637512107228, guid: c38de719f6949f34da7055d31f5f49f3, type: 3}
+    icon: {fileID: -18134982096779731, guid: 21ec4221d8f8c5f458f7355b9959d226, type: 3}
     actualSprite: {fileID: -1343518637512107228, guid: c38de719f6949f34da7055d31f5f49f3, type: 3}
-    blurredSprite: {fileID: 0}
+    blurredSprite: {fileID: -9055192626705066375, guid: 4717b305269a1c84ba9ee889c3443e2c, type: 3}
     prefb: {fileID: 0}
+    description: 
+    specialAbility: 
     isDefault: 0
     itemType: 1
     isPurchased: 0
     isEquipped: 0
   - itemName: Mountain
     price: 25000
-    icon: {fileID: -6680556436121249758, guid: 2cdba57273996fa418bbfb3f61358f39, type: 3}
+    icon: {fileID: 9002601331091940180, guid: 986a0b7309f399546ac7c724dc5488f6, type: 3}
     actualSprite: {fileID: -6680556436121249758, guid: 2cdba57273996fa418bbfb3f61358f39, type: 3}
-    blurredSprite: {fileID: 0}
+    blurredSprite: {fileID: 6617642490607179941, guid: 1c31225bdcefc1f41ad597415dd3b6bc, type: 3}
     prefb: {fileID: 0}
+    description: 
+    specialAbility: 
     isDefault: 0
     itemType: 1
     isPurchased: 0
     isEquipped: 0
   - itemName: Desert
     price: 50000
-    icon: {fileID: 130452656225014213, guid: 17e6fca148dc5654da4d180f1b623d3e, type: 3}
+    icon: {fileID: -5928418940980285594, guid: 503698982ba590a41955632e5876cd07, type: 3}
     actualSprite: {fileID: 130452656225014213, guid: 17e6fca148dc5654da4d180f1b623d3e, type: 3}
-    blurredSprite: {fileID: 0}
+    blurredSprite: {fileID: 5004877566587047478, guid: 5133e384c864f3647a30b8a3ca27d702, type: 3}
     prefb: {fileID: 0}
+    description: 
+    specialAbility: 
     isDefault: 0
     itemType: 1
     isPurchased: 0
@@ -89,52 +97,77 @@ MonoBehaviour:
   bladeItemList:
   - itemName: Basic
     price: 0
-    icon: {fileID: 8524827877590128127, guid: c25ca432b5575944a8b70d88988eca8e, type: 3}
+    icon: {fileID: 8524827877590128127, guid: 7dadf876fc78bce40942a4637be73211, type: 3}
     actualSprite: {fileID: 0}
     blurredSprite: {fileID: 0}
     prefb: {fileID: 6311237056519408263, guid: 22a02b0350138ac4cb69800f3589f30a, type: 3}
+    description: Basic balde is good of all time so it is very good so that that
+      acan be used in any situation if necessary in any of the performance situation
+    specialAbility: 'EXPLOSIVE RESISTANCE: 50HP'
     isDefault: 1
     itemType: 0
     isPurchased: 0
     isEquipped: 0
   - itemName: Ice Blade
     price: 100
-    icon: {fileID: 2766051724459457909, guid: 6f0b76c695b96cc499d450e841214d27, type: 3}
+    icon: {fileID: 5160393701342520624, guid: b24a08238a4653443b5b3ae0e8aff416, type: 3}
     actualSprite: {fileID: 0}
     blurredSprite: {fileID: 0}
     prefb: {fileID: 6311237056519408263, guid: 08f372de6410a5c40afeef9446bc6712, type: 3}
+    description: --
+    specialAbility: --
     isDefault: 0
     itemType: 0
     isPurchased: 0
     isEquipped: 0
   - itemName: CyberBlade
     price: 10000
-    icon: {fileID: 4555310059249648806, guid: f2046f5343c26214b96602e8b252d205, type: 3}
+    icon: {fileID: -1273902096176612912, guid: 6ce1c061871add34582efccda9082a0b, type: 3}
     actualSprite: {fileID: 0}
     blurredSprite: {fileID: 0}
     prefb: {fileID: 6311237056519408263, guid: de7e41fe840fa8e4f8f3490fa28992a7, type: 3}
+    description: 
+    specialAbility: 
     isDefault: 0
     itemType: 0
     isPurchased: 0
     isEquipped: 0
   - itemName: Fire Blade
     price: 25000
-    icon: {fileID: 7928803683018547842, guid: f1161446a0147a94fa6bfd739357cca9, type: 3}
+    icon: {fileID: -9195209318991056578, guid: 0731e8910b5352b419f617cc24c7227d, type: 3}
     actualSprite: {fileID: 0}
     blurredSprite: {fileID: 0}
     prefb: {fileID: 6311237056519408263, guid: 3937a36bfe1fdb4418e7ab47fefb9af3, type: 3}
+    description: 
+    specialAbility: 
     isDefault: 0
     itemType: 0
     isPurchased: 0
     isEquipped: 0
-  - itemName: Gold Blade
+  - itemName: GOLDEN SPARK BLADE
     price: 50000
-    icon: {fileID: 4398459047656103549, guid: d13149128de3619499fcc78b6cde1391, type: 3}
+    icon: {fileID: 7729859393515895170, guid: 6d4cf8c4f51b1d8459a47eabac9b02f1, type: 3}
     actualSprite: {fileID: 0}
     blurredSprite: {fileID: 0}
     prefb: {fileID: 6311237056519408263, guid: d0c1fa5d2a06cfc4f8c9a231a332e05a, type: 3}
+    description: 
+    specialAbility: 
     isDefault: 0
     itemType: 0
+    isPurchased: 0
+    isEquipped: 0
+  bowItemsList:
+  - itemName: Basic Bow
+    price: 0
+    icon: {fileID: 6461444754879858660, guid: ae096f0b2919ebb46a0dacaef3f0d4a8, type: 3}
+    actualSprite: {fileID: 0}
+    blurredSprite: {fileID: 0}
+    prefb: {fileID: 0}
+    description: This is Basic Bow Perfect for Starters. It has special ability of
+      shooting Arrows 2x Faster.
+    specialAbility: CAN PERFORM RAPID FIRE
+    isDefault: 1
+    itemType: 2
     isPurchased: 0
     isEquipped: 0
   characterList:

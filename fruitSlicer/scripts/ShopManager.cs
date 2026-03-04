@@ -18,6 +18,11 @@ public class ShopManager : MonoBehaviour
 
     private int totalCoins;
 
+    private GameMode shopGameMode;
+
+    public GameObject shopCategoriesFruitSlicer;
+    public GameObject shopCategoriesArchery;
+
     void Awake()
     {
         if (instance == null) { instance = this; }
@@ -28,6 +33,8 @@ public class ShopManager : MonoBehaviour
     }
     void Start()
     {
+        shopGameMode = GameMode.Infinite;
+        shopCategoriesFruitSlicer.SetActive(true);
         UpdateCoinUI();
         ShowBlades(false); // Don't play sound on initial load
     }
@@ -59,6 +66,39 @@ public class ShopManager : MonoBehaviour
         ShopLists.instance.selectedShopList = ShopLists.instance.shopBackgroundList;
         ShopLists.instance.LoadSavedData();
         RefreshUI();
+
+    }
+
+    public void ShowBows()
+    {
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayButtonClickSound();
+        }
+        ShopLists.instance.currentTab = ShopItem.ItemType.Bow;
+        ShopLists.instance.selectedShopList = ShopLists.instance.bowItemsList;
+        ShopLists.instance.LoadSavedData();
+        RefreshUI();
+
+    }
+
+
+
+    public void fruitSlicerSelected()
+    {
+        shopGameMode = GameMode.Infinite;
+        shopCategoriesFruitSlicer.SetActive(true);
+        shopCategoriesArchery.SetActive(false);
+        showBlades();
+    }
+
+    public void ArcherySelected()
+    {
+        Debug.Log("Logged");
+        shopGameMode = GameMode.Archery;
+        shopCategoriesFruitSlicer.SetActive(false);
+        shopCategoriesArchery.SetActive(true);
+        ShowBows();
     }
 
     // --- MAIN LOGIC ---

@@ -48,11 +48,13 @@ public class SoundManager : MonoBehaviour
     private bool isMuted = false;
     private float savedSliderValue = 1f; // Stores the 0.0 to 1.0 slider position
 
+
+
     void Awake()
     {
 
         if (instance == null)
-        {
+        {;
             instance = this;
             DontDestroyOnLoad(gameObject);
 
