@@ -2227,7 +2227,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.5999985, y: -16.1}
+  m_AnchoredPosition: {x: -3.6, y: -16.1}
   m_SizeDelta: {x: 2.06, y: -47.03}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1010049888
@@ -3632,8 +3632,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000052452, y: -0.5719}
-  m_SizeDelta: {x: 3.1503, y: 5.0196}
+  m_AnchoredPosition: {x: -0.0243, y: -0.5719}
+  m_SizeDelta: {x: 2.9281, y: 5.0196}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1825253526
 MonoBehaviour:
@@ -3779,7 +3779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopManager
   contentContainer: {fileID: 2133304951}
-  itemPrefab: {fileID: 5259453832413368316, guid: 7d464d8c928a6b54b938f65b38ed3351, type: 3}
+  itemPrefab: {fileID: 6098801275474918527, guid: d7b407d197365d54999a02dee8593b53, type: 3}
   coinsText: {fileID: 2066386500}
   shopCategoriesFruitSlicer: {fileID: 469043572}
   shopCategoriesArchery: {fileID: 2140665414}
@@ -4254,14 +4254,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GridLayoutGroup
   m_Padding:
-    m_Left: 0
+    m_Left: 11
     m_Right: 0
     m_Top: 0
     m_Bottom: 15
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 120, y: 170}
+  m_CellSize: {x: 104, y: 170}
   m_Spacing: {x: 1, y: 0}
   m_Constraint: 1
   m_ConstraintCount: 1
@@ -4694,6 +4694,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5139106960391300893, guid: 07f16581bdde37849aff9603148fa1ff, type: 3}
+      propertyPath: shopBackgroundList.Array.data[2].icon
+      value: 
+      objectReference: {fileID: 2509787932023826804, guid: ae4fe9dcc6ec83a45a11f1209a7518d2, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
