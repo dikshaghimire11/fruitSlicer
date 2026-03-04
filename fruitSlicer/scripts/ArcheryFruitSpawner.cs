@@ -26,6 +26,7 @@ public class ArcheryFruitSpawner : MonoBehaviour
 
     public float[] spawnPositions;
     private int lastSpawnIndex = -1;
+    public int fruitThresholdForHint = 8;
 
     void Awake()
     {
@@ -81,7 +82,9 @@ public class ArcheryFruitSpawner : MonoBehaviour
             }
 
             if (prefabToSpawn != null)
+
                 SpawnObject(prefabToSpawn);
+            CheckFruitCount();
             yield return new WaitForSeconds(spawnDelay);
         }
     }
@@ -198,11 +201,11 @@ public class ArcheryFruitSpawner : MonoBehaviour
 
         if (mainCamera != null)
         {
-                    mainCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Fruits"));
-                    mainCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("FruitsDown"));  
+            mainCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Fruits"));
+            mainCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("FruitsDown"));
 
         }
-  
+
 
     }
 
@@ -210,7 +213,17 @@ public class ArcheryFruitSpawner : MonoBehaviour
     {
         if (mainCamera != null)
             mainCamera.cullingMask |= (1 << LayerMask.NameToLayer("Fruits"));
-            mainCamera.cullingMask |= (1 << LayerMask.NameToLayer("FruitsDown"));
+        mainCamera.cullingMask |= (1 << LayerMask.NameToLayer("FruitsDown"));
+
+    }
+    void CheckFruitCount()
+    {
+        int fruitCount = GameObject.FindGameObjectsWithTag("Fruits").Length;
+
+        if (fruitCount >= fruitThresholdForHint)
+        {
+            ScoreManager.instance?.HighlightSpecialRewardButton();
+        }
 
     }
 }
