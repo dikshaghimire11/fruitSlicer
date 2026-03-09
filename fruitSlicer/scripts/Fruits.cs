@@ -23,6 +23,8 @@ public class Fruit : MonoBehaviour
     // Shared AudioSource for all fruits
     private static AudioSource sliceSource;
 
+    public float health = 100;
+
 
 
     private Rigidbody2D rb;
@@ -45,7 +47,7 @@ public class Fruit : MonoBehaviour
 
     void Start()
     {
-                  rb = transform.GetComponent<Rigidbody2D>();  
+        rb = transform.GetComponent<Rigidbody2D>();
     }
 
     public void Slice(Vector2 sliceDirection)
@@ -153,6 +155,17 @@ public class Fruit : MonoBehaviour
 
 
         }
+    }
+
+    public GameObject reduceHealth(float reduceBy, Blade blade, Collider2D collider)
+    {
+        health = health - reduceBy;
+        if (health <= 0)
+        {
+            blade.destroyFruit(this, collider);
+            return this.gameObject;
+        }
+        return null;
     }
 }
 

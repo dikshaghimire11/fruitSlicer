@@ -143,6 +143,7 @@ MonoBehaviour:
   missYPosition: -6
   juiceColor: {r: 1, g: 0.8305667, b: 0.7830188, a: 0}
   uniformScale: 0.7
+  health: 100
 --- !u!58 &2613413523906398592
 CircleCollider2D:
   m_ObjectHideFlags: 0

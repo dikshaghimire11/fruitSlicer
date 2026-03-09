@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2620621567010100632}
   - component: {fileID: 1267009548596712393}
   - component: {fileID: -1498622802490810624}
+  - component: {fileID: 8927299889006422522}
   m_Layer: 0
   m_Name: CyberBlade
   m_TagString: Blade
@@ -29,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6311237056519408263}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 0.0009259259, y: 0.00052083336, z: 1}
   m_ConstrainProportionsScale: 0
@@ -188,7 +189,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.76123095, g: 0.4039216, b: 1, a: 1}
+      key0: {r: 0, g: 0.8513794, b: 1, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 0.97764707}
       key2: {r: 1, g: 1, b: 1, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -216,8 +217,8 @@ TrailRenderer:
       m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 3
-    numCornerVertices: 10
-    numCapVertices: 5
+    numCornerVertices: 1
+    numCapVertices: 3
     alignment: 0
     textureMode: 0
     textureScale: {x: 1, y: 1}
@@ -344,3 +345,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8927299889006422522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6311237056519408263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bbf756f7c8201d43af0cd57e210ad3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CyberBladeSpecialAbility
+  lazerPrefab: {fileID: 5648207951006386086, guid: 04daa3832c8b4fc42af710b05bfd6f09, type: 3}
+  coolDownSeconds: 15
+  chargingSeconds: 15
+  quickChargeCost: 200
+  activateFor: 1
+  bladeImage: {fileID: -1273902096176612912, guid: 6ce1c061871add34582efccda9082a0b, type: 3}
+  chargedParticleEffectPrefab: {fileID: 8559398794587435486, guid: 8ae449a3bf2228048848dd50c081ebc5, type: 3}
+  SpecialAbilityName: Lazer Shot
+  abilityUnlockedSound: {fileID: 8300000, guid: 6a210802faaa6ec40b5f5d92ec257f83, type: 3}
+  totalSimultaneousDamage: 1
+  damageValue: 100
+  UIChargeEffectScale: {x: 0.5, y: 0.5, z: -0.5}
+  position: {x: 0.962, y: 1.95, z: 0}

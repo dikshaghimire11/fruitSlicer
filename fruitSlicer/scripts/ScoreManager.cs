@@ -42,7 +42,7 @@ public class ScoreManager : MonoBehaviour
     [Header("Game Rules")]
     public int maxLives = 3;
 
-    private int score = 0;
+    public int score = 0;
     private int bonus = 0;
     private int highScore = 0;
 

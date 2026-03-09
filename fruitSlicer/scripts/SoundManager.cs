@@ -355,4 +355,12 @@ public class SoundManager : MonoBehaviour
 
         }
     }
+
+      public void playClip(AudioClip audioClip)
+    {
+        if (audioClip != null && audioClip != null)
+        {
+            sfxSource.PlayOneShot(audioClip);
+        }
+    }
 }
