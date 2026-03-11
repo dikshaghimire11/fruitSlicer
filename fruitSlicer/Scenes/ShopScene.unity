@@ -4696,7 +4696,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5139106960391300893, guid: 07f16581bdde37849aff9603148fa1ff, type: 3}
       propertyPath: bladeItemList.Array.data[2].price
-      value: 1
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 5139106960391300893, guid: 07f16581bdde37849aff9603148fa1ff, type: 3}
       propertyPath: shopBackgroundList.Array.data[2].icon
