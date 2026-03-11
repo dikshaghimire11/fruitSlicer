@@ -62,6 +62,9 @@ public class Arrow : MonoBehaviour
             {
                 ScoreManager.instance?.AddScore(fruit.points);
                 ShowFloatingText("+" + fruit.points, Color.cyan, fruit.transform.position, 0.5f, 0.2f);
+
+                ArcheryFruitSpawner.instance.cuttedFruitsCount++;
+
             }
             HandleCombo(fruit, isCorrectFruit);
             return;
@@ -113,7 +116,7 @@ public class Arrow : MonoBehaviour
         comboCount++;
 
 
-        if (comboCount <2) return;
+        if (comboCount < 2) return;
 
         float textSize = 0.6f;
         int bonus;

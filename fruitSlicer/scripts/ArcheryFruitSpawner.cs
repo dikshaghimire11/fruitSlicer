@@ -22,8 +22,12 @@ public class ArcheryFruitSpawner : MonoBehaviour
 
     private ArcheryWaveDTO currentLevelData;
     private int lastSpawnIndex = -1;
+    private int spawnedCount = 0;
+    private bool spawningFinished = false;
+    private bool waveCompleted = false;
 
     private Camera mainCamera;
+    public int cuttedFruitsCount = 0;
 
     void Awake()
     {
@@ -33,13 +37,18 @@ public class ArcheryFruitSpawner : MonoBehaviour
     void Start()
     {
         if (mainCamera == null) mainCamera = Camera.main;
-
-        int playerLevel = PlayerPrefs.GetInt("ArcheryPlayerLevel", 1);
-        SetLevel(playerLevel);
+        PlayerPrefs.SetInt("ArcheryPlayerLevel", 1); // Ensure level is set
+        PlayerPrefs.Save();
     }
 
     public void startSpawnning()
     {
+        cuttedFruitsCount = 0;
+        spawningFinished = false;
+        waveCompleted = false;
+
+        int playerLevel = PlayerPrefs.GetInt("ArcheryPlayerLevel", 1);
+        SetLevel(playerLevel);
         StartCoroutine(SpawnFruitsRoutine());
         // StartCoroutine(SpawnFruitsRoutine(false));
         //StartCoroutine(SpawnBombRoutine());
@@ -79,18 +88,21 @@ public class ArcheryFruitSpawner : MonoBehaviour
                     prefabToSpawn = normalFruits[Random.Range(0, normalFruits.Count)];
                 else
                     prefabToSpawn = fruitPrefabs[0]; // fallback if only 1 fruit exists
+                spawnedCount++;
             }
 
             if (prefabToSpawn != null)
             {
                 SpawnObject(prefabToSpawn);
-                spawnedCount++;
+
             }
 
             CheckFruitCount();
 
+
             yield return new WaitForSeconds(currentLevelData.spawnDelay);
         }
+        spawningFinished = true;
     }
 
     void SpawnObject(GameObject prefab)
@@ -137,6 +149,7 @@ public class ArcheryFruitSpawner : MonoBehaviour
 
         Vector3 startPos = obj.transform.position;
         Vector3 endPos = new Vector3(rightX, startPos.y, startPos.z);
+
         float elapsed = 0f;
 
         while (elapsed < duration && obj != null)
@@ -144,6 +157,10 @@ public class ArcheryFruitSpawner : MonoBehaviour
             elapsed += Time.deltaTime;
             obj.transform.position = Vector3.Lerp(startPos, endPos, elapsed / duration);
             yield return null;
+        }
+        if (obj != null)
+        {
+            Destroy(obj);
         }
     }
 
@@ -165,7 +182,7 @@ public class ArcheryFruitSpawner : MonoBehaviour
 
         fruitThresholdForHint = currentLevelData.fruitThresholdForHint;
 
-       // Debug.Log($"Loaded Level {playerLevel} | Total Fruits: {currentLevelData.totalFruits} | Speed: {currentLevelData.fruitSpeed}");
+        // Debug.Log($"Loaded Level {playerLevel} | Total Fruits: {currentLevelData.totalFruits} | Speed: {currentLevelData.fruitSpeed}");
     }
     public void HideFruitsLayer()
     {
@@ -182,6 +199,34 @@ public class ArcheryFruitSpawner : MonoBehaviour
         {
             mainCamera.cullingMask |= (1 << LayerMask.NameToLayer("Fruits"));
             mainCamera.cullingMask |= (1 << LayerMask.NameToLayer("FruitsDown"));
+        }
+    }
+    void Update()
+    {
+        if (waveCompleted) return;
+
+        if (currentLevelData == null)
+        {
+            return;
+        }
+        // Debug.Log($"Cutted Fruits: {cuttedFruitsCount} / {currentLevelData.totalFruits} | Spawning Finished: {spawningFinished}");
+
+        if (cuttedFruitsCount >= currentLevelData.totalFruits)
+        {
+            waveCompleted = true;
+            ScoreManager.instance.LevelComplete(currentLevelData.bonus);
+            return;
+        }
+
+        if (spawningFinished)
+        {
+            int fruitsLeft = GameObject.FindGameObjectsWithTag("Fruits").Length;
+
+            if (fruitsLeft == 0 && cuttedFruitsCount < currentLevelData.totalFruits)
+            {
+                waveCompleted = true;
+                ScoreManager.instance.EndGame(); 
+            }
         }
     }
 }

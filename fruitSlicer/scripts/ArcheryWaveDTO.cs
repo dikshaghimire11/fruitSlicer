@@ -7,4 +7,5 @@ public class ArcheryWaveDTO
     public int fruitThresholdForHint;
     public float specialFruitInterval;
     public float fallDuration;
+    public int bonus;
 }

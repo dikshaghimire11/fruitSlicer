@@ -71,7 +71,11 @@ public class ScoreManager : MonoBehaviour
 
     public Sprite archeryArrowttackSprite;
     public GameObject handObject;
-
+    public GameObject levelCompletePanel;
+    public GameObject countdownObject;
+    public TextMeshProUGUI countdownText;
+    private Vector3 smallScale = new Vector3(0.2f, 0.2f, 0.2f);
+    private Vector3 bigScale = new Vector3(1.2f, 1.2f, 1.2f);
 
 
 
@@ -423,7 +427,7 @@ public class ScoreManager : MonoBehaviour
             }
         }
     }
-    void EndGame()
+    public void EndGame()
     {
         isGameOver = true;
 
@@ -436,6 +440,8 @@ public class ScoreManager : MonoBehaviour
         GameCanvasManager.instance.hideUIInterction();
         if (FruitSpawner.instance != null) FruitSpawner.instance.HideFruitsLayer();
         if (ArcheryFruitSpawner.instance != null) ArcheryFruitSpawner.instance.HideFruitsLayer();
+
+
 
         // Save Score/Coins
 
@@ -477,11 +483,13 @@ public class ScoreManager : MonoBehaviour
 
                 PlayerPrefs.SetInt("HasArcheryPlayedBefore", 1);
                 PlayerPrefs.Save();
+                PlayerPrefs.SetInt("ArcheryPlayerLevel", 1);
+                PlayerPrefs.Save();
                 if (specialRewardButton != null)
                     specialRewardButton.gameObject.SetActive(false);
                 break;
         }
-        ;
+         ;
 
         if (SoundManager.instance != null)
         {
@@ -663,6 +671,178 @@ public class ScoreManager : MonoBehaviour
             handObject.transform.localScale = Vector3.one;
             yield return new WaitForSecondsRealtime(0.3f);
         }
+    }
+    public void LevelComplete(int bonus)
+    {
+        int currentLevel = PlayerPrefs.GetInt("ArcheryPlayerLevel", 1);
+
+        if (SoundManager.instance != null)
+            SoundManager.instance.PlayGameOverSound();
+
+        if (ArcheryFruitSpawner.instance != null)
+            ArcheryFruitSpawner.instance.HideFruitsLayer();
+
+        score = score + bonus;
+
+        levelCompletePanel.SetActive(true);
+        levelCompletePanel.transform.localScale = Vector3.zero;
+
+        if (bonusPointsText != null) bonusPointsText.text = "=" + bonus;
+        if (timeBonusText != null) timeBonusText.text = "WAVE " + currentLevel + " COMPLETE!";
+
+        StartCoroutine(LevelCompleteAnimation(score));
+
+        currentLevel++;
+        PlayerPrefs.SetInt("ArcheryPlayerLevel", currentLevel);
+        PlayerPrefs.Save();
+
+        GameCanvasManager.instance.hideUIInterction();
+    }
+    IEnumerator LevelCompleteAnimation(int finalScore)
+    {
+        float time = 0f;
+        float duration = 0.35f;
+
+        Vector3 start = Vector3.zero;
+        Vector3 end = Vector3.one;
+
+        while (time < duration)
+        {
+            float t = time / duration;
+
+            levelCompletePanel.transform.localScale =
+                Vector3.Lerp(start, end, t);
+
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        levelCompletePanel.transform.localScale = end;
+
+        yield return StartCoroutine(CountScore(finalScore));
+
+        yield return new WaitForSeconds(1.2f);
+
+        StartCoroutine(FadeOutLevelPanel());
+    }
+    IEnumerator CountScore(int targetScore)
+    {
+        int current = 0;
+
+        while (current < targetScore)
+        {
+            current += Mathf.CeilToInt(targetScore * Time.deltaTime * 2);
+
+            if (current > targetScore)
+                current = targetScore;
+
+            if (missionPassEarnPoints != null)
+                missionPassEarnPoints.text = "TOTAL=" + current;
+
+            if (pointsPerLevelText != null)
+                pointsPerLevelText.text = current.ToString();
+
+            yield return null;
+        }
+    }
+    IEnumerator FadeOutLevelPanel()
+    {
+        CanvasGroup cg = levelCompletePanel.GetComponent<CanvasGroup>();
+
+        if (cg == null)
+            cg = levelCompletePanel.AddComponent<CanvasGroup>();
+
+        float time = 0f;
+        float duration = 0.4f;
+
+        while (time < duration)
+        {
+            cg.alpha = Mathf.Lerp(1f, 0f, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        levelCompletePanel.SetActive(false);
+
+        StartCoroutine(StartNextLevelCountdown());
+    }
+
+    IEnumerator StartNextLevelCountdown()
+    {
+        yield return new WaitForSeconds(2f);
+
+        levelCompletePanel.SetActive(false);
+        countdownObject.SetActive(true);
+
+        yield return StartCoroutine(PlayCountdown("3"));
+        yield return StartCoroutine(PlayCountdown("2"));
+        yield return StartCoroutine(PlayCountdown("1"));
+        yield return StartCoroutine(PlayGo());
+
+        countdownObject.SetActive(false);
+
+        if (ArcheryFruitSpawner.instance != null)
+        {
+            ArcheryFruitSpawner.instance.startSpawnning();
+            ArcheryFruitSpawner.instance.ShowFruitsLayer();
+        }
+
+        GameCanvasManager.instance.unHideUiInteraction();
+
+    }
+    IEnumerator PlayCountdown(string number)
+    {
+        countdownText.text = number;
+
+        countdownText.transform.localScale = smallScale; // reset scale
+        countdownText.color = Color.white; // reset color
+
+        float time = 0f;
+        float duration = 0.35f;
+
+        while (time < duration)
+        {
+            float t = time / duration;
+
+            countdownText.transform.localScale =
+                Vector3.Lerp(smallScale, bigScale, t);
+
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        countdownText.transform.localScale = bigScale;
+
+        yield return new WaitForSeconds(0.4f);
+    }
+    IEnumerator PlayGo()
+    {
+        countdownText.text = "GO!";
+
+        countdownText.transform.localScale = bigScale;
+        countdownText.color = Color.white;
+
+        float time = 0f;
+        float duration = 0.5f;
+
+        Color startColor = countdownText.color;
+
+        while (time < duration)
+        {
+            float t = time / duration;
+
+            countdownText.transform.localScale =
+                Vector3.Lerp(bigScale, bigScale * 1.6f, t);
+
+            Color c = startColor;
+            c.a = Mathf.Lerp(1f, 0f, t);
+            countdownText.color = c;
+
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        countdownText.color = Color.white; // reset for next wave
     }
 
 

@@ -486,4 +486,27 @@ public class GameCanvasManager : MonoBehaviour
         StartCoroutine(MoveRoutine(new Vector2(0, 0f), 1, 0, workDesk));
     }
 
+    // public void waveLevelComplete()
+    // {
+    //     GameObject character = archeryCharacter;
+    //     newObject = Instantiate(character, character.transform.position, character.transform.rotation, shopGameObject.transform);
+    //     newObject.transform.SetSiblingIndex(0);
+    //     if (SoundManager.instance != null) SoundManager.instance.PlayCharacterPopSound();
+
+
+    //     StartCoroutine(MoveRoutine(new Vector2(-0.35f, -0.87f), 1, 0, newObject));
+    //     StartCoroutine(MoveRoutine(new Vector2(0, 0f), 1, 0, workDesk));
+    //     hideUIInterction();
+
+    // }
+    // public void destroyNewObject()
+    // {
+    //     if (newObject != null)
+    //     {
+    //         Destroy(newObject);
+    //     }
+        
+
+    // }
+
 }
