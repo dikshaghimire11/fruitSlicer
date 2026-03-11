@@ -94,7 +94,6 @@ public class ShopManager : MonoBehaviour
 
     public void ArcherySelected()
     {
-        Debug.Log("Logged");
         shopGameMode = GameMode.Archery;
         shopCategoriesFruitSlicer.SetActive(false);
         shopCategoriesArchery.SetActive(true);

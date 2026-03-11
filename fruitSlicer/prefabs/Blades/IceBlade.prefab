@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2620621567010100632}
   - component: {fileID: 1267009548596712393}
   - component: {fileID: 7035028759514319195}
+  - component: {fileID: -6291421675836262911}
   m_Layer: 0
   m_Name: IceBlade
   m_TagString: Blade
@@ -344,3 +345,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-6291421675836262911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6311237056519408263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de5cf103884be574fb78946046ca789a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IceBladeSpecialAbility
+  iceWindPrefab: {fileID: 5385624053204156146, guid: 676f5fa02a68c1443a13e5a2c07a3e88, type: 3}
+  coolDownSeconds: 10
+  chargingSeconds: 10
+  quickChargeCost: 210
+  activateFor: 5
+  bladeImage: {fileID: 5160393701342520624, guid: b24a08238a4653443b5b3ae0e8aff416, type: 3}
+  chargedParticleEffectPrefab: {fileID: 1565653427888123023, guid: a45c5a7a959a93f4f937db9bb5229a90, type: 3}
+  SpecialAbilityName: Ice Wind
+  abilityUnlockedSound: {fileID: 8300000, guid: 6a210802faaa6ec40b5f5d92ec257f83, type: 3}
+  damageValue: 1
+  UIChargeEffectScale: {x: 0.03, y: 0.03, z: -0.03}
+  position: {x: 0.962, y: 1.95, z: 0}

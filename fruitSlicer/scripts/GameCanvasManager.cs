@@ -48,6 +48,8 @@ public class GameCanvasManager : MonoBehaviour
     public GameObject closeButton;
     public GameObject goToShopPanel;
 
+    public GameObject BladeSpecialAbilityUI;
+
 
     public GameObject reviewPanel;
     private bool waitingForReview;
@@ -55,6 +57,8 @@ public class GameCanvasManager : MonoBehaviour
     public GameObject notBlurredShopBackground;
     public GameObject bowPrefab;
     private GameObject bowInstance;
+
+    public GameObject floatingTextPrefab;
 
     void Awake()
     {
@@ -274,6 +278,10 @@ public class GameCanvasManager : MonoBehaviour
 
     public void hideUIInterction()
     {
+        if (BladeSpecialAbilityUI != null)
+        {
+            BladeSpecialAbilityUI.SetActive(false);
+        }
         if (hideUIPausePanel != null)
         {
             hideUIPausePanel.GetComponent<UnityEngine.UI.Image>().enabled = true;
@@ -302,6 +310,10 @@ public class GameCanvasManager : MonoBehaviour
 
     public void unHideUiInteraction()
     {
+        if (BladeSpecialAbilityUI != null)
+        {
+            BladeSpecialAbilityUI.SetActive(true);
+        }
         if (hideUIPausePanel != null)
         {
             hideUIPausePanel.GetComponent<UnityEngine.UI.Image>().enabled = false;
@@ -410,20 +422,20 @@ public class GameCanvasManager : MonoBehaviour
     public void OpenPlayStoreReview()
     {
 #if UNITY_ANDROID
-    string packageName = Application.identifier;
+        string packageName = Application.identifier;
 
-    // Open Play Store app directly to the review page
-    string reviewUrl = "market://details?id=" + packageName + "&reviewId=0";
-    string fallbackUrl = "https://play.google.com/store/apps/details?id=" + packageName;
+        // Open Play Store app directly to the review page
+        string reviewUrl = "market://details?id=" + packageName + "&reviewId=0";
+        string fallbackUrl = "https://play.google.com/store/apps/details?id=" + packageName;
 
-    try
-    {
-        Application.OpenURL(reviewUrl);
-    }
-    catch
-    {
-        Application.OpenURL(fallbackUrl); 
-    }
+        try
+        {
+            Application.OpenURL(reviewUrl);
+        }
+        catch
+        {
+            Application.OpenURL(fallbackUrl);
+        }
 #else
         // Non-Android platforms: open web page
         Application.OpenURL("https://play.google.com/store/apps/details?id=" + Application.identifier);
@@ -486,6 +498,7 @@ public class GameCanvasManager : MonoBehaviour
         StartCoroutine(MoveRoutine(new Vector2(0, 0f), 1, 0, workDesk));
     }
 
+<<<<<<< HEAD
     // public void waveLevelComplete()
     // {
     //     GameObject character = archeryCharacter;
@@ -508,5 +521,22 @@ public class GameCanvasManager : MonoBehaviour
         
 
     // }
+=======
+    public void ShowFloatingText(string message, Color color, Vector3 position, float size, float yOffset)
+    {
+        if (floatingTextPrefab == null) return;
+        GameObject obj = Instantiate(
+            floatingTextPrefab,
+            position + new Vector3(0f, yOffset, -5f),
+            Quaternion.identity
+        );
+
+        obj.transform.localScale = Vector3.one * size;
+
+        FloatingText ft = obj.GetComponent<FloatingText>();
+        if (ft != null)
+            ft.Setup(message, color);
+    }
+>>>>>>> c7240e7fa7a7305f1dd66c8389b10f9698649fc8
 
 }

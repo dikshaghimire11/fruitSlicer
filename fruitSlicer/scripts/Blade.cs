@@ -29,6 +29,8 @@ public class Blade : MonoBehaviour
     public float maxSoundVelocity = 15f;
     public float audioFadeSpeed = 6f;
 
+    public IBladeSpecialAbility ibladeSpecialAbility;
+
     void Awake()
     {
         mainCamera = Camera.main;
@@ -47,6 +49,10 @@ public class Blade : MonoBehaviour
         audioSource.Stop();
     }
 
+    void Start()
+    {
+        ibladeSpecialAbility = gameObject.GetComponent<IBladeSpecialAbility>();
+    }
     void Update()
     {
         if (IsInputDown()) StartSlicing();
@@ -85,6 +91,7 @@ public class Blade : MonoBehaviour
         bladeTrail.emitting = true;
 
         previousPosition = GetInputPosition();
+        ibladeSpecialAbility.updateFingerPosition(previousPosition);
         rb.position = previousPosition;
 
         accumulatedDistance = 0f;
@@ -106,6 +113,7 @@ public class Blade : MonoBehaviour
     void ContinueSlicing()
     {
         Vector3 worldPos = GetInputPosition();
+        ibladeSpecialAbility.updateFingerPosition(worldPos);
         Vector3 movement = worldPos - previousPosition;
         float distance = movement.magnitude;
 
@@ -157,6 +165,40 @@ public class Blade : MonoBehaviour
         previousPosition = worldPos;
     }
 
+    public void destroyFruit(Fruit fruit, Collider2D collider)
+    {
+        Debug.Log("Entered destroy fruit" + fruit.name + " at: " + Time.time);
+        if (fruit.attackedBy != null)
+        {
+            Debug.Log("INside Condition" + fruit.name + " at: " + Time.time);
+            fruit.attackedBy.fruitDestroyed(fruit);
+        }
+        collider.enabled = false;
+        fruit.Slice(currentSliceDirection);
+        bool isCorrectFruit = false;
+        switch (ModeManager.Instance.currentMode)
+        {
+            case GameMode.Infinite:
+                ScoreManager.instance?.AddScore(fruit.points);
+                ShowFloatingText("+" + fruit.points, Color.cyan, fruit.transform.position, 0.5f, 0.2f);
+                break;
+
+            case GameMode.JuiceMaking:
+                isCorrectFruit = JuiceManager.instance?.CheckFruit(fruit.name) ?? false;
+                if (isCorrectFruit)
+                {
+                    ShowFloatingText("PERFECT!", Color.cyan, fruit.transform.position, 0.6f, 0.2f);
+                }
+                else
+                {
+                    ShowFloatingText("X", Color.red, fruit.transform.position, 1.5f, 0.2f);
+                }
+                break;
+        }
+
+        HandleCombo(fruit, isCorrectFruit);
+        return;
+    }
     void CheckHit(Collider2D other)
     {
         if (!other.enabled) return;
@@ -164,31 +206,7 @@ public class Blade : MonoBehaviour
         Fruit fruit = other.GetComponent<Fruit>();
         if (fruit != null)
         {
-            other.enabled = false;
-            fruit.Slice(currentSliceDirection);
-            bool isCorrectFruit = false;
-            switch (ModeManager.Instance.currentMode)
-            {
-                case GameMode.Infinite:
-                    ScoreManager.instance?.AddScore(fruit.points);
-                    ShowFloatingText("+" + fruit.points, Color.cyan, fruit.transform.position, 0.5f, 0.2f);
-                    break;
-
-                case GameMode.JuiceMaking:
-                    isCorrectFruit = JuiceManager.instance?.CheckFruit(fruit.name) ?? false;
-                    if (isCorrectFruit)
-                    {
-                        ShowFloatingText("PERFECT!", Color.cyan, fruit.transform.position, 0.6f, 0.2f);
-                    }
-                    else
-                    {
-                        ShowFloatingText("X", Color.red, fruit.transform.position, 1.5f, 0.2f);
-                    }
-                    break;
-            }
-
-            HandleCombo(fruit, isCorrectFruit);
-            return;
+            destroyFruit(fruit, other);
         }
 
         Bomb bomb = other.GetComponent<Bomb>();
