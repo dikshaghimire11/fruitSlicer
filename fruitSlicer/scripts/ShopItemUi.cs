@@ -49,6 +49,7 @@ public class ShopItemUI : MonoBehaviour
         else
         {
             priceText.text = item.price.ToString();
+            actionButtonText.text = "BUY";
             coinIcon.SetActive(true);
             actionButton.interactable = true;
             actionButton.image.color = Color.green; // Make button look like "Buy"

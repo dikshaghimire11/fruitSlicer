@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LaserController : MonoBehaviour
+public class LaserController : MonoBehaviour, ISpecialAbilityController
 
 {
 
@@ -22,6 +22,8 @@ public class LaserController : MonoBehaviour
     public AudioClip laserShootSound;
 
     public AudioSource selfAudioSource;
+
+    private Fruit fruit;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,14 +36,17 @@ public class LaserController : MonoBehaviour
     {
         if (target == null)
         {
-            targetDestroyed();
+            lineRenderer.enabled = false;
             return;
-
         }
-        Fruit fruit = target.GetComponent<Fruit>();
+        if (!GameCanvasManager.instance.startSpawning || ScoreManager.instance.isGameOver)
+        {
+            return;
+        }
+
         if (fruit == null)
             return;
-        selfAudioSource.PlayOneShot(laserShootSound, 0.2f);
+
         target.GetComponent<Rigidbody2D>().gravityScale = -1.5f;
         lineRenderer.positionCount = 2;
         lineRenderer.SetPosition(0, new Vector3(reportTo.getFingerPosition().x, reportTo.getFingerPosition().y, -14));
@@ -56,16 +61,19 @@ public class LaserController : MonoBehaviour
         }
         target.transform.Rotate(0, 0, 200 * Time.deltaTime);
         lineRenderer.enabled = true;
-        GameObject destroyed = fruit.reduceHealth(damageValue * Time.deltaTime, blade, collider);
-
+        fruit.reduceHealth(damageValue * Time.deltaTime, blade, collider);
     }
 
     public void targetDestroyed()
     {
-        selfAudioSource.Stop();
+        if (selfAudioSource.isPlaying)
+        {
+            selfAudioSource.Stop();
+        }
+
         if (reportTo != null)
         {
-            reportTo.laserIsVancant(this.gameObject);
+            reportTo.laserIsVancant(this);
         }
         lineRenderer.enabled = false;
         if (particleEffect != null)
@@ -74,13 +82,37 @@ public class LaserController : MonoBehaviour
         }
     }
 
-    public void setTarget(IBladeSpecialAbility reportTo, float damageValue, Blade blade, Collider2D collider)
+    public void setTarget(IBladeSpecialAbility reportTo, float damageValue, Blade blade, Collider2D collider, Fruit fruit)
     {
+        selfAudioSource.PlayOneShot(laserShootSound, 0.5f);  
+        this.fruit = fruit;
         this.target = collider.gameObject;
         this.reportTo = reportTo;
         this.damageValue = damageValue;
         this.blade = blade;
         this.collider = collider;
+        fruit.attackedBy = this;
+
     }
+
+    public void fruitDestroyed(Fruit fruit)
+    {
+        targetDestroyed();
+    }
+
+    public void stopAttacking()
+    {
+        if (target == null)
+        {
+            return;
+        }
+
+        fruit.GetComponent<Rigidbody2D>().gravityScale = 0.3f;
+        fruit.attackedBy = null;
+        target = null;
+        fruit = null;
+        targetDestroyed();
+    }
+
 
 }

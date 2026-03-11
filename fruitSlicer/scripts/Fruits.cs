@@ -1,5 +1,5 @@
+using System;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Fruit : MonoBehaviour
 {
@@ -25,6 +25,13 @@ public class Fruit : MonoBehaviour
 
     public float health = 100;
 
+    public ISpecialAbilityController attackedBy;
+    public Boolean attackedByBoolean;
+
+    public SpriteRenderer frozenEffect;
+
+    public FrozenFruitEffect frozenFruitEffect;
+
 
 
     private Rigidbody2D rb;
@@ -48,6 +55,9 @@ public class Fruit : MonoBehaviour
     void Start()
     {
         rb = transform.GetComponent<Rigidbody2D>();
+        frozenEffect = this.transform.Find("FrozenFruit").GetComponent<SpriteRenderer>();
+        frozenEffect.enabled = false;
+        frozenFruitEffect = gameObject.GetComponent<FrozenFruitEffect>();
     }
 
     public void Slice(Vector2 sliceDirection)
@@ -58,13 +68,17 @@ public class Fruit : MonoBehaviour
         // PLAY SOUND INSTANTLY (NO DELAY)
         if (sliceSound != null && sliceSource != null)
         {
-            sliceSource.pitch = Random.Range(1.2f, 1.3f); // optional juicy effect
+            sliceSource.pitch = UnityEngine.Random.Range(1.2f, 1.3f); // optional juicy effect
             sliceSource.PlayOneShot(sliceSound, 0.4f);
         }
 
         // Hide main fruit
         gameObject.SetActive(false);
 
+        if (frozenEffect.enabled)
+        {
+            frozenFruitEffect.SpawnSlicedParts(Vector2.up);
+        }
         // Spawn halves
         GameObject leftInst = Instantiate(leftHalf, transform.position, transform.rotation);
         GameObject rightInst = Instantiate(rightHalf, transform.position, transform.rotation);
@@ -82,7 +96,7 @@ public class Fruit : MonoBehaviour
         leftRb.AddForce((-sliceDirection + new Vector2(-0.5f, 0)) * sliceForce, ForceMode2D.Impulse);
         rightRb.AddForce((sliceDirection + new Vector2(0.5f, 0)) * sliceForce, ForceMode2D.Impulse);
 
-        float torque = Random.Range(rotationForce * 0.8f, rotationForce * 1.2f);
+        float torque = UnityEngine.Random.Range(rotationForce * 0.8f, rotationForce * 1.2f);
         leftRb.AddTorque(torque, ForceMode2D.Impulse);
         rightRb.AddTorque(-torque, ForceMode2D.Impulse);
 
@@ -122,7 +136,10 @@ public class Fruit : MonoBehaviour
 
     public void fruitCrossedBoundary()
     {
-
+        if (attackedBy != null)
+        {
+            attackedBy.fruitDestroyed(this);
+        }
         if (ScoreManager.instance != null && ScoreManager.instance.isGameOver)
         {
             Destroy(gameObject);
@@ -157,15 +174,13 @@ public class Fruit : MonoBehaviour
         }
     }
 
-    public GameObject reduceHealth(float reduceBy, Blade blade, Collider2D collider)
+    public void reduceHealth(float reduceBy, Blade blade, Collider2D collider)
     {
         health = health - reduceBy;
         if (health <= 0)
         {
             blade.destroyFruit(this, collider);
-            return this.gameObject;
         }
-        return null;
     }
 }
 

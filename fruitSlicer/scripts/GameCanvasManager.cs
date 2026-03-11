@@ -48,6 +48,8 @@ public class GameCanvasManager : MonoBehaviour
     public GameObject closeButton;
     public GameObject goToShopPanel;
 
+    public GameObject BladeSpecialAbilityUI;
+
 
     public GameObject reviewPanel;
     private bool waitingForReview;
@@ -276,6 +278,10 @@ public class GameCanvasManager : MonoBehaviour
 
     public void hideUIInterction()
     {
+        if (BladeSpecialAbilityUI != null)
+        {
+            BladeSpecialAbilityUI.SetActive(false);
+        }
         if (hideUIPausePanel != null)
         {
             hideUIPausePanel.GetComponent<UnityEngine.UI.Image>().enabled = true;
@@ -304,6 +310,10 @@ public class GameCanvasManager : MonoBehaviour
 
     public void unHideUiInteraction()
     {
+        if (BladeSpecialAbilityUI != null)
+        {
+            BladeSpecialAbilityUI.SetActive(true);
+        }
         if (hideUIPausePanel != null)
         {
             hideUIPausePanel.GetComponent<UnityEngine.UI.Image>().enabled = false;

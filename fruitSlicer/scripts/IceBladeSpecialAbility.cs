@@ -9,10 +9,10 @@ using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 
-public class CyberBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
+public class IceBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
 
 {
-    public GameObject lazerPrefab;
+    public GameObject iceWindPrefab;
 
     public float coolDownSeconds;
 
@@ -28,6 +28,7 @@ public class CyberBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
     public String SpecialAbilityName;
     private bool isCurrentlySlicing;
 
+
     private bool readyToAttack;
 
     private bool isCharging;
@@ -39,9 +40,10 @@ public class CyberBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
 
     private List<Collider2D> previousCollided = new List<Collider2D>();
 
-    private List<ISpecialAbilityController> vacantLazerGameObject = new List<ISpecialAbilityController>();
-    private List<ISpecialAbilityController> allLazerGameObjects = new List<ISpecialAbilityController>();
+    // private List<ISpecialAbilityController> vacantLazerGameObject = new List<ISpecialAbilityController>();
+    // private List<ISpecialAbilityController> allLazerGameObjects = new List<ISpecialAbilityController>();
 
+    private ISpecialAbilityController windGameObject;
 
 
     private float tempCoolDownTimer;
@@ -54,10 +56,12 @@ public class CyberBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
     public AudioClip abilityUnlockedSound;
 
 
+
+
     // private List<LineRenderer> occupiedLineRenderer = new List<LineRenderer>();
 
 
-    public int totalSimultaneousDamage = 3;
+    // public int totalSimultaneousDamage = 3;
 
     public float damageValue = 1;
 
@@ -89,18 +93,19 @@ public class CyberBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
 
         Vector2 origin = position;
 
-        collidedObjects.Sort((a, b) =>
-        {
-            float distA = Vector2.Distance(origin, a.transform.position);
-            float distB = Vector2.Distance(origin, b.transform.position);
-            return distA.CompareTo(distB);
-        });
+        // collidedObjects.Sort((a, b) =>
+        // {
+        //     float distA = Vector2.Distance(origin, a.transform.position);
+        //     float distB = Vector2.Distance(origin, b.transform.position);
+        //     return distA.CompareTo(distB);
+        // });
 
 
         int counter = 0;
 
         foreach (Collider2D col in collidedObjects)
         {
+            Debug.Log("collided: " + col.gameObject.name + " at: " + Time.time);
             if (col == null)
                 continue;
 
@@ -120,13 +125,17 @@ public class CyberBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
             {
                 return;
             }
-            if (vacantLazerGameObject.Count <= 0)
+
+            if (windGameObject.IsUnityNull())
             {
-                break;
+                GameObject wind = Instantiate(iceWindPrefab, iceWindPrefab.transform.position, iceWindPrefab.transform.rotation, GameCanvasManager.instance.transform);
+                windGameObject = wind.GetComponentInChildren<ISpecialAbilityController>();
+                ParticleSystem ps = wind.GetComponentInChildren<ParticleSystem>(); 
+                ps.Simulate(1.5f, true, true);
+                ps.Play();
             }
-            ISpecialAbilityController controller = vacantLazerGameObject[0];
-            controller.setTarget(this, damageValue, blade, col, fruit);
-            vacantLazerGameObject.Remove(controller);
+
+            windGameObject.setTarget(this, damageValue, blade, col, fruit);
             activated = true;
 
         }
@@ -159,13 +168,6 @@ public class CyberBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
         particleEffect.transform.localScale = UIChargeEffectScale;
         damageCollider = GameObject.Find("SpecialEffectCollider").GetComponent<Collider2D>();
         blade = gameObject.GetComponent<Blade>();
-        for (int i = 0; i < totalSimultaneousDamage; i++)
-        {
-            GameObject lineRenderer = Instantiate(lazerPrefab, transform.position, transform.rotation, transform);
-
-            vacantLazerGameObject.Add(lineRenderer.GetComponent<ISpecialAbilityController>());
-            allLazerGameObjects.AddRange(vacantLazerGameObject);
-        }
     }
 
     public void purchaseQuickCharge()
@@ -178,8 +180,8 @@ public class CyberBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
         else
         {
             GameCanvasManager.instance.ShowFloatingText("Insuffient Coins!", Color.yellow, abilityUI.quickChargeButton.transform.position, 0.5f, 0f);
-           if(SoundManager.instance!=null)
-            SoundManager.instance.PlayLifeLostSound();
+            if (SoundManager.instance != null)
+                SoundManager.instance.PlayLifeLostSound();
         }
     }
 
@@ -237,7 +239,7 @@ public class CyberBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
     public void laserIsVancant(ISpecialAbilityController controller)
     {
 
-        vacantLazerGameObject.Add(controller);
+        // vacantLazerGameObject.Add(controller);
     }
 
     public UnityEngine.Vector3 getFingerPosition()
@@ -279,10 +281,7 @@ public class CyberBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
 
     public void startCoolingDown()
     {
-        foreach (ISpecialAbilityController c in allLazerGameObjects)
-        {
-            c.stopAttacking();
-        }
+        windGameObject.stopAttacking();
         tempCoolDownTimer = coolDownSeconds;
         isCharging = false;
         isCoolingDown = true;

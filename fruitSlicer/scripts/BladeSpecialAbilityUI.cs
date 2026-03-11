@@ -18,11 +18,16 @@ public class BladeSpecialAbilityUI : MonoBehaviour
 
     public GameObject recharging;
 
+    public GameObject attacking;
+
     public TextMeshProUGUI coolDownTimer;
     public TextMeshProUGUI chargingTimer;
 
     public TextMeshProUGUI quckChargeCost;
     public TextMeshProUGUI specialAbilityName;
+
+    public TextMeshProUGUI activationTimer;
+
 
 
 

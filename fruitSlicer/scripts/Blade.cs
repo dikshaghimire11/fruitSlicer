@@ -167,6 +167,12 @@ public class Blade : MonoBehaviour
 
     public void destroyFruit(Fruit fruit, Collider2D collider)
     {
+        Debug.Log("Entered destroy fruit" + fruit.name + " at: " + Time.time);
+        if (fruit.attackedBy != null)
+        {
+            Debug.Log("INside Condition" + fruit.name + " at: " + Time.time);
+            fruit.attackedBy.fruitDestroyed(fruit);
+        }
         collider.enabled = false;
         fruit.Slice(currentSliceDirection);
         bool isCorrectFruit = false;

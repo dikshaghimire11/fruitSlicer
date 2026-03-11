@@ -11,7 +11,8 @@ public interface IBladeSpecialAbility
 
     public void isSlicing(Boolean value);
 
-    public void laserIsVancant(GameObject gameObject);
+    public void laserIsVancant(ISpecialAbilityController gameObject);
 
     public void resetSpecialAbility();
+
 }
