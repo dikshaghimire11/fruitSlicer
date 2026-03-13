@@ -56,7 +56,6 @@ public class FruitSpawner : MonoBehaviour
 
 string bladeName = ShopLists.instance.bladeItemList[bladeIndex].prefb.name;
 usedKnifeName = bladeName.Replace("Blade", ""); 
-Debug.Log("usedKnifeName "+usedKnifeName);
 
     }
 

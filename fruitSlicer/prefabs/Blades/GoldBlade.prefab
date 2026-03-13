@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2620621567010100632}
   - component: {fileID: 1267009548596712393}
   - component: {fileID: 7035028759514319195}
+  - component: {fileID: 4925141712498284346}
   m_Layer: 0
   m_Name: GoldBlade
   m_TagString: Blade
@@ -344,3 +345,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4925141712498284346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6311237056519408263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bbf756f7c8201d43af0cd57e210ad3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CyberBladeSpecialAbility
+  lazerPrefab: {fileID: 5648207951006386086, guid: 20ead3a79c19b504a970747b502fd439, type: 3}
+  coolDownSeconds: 5
+  chargingSeconds: 5
+  quickChargeCost: 1000
+  activateFor: 10
+  bladeImage: {fileID: 7729859393515895170, guid: 6d4cf8c4f51b1d8459a47eabac9b02f1, type: 3}
+  chargedParticleEffectPrefab: {fileID: 8559398794587435486, guid: 9db55847b5723454caa23b58f49806cf, type: 3}
+  SpecialAbilityName: Golden Thunder
+  abilityUnlockedSound: {fileID: 8300000, guid: 6a210802faaa6ec40b5f5d92ec257f83, type: 3}
+  totalSimultaneousDamage: 10
+  damageValue: 200
+  UIChargeEffectScale: {x: 0.5, y: 0.5, z: -0.5}
+  position: {x: 0.962, y: 1.95, z: 0}

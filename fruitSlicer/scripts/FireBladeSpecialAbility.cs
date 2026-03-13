@@ -9,7 +9,7 @@ using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 
-public class IceBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
+public class FireBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
 
 {
     public GameObject iceWindPrefab;
@@ -105,6 +105,7 @@ public class IceBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
 
         foreach (Collider2D col in collidedObjects)
         {
+            Debug.Log("collided: " + col.gameObject.name + " at: " + Time.time);
             if (col == null)
                 continue;
 

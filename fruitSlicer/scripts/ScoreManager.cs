@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine.UI;
 using JetBrains.Annotations;
 using System.Collections;
+using System;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -76,6 +77,9 @@ public class ScoreManager : MonoBehaviour
     public TextMeshProUGUI countdownText;
     private Vector3 smallScale = new Vector3(0.2f, 0.2f, 0.2f);
     private Vector3 bigScale = new Vector3(1.2f, 1.2f, 1.2f);
+
+    public Boolean dontLooseLife;
+
 
 
 

@@ -42,6 +42,10 @@ public class IceEffectController : MonoBehaviour, ISpecialAbilityController
     // Update is called once per frame
     void Update()
     {
+        if (ScoreManager.instance.isGameOver)
+        {
+            stopAttacking();
+        }
         transform.Rotate(0, 0, 200 * Time.deltaTime);
         //         transform.localScale = UnityEngine.Vector3.Lerp(transform.localScale, new UnityEngine.Vector3(0.7f, 0.7f, 0.7f), 1f * Time.deltaTime);
         //         transform.position = UnityEngine.Vector3.MoveTowards(

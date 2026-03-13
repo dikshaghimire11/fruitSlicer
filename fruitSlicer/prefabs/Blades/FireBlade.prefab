@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2620621567010100632}
   - component: {fileID: 1267009548596712393}
   - component: {fileID: 7035028759514319195}
+  - component: {fileID: 6750036139528833504}
   m_Layer: 0
   m_Name: FireBlade
   m_TagString: Blade
@@ -344,3 +345,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6750036139528833504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6311237056519408263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9ec64d585b9ed448b559093abc9b774, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FireBladeSpecialAbility
+  iceWindPrefab: {fileID: 5385624053204156146, guid: 1dcc592c3a1f16e41b08b3f432df20a2, type: 3}
+  coolDownSeconds: 5
+  chargingSeconds: 5
+  quickChargeCost: 500
+  activateFor: 10
+  bladeImage: {fileID: -9195209318991056578, guid: 0731e8910b5352b419f617cc24c7227d, type: 3}
+  chargedParticleEffectPrefab: {fileID: 1565653427888123023, guid: 78ced0dfab5544145a4c112d981625b4, type: 3}
+  SpecialAbilityName: Fire Storm
+  abilityUnlockedSound: {fileID: 8300000, guid: 6a210802faaa6ec40b5f5d92ec257f83, type: 3}
+  damageValue: 500
+  UIChargeEffectScale: {x: 0.03, y: 0.03, z: -0.03}
+  position: {x: 0.962, y: 1.95, z: 0}
