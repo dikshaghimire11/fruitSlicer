@@ -181,6 +181,11 @@ public class Blade : MonoBehaviour
 
 if (bladePower != null && !isPowerBladeActive)
 {
+     if (SoundManager.instance != null)
+        {
+            SoundManager.instance.playKnifeSlice();
+        }
+    
     other.enabled = false;
 
     // store values first
@@ -197,6 +202,7 @@ if (bladePower != null && !isPowerBladeActive)
         normalBladePrefab,
         duration
     );
+
 }
 
     }

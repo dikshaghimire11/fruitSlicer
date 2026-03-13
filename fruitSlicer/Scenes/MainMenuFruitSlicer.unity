@@ -4075,6 +4075,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 61e4b46a91a8522439638d138c54c813, type: 3}
   - {fileID: 8300000, guid: 75952b7cdce08134191c4d79c4bea82c, type: 3}
   mildComboSound: {fileID: 8300000, guid: 7aee5fe39dd77604488ccab195134b89, type: 3}
+  knifeSliceSound: {fileID: 8300000, guid: 06048571d4b7a57429d30f5bf8dd95b6, type: 3}
 --- !u!4 &1343208068
 Transform:
   m_ObjectHideFlags: 0

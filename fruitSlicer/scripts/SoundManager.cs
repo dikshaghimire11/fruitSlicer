@@ -47,6 +47,7 @@ public class SoundManager : MonoBehaviour
     // --- STATE VARIABLES ---
     private bool isMuted = false;
     private float savedSliderValue = 1f; // Stores the 0.0 to 1.0 slider position
+    public AudioClip knifeSliceSound;
 
 
 
@@ -361,6 +362,12 @@ public class SoundManager : MonoBehaviour
         if (audioClip != null && audioClip != null)
         {
             sfxSource.PlayOneShot(audioClip);
+        }
+    }
+    public void playKnifeSlice(){
+         if (sfxSource != null && knifeSliceSound != null)
+        {
+            sfxSource.PlayOneShot(knifeSliceSound, 0.5f);
         }
     }
 }
