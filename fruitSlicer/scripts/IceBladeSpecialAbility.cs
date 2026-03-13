@@ -105,7 +105,6 @@ public class IceBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
 
         foreach (Collider2D col in collidedObjects)
         {
-            Debug.Log("collided: " + col.gameObject.name + " at: " + Time.time);
             if (col == null)
                 continue;
 

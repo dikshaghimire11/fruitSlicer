@@ -247,6 +247,7 @@ MonoBehaviour:
   minSoundVelocity: 2.5
   maxSoundVelocity: 15
   audioFadeSpeed: 6
+  powerBladeDuration: 5
 --- !u!82 &-6100973109410088585
 AudioSource:
   m_ObjectHideFlags: 0

@@ -483,8 +483,6 @@ public class ScoreManager : MonoBehaviour
 
                 PlayerPrefs.SetInt("HasArcheryPlayedBefore", 1);
                 PlayerPrefs.Save();
-                PlayerPrefs.SetInt("ArcheryPlayerLevel", 1);
-                PlayerPrefs.Save();
                 if (specialRewardButton != null)
                     specialRewardButton.gameObject.SetActive(false);
                 break;
@@ -552,6 +550,15 @@ public class ScoreManager : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             if (FruitSpawner.instance != null) FruitSpawner.instance.ShowFruitsLayer();
             if (ArcheryFruitSpawner.instance != null) ArcheryFruitSpawner.instance.ShowFruitsLayer();
+            switch (ModeManager.Instance.currentMode)
+            {
+                case GameMode.Archery:
+
+                    PlayerPrefs.SetInt("ArcheryPlayerLevel", 1);
+                    PlayerPrefs.Save();
+                    break;
+
+            }
         }
 
     }

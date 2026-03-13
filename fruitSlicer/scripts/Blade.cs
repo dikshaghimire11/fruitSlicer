@@ -1,6 +1,6 @@
 using UnityEngine;
+using System.Collections;
 
-[RequireComponent(typeof(TrailRenderer), typeof(Rigidbody2D), typeof(AudioSource))]
 public class Blade : MonoBehaviour
 {
     private TrailRenderer bladeTrail;
@@ -31,6 +31,11 @@ public class Blade : MonoBehaviour
 
     public IBladeSpecialAbility ibladeSpecialAbility;
 
+    [Header("Blade Prefabs")] 
+    private GameObject normalBladePrefab; 
+
+    private bool isPowerBladeActive = false;
+
     void Awake()
     {
         mainCamera = Camera.main;
@@ -51,8 +56,13 @@ public class Blade : MonoBehaviour
 
     void Start()
     {
-        ibladeSpecialAbility = gameObject.GetComponent<IBladeSpecialAbility>();
+        ibladeSpecialAbility = GetComponent<IBladeSpecialAbility>();
+
+        // Load normal blade from PlayerPrefs or fallback
+      int bladeIndex = PlayerPrefs.GetInt("Equipped_Blade", 0);
+        normalBladePrefab = ShopLists.instance.bladeItemList[bladeIndex].prefb;
     }
+
     void Update()
     {
         if (IsInputDown()) StartSlicing();
@@ -62,24 +72,13 @@ public class Blade : MonoBehaviour
             ContinueSlicing();
     }
 
-    bool IsInputDown()
-    {
-        return Input.GetMouseButtonDown(0) ||
-              (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began);
-    }
-
-    bool IsInputUp()
-    {
-        return Input.GetMouseButtonUp(0) ||
-              (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended);
-    }
+    #region Input
+    bool IsInputDown() => Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began);
+    bool IsInputUp() => Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended);
 
     Vector3 GetInputPosition()
     {
-        Vector3 screenPos = Input.touchCount > 0
-            ? (Vector3)Input.GetTouch(0).position
-            : Input.mousePosition;
-
+        Vector3 screenPos = Input.touchCount > 0 ? (Vector3)Input.GetTouch(0).position : Input.mousePosition;
         screenPos.z = Mathf.Abs(mainCamera.transform.position.z);
         return mainCamera.ScreenToWorldPoint(screenPos);
     }
@@ -89,15 +88,11 @@ public class Blade : MonoBehaviour
         isSlicing = true;
         bladeTrail.Clear();
         bladeTrail.emitting = true;
-
         previousPosition = GetInputPosition();
-        ibladeSpecialAbility.updateFingerPosition(previousPosition);
+        ibladeSpecialAbility?.updateFingerPosition(previousPosition);
         rb.position = previousPosition;
-
         accumulatedDistance = 0f;
         comboCount = 0;
-
-        // 🔇 Do NOT auto-play sound on touch
         audioSource.volume = 0f;
     }
 
@@ -105,7 +100,6 @@ public class Blade : MonoBehaviour
     {
         isSlicing = false;
         bladeTrail.emitting = false;
-
         audioSource.Stop();
         audioSource.volume = 0f;
     }
@@ -113,101 +107,56 @@ public class Blade : MonoBehaviour
     void ContinueSlicing()
     {
         Vector3 worldPos = GetInputPosition();
-        ibladeSpecialAbility.updateFingerPosition(worldPos);
+        ibladeSpecialAbility?.updateFingerPosition(worldPos);
         Vector3 movement = worldPos - previousPosition;
         float distance = movement.magnitude;
 
         if (distance <= 0f)
         {
             audioSource.volume = Mathf.MoveTowards(audioSource.volume, 0f, audioFadeSpeed * Time.deltaTime);
-            if (audioSource.volume <= 0.01f)
-                audioSource.Stop();
+            if (audioSource.volume <= 0.01f) audioSource.Stop();
             return;
         }
 
         float velocity = distance / Time.deltaTime;
         accumulatedDistance += distance;
-
         currentSliceDirection = movement.normalized;
 
-        // 🎵 Blade sound handling (FIXED)
+        // Audio
         if (velocity > minSoundVelocity)
         {
-            float targetVolume = Mathf.Clamp01(
-                (velocity - minSoundVelocity) / (maxSoundVelocity - minSoundVelocity));
-
+            float targetVolume = Mathf.Clamp01((velocity - minSoundVelocity) / (maxSoundVelocity - minSoundVelocity));
             audioSource.volume = Mathf.MoveTowards(audioSource.volume, targetVolume, audioFadeSpeed * Time.deltaTime);
             audioSource.pitch = Mathf.Lerp(0.85f, 1.4f, targetVolume);
-
-            if (!audioSource.isPlaying)
-                audioSource.Play();
+            if (!audioSource.isPlaying) audioSource.Play();
         }
         else
         {
             audioSource.volume = Mathf.MoveTowards(audioSource.volume, 0f, audioFadeSpeed * Time.deltaTime);
-            if (audioSource.volume <= 0.01f)
-                audioSource.Stop();
+            if (audioSource.volume <= 0.01f) audioSource.Stop();
         }
 
-        // Check slicing hits
+        // Hit detection
         if (velocity > minSlicingVelocity && distance > minMovementForSlice && accumulatedDistance > minSliceDistance)
         {
             RaycastHit2D[] hits = Physics2D.LinecastAll(previousPosition, worldPos);
-
             foreach (RaycastHit2D hit in hits)
-            {
                 if (hit.collider != null && hit.collider.enabled)
                     CheckHit(hit.collider);
-            }
         }
 
         rb.MovePosition(worldPos);
         previousPosition = worldPos;
     }
+    #endregion
 
-    public void destroyFruit(Fruit fruit, Collider2D collider)
-    {
-        Debug.Log("Entered destroy fruit" + fruit.name + " at: " + Time.time);
-        if (fruit.attackedBy != null)
-        {
-            Debug.Log("INside Condition" + fruit.name + " at: " + Time.time);
-            fruit.attackedBy.fruitDestroyed(fruit);
-        }
-        collider.enabled = false;
-        fruit.Slice(currentSliceDirection);
-        bool isCorrectFruit = false;
-        switch (ModeManager.Instance.currentMode)
-        {
-            case GameMode.Infinite:
-                ScoreManager.instance?.AddScore(fruit.points);
-                ShowFloatingText("+" + fruit.points, Color.cyan, fruit.transform.position, 0.5f, 0.2f);
-                break;
-
-            case GameMode.JuiceMaking:
-                isCorrectFruit = JuiceManager.instance?.CheckFruit(fruit.name) ?? false;
-                if (isCorrectFruit)
-                {
-                    ShowFloatingText("PERFECT!", Color.cyan, fruit.transform.position, 0.6f, 0.2f);
-                }
-                else
-                {
-                    ShowFloatingText("X", Color.red, fruit.transform.position, 1.5f, 0.2f);
-                }
-                break;
-        }
-
-        HandleCombo(fruit, isCorrectFruit);
-        return;
-    }
+    #region Hit Detection
     void CheckHit(Collider2D other)
     {
         if (!other.enabled) return;
 
         Fruit fruit = other.GetComponent<Fruit>();
-        if (fruit != null)
-        {
-            destroyFruit(fruit, other);
-        }
+        if (fruit != null) { destroyFruit(fruit, other); return; }
 
         Bomb bomb = other.GetComponent<Bomb>();
         if (bomb != null)
@@ -227,71 +176,95 @@ public class Blade : MonoBehaviour
             ice.Slice(currentSliceDirection);
             ShowFloatingText("FREEZE!", Color.cyan, ice.transform.position, 0.5f, 0.2f);
         }
+
+      BladePowerup bladePower = other.GetComponent<BladePowerup>();
+
+if (bladePower != null && !isPowerBladeActive)
+{
+    other.enabled = false;
+
+    // store values first
+    GameObject powerPrefab = bladePower.powerBladePrefab;
+    float duration = bladePower.effectDuration;
+
+    // destroy the powerup
+    Destroy(bladePower.gameObject);
+
+    // swap blade
+    BladeManager.instance.SwapBlade(
+        gameObject,
+        powerPrefab,
+        normalBladePrefab,
+        duration
+    );
+}
+
+    }
+    #endregion
+
+
+    public void destroyFruit(Fruit fruit, Collider2D collider)
+    {
+        collider.enabled = false;
+        fruit.Slice(currentSliceDirection);
+        bool isCorrectFruit = false;
+
+        switch (ModeManager.Instance.currentMode)
+        {
+            case GameMode.Infinite:
+                ScoreManager.instance?.AddScore(fruit.points);
+                ShowFloatingText("+" + fruit.points, Color.cyan, fruit.transform.position, 0.5f, 0.2f);
+                break;
+
+            case GameMode.JuiceMaking:
+                isCorrectFruit = JuiceManager.instance?.CheckFruit(fruit.name) ?? false;
+                if (isCorrectFruit)
+                    ShowFloatingText("PERFECT!", Color.cyan, fruit.transform.position, 0.6f, 0.2f);
+                else
+                    ShowFloatingText("X", Color.red, fruit.transform.position, 1.5f, 0.2f);
+                break;
+        }
+
+        HandleCombo(fruit, isCorrectFruit);
     }
 
     void HandleCombo(Fruit fruit, bool isCorrectFruit)
     {
-        if (Time.time - lastHitTime > maxComboDelay)
-            comboCount = 0;
-
+        if (Time.time - lastHitTime > maxComboDelay) comboCount = 0;
         lastHitTime = Time.time;
 
-        if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
-        {
-            if (!isCorrectFruit)
-            {
-                comboCount = 0;
-                return;
-            }
-
-            comboCount++;
-        }
-        else
-        {
-            comboCount++;
-        }
+        if (ModeManager.Instance.currentMode == GameMode.JuiceMaking && !isCorrectFruit) comboCount = 0;
+        else comboCount++;
 
         if (comboCount < 2) return;
 
-        float textSize = 0.6f;
         int bonus;
-
         switch (ModeManager.Instance.currentMode)
         {
             case GameMode.JuiceMaking:
                 bonus = comboCount * 2;
                 ScoreManager.instance?.addBonusAmount(bonus);
-                ShowFloatingText("+" + bonus, Color.yellow, fruit.transform.position, textSize, 0f);
+                ShowFloatingText("+" + bonus, Color.yellow, fruit.transform.position, 0.6f, 0f);
                 break;
-
             case GameMode.Infinite:
                 bonus = comboCount * 5;
                 ScoreManager.instance?.AddScore(bonus);
-                ShowFloatingText("COMBO", Color.yellow, fruit.transform.position + new Vector3(-0.2f, 0f, 0f), textSize, 0f);
-                ShowFloatingText("+" + bonus, Color.yellow, fruit.transform.position + new Vector3(0.2f, 0f, 0f), textSize, 0f);
+                ShowFloatingText("COMBO", Color.yellow, fruit.transform.position + new Vector3(-0.2f, 0f, 0f), 0.6f, 0f);
+                ShowFloatingText("+" + bonus, Color.yellow, fruit.transform.position + new Vector3(0.2f, 0f, 0f), 0.6f, 0f);
                 break;
         }
 
-        if (SoundManager.instance != null)
-        {
-            SoundManager.instance.PlayComboSound(comboCount);
-        }
+        SoundManager.instance?.PlayComboSound(comboCount);
     }
-
 
     public void ShowFloatingText(string message, Color color, Vector3 position, float size, float yOffset)
     {
         if (floatingTextPrefab == null) return;
-        GameObject obj = Instantiate(
-            floatingTextPrefab,
-            position + new Vector3(0f, yOffset, 0f),
-            Quaternion.identity
-        );
 
+        GameObject obj = Instantiate(floatingTextPrefab, position + new Vector3(0f, yOffset, 0f), Quaternion.identity);
         obj.transform.localScale = Vector3.one * size;
 
         FloatingText ft = obj.GetComponent<FloatingText>();
-        if (ft != null)
-            ft.Setup(message, color);
+        if (ft != null) ft.Setup(message, color);
     }
 }

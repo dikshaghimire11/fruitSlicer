@@ -498,30 +498,7 @@ public class GameCanvasManager : MonoBehaviour
         StartCoroutine(MoveRoutine(new Vector2(0, 0f), 1, 0, workDesk));
     }
 
-<<<<<<< HEAD
-    // public void waveLevelComplete()
-    // {
-    //     GameObject character = archeryCharacter;
-    //     newObject = Instantiate(character, character.transform.position, character.transform.rotation, shopGameObject.transform);
-    //     newObject.transform.SetSiblingIndex(0);
-    //     if (SoundManager.instance != null) SoundManager.instance.PlayCharacterPopSound();
 
-
-    //     StartCoroutine(MoveRoutine(new Vector2(-0.35f, -0.87f), 1, 0, newObject));
-    //     StartCoroutine(MoveRoutine(new Vector2(0, 0f), 1, 0, workDesk));
-    //     hideUIInterction();
-
-    // }
-    // public void destroyNewObject()
-    // {
-    //     if (newObject != null)
-    //     {
-    //         Destroy(newObject);
-    //     }
-        
-
-    // }
-=======
     public void ShowFloatingText(string message, Color color, Vector3 position, float size, float yOffset)
     {
         if (floatingTextPrefab == null) return;
@@ -537,6 +514,6 @@ public class GameCanvasManager : MonoBehaviour
         if (ft != null)
             ft.Setup(message, color);
     }
->>>>>>> c7240e7fa7a7305f1dd66c8389b10f9698649fc8
+
 
 }
