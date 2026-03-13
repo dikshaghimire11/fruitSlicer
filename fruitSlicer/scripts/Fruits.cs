@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Fruit : MonoBehaviour
 {
@@ -139,6 +140,10 @@ public class Fruit : MonoBehaviour
         if (attackedBy != null)
         {
             attackedBy.fruitDestroyed(this);
+        }
+        if (ScoreManager.instance.dontLooseLife)
+        {
+            return;
         }
         if (ScoreManager.instance != null && ScoreManager.instance.isGameOver)
         {

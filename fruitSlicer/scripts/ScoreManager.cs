@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine.UI;
 using JetBrains.Annotations;
 using System.Collections;
+using System;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -71,6 +72,8 @@ public class ScoreManager : MonoBehaviour
 
     public Sprite archeryArrowttackSprite;
     public GameObject handObject;
+
+    public Boolean dontLooseLife;
 
 
 

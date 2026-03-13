@@ -9,7 +9,7 @@ using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 
-public class IceBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
+public class FireBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
 
 {
     public GameObject iceWindPrefab;
