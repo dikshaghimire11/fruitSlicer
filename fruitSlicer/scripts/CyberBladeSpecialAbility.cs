@@ -178,8 +178,8 @@ public class CyberBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
         else
         {
             GameCanvasManager.instance.ShowFloatingText("Insuffient Coins!", Color.yellow, abilityUI.quickChargeButton.transform.position, 0.5f, 0f);
-           if(SoundManager.instance!=null)
-            SoundManager.instance.PlayLifeLostSound();
+            if (SoundManager.instance != null)
+                SoundManager.instance.PlayLifeLostSound();
         }
     }
 
@@ -250,6 +250,16 @@ public class CyberBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
         abilityUI.coolDownTimer.text = coolDownSeconds.ToString();
         abilityUI.chargingTimer.text = chargingSeconds.ToString();
         abilityUI.quckChargeCost.text = quickChargeCost.ToString();
+        Transform chargedEffectTransform=abilityUI.chargedEffectParent.transform;
+        if (chargedEffectTransform.childCount > 0)
+        {
+            Transform chargedEffect = chargedEffectTransform.GetChild(0);
+            if (chargedEffect != null)
+            {
+                  GameObject.Destroy(chargedEffect.gameObject);
+            }
+        }
+
         startCharging();
 
 
@@ -315,7 +325,11 @@ public class CyberBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
         }
     }
 
-
-
-
+    public void stopAttacking()
+    {
+        foreach (ISpecialAbilityController controller in allLazerGameObjects)
+        {
+            controller.stopAttacking();
+        }
+    }
 }

@@ -31,8 +31,8 @@ public class Blade : MonoBehaviour
 
     public IBladeSpecialAbility ibladeSpecialAbility;
 
-    [Header("Blade Prefabs")] 
-    private GameObject normalBladePrefab; 
+    [Header("Blade Prefabs")]
+    private GameObject normalBladePrefab;
 
     private bool isPowerBladeActive = false;
 
@@ -59,7 +59,7 @@ public class Blade : MonoBehaviour
         ibladeSpecialAbility = GetComponent<IBladeSpecialAbility>();
 
         // Load normal blade from PlayerPrefs or fallback
-      int bladeIndex = PlayerPrefs.GetInt("Equipped_Blade", 0);
+        int bladeIndex = PlayerPrefs.GetInt("Equipped_Blade", 0);
         normalBladePrefab = ShopLists.instance.bladeItemList[bladeIndex].prefb;
     }
 
@@ -83,7 +83,7 @@ public class Blade : MonoBehaviour
         return mainCamera.ScreenToWorldPoint(screenPos);
     }
 
-    void StartSlicing()
+    public void StartSlicing()
     {
         isSlicing = true;
         bladeTrail.Clear();
@@ -177,33 +177,33 @@ public class Blade : MonoBehaviour
             ShowFloatingText("FREEZE!", Color.cyan, ice.transform.position, 0.5f, 0.2f);
         }
 
-      BladePowerup bladePower = other.GetComponent<BladePowerup>();
+        BladePowerup bladePower = other.GetComponent<BladePowerup>();
 
-if (bladePower != null && !isPowerBladeActive)
-{
-     if (SoundManager.instance != null)
+        if (bladePower != null && !isPowerBladeActive)
         {
-            SoundManager.instance.playKnifeSlice();
+            if (SoundManager.instance != null)
+            {
+                SoundManager.instance.playKnifeSlice();
+            }
+
+            other.enabled = false;
+
+            // store values first
+            GameObject powerPrefab = bladePower.powerBladePrefab;
+            float duration = bladePower.effectDuration;
+
+            // destroy the powerup
+            Destroy(bladePower.gameObject);
+
+            // swap blade
+            BladeManager.instance.SwapBlade(
+                gameObject,
+                powerPrefab,
+                normalBladePrefab,
+                duration
+            );
+
         }
-    
-    other.enabled = false;
-
-    // store values first
-    GameObject powerPrefab = bladePower.powerBladePrefab;
-    float duration = bladePower.effectDuration;
-
-    // destroy the powerup
-    Destroy(bladePower.gameObject);
-
-    // swap blade
-    BladeManager.instance.SwapBlade(
-        gameObject,
-        powerPrefab,
-        normalBladePrefab,
-        duration
-    );
-
-}
 
     }
     #endregion
@@ -211,10 +211,15 @@ if (bladePower != null && !isPowerBladeActive)
 
     public void destroyFruit(Fruit fruit, Collider2D collider)
     {
+        Debug.Log("Entered destroy fruit" + fruit.name + " at: " + Time.time);
+        if (fruit.attackedBy != null)
+        {
+            Debug.Log("INside Condition" + fruit.name + " at: " + Time.time);
+            fruit.attackedBy.fruitDestroyed(fruit);
+        }
         collider.enabled = false;
         fruit.Slice(currentSliceDirection);
         bool isCorrectFruit = false;
-
         switch (ModeManager.Instance.currentMode)
         {
             case GameMode.Infinite:
@@ -225,13 +230,18 @@ if (bladePower != null && !isPowerBladeActive)
             case GameMode.JuiceMaking:
                 isCorrectFruit = JuiceManager.instance?.CheckFruit(fruit.name) ?? false;
                 if (isCorrectFruit)
+                {
                     ShowFloatingText("PERFECT!", Color.cyan, fruit.transform.position, 0.6f, 0.2f);
+                }
                 else
+                {
                     ShowFloatingText("X", Color.red, fruit.transform.position, 1.5f, 0.2f);
+                }
                 break;
         }
 
         HandleCombo(fruit, isCorrectFruit);
+        return;
     }
 
     void HandleCombo(Fruit fruit, bool isCorrectFruit)

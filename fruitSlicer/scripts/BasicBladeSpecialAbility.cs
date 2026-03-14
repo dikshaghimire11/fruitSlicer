@@ -32,7 +32,19 @@ public class BasicBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
 
     public void resetSpecialAbility()
     {
-        // throw new System.NotImplementedException();
+        abilityUI.chargedEffectParent.SetActive(false);
+        abilityUI.readyToAttackButton.SetActive(false);
+        abilityUI.attacking.SetActive(false);
+        abilityUI.coolingDownButton.SetActive(false);
+        Transform chargedEffectTransform=abilityUI.chargedEffectParent.transform;
+        if (chargedEffectTransform.childCount > 0)
+        {
+            Transform chargedEffect = chargedEffectTransform.GetChild(0);
+            if (chargedEffect != null)
+            {
+                GameObject.Destroy(chargedEffect.gameObject);
+            }
+        }
     }
 
     public void updateFingerPosition(Vector3 position)
@@ -49,15 +61,17 @@ public class BasicBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
         {
             abilityUI.specialAbilityName.text = SpecialAbilityName;
         }
-        abilityUI.chargedEffectParent.SetActive(false);
-        abilityUI.readyToAttackButton.SetActive(false);
-        abilityUI.attacking.SetActive(false);
-        abilityUI.coolingDownButton.SetActive(false);
+        resetSpecialAbility();
         // abilityUI.quickChargeButton.GetComponent<Button>().onClick.AddListener(() => purchaseQuickCharge());
     }
 
     // Update is called once per frame
     void Update()
+    {
+
+    }
+
+    public void stopAttacking()
     {
 
     }

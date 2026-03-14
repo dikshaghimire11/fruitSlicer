@@ -15,4 +15,6 @@ public interface IBladeSpecialAbility
 
     public void resetSpecialAbility();
 
+    public void stopAttacking();
+
 }
