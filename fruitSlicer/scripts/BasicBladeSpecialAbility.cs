@@ -36,7 +36,7 @@ public class BasicBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
         abilityUI.readyToAttackButton.SetActive(false);
         abilityUI.attacking.SetActive(false);
         abilityUI.coolingDownButton.SetActive(false);
-        Transform chargedEffectTransform=abilityUI.chargedEffectParent.transform;
+        Transform chargedEffectTransform = abilityUI.chargedEffectParent.transform;
         if (chargedEffectTransform.childCount > 0)
         {
             Transform chargedEffect = chargedEffectTransform.GetChild(0);
@@ -74,5 +74,10 @@ public class BasicBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
     public void stopAttacking()
     {
 
+    }
+
+    public void powerReady()
+    {
+        // bladeReadyToAttack();
     }
 }
