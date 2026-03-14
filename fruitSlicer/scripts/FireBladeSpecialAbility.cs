@@ -307,7 +307,6 @@ public class FireBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
     }
     public void bladeReadyToAttack()
     {
-
         tempAttackFor = activateFor;
         isCharging = false;
         isCoolingDown = false;
@@ -333,4 +332,11 @@ public class FireBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
         }
 
     }
+
+     public void powerReady()
+    {
+        bladeReadyToAttack();
+    }
+
+    
 }

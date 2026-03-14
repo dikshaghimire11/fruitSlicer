@@ -250,13 +250,13 @@ public class CyberBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
         abilityUI.coolDownTimer.text = coolDownSeconds.ToString();
         abilityUI.chargingTimer.text = chargingSeconds.ToString();
         abilityUI.quckChargeCost.text = quickChargeCost.ToString();
-        Transform chargedEffectTransform=abilityUI.chargedEffectParent.transform;
+        Transform chargedEffectTransform = abilityUI.chargedEffectParent.transform;
         if (chargedEffectTransform.childCount > 0)
         {
             Transform chargedEffect = chargedEffectTransform.GetChild(0);
             if (chargedEffect != null)
             {
-                  GameObject.Destroy(chargedEffect.gameObject);
+                GameObject.Destroy(chargedEffect.gameObject);
             }
         }
 
@@ -307,7 +307,6 @@ public class CyberBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
     }
     public void bladeReadyToAttack()
     {
-
         tempAttackFor = activateFor;
         isCharging = false;
         isCoolingDown = false;
@@ -331,5 +330,10 @@ public class CyberBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
         {
             controller.stopAttacking();
         }
+    }
+
+    public void powerReady()
+    {
+        bladeReadyToAttack();
     }
 }

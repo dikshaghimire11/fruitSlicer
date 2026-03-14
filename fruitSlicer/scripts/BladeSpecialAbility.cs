@@ -17,4 +17,8 @@ public interface IBladeSpecialAbility
 
     public void stopAttacking();
 
+    public void powerReady();
+
+
+
 }
