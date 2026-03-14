@@ -4589,7 +4589,7 @@ MonoBehaviour:
   - {fileID: 7767628628793562763, guid: c230a37096a916b479448ac1ec9ea5de, type: 3}
   - {fileID: 7767628628793562763, guid: eb1ada370f5ebaf4b8cec8825ebc8f94, type: 3}
   - {fileID: 7767628628793562763, guid: c041b6a1ce7c9294fae9a1071c920790, type: 3}
-  knifeSpawnDelay: 20
+  knifeSpawnDelay: 60
 --- !u!4 &979263250
 Transform:
   m_ObjectHideFlags: 0
