@@ -285,6 +285,7 @@ public class FireBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
 
     public void startCharging()
     {
+        abilityUI.chargeSlider.gameObject.SetActive(true);
         abilityUI.scannerNet.SetActive(false);
         tempChargingTimer = chargingSeconds;
         isCharging = true;
@@ -325,6 +326,7 @@ public class FireBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
     }
     public void bladeReadyToAttack()
     {
+        abilityUI.chargeSlider.gameObject.SetActive(true);
         abilityUI.chargeSlider.value = 1;
         tempAttackFor = activateFor;
         isCharging = false;
@@ -355,6 +357,17 @@ public class FireBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
     public void powerReady()
     {
         bladeReadyToAttack();
+    }
+    public float attackTimeLeft()
+    {
+        if (activated)
+        {
+            return tempAttackFor;
+        }
+        else
+        {
+            return 0f;
+        }
     }
 
 

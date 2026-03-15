@@ -59,8 +59,11 @@ public class BladeManager : MonoBehaviour
         bladeLifeTimeParent.SetActive(false);
 
         // Spawn normal blade
-
-        specialAbility1.stopAttacking();
+        if (specialAbility1.attackTimeLeft() > 0f)
+        {
+            yield return new WaitForSeconds(specialAbility1.attackTimeLeft());
+        }
+        // specialAbility1.stopAttacking();
         GameObject normalBlade = Instantiate(normalBladePrefab, powerBlade.transform.position, Quaternion.identity, GameCanvasManager.instance.transform);
         powerBlade.SetActive(false);
         Blade blade1 = normalBlade.GetComponent<Blade>();

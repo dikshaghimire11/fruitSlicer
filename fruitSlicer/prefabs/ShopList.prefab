@@ -72,7 +72,7 @@ MonoBehaviour:
     isEquipped: 0
   - itemName: Mountain
     price: 25000
-    icon: {fileID: 9002601331091940180, guid: 986a0b7309f399546ac7c724dc5488f6, type: 3}
+    icon: {fileID: 2509787932023826804, guid: ae4fe9dcc6ec83a45a11f1209a7518d2, type: 3}
     actualSprite: {fileID: -6680556436121249758, guid: 2cdba57273996fa418bbfb3f61358f39, type: 3}
     blurredSprite: {fileID: 6617642490607179941, guid: 1c31225bdcefc1f41ad597415dd3b6bc, type: 3}
     prefb: {fileID: 0}
@@ -101,9 +101,10 @@ MonoBehaviour:
     actualSprite: {fileID: 0}
     blurredSprite: {fileID: 0}
     prefb: {fileID: 6311237056519408263, guid: 22a02b0350138ac4cb69800f3589f30a, type: 3}
-    description: Basic balde is good of all time so it is very good so that that
-      acan be used in any situation if necessary in any of the performance situation
-    specialAbility: 'EXPLOSIVE RESISTANCE: 50HP'
+    description: A reliable steel blade with balanced performance. It has no special
+      powers but offers clean, precise slicing. Perfect for players who rely purely
+      on skill and timing.
+    specialAbility: 'Ability: None'
     isDefault: 1
     itemType: 0
     isPurchased: 0
@@ -114,44 +115,52 @@ MonoBehaviour:
     actualSprite: {fileID: 0}
     blurredSprite: {fileID: 0}
     prefb: {fileID: 6311237056519408263, guid: 08f372de6410a5c40afeef9446bc6712, type: 3}
-    description: --
-    specialAbility: --
+    description: Releases a burst of freezing wind when fruits are about to fall.
+      The icy blast freezes them mid-air for a moment, giving you extra time to slice
+      and save your combo.
+    specialAbility: 'Ability: Frost Lock'
     isDefault: 0
     itemType: 0
     isPurchased: 0
     isEquipped: 0
   - itemName: CyberBlade
-    price: 10000
+    price: 20000
     icon: {fileID: -1273902096176612912, guid: 6ce1c061871add34582efccda9082a0b, type: 3}
     actualSprite: {fileID: 0}
     blurredSprite: {fileID: 0}
     prefb: {fileID: 6311237056519408263, guid: de7e41fe840fa8e4f8f3490fa28992a7, type: 3}
-    description: 
-    specialAbility: 
+    description: Fires a futuristic laser that pulls falling fruits back toward the
+      slicing area. The powerful energy beam prevents fruits from escaping and helps
+      you maintain your combo streak.
+    specialAbility: 'Ability: Gravity Beam'
     isDefault: 0
     itemType: 0
     isPurchased: 0
     isEquipped: 0
   - itemName: Fire Blade
-    price: 25000
+    price: 50000
     icon: {fileID: -9195209318991056578, guid: 0731e8910b5352b419f617cc24c7227d, type: 3}
     actualSprite: {fileID: 0}
     blurredSprite: {fileID: 0}
     prefb: {fileID: 6311237056519408263, guid: 3937a36bfe1fdb4418e7ab47fefb9af3, type: 3}
-    description: 
-    specialAbility: 
+    description: Unleashes a blazing fire storm that burns fruits instantly before
+      they fall. The explosive flames sweep across the screen, destroying danger
+      and turning it into easy points.
+    specialAbility: 'Ability: Inferno Surge'
     isDefault: 0
     itemType: 0
     isPurchased: 0
     isEquipped: 0
   - itemName: GOLDEN SPARK BLADE
-    price: 50000
+    price: 100000
     icon: {fileID: 7729859393515895170, guid: 6d4cf8c4f51b1d8459a47eabac9b02f1, type: 3}
     actualSprite: {fileID: 0}
     blurredSprite: {fileID: 0}
     prefb: {fileID: 6311237056519408263, guid: d0c1fa5d2a06cfc4f8c9a231a332e05a, type: 3}
-    description: 
-    specialAbility: 
+    description: The golden blade releases electric sparks that strike falling fruits
+      instantly. Lightning energy destroys them before they escape, protecting your
+      combo with fast and powerful golden attacks.
+    specialAbility: 'Ability: Thunder Strike'
     isDefault: 0
     itemType: 0
     isPurchased: 0
@@ -163,9 +172,10 @@ MonoBehaviour:
     actualSprite: {fileID: 0}
     blurredSprite: {fileID: 0}
     prefb: {fileID: 0}
-    description: This is Basic Bow Perfect for Starters. It has special ability of
-      shooting Arrows 2x Faster.
-    specialAbility: CAN PERFORM RAPID FIRE
+    description: A reliable bow with balanced performance. It has no special powers
+      but offers clean, precise aiming. Perfect for players who rely purely on skill
+      and timing.
+    specialAbility: 'Ability: None'
     isDefault: 1
     itemType: 2
     isPurchased: 0

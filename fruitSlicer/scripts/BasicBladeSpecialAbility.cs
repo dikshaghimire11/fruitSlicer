@@ -82,4 +82,9 @@ public class BasicBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
     {
         // bladeReadyToAttack();
     }
+
+    public float attackTimeLeft()
+    {
+        return 0f;
+    }
 }
