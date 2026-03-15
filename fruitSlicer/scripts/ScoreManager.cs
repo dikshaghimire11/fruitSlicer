@@ -32,6 +32,7 @@ public class ScoreManager : MonoBehaviour
 
 
 
+
     public GameObject x2Button;
     public GameObject x2ButtonForCareer;
 
@@ -422,10 +423,18 @@ public class ScoreManager : MonoBehaviour
 
     private void destroyAllSpawnnedObjects()
     {
+        Blade blade = FindFirstObjectByType<Blade>();
+        Debug.Log("Blade found");
+        if (blade != null)
+        {
+            IBladeSpecialAbility specialAbility = blade.gameObject.GetComponent<IBladeSpecialAbility>();
+            specialAbility.stopAttacking();
+            Debug.Log("Stopped Attacking");
+        }
         GameObject[] allObjects = FindObjectsOfType<GameObject>();
         foreach (GameObject obj in allObjects)
         {
-            if (obj.layer == 6)
+            if (obj.layer == 6 || obj.layer == 8)
             {
                 GameObject.Destroy(obj);
             }
@@ -437,7 +446,7 @@ public class ScoreManager : MonoBehaviour
 
 
 
-        // Time.timeScale = 0f;
+        Time.timeScale = 0f;
 
 
         if (gameOverPanel != null) gameOverPanel.SetActive(true);

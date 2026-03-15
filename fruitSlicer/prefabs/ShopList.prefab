@@ -95,7 +95,7 @@ MonoBehaviour:
     isPurchased: 0
     isEquipped: 0
   bladeItemList:
-  - itemName: Basic
+  - itemName: Basic Blade
     price: 0
     icon: {fileID: 8524827877590128127, guid: 7dadf876fc78bce40942a4637be73211, type: 3}
     actualSprite: {fileID: 0}
@@ -123,7 +123,7 @@ MonoBehaviour:
     itemType: 0
     isPurchased: 0
     isEquipped: 0
-  - itemName: CyberBlade
+  - itemName: Neon Reaper
     price: 20000
     icon: {fileID: -1273902096176612912, guid: 6ce1c061871add34582efccda9082a0b, type: 3}
     actualSprite: {fileID: 0}
@@ -137,7 +137,7 @@ MonoBehaviour:
     itemType: 0
     isPurchased: 0
     isEquipped: 0
-  - itemName: Fire Blade
+  - itemName: Inferno Cutter
     price: 50000
     icon: {fileID: -9195209318991056578, guid: 0731e8910b5352b419f617cc24c7227d, type: 3}
     actualSprite: {fileID: 0}
@@ -151,7 +151,7 @@ MonoBehaviour:
     itemType: 0
     isPurchased: 0
     isEquipped: 0
-  - itemName: GOLDEN SPARK BLADE
+  - itemName: Thunder Edge
     price: 100000
     icon: {fileID: 7729859393515895170, guid: 6d4cf8c4f51b1d8459a47eabac9b02f1, type: 3}
     actualSprite: {fileID: 0}

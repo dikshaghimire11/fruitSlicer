@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1284778869009411832}
   - component: {fileID: 2616962542211625106}
   - component: {fileID: 6162709603012097208}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: ElectricLazer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

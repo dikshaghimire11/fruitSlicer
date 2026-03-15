@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 979902741477086127}
   - component: {fileID: 4889444631850747804}
   - component: {fileID: 8735588592231681577}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: IceChargedEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}

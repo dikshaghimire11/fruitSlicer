@@ -79,6 +79,7 @@ public class BladeManager : MonoBehaviour
         {
             bladeLifeTime -= Time.deltaTime;
             bladeTimer.text = ((int)bladeLifeTime).ToString();
+            
         }
 
 

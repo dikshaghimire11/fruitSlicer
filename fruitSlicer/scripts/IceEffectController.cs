@@ -145,6 +145,10 @@ public class IceEffectController : MonoBehaviour, ISpecialAbilityController
         foreach (Fruit fruit in fruits)
         {
             // targetDestroyed(fruit);
+            if (fruit == null)
+            {
+                continue;
+            }
             fruit.frozenEffect.enabled = false;
             fruit.attackedBy = null;
             fruit.attackedByBoolean = false;

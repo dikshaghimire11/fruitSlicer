@@ -291,6 +291,8 @@ public class FruitSpawner : MonoBehaviour
         {
             mainCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Fruits"));
             mainCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("FruitsDown"));
+            mainCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Effects"));
+
         }
 
 
@@ -302,6 +304,8 @@ public class FruitSpawner : MonoBehaviour
         {
             mainCamera.cullingMask |= (1 << LayerMask.NameToLayer("Fruits"));
             mainCamera.cullingMask |= (1 << LayerMask.NameToLayer("FruitsDown"));
+            mainCamera.cullingMask |= (1 << LayerMask.NameToLayer("Effects"));
+
         }
 
     }

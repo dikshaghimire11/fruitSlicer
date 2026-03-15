@@ -37,7 +37,9 @@ public class BasicBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
         abilityUI.chargedEffectParent.SetActive(false);
         abilityUI.readyToAttackButton.SetActive(false);
         abilityUI.attacking.SetActive(false);
+        abilityUI.recharging.SetActive(false);
         abilityUI.coolingDownButton.SetActive(false);
+        abilityUI.quickChargeButton.SetActive(false);
         Transform chargedEffectTransform = abilityUI.chargedEffectParent.transform;
         if (chargedEffectTransform.childCount > 0)
         {

@@ -360,11 +360,11 @@ MonoBehaviour:
   iceWindPrefab: {fileID: 5385624053204156146, guid: 676f5fa02a68c1443a13e5a2c07a3e88, type: 3}
   coolDownSeconds: 30
   chargingSeconds: 30
-  quickChargeCost: 210
+  quickChargeCost: 500
   activateFor: 10
   bladeImage: {fileID: 5160393701342520624, guid: b24a08238a4653443b5b3ae0e8aff416, type: 3}
   chargedParticleEffectPrefab: {fileID: 1565653427888123023, guid: a45c5a7a959a93f4f937db9bb5229a90, type: 3}
-  SpecialAbilityName: Ice Wind
+  SpecialAbilityName: Frost Lock
   abilityUnlockedSound: {fileID: 8300000, guid: 6a210802faaa6ec40b5f5d92ec257f83, type: 3}
   damageValue: 1
   UIChargeEffectScale: {x: 0.03, y: 0.03, z: -0.03}

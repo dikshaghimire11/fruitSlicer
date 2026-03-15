@@ -364,7 +364,7 @@ MonoBehaviour:
   activateFor: 10
   bladeImage: {fileID: -9195209318991056578, guid: 0731e8910b5352b419f617cc24c7227d, type: 3}
   chargedParticleEffectPrefab: {fileID: 1565653427888123023, guid: 78ced0dfab5544145a4c112d981625b4, type: 3}
-  SpecialAbilityName: Fire Storm
+  SpecialAbilityName: Inferno Surge
   abilityUnlockedSound: {fileID: 8300000, guid: 6a210802faaa6ec40b5f5d92ec257f83, type: 3}
   damageValue: 500
   UIChargeEffectScale: {x: 0.03, y: 0.03, z: -0.03}

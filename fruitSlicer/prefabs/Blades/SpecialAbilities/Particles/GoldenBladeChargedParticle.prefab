@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1005984104718670207}
   - component: {fileID: 2682942565141900276}
   - component: {fileID: 8507462468881269334}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GoldenBladeChargedParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

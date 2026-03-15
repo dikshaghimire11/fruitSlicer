@@ -47,7 +47,8 @@ public class LaserController : MonoBehaviour, ISpecialAbilityController
         if (fruit == null)
             return;
 
-        target.GetComponent<Rigidbody2D>().gravityScale = -1.5f;
+        target.GetComponent<Rigidbody2D>().gravityScale = -0.7f;
+        target.GetComponent<Rigidbody2D>().mass += Time.deltaTime;
         lineRenderer.positionCount = 2;
         lineRenderer.SetPosition(0, new Vector3(reportTo.getFingerPosition().x, reportTo.getFingerPosition().y, -14));
         lineRenderer.SetPosition(1, new Vector3(target.transform.position.x, target.transform.position.y, -14));
@@ -84,7 +85,7 @@ public class LaserController : MonoBehaviour, ISpecialAbilityController
 
     public void setTarget(IBladeSpecialAbility reportTo, float damageValue, Blade blade, Collider2D collider, Fruit fruit)
     {
-        selfAudioSource.PlayOneShot(laserShootSound, 0.5f);  
+        selfAudioSource.PlayOneShot(laserShootSound, 0.5f);
         this.fruit = fruit;
         this.target = collider.gameObject;
         this.reportTo = reportTo;

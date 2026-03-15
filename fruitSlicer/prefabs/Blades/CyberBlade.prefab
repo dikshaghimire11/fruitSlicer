@@ -360,13 +360,13 @@ MonoBehaviour:
   lazerPrefab: {fileID: 5648207951006386086, guid: 04daa3832c8b4fc42af710b05bfd6f09, type: 3}
   coolDownSeconds: 30
   chargingSeconds: 30
-  quickChargeCost: 100
+  quickChargeCost: 500
   activateFor: 10
   bladeImage: {fileID: -1273902096176612912, guid: 6ce1c061871add34582efccda9082a0b, type: 3}
   chargedParticleEffectPrefab: {fileID: 8559398794587435486, guid: 8ae449a3bf2228048848dd50c081ebc5, type: 3}
-  SpecialAbilityName: Lazer Shot
+  SpecialAbilityName: Gravity Beam
   abilityUnlockedSound: {fileID: 8300000, guid: 6a210802faaa6ec40b5f5d92ec257f83, type: 3}
   totalSimultaneousDamage: 10
-  damageValue: 0
+  damageValue: 60
   UIChargeEffectScale: {x: 0.5, y: 0.5, z: -0.5}
   position: {x: 0.962, y: 1.95, z: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4326763078892373867}
   - component: {fileID: 5771370523621266220}
   - component: {fileID: 2698219983649376157}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: WindParticleEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
