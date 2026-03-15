@@ -24,7 +24,7 @@ public class FruitSpawner : MonoBehaviour
     // --- SPECIAL ITEMS SETTINGS ---
     [Header("Special Items Settings")]
     public GameObject bombPrefab;
-    public GameObject icePrefab;
+    // public GameObject icePrefab;
     public float specialSpawnDelay = 10f;
 
     // --- INTERNAL VARIABLES ---
@@ -35,7 +35,7 @@ public class FruitSpawner : MonoBehaviour
 
     private Camera mainCamera;
     public List<GameObject> knifePrefabs;
-    public float knifeSpawnDelay=60f;
+    public float knifeSpawnDelay = 60f;
 
     private int lastKnifeIndex = -1;
     private string usedKnifeName;
@@ -52,10 +52,10 @@ public class FruitSpawner : MonoBehaviour
         {
             mainCamera = Camera.main;
         }
-     int bladeIndex = PlayerPrefs.GetInt("Equipped_Blade", 0);
+        int bladeIndex = PlayerPrefs.GetInt("Equipped_Blade", 0);
 
-string bladeName = ShopLists.instance.bladeItemList[bladeIndex].prefb.name;
-usedKnifeName = bladeName.Replace("Blade", ""); 
+        string bladeName = ShopLists.instance.bladeItemList[bladeIndex].prefb.name;
+        usedKnifeName = bladeName.Replace("Blade", "");
 
     }
 
@@ -158,7 +158,7 @@ usedKnifeName = bladeName.Replace("Blade", "");
     }
 
 
-IEnumerator SpawnBombAndIceRoutine()
+    IEnumerator SpawnBombAndIceRoutine()
     {
         Vector3[] corners = new Vector3[4];
 
@@ -178,25 +178,25 @@ IEnumerator SpawnBombAndIceRoutine()
 
             GameObject prefabToSpawn = null;
 
-            if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
-            {
-                // In Juice Mode → Only Bomb
-                prefabToSpawn = bombPrefab;
-            }
-            else
-            {
-                // 🔥 Pattern: 3 Bombs → 1 Ice
-                if (bombCounter < 3)
-                {
-                    prefabToSpawn = bombPrefab;
-                    bombCounter++;
-                }
-                else
-                {
-                    prefabToSpawn = icePrefab;
-                    bombCounter = 0; // reset after ice
-                }
-            }
+            // if (ModeManager.Instance.currentMode == GameMode.JuiceMaking)
+            // {
+            // In Juice Mode → Only Bomb
+            prefabToSpawn = bombPrefab;
+            // }
+            // else
+            // {
+            //     // // 🔥 Pattern: 3 Bombs → 1 Ice
+            //     // if (bombCounter < 3)
+            //     // {
+            //     //     prefabToSpawn = bombPrefab;
+            //     //     bombCounter++;
+            //     // }
+            //     // else
+            //     // {
+            //     //     prefabToSpawn = icePrefab;
+            //     //     bombCounter = 0; // reset after ice
+            //     // }
+            // }
 
             if (prefabToSpawn != null)
                 SpawnObject(prefabToSpawn, corners);
@@ -204,46 +204,46 @@ IEnumerator SpawnBombAndIceRoutine()
             yield return new WaitForSeconds(1f);
         }
     }
- 
-IEnumerator SpawnKnifeRoutine()
-{
-    Vector3[] corners = new Vector3[4];
 
-    if (gameContainer != null)
-        gameContainer.GetComponent<RectTransform>().GetWorldCorners(corners);
-    else
-        yield break;
-
-    while (true)
+    IEnumerator SpawnKnifeRoutine()
     {
-        yield return new WaitForSeconds(knifeSpawnDelay);
+        Vector3[] corners = new Vector3[4];
 
-        if (ScoreManager.instance.isGameOver)
+        if (gameContainer != null)
+            gameContainer.GetComponent<RectTransform>().GetWorldCorners(corners);
+        else
             yield break;
 
-        yield return new WaitForSeconds(1f);
-
-        GameObject prefabToSpawn = null;
-        for (int i = 0; i < knifePrefabs.Count; i++)
+        while (true)
         {
-            int randomIndex = Random.Range(0, knifePrefabs.Count);
-            string knifeName = knifePrefabs[randomIndex].name.Replace("(Clone)", "");
-            if (randomIndex != lastKnifeIndex && !knifeName.StartsWith(usedKnifeName))
+            yield return new WaitForSeconds(knifeSpawnDelay);
+
+            if (ScoreManager.instance.isGameOver)
+                yield break;
+
+            yield return new WaitForSeconds(1f);
+
+            GameObject prefabToSpawn = null;
+            for (int i = 0; i < knifePrefabs.Count; i++)
             {
+                int randomIndex = Random.Range(0, knifePrefabs.Count);
+                string knifeName = knifePrefabs[randomIndex].name.Replace("(Clone)", "");
+                if (randomIndex != lastKnifeIndex && !knifeName.StartsWith(usedKnifeName))
+                {
 
-                prefabToSpawn = knifePrefabs[randomIndex];
-                lastKnifeIndex = randomIndex;
-                break; 
+                    prefabToSpawn = knifePrefabs[randomIndex];
+                    lastKnifeIndex = randomIndex;
+                    break;
+                }
             }
+
+            // Spawn if valid
+            if (prefabToSpawn != null)
+                SpawnObject(prefabToSpawn, corners);
+
+            yield return new WaitForSeconds(1f);
         }
-
-        // Spawn if valid
-        if (prefabToSpawn != null)
-            SpawnObject(prefabToSpawn, corners);
-
-        yield return new WaitForSeconds(1f);
     }
-}
 
 
 

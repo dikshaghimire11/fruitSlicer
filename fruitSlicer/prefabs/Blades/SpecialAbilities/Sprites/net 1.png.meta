@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3762202e2543e1947a699b215f55bf00
+guid: 8f06907fb790216429f26498b89d66b4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2565898361405630547
-    second: Recharge_0
+      213: 3107940632541304625
+    second: net 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,23 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Recharge_0
+      name: net 1_0
       rect:
         serializedVersion: 2
-        x: 69
-        y: 237
-        width: 342
-        height: 123
+        x: 7
+        y: 0
+        width: 972
+        height: 500
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 358e65907f6eb9320800000000000000
-      internalID: 2565898361405630547
+      spriteID: 13790a9e98f912b20800000000000000
+      internalID: 3107940632541304625
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: c7b67ec23862ead4d84a1ea667c0c1eb
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Recharge_0: 2565898361405630547
+      net 1_0: 3107940632541304625
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

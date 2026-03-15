@@ -28,6 +28,15 @@ public class BladeSpecialAbilityUI : MonoBehaviour
 
     public TextMeshProUGUI activationTimer;
 
+    public Slider chargeSlider;
+    public Image fillArea;
+    public Gradient chargeGradient;
+    public Gradient coolGradient;
+
+    public GameObject scannerNet;
+
+    public ScannerNet scannerNetScript;
+
 
 
 

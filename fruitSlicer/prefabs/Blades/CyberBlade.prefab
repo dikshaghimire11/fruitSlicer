@@ -359,9 +359,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CyberBladeSpecialAbility
   lazerPrefab: {fileID: 5648207951006386086, guid: 04daa3832c8b4fc42af710b05bfd6f09, type: 3}
   coolDownSeconds: 5
-  chargingSeconds: 5
+  chargingSeconds: 8
   quickChargeCost: 100
-  activateFor: 1000
+  activateFor: 10
   bladeImage: {fileID: -1273902096176612912, guid: 6ce1c061871add34582efccda9082a0b, type: 3}
   chargedParticleEffectPrefab: {fileID: 8559398794587435486, guid: 8ae449a3bf2228048848dd50c081ebc5, type: 3}
   SpecialAbilityName: Lazer Shot

@@ -54,6 +54,7 @@ public class CyberBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
     public AudioClip abilityUnlockedSound;
 
 
+
     // private List<LineRenderer> occupiedLineRenderer = new List<LineRenderer>();
 
 
@@ -195,7 +196,9 @@ public class CyberBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
         if (isCharging)
         {
             tempChargingTimer -= Time.deltaTime;
-            abilityUI.chargingTimer.text = ((int)tempChargingTimer).ToString();
+            abilityUI.chargeSlider.value = 1 - (tempChargingTimer / chargingSeconds);
+            abilityUI.fillArea.color = abilityUI.chargeGradient.Evaluate(abilityUI.chargeSlider.value);
+            // abilityUI.chargingTimer.text = ((int)tempChargingTimer).ToString();
             if (tempChargingTimer <= 0)
             {
                 bladeReadyToAttack();
@@ -205,7 +208,9 @@ public class CyberBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
         else if (isCoolingDown)
         {
             tempCoolDownTimer -= Time.deltaTime;
-            abilityUI.coolDownTimer.text = ((int)tempCoolDownTimer).ToString();
+            abilityUI.chargeSlider.value = tempCoolDownTimer / coolDownSeconds;
+            abilityUI.fillArea.color = abilityUI.coolGradient.Evaluate(abilityUI.chargeSlider.value);
+            // abilityUI.coolDownTimer.text = ((int)tempCoolDownTimer).ToString();
             if (tempCoolDownTimer <= 0)
             {
                 startCharging();
@@ -215,13 +220,24 @@ public class CyberBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
         }
         else if (readyToAttack)
         {
+            abilityUI.scannerNet.SetActive(true);
+            abilityUI.scannerNetScript.setColor(Color.cyan);
+            abilityUI.scannerNetScript.setSpeed(abilityUI.scannerNetScript.minSpeed);
             performAbility();
             if (activated)
             {
+                abilityUI.scannerNetScript.setColor(Color.red);
+                if (tempAttackFor <= 3)
+                {
+                    abilityUI.scannerNetScript.setSpeed(abilityUI.scannerNetScript.maxSpeed);
+                }
                 abilityUI.readyToAttackButton.SetActive(false);
                 abilityUI.attacking.SetActive(true);
                 tempAttackFor -= Time.deltaTime;
-                abilityUI.activationTimer.text = ((int)tempAttackFor).ToString();
+                abilityUI.chargeSlider.value = tempAttackFor / activateFor;
+                abilityUI.fillArea.color = abilityUI.chargeGradient.Evaluate(abilityUI.chargeSlider.value);
+                // abilityUI.scannerNetScript.setColor(abilityUI.fillArea.color);
+                // abilityUI.activationTimer.text = ((int)tempAttackFor).ToString();
                 if (tempAttackFor <= 0)
                 {
                     activated = false;
@@ -247,6 +263,7 @@ public class CyberBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
 
     public void resetSpecialAbility()
     {
+        abilityUI.scannerNet.SetActive(false);
         abilityUI.coolDownTimer.text = coolDownSeconds.ToString();
         abilityUI.chargingTimer.text = chargingSeconds.ToString();
         abilityUI.quckChargeCost.text = quickChargeCost.ToString();
@@ -267,6 +284,7 @@ public class CyberBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
 
     public void startCharging()
     {
+        abilityUI.scannerNet.SetActive(false);
         tempChargingTimer = chargingSeconds;
         isCharging = true;
         isCoolingDown = false;
@@ -293,6 +311,7 @@ public class CyberBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
         {
             c.stopAttacking();
         }
+        abilityUI.scannerNet.SetActive(false);
         tempCoolDownTimer = coolDownSeconds;
         isCharging = false;
         isCoolingDown = true;
@@ -307,6 +326,7 @@ public class CyberBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
     }
     public void bladeReadyToAttack()
     {
+        abilityUI.chargeSlider.value = 1;
         tempAttackFor = activateFor;
         isCharging = false;
         isCoolingDown = false;

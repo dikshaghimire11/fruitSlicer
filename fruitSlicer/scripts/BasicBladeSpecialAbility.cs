@@ -32,6 +32,8 @@ public class BasicBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
 
     public void resetSpecialAbility()
     {
+        abilityUI.scannerNet.SetActive(false);
+        abilityUI.chargeSlider.gameObject.SetActive(false);
         abilityUI.chargedEffectParent.SetActive(false);
         abilityUI.readyToAttackButton.SetActive(false);
         abilityUI.attacking.SetActive(false);
