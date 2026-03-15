@@ -19,6 +19,8 @@ public interface IBladeSpecialAbility
 
     public void powerReady();
 
+    public float attackTimeLeft();
+
 
 
 }

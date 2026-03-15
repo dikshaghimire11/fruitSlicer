@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Runtime.CompilerServices;
 using TMPro;
 using Unity.VisualScripting;
@@ -284,6 +285,7 @@ public class CyberBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
 
     public void startCharging()
     {
+        abilityUI.chargeSlider.gameObject.SetActive(true);
         abilityUI.scannerNet.SetActive(false);
         tempChargingTimer = chargingSeconds;
         isCharging = true;
@@ -326,6 +328,7 @@ public class CyberBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
     }
     public void bladeReadyToAttack()
     {
+        abilityUI.chargeSlider.gameObject.SetActive(true);
         abilityUI.chargeSlider.value = 1;
         tempAttackFor = activateFor;
         isCharging = false;
@@ -355,5 +358,17 @@ public class CyberBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
     public void powerReady()
     {
         bladeReadyToAttack();
+    }
+
+    public float attackTimeLeft()
+    {
+        if (activated)
+        {
+            return tempAttackFor;
+        }
+        else
+        {
+            return 0f;
+        }
     }
 }
