@@ -358,8 +358,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireBladeSpecialAbility
   iceWindPrefab: {fileID: 5385624053204156146, guid: 1dcc592c3a1f16e41b08b3f432df20a2, type: 3}
-  coolDownSeconds: 5
-  chargingSeconds: 5
+  coolDownSeconds: 30
+  chargingSeconds: 30
   quickChargeCost: 500
   activateFor: 10
   bladeImage: {fileID: -9195209318991056578, guid: 0731e8910b5352b419f617cc24c7227d, type: 3}

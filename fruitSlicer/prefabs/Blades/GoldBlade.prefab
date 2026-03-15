@@ -358,8 +358,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CyberBladeSpecialAbility
   lazerPrefab: {fileID: 5648207951006386086, guid: 20ead3a79c19b504a970747b502fd439, type: 3}
-  coolDownSeconds: 5
-  chargingSeconds: 5
+  coolDownSeconds: 30
+  chargingSeconds: 30
   quickChargeCost: 1000
   activateFor: 10
   bladeImage: {fileID: 7729859393515895170, guid: 6d4cf8c4f51b1d8459a47eabac9b02f1, type: 3}

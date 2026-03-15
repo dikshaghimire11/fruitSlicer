@@ -358,10 +358,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IceBladeSpecialAbility
   iceWindPrefab: {fileID: 5385624053204156146, guid: 676f5fa02a68c1443a13e5a2c07a3e88, type: 3}
-  coolDownSeconds: 10
-  chargingSeconds: 10
+  coolDownSeconds: 30
+  chargingSeconds: 30
   quickChargeCost: 210
-  activateFor: 5
+  activateFor: 10
   bladeImage: {fileID: 5160393701342520624, guid: b24a08238a4653443b5b3ae0e8aff416, type: 3}
   chargedParticleEffectPrefab: {fileID: 1565653427888123023, guid: a45c5a7a959a93f4f937db9bb5229a90, type: 3}
   SpecialAbilityName: Ice Wind

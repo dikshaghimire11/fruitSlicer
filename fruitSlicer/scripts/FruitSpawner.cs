@@ -214,38 +214,36 @@ public class FruitSpawner : MonoBehaviour
         else
             yield break;
 
+        // First spawn delay
+        yield return new WaitForSeconds(15f);
+
         while (true)
         {
-            yield return new WaitForSeconds(knifeSpawnDelay);
-
             if (ScoreManager.instance.isGameOver)
                 yield break;
 
-            yield return new WaitForSeconds(1f);
-
             GameObject prefabToSpawn = null;
+
             for (int i = 0; i < knifePrefabs.Count; i++)
             {
                 int randomIndex = Random.Range(0, knifePrefabs.Count);
                 string knifeName = knifePrefabs[randomIndex].name.Replace("(Clone)", "");
+
                 if (randomIndex != lastKnifeIndex && !knifeName.StartsWith(usedKnifeName))
                 {
-
                     prefabToSpawn = knifePrefabs[randomIndex];
                     lastKnifeIndex = randomIndex;
                     break;
                 }
             }
 
-            // Spawn if valid
             if (prefabToSpawn != null)
                 SpawnObject(prefabToSpawn, corners);
 
-            yield return new WaitForSeconds(1f);
+            // Delay for next spawn
+            yield return new WaitForSeconds(knifeSpawnDelay);
         }
     }
-
-
 
     // --- 3. HELPER FUNCTION TO LAUNCH OBJECTS ---
     void SpawnObject(GameObject prefab, Vector3[] corners)

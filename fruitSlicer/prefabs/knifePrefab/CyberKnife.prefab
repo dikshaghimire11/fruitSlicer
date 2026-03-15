@@ -508,7 +508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55405db1605edcb44b438e2b7f14d0a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BladePowerup
-  effectDuration: 18
+  effectDuration: 30
   powerBladePrefab: {fileID: 6311237056519408263, guid: de7e41fe840fa8e4f8f3490fa28992a7, type: 3}
   bladeTime: {fileID: 7848009032622092691}
 --- !u!1 &8311327164515744624
