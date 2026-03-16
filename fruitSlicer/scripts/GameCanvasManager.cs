@@ -175,6 +175,10 @@ public class GameCanvasManager : MonoBehaviour
         RectTransform rectTransform = targetObject.GetComponent<RectTransform>();
         Vector2 startPos = rectTransform.anchoredPosition;
         float elapsedTime = 0;
+        if (Time.deltaTime != 1)
+        {
+            Time.timeScale = 1f;
+        }
 
         while (elapsedTime < time)
         {
