@@ -4694,45 +4694,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5139106960391300893, guid: 07f16581bdde37849aff9603148fa1ff, type: 3}
-      propertyPath: shopBackgroundList.Array.data[0].description
-      value: A relaxing seaside location with a calm ocean view, palm trees, and
-        warm sunlight. The peaceful atmosphere and refreshing scenery make it a perfect
-        place to enjoy a light and cheerful gameplay.
-      objectReference: {fileID: 0}
-    - target: {fileID: 5139106960391300893, guid: 07f16581bdde37849aff9603148fa1ff, type: 3}
-      propertyPath: shopBackgroundList.Array.data[1].description
-      value: A peaceful forest filled with tall trees and green surroundings. The
-        natural environment and fresh atmosphere create a relaxing and immersive
-        gameplay setting.
-      objectReference: {fileID: 0}
-    - target: {fileID: 5139106960391300893, guid: 07f16581bdde37849aff9603148fa1ff, type: 3}
-      propertyPath: shopBackgroundList.Array.data[2].description
-      value: A beautiful landscape surrounded by tall mountains and a clear lake.
-        The cool environment and scenic natural view create a calm and refreshing
-        place for gameplay.
-      objectReference: {fileID: 0}
-    - target: {fileID: 5139106960391300893, guid: 07f16581bdde37849aff9603148fa1ff, type: 3}
-      propertyPath: shopBackgroundList.Array.data[3].description
-      value: A wide desert environment with endless sand dunes and bright sunlight.
-        The warm and open landscape creates a unique and adventurous atmosphere.
-      objectReference: {fileID: 0}
-    - target: {fileID: 5139106960391300893, guid: 07f16581bdde37849aff9603148fa1ff, type: 3}
-      propertyPath: shopBackgroundList.Array.data[0].specialAbility
-      value: --
-      objectReference: {fileID: 0}
-    - target: {fileID: 5139106960391300893, guid: 07f16581bdde37849aff9603148fa1ff, type: 3}
-      propertyPath: shopBackgroundList.Array.data[1].specialAbility
-      value: --
-      objectReference: {fileID: 0}
-    - target: {fileID: 5139106960391300893, guid: 07f16581bdde37849aff9603148fa1ff, type: 3}
-      propertyPath: shopBackgroundList.Array.data[2].specialAbility
-      value: --
-      objectReference: {fileID: 0}
-    - target: {fileID: 5139106960391300893, guid: 07f16581bdde37849aff9603148fa1ff, type: 3}
-      propertyPath: shopBackgroundList.Array.data[3].specialAbility
-      value: --
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

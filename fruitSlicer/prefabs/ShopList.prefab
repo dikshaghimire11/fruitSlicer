@@ -52,8 +52,10 @@ MonoBehaviour:
     actualSprite: {fileID: -3260171324595997514, guid: 8568f701337b9bf4eb187afe53c20a5e, type: 3}
     blurredSprite: {fileID: 2939814833929168162, guid: b651946bd1a79774291656a8bbf8e8b3, type: 3}
     prefb: {fileID: 0}
-    description: This is beach location, Very very beautiful
-    specialAbility: 
+    description: A relaxing seaside location with a calm ocean view, palm trees,
+      and warm sunlight. The peaceful atmosphere and refreshing scenery make it a
+      perfect place to enjoy a light and cheerful gameplay.
+    specialAbility: --
     isDefault: 1
     itemType: 1
     isPurchased: 0
@@ -64,8 +66,10 @@ MonoBehaviour:
     actualSprite: {fileID: -1343518637512107228, guid: c38de719f6949f34da7055d31f5f49f3, type: 3}
     blurredSprite: {fileID: -9055192626705066375, guid: 4717b305269a1c84ba9ee889c3443e2c, type: 3}
     prefb: {fileID: 0}
-    description: 
-    specialAbility: 
+    description: A peaceful forest filled with tall trees and green surroundings.
+      The natural environment and fresh atmosphere create a relaxing and immersive
+      gameplay setting.
+    specialAbility: --
     isDefault: 0
     itemType: 1
     isPurchased: 0
@@ -76,8 +80,10 @@ MonoBehaviour:
     actualSprite: {fileID: -6680556436121249758, guid: 2cdba57273996fa418bbfb3f61358f39, type: 3}
     blurredSprite: {fileID: 6617642490607179941, guid: 1c31225bdcefc1f41ad597415dd3b6bc, type: 3}
     prefb: {fileID: 0}
-    description: 
-    specialAbility: 
+    description: A beautiful landscape surrounded by tall mountains and a clear lake.
+      The cool environment and scenic natural view create a calm and refreshing place
+      for gameplay.
+    specialAbility: --
     isDefault: 0
     itemType: 1
     isPurchased: 0
@@ -88,8 +94,9 @@ MonoBehaviour:
     actualSprite: {fileID: 130452656225014213, guid: 17e6fca148dc5654da4d180f1b623d3e, type: 3}
     blurredSprite: {fileID: 5004877566587047478, guid: 5133e384c864f3647a30b8a3ca27d702, type: 3}
     prefb: {fileID: 0}
-    description: 
-    specialAbility: 
+    description: A wide desert environment with endless sand dunes and bright sunlight.
+      The warm and open landscape creates a unique and adventurous atmosphere.
+    specialAbility: --
     isDefault: 0
     itemType: 1
     isPurchased: 0
