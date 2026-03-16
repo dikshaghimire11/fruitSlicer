@@ -204,10 +204,12 @@ public class GameCanvasManager : MonoBehaviour
         else if (type == 3)
         {
             goToShopPanel.SetActive(true);
+            hideUIInterction();
         }
         else if (type == 4)
         {
             reviewPanel.SetActive(true);
+            hideUIInterction();
         }
 
 
@@ -386,6 +388,7 @@ public class GameCanvasManager : MonoBehaviour
             SoundManager.instance.PlayButtonClickSound();
         }
         goToShopPanel.SetActive(false);
+        unHideUiInteraction();
         PlayerPrefs.SetInt("NavigateToShop", 1);
         PlayerPrefs.Save();
         SceneManager.LoadSceneAsync("ShopScene");
@@ -412,6 +415,7 @@ public class GameCanvasManager : MonoBehaviour
             SoundManager.instance.PlayButtonClickSound();
         }
         reviewPanel.SetActive(false);
+        unHideUiInteraction();
         PlayerPrefs.SetInt("HasReview", 1);
         PlayerPrefs.Save();
         waitingForReview = true;
@@ -466,6 +470,7 @@ public class GameCanvasManager : MonoBehaviour
         PlayerPrefs.SetInt("HasReview", 1);
         PlayerPrefs.Save();
         reviewPanel.SetActive(false);
+        unHideUiInteraction();
         startGame();
     }
 
