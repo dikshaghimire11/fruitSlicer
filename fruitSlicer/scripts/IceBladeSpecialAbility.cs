@@ -226,9 +226,10 @@ public class IceBladeSpecialAbility : MonoBehaviour, IBladeSpecialAbility
             performAbility();
             if (activated)
             {
-                abilityUI.scannerNetScript.setColor(Color.red);
+                abilityUI.scannerNetScript.setColor(Color.yellow);
                 if (tempAttackFor <= 3)
                 {
+                    abilityUI.scannerNetScript.setColor(Color.red);
                     abilityUI.scannerNetScript.setSpeed(abilityUI.scannerNetScript.maxSpeed);
                 }
                 ScoreManager.instance.dontLooseLife = true;

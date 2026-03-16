@@ -5839,7 +5839,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 141.7, y: 185.7}
+  m_AnchoredPosition: {x: 132, y: 175}
   m_SizeDelta: {x: -116.19998, y: -32.699997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1306531836
@@ -5862,9 +5862,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'AUTOMATICALLY
-
-    ACTIVATES'
+  m_text: AUTO TRIGGERS WHEN A FRUIT FALLS ON THE SCANNER NET
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4749856e5c6abcb44b2a907fadc3def7, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 3e18916f3b9602c4f899f242575b00b7, type: 2}
@@ -5930,7 +5928,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -132.0972, y: -191.72829, z: 7.6070747, w: 1.7470284}
+  m_margin: {x: -100.1138, y: -159.47475, z: 34.485355, w: 1.7470284}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -9256,7 +9254,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 1824102672}
   speed: 2
   minSpeed: 1
-  maxSpeed: 5
+  maxSpeed: 2.5
 --- !u!1 &1827545030
 GameObject:
   m_ObjectHideFlags: 0
